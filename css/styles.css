@@ -1,0 +1,98 @@
+/* Base */
+html { scroll-behavior: smooth; }
+body { line-height: 1.6; }
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  z-index: 1000;
+}
+.skip-link:focus { left: 8px; }
+
+/* Branding */
+.logo { height: 48px; width: auto; }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 70vh;
+  color: #fff;
+  background-image: url('../img/Hero.png');
+  background-size: cover;
+  background-position: center;
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+}
+.hero .container { position: relative; z-index: 1; }
+
+/* Parallax spacer */
+.parallax-bg {
+  background-image: url('../img/parallax_bg.png');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; /* scale to full width while covering height */
+}
+.parallax-header { min-height: 72px; }
+.parallax-footer { min-height: 200px; }
+.spacer { height: 200px; }
+
+/* Footer */
+.footer-bg { background-color: rgba(9,10,46,0.0); position: relative; }
+
+/* Header & Footer overlays for contrast */
+.parallax-header::before,
+.parallax-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5); /* stronger for readability */
+  pointer-events: none;
+}
+.parallax-header, .parallax-footer { position: relative; }
+.parallax-header .navbar-brand, .parallax-header #navbarNav { position: relative; z-index: 1; }
+
+/* Muted background for text sections */
+.bg-soft { background-color: #f2f4f8; }
+
+/* Nav link button style (semi-transparent white) */
+.btn-nav {
+  color: #0d1b2a !important;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 999px;
+  padding: 6px 14px;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.home-link { color: #fff !important; opacity: 0.9; }
+.home-link:hover, .home-link:focus { color: #fff !important; opacity: 1; text-decoration: underline; }
+.navbar-nav { gap: 8px; }
+.navbar-nav .nav-item + .nav-item { margin-left: 8px; }
+.btn-nav:hover, .btn-nav:focus {
+  color: #000 !important;
+  background: #ffffff;
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+.navbar-dark .navbar-toggler {
+  border-color: rgba(255,255,255,0.6);
+}
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Responsive tweaks */
+@media (max-width: 767.98px) {
+  .hero { min-height: 60vh; }
+  .logo { height: 40px; }
+  /* Disable fixed background on mobile for performance */
+  .parallax-bg { background-attachment: scroll; }
+}

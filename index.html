@@ -2,182 +2,223 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Such Software LLC</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Custom styles */
-        .hero-image {
-            background-image: url('img/Hero.png'); /* Replace with the path to your hero image */
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-        }
-        .logo {
-            height: 90px; /* Adjust as needed */
-        }
-        footer {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .parallax-bg {
-            background-image: url('img/parallaxbg_catspencilscomputers.webp');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .footer-bg {
-            background-color: #090a2e;
-        }
+    <meta name="description" content="Such Software designs, hosts, and runs artist storefronts—no monthly fees, commission-only. Sell originals, merch, and digital collectibles.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://such.software/">
 
-    </style>
+    <!-- Social / Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://such.software/">
+    <meta property="og:title" content="Such Software — Sell your art online. No upfront costs.">
+    <meta property="og:description" content="We design, host, and run your storefront. You pay only when you sell.">
+    <meta property="og:image" content="https://such.software/img/Logo_w_text.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Such Software — Sell your art online. No upfront costs.">
+    <meta name="twitter:description" content="We design, host, and run your storefront. You pay only when you sell.">
+    <meta name="twitter:image" content="https://such.software/img/Logo_w_text.png">
+
+    <meta name="theme-color" content="#090a2e">
+    <link rel="icon" type="image/png" href="img/Logo_SUCH_catface.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- JSON-LD Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Such Software LLC",
+      "url": "https://such.software/",
+      "logo": "https://such.software/img/Logo_DALLE.png",
+      "sameAs": [
+        "https://t.me/jwinterm",
+        "https://twitter.com/j_winter_m"
+      ]
+    }
+    </script>
 </head>
 
-<body>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="80">
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <!-- Header with Logo -->
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="img/Logo_SUCH_catface.png" alt="Logo" class="logo"> <!-- Replace with the path to your logo -->
+    <header class="navbar navbar-expand-lg navbar-dark sticky-top parallax-bg parallax-header" role="banner">
+        <a class="navbar-brand d-flex align-items-center" href="#home">
+            <img src="img/Logo_SUCH_catface.png" alt="Such Software cat logo" class="logo" width="90" height="90">
+            <span class="visually-hidden">Such Software</span>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <nav class="collapse navbar-collapse" id="navbarNav" role="navigation" aria-label="Primary">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item my-1 my-lg-0"><a class="nav-link home-link" href="#home">Home</a></li>
+                <li class="nav-item my-1 my-lg-0"><a class="nav-link btn btn-nav btn-sm" href="#services">Services</a></li>
+                <li class="nav-item my-1 my-lg-0"><a class="nav-link btn btn-nav btn-sm" href="#about">About</a></li>
+                <li class="nav-item my-1 my-lg-0"><a class="nav-link btn btn-nav btn-sm" href="#contact">Contact</a></li>
             </ul>
-        </div>
+        </nav>
     </header>
 
-    <!-- Hero Image Section -->
-    <section id="home" class="hero-image">
-        <div class="h-100 d-flex justify-content-center align-items-end">
-            <h2 class="text-white text-uppercase font-weight-bold">Such Software LLC</h2>
-        </div>
-    </section>
+    <main id="main" tabindex="-1">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero__overlay"></div>
+            <div class="container h-100 d-flex flex-column justify-content-center align-items-start text-white">
+                <h1 class="display-4 font-weight-bold">Sell your art online. <br/>No upfront costs.</h1>
+                <p class="lead mt-2 mb-4">We design, host, and run your storefront. <br/>You pay only when you sell.</p>
+                <div>
+                    <a href="#contact" class="btn btn-primary btn-lg mr-2">Get your free site</a>
+                    <a href="#services" class="btn btn-outline-light btn-lg">See how it works</a>
+                </div>
+            </div>
+        </section>
 
-    <!-- Other Sections Here... -->
-     <section id="home" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-11">   
-                    <h2>Welcome to Such Software</h2>
-                    <p>Your partner in art and technology.</p>
+        <!-- Parallax spacer -->
+    <div class="parallax-bg spacer" aria-hidden="true"></div>
+
+        <!-- Services Section -->
+    <section id="services" class="py-5 bg-soft">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col">
+                        <h2>Services</h2>
+                        <p class="text-muted mb-0">Everything you need to sell originals, prints, merch, and digital work.</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section id="parallax-spacer" class="parallax-bg py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-11">
-                <h2></h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-11">
-                <h3>About Us</h3>
-                    <p class="text-justify">
-                        At Such Software, we are committed to bridging the gap between art and technology. 
-                        Our journey began with a vision to empower artists in the digital era, offering them unique platforms to showcase and sell their creations. 
-                        As a technology-driven company, we specialize in designing and hosting bespoke websites tailored to the needs of artists. 
-                        Our team, a blend of tech enthusiasts and art aficionados, understands the nuances of the art world and the digital landscape.
-                    </p>
-                    <p class="text-justify">
-                        We believe in nurturing creativity by providing artists with state-of-the-art digital tools, freeing them to focus on what they do best: creating mesmerizing art. 
-                        Our commitment extends beyond just offering services; we aim to be partners in the artistic journey of each of our clients, fostering a community where art and technology coexist in harmony.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="parallax-spacer" class="parallax-bg py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-11">
-                <h2></h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="services" class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-11">
-                    <h3>Our Services</h3>
-                    <p class="text-justify">
-                        Such Software offers a comprehensive suite of services designed specifically for artists looking to make their mark in the digital world. 
-                        We provide expert website design services, creating visually stunning and user-friendly sites that reflect each artist's unique style and brand. 
-                        Our hosting solutions are not only reliable but also free, removing financial barriers and making it easier for artists to maintain an online presence. 
-                    </p>
-                    <p class="text-justify">
-                        We cater to a diverse range of artistic needs, supporting the sale of original artworks, merchandise through drop shipping, and digital collectibles. 
-                        Understanding the importance of seamless transactions, we integrate multiple payment options including credit cards, PayPal, and various cryptocurrencies. 
-                        Our business model is artist-friendly, as we only take a commission on sales, ensuring that artists reap the maximum benefits from their work. 
-                        At Such Software, we don’t just offer services; we provide a platform for artists to thrive in the digital age.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="contact" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-11">
-                    <h3>Contact Us</h3>
-                    <div class="row">
-                        <div class="col-sm">
-                            <a href="https://t.me/jwinterm" target="_blank" class="btn btn-primary">
-                                <i class="fab fa-telegram-plane"></i> Telegram
-                            </a>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="h5">Custom artist sites</h3>
+                                <ul class="mb-0 pl-3">
+                                    <li>Branded storefront, your style</li>
+                                    <li>Mobile-first, fast, accessible</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-sm">
-                            <a href="https://twitter.com/j_winter_m" target="_blank" class="btn btn-info">
-                                <i class="fab fa-twitter"></i> Twitter
-                            </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="h5">Hosting included</h3>
+                                <ul class="mb-0 pl-3">
+                                    <li>Secure, reliable hosting</li>
+                                    <li>No monthly fees</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-sm">
-                            <a href="mailto:info@such.software" target="_blank" class="btn btn-success">
-                                <i class="fas fa-envelope"></i> Email
-                            </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="h5">Sales & fulfillment</h3>
+                                <ul class="mb-0 pl-3">
+                                    <li>Originals, prints, and merch</li>
+                                    <li>Dropshipping supported</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="h5">Payments & digital</h3>
+                                <ul class="mb-0 pl-3">
+                                    <li>Cards, PayPal, and crypto</li>
+                                    <li>Optional digital collectibles</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <footer>
+        </section>
 
-    <!-- Footer with Logo -->
-    <footer>
-        <div class="container">
-            <div class="row footer-bg">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                    <img src="img/Logo_DALLE.png" alt="Logo" class="img-fluid"> 
-                    <p class="text-white">&copy; 2023 Such Software LLC</p>
-                </div>
-                <div class="col-md-4">
+        <!-- About Section -->
+    <section id="about" class="py-5 bg-soft">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8">
+                        <h2>About</h2>
+                        <p>
+                            We bridge art and technology so creators can focus on creating. Such Software designs and hosts modern artist storefronts—commission-only, no monthly fees. We handle the web stack; you keep making great work.
+                        </p>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Parallax spacer -->
+        <div class="parallax-bg spacer" aria-hidden="true"></div>
+
+        <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-soft">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <h2>Contact</h2>
+                        <p class="text-muted">Let’s get your art online this week. Typical response within 24 hours.</p>
+                        <div class="row g-0 mb-3">
+                            <div class="col-sm-4 mb-3 pe-sm-2">
+                                <a href="https://t.me/jwinterm" target="_blank" rel="noopener noreferrer" class="btn btn-nav w-100" aria-label="Contact on Telegram">
+                                    <i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram
+                                </a>
+                            </div>
+                            <div class="col-sm-4 mb-3 pe-sm-2 ps-sm-2">
+                                <a href="https://twitter.com/j_winter_m" target="_blank" rel="noopener noreferrer" class="btn btn-nav w-100" aria-label="Visit X/Twitter profile">
+                                    <i class="fab fa-twitter" aria-hidden="true"></i> X / Twitter
+                                </a>
+                            </div>
+                            <div class="col-sm-4 mb-3 ps-sm-2">
+                                <a href="mailto:info@such.software" class="btn btn-nav w-100" aria-label="Send email to info@such.software">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i> Email
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Contact form (FormSubmit) -->
+                        <form class="mt-2" method="POST" action="https://formsubmit.co/info@such.software">
+                            <!-- FormSubmit options -->
+                            <input type="hidden" name="_subject" value="New inquiry from such.software">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="text" name="website" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" name="message" rows="4" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bg text-center text-white py-4 parallax-bg parallax-footer">
+        <div class="container">
+            <img src="img/Logo_w_text.png" alt="Such Software square logo" class="img-fluid mb-3" width="200" height="200" loading="lazy">
+            <p class="mb-0">&copy; 2025 Such Software LLC. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
