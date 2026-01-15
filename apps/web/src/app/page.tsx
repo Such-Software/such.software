@@ -24,7 +24,7 @@ export default function Home() {
       </header>
       
       <div className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-20 pb-10 px-4 text-center">
-         <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500">
+         <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500 pb-2">
            Digital Craftsmanship
          </h2>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">
