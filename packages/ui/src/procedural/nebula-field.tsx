@@ -24,11 +24,11 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
   useEffect(() => {
     let isMounted = true;
     const animate = async () => {
-      // Staggered start delay (0-4s)
-      await new Promise(resolve => setTimeout(resolve, Math.random() * 4000));
+      // Shorter start delay (0-2s) so it feels more reactive on load
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
       
       while (isMounted) {
-        const duration = 10 + Math.random() * 8; // Slow streamers
+        const duration = 8 + Math.random() * 6; // slightly faster but still slow
         
         // Ensure starting state is definitely 0
         controls.set({ pathLength: 0, pathOffset: 0, opacity: 0 });
@@ -91,7 +91,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
 
   // Configuration for convergence point
   const targetX = 25; 
-  const targetY = 20;
+  const targetY = 30; // Lowered to hit center of computer better
 
   const paths = useMemo(() => {
     return Array.from({ length: density }).map(() => {
@@ -118,6 +118,18 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
     setMounted(true);
   }, []);
 
+  // Initial animation for the computer icon
+  useEffect(() => {
+    if (mounted) {
+      monitorControls.set({ opacity: 0, scale: 0.5 });
+      monitorControls.start({ 
+        opacity: themeMode === 'light' ? 0.4 : 0.6, 
+        scale: 1,
+        transition: { duration: 2, ease: "easeOut" }
+      });
+    }
+  }, [mounted, themeMode, monitorControls]);
+
   const handleHit = useCallback(() => {
      const colors = [
          "text-emerald-500", "text-blue-500", "text-purple-500", 
@@ -142,7 +154,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
       
       <motion.div 
-        className="absolute -translate-x-1/2 -translate-y-1/2 z-20 opacity-40 dark:opacity-60"
+        className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
         style={{ 
           left: `${targetX}%`, 
           top: `${targetY}%`,
@@ -170,7 +182,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={themeMode === 'light' ? 0.05 : 0.15}
+            width={themeMode === 'light' ? 0.1 : 0.2}
           />
         ))}
       </svg>

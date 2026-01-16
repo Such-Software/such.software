@@ -10,12 +10,12 @@ export const PortfolioGrid = () => {
           <h3 className="text-3xl font-bold text-white shadow-black drop-shadow-xl">r/CryptoCurrency</h3>
           <p className="text-gray-200 shadow-black drop-shadow-md max-w-sm mt-2 font-medium">Governance dashboard for 10M+ members. Real-time DAO metrics.</p>
         </div>
-        <div className="absolute inset-x-4 inset-y-4 rounded-lg overflow-hidden z-10">
+        <div className="absolute inset-4 rounded-xl overflow-hidden z-10 bg-slate-800/50">
             <Image 
               src="/images/r-cryptocurrency.png" 
               alt="r/CryptoCurrency" 
               fill 
-              className="object-cover object-top opacity-60 transition-transform duration-1000 group-hover:scale-110" 
+              className="object-contain p-4 opacity-70 transition-transform duration-1000 group-hover:scale-105" 
               sizes="(max-width: 768px) 100vw, 50vw"
             />
         </div>
@@ -27,12 +27,12 @@ export const PortfolioGrid = () => {
           <h3 className="text-2xl font-bold text-zinc-900 drop-shadow-sm bg-white/60 backdrop-blur-md rounded-xl px-6 py-2">Occupy Wallets</h3>
           <p className="text-zinc-900 font-bold drop-shadow-sm bg-white/60 backdrop-blur-md rounded-xl px-6 py-2 mt-4">High-fidelity gallery for fiscal graffiti.</p>
         </div>
-        <div className="absolute inset-x-4 inset-y-4 rounded-lg overflow-hidden z-10">
+        <div className="absolute inset-4 rounded-xl overflow-hidden z-10 bg-zinc-200/50">
              <Image 
               src="/images/occupy-wallets.png" 
               alt="Occupy Wallets" 
               fill 
-              className="object-cover object-top opacity-50 transition-transform duration-1000 group-hover:scale-110" 
+              className="object-contain p-4 opacity-60 transition-transform duration-1000 group-hover:scale-105" 
               sizes="(max-width: 768px) 100vw, 50vw"
             />
         </div>
@@ -47,12 +47,12 @@ export const PortfolioGrid = () => {
             <li className="flex items-center gap-2">Wowne.ro <span className="text-xs opacity-60">(WASM)</span></li>
           </ul>
         </div>
-         <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 border border-orange-500/20 shadow-lg">
+         <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border border-orange-500/10 shadow-inner">
             <Image 
               src="/images/privacy-labs.png" 
               alt="Privacy Labs" 
               fill 
-              className="object-cover object-top opacity-40 transition-transform duration-1000 group-hover:scale-110" 
+              className="object-contain p-2 opacity-50 transition-transform duration-1000 group-hover:scale-110" 
               sizes="(max-width: 768px) 100vw, 25vw"
             />
          </div>
@@ -64,12 +64,12 @@ export const PortfolioGrid = () => {
           <h3 className="text-xl font-bold text-indigo-700 dark:text-indigo-400">MoonPlace</h3>
           <p className="text-sm mt-1 text-foreground font-semibold">Collaborative pixel canvas engine.</p>
         </div>
-         <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 border border-indigo-500/20 shadow-lg">
+         <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border border-indigo-500/10 shadow-inner">
              <Image 
               src="/images/moonplace.png" 
               alt="MoonPlace" 
               fill 
-              className="object-cover object-top opacity-40 transition-transform duration-1000 group-hover:scale-110" 
+              className="object-contain p-2 opacity-50 transition-transform duration-1000 group-hover:scale-110" 
               sizes="(max-width: 768px) 100vw, 25vw"
             />
          </div>
