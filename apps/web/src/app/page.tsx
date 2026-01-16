@@ -3,6 +3,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { PortfolioGrid } from "@/components/portfolio/bento-grid";
 import { ContactForm } from "@/components/contact/contact-form";
 import { FounderSignature } from "@/components/about/founder-signature";
+import { ServicesPreview } from "@/components/landing/services-preview";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
 
@@ -31,7 +32,7 @@ export default function Home() {
            Next-generation web applications engineered for scale, compliance, and performance.
          </p>
          
-         <div className="flex gap-4 mb-20">
+         <div className="flex gap-4 mb-10">
             <Link href="/services">
               <Button size="lg" className="rounded-full">
                 Explore Services
@@ -43,6 +44,8 @@ export default function Home() {
                </Button>
             </Link>
          </div>
+
+         <ServicesPreview />
          
          <div className="grid gap-4 w-full">
             <h3 className="text-3xl font-bold text-left w-full mt-10 mb-6 px-4">Selected Works</h3>

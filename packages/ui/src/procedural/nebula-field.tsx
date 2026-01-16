@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useState, useCallback } from "react";
 import { cn } from "../lib/utils";
 import { Monitor } from "lucide-react";
 
@@ -11,9 +11,65 @@ interface NebulaProps {
   themeMode?: 'light' | 'dark'; // customized prop
 }
 
+interface StreamLineProps {
+  d: string;
+  themeMode: 'light' | 'dark';
+  onHit: () => void;
+  width: number;
+}
+
+const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    let isMounted = true;
+    const animate = async () => {
+      // Random initial delay
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 4000));
+      
+      while (isMounted) {
+        const duration = 2 + Math.random() * 4;
+        
+        controls.set({ pathLength: 0, opacity: 0 });
+
+        await controls.start({
+          pathLength: [0, 1],
+          opacity: [0, 1, 1, 0],
+          transition: { 
+            duration, 
+            ease: "easeInOut",
+            times: [0, 0.1, 0.9, 1]
+          }
+        });
+
+        if (isMounted) onHit();
+        
+        await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
+      }
+    };
+    animate();
+    return () => { isMounted = false; };
+  }, [controls, onHit]);
+
+  return (
+    <motion.path
+      d={d}
+      stroke="currentColor"
+      strokeWidth={width}
+      fill="none"
+      animate={controls}
+      className={cn(
+        "transition-colors duration-500",
+        themeMode === 'light' ? "text-slate-400" : "text-emerald-500"
+      )}
+    />
+  );
+};
+
 export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: NebulaProps) => {
   const [paths, setPaths] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
+  const monitorControls = useAnimation();
   
   // Configuration for convergence point (percent of container)
   const targetX = 25; // moved right
@@ -45,7 +101,15 @@ export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: Neb
       return `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`;
     });
     setPaths(newPaths);
-  }, [density, targetX, targetY]);
+  }, [density]); // Removed targetX/Y dep as constant
+
+  const handleHit = useCallback(() => {
+     monitorControls.start({
+        scale: [1, 1.15, 1],
+        filter: ["brightness(1)", "brightness(1.5)", "brightness(1)"],
+        transition: { duration: 0.3 }
+     });
+  }, [monitorControls]);
 
   if (!mounted) return null;
 
@@ -53,9 +117,10 @@ export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: Neb
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
       
       {/* "Computer" Icon positioned via inline styles to match physics target exactly */}
-      <div 
-        className="absolute -translate-x-1/2 -translate-y-1/2 z-10 opacity-20 dark:opacity-40 animate-pulse"
+      <motion.div 
+        className="absolute -translate-x-1/2 -translate-y-1/2 z-10 opacity-30 dark:opacity-50"
         style={{ left: `${targetX}%`, top: `${targetY}%` }}
+        animate={monitorControls}
       >
         <Monitor 
           size={64} 
@@ -64,7 +129,7 @@ export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: Neb
             themeMode === 'light' ? "text-slate-400" : "text-emerald-500"
           )} 
         />
-      </div>
+      </motion.div>
 
       <svg
         viewBox="0 0 100 100"
@@ -72,27 +137,12 @@ export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: Neb
         className="w-full h-full opacity-60 dark:opacity-80 absolute inset-0"
       >
         {paths.map((d, i) => (
-          <motion.path
+          <StreamLine
             key={i}
             d={d}
-            stroke="currentColor"
-            strokeWidth={themeMode === 'light' ? 0.1 : 0.2} 
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{
-              pathLength: [0, 1], // Draw from start to end
-              opacity: [0, 1, 0]  // Fade in, then out at the end
-            }}
-            transition={{
-              duration: 5 + Math.random() * 5, // Faster, more data-stream like (was 20s)
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 5
-            }}
-            className={cn(
-              "transition-colors duration-500",
-              themeMode === 'light' ? "text-slate-400" : "text-emerald-500"
-            )}
+            themeMode={themeMode}
+            onHit={handleHit}
+            width={themeMode === 'light' ? 0.1 : 0.2}
           />
         ))}
       </svg>
