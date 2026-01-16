@@ -77,6 +77,3 @@ export const PortfolioGrid = () => {
     </section>
   );
 };
-    </section>
-  );
-};
