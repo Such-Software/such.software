@@ -24,16 +24,14 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
   useEffect(() => {
     let isMounted = true;
     const animate = async () => {
-      // Shorter start delay (0-2s) so it feels more reactive on load
-      await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
+      // Very short initial delay for first streamers
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
       
       while (isMounted) {
-        const duration = 8 + Math.random() * 6; // slightly faster but still slow
+        const duration = 7 + Math.random() * 5; // Faster, snappier
         
-        // Ensure starting state is definitely 0
         controls.set({ pathLength: 0, pathOffset: 0, opacity: 0 });
 
-        // Trigger onHit when the tip reaches the end (at 75% of duration)
         const hitTimeout = setTimeout(() => {
           if (isMounted) onHit();
         }, duration * 750);
@@ -41,7 +39,7 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
         await controls.start({
           pathLength: [0, 0.25, 0.25, 0],
           pathOffset: [0, 0, 0.75, 1],
-          opacity: [0, 0.5, 0.5, 0],
+          opacity: [0, 0.4, 0.4, 0], // Muted streamers
           transition: { 
             duration, 
             ease: "linear",
@@ -50,9 +48,7 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
         });
 
         clearTimeout(hitTimeout);
-        
-        // Continuous flow with small pause
-        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+        await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1500));
       }
     };
     animate();
@@ -91,7 +87,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
 
   // Configuration for convergence point
   const targetX = 25; 
-  const targetY = 30; // Lowered to hit center of computer better
+  const targetY = 35; // Moved down slightly more
 
   const paths = useMemo(() => {
     return Array.from({ length: density }).map(() => {
@@ -105,76 +101,70 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
         case 3: startX = -20; startY = Math.random() * 100; break;
       }
 
-      const endX = targetX + (Math.random() - 0.5) * 4;
-      const endY = targetY + (Math.random() - 0.5) * 4;
+      const endX = targetX + (Math.random() - 0.5) * 2; // Tighter hit box
+      const endY = targetY + (Math.random() - 0.5) * 2; // Tighter hit box
       const cpX = (startX + endX) / 2 + (Math.random() - 0.5) * 50;
       const cpY = (startY + endY) / 2 + (Math.random() - 0.5) * 50;
       
       return `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`;
     });
-  }, [density, themeMode]); // Regenerate on theme switch
+  }, [density, themeMode, targetX, targetY]); // Added dependencies for stability
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Initial animation for the computer icon
-  useEffect(() => {
-    if (mounted) {
-      monitorControls.set({ opacity: 0, scale: 0.5 });
-      monitorControls.start({ 
-        opacity: themeMode === 'light' ? 0.4 : 0.6, 
-        scale: 1,
-        transition: { duration: 2, ease: "easeOut" }
-      });
-    }
-  }, [mounted, themeMode, monitorControls]);
-
   const handleHit = useCallback(() => {
-     const colors = [
-         "text-emerald-500", "text-blue-500", "text-purple-500", 
-         "text-indigo-500", "text-cyan-500", "text-rose-500", "text-amber-500"
-     ];
+     const colors = themeMode === 'light' 
+        ? ["text-slate-400", "text-blue-400", "text-indigo-400", "text-emerald-400", "text-cyan-400"]
+        : ["text-emerald-400/60", "text-blue-400/60", "text-purple-400/60", "text-indigo-400/60", "text-cyan-400/60", "text-rose-400/60", "text-amber-400/60"];
+     
      setMonitorColor(colors[Math.floor(Math.random() * colors.length)]);
 
      monitorControls.start({
-        scale: [1, 1.2, 1],
+        scale: [1, 1.08, 1], // Less jarring scale
         filter: [
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))", 
-          "brightness(1.5) drop-shadow(0 0 20px currentColor)", 
+          "brightness(1.2) drop-shadow(0 0 15px currentColor)", // Less brightness
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))"
         ],
-        transition: { duration: 4, ease: "easeInOut" } 
+        transition: { duration: 3, ease: "easeOut" } // Slower and smoother
      });
-  }, [monitorControls]);
-
-  if (!mounted) return null;
+  }, [monitorControls, themeMode]);
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
       
       <motion.div 
         className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ 
+          opacity: themeMode === 'light' ? 0.3 : 0.5, 
+          scale: 1 
+        }}
+        transition={{ duration: 1 }}
         style={{ 
           left: `${targetX}%`, 
           top: `${targetY}%`,
           y: yRange
         }}
-        animate={monitorControls}
       >
-        <Monitor 
-          size={64} 
-          className={cn(
-            "transition-colors duration-2000",
-            monitorColor
-          )} 
-        />
+        <motion.div animate={monitorControls}>
+          <Monitor 
+            size={64} 
+            className={cn(
+              "transition-colors duration-2000",
+              monitorColor
+            )} 
+          />
+        </motion.div>
       </motion.div>
 
-      <svg
+      <motion.svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         className="w-full h-full opacity-40 dark:opacity-70 absolute inset-0"
+        style={{ y: yRange }} // SVG follows computer parallax
       >
         {paths.map((d: string, i: number) => (
           <StreamLine
@@ -182,10 +172,10 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={themeMode === 'light' ? 0.1 : 0.2}
+            width={themeMode === 'light' ? 0.08 : 0.12} // slightly thinner for less jarring feel
           />
         ))}
-      </svg>
+      </motion.svg>
     </div>
   );
 };
