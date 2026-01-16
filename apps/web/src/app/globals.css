@@ -89,11 +89,11 @@
   }
   
   .section-container {
-    @apply mask-backdrop rounded-[2.5rem] p-10 md:p-16 text-card-foreground;
+    @apply mask-backdrop rounded-[2.5rem] p-12 md:p-20 text-card-foreground;
   }
 
   .glass-card {
-    @apply mask-backdrop rounded-[2rem] p-8 text-card-foreground;
+    @apply mask-backdrop rounded-[2rem] p-10 text-card-foreground;
   }
   
   .glass-card:hover {

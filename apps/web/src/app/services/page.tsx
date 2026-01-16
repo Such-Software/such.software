@@ -24,7 +24,7 @@ export default function ServicesPage() {
       <DataGrid />
 
       <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 border-b border-border/50 rounded-b-3xl">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-2">
           <SiteLogo />
           <nav className="hidden md:flex gap-6 text-sm font-medium">
              <Link href="/services" className="text-primary transition-colors">Services</Link>
@@ -37,7 +37,7 @@ export default function ServicesPage() {
       <div className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
         {/* Context Header */}
         <div className="mb-20">
-            <div className="text-left mb-8 px-2 border-l-2 border-emerald-500/50 section-container">
+            <div className="text-left mb-8 section-container border-l-4 border-l-emerald-500">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
                   Specialized Solutions
                 </h1>
@@ -51,7 +51,7 @@ export default function ServicesPage() {
 
         {/* Medusa / Webshops Section */}
         <div className="mb-24">
-            <div className="text-left mb-8 px-2 border-l-2 border-blue-500/50 section-container mb-10">
+            <div className="text-left mb-10 section-container border-l-4 border-l-blue-500">
                 <h2 className="text-3xl font-bold mb-2">Medusa v2 Development</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl">
                     We build proprietary, headless commerce engines that scale with your business logic. 
@@ -86,7 +86,7 @@ export default function ServicesPage() {
 
         {/* Custom Apps Section */}
         <div className="mb-24">
-            <div className="text-left mb-8 px-2 border-l-2 border-purple-500/50 section-container mb-10">
+            <div className="text-left mb-10 section-container border-l-4 border-l-purple-500">
                 <h2 className="text-3xl font-bold mb-2">Custom Apps & Interactive Websites</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
                     Whether it's a real-time collaborative tool or a high-end brand experience, 
@@ -113,7 +113,7 @@ export default function ServicesPage() {
 
         {/* Crypto Section */}
         <div className="mb-24">
-            <div className="text-left mb-8 px-2 border-l-2 border-cyan-500/50 section-container mb-10">
+            <div className="text-left mb-10 section-container border-l-4 border-l-cyan-500">
                 <h2 className="text-3xl font-bold mb-2">Cryptocurrency & Payment Consulting</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
                     Navigate the complex world of global finance. We bridge the gap between 

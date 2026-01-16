@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const FounderSignature = () => {
   return (
-    <div className="grid md:grid-cols-[1fr,440px] gap-12 lg:gap-20 items-start">
+    <div className="grid md:grid-cols-[1fr,440px] gap-12 lg:gap-20 items-center">
       {/* Left Column: Bio */}
       <div className="space-y-8 text-left section-container">
         <div className="flex items-center gap-6 relative z-10">
@@ -35,7 +35,7 @@ export const FounderSignature = () => {
       </div>
 
       {/* Right Column: Cards 01, 02, 03 */}
-      <div className="space-y-6 lg:-mt-4">
+      <div className="space-y-6">
         <Card className="glass-card hover:border-purple-500/30">
           <h4 className="text-base font-bold mb-3 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 text-[10px]">01</span>

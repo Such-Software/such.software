@@ -3,7 +3,7 @@ import { Card } from "@repo/ui/components/card";
 export function ServicesPreview() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-8 mb-16 relative z-10">
-        <div className="text-left mb-8 px-2 border-l-2 border-emerald-500/50 section-container">
+        <div className="text-left mb-8 section-container border-l-4 border-l-emerald-500">
             <h3 className="text-3xl font-bold mb-3 tracking-tight">High-Performance Webshops</h3>
             <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                 We build commerce infrastructure that scales with you. From complex supply chains 

@@ -21,7 +21,7 @@ export default function AboutPage() {
     <main className="relative flex flex-col items-center overflow-hidden">
       
       <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 rounded-b-3xl border-b border-border/50">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-2">
           <SiteLogo />
           <nav className="hidden md:flex gap-6 text-sm font-medium">
              <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
