@@ -1,14 +1,14 @@
 'use client';
 
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState, useCallback } from "react";
+import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "../lib/utils";
 import { Monitor } from "lucide-react";
 
 interface NebulaProps {
   className?: string;
   density?: number;
-  themeMode?: 'light' | 'dark'; // customized prop
+  themeMode?: 'light' | 'dark';
 }
 
 interface StreamLineProps {
@@ -24,27 +24,35 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
   useEffect(() => {
     let isMounted = true;
     const animate = async () => {
-      // Random initial delay
+      // Staggered start delay (0-4s)
       await new Promise(resolve => setTimeout(resolve, Math.random() * 4000));
       
       while (isMounted) {
-        const duration = 2 + Math.random() * 4;
+        const duration = 10 + Math.random() * 8; // Slow streamers
         
-        controls.set({ pathLength: 0, opacity: 0 });
+        // Ensure starting state is definitely 0
+        controls.set({ pathLength: 0, pathOffset: 0, opacity: 0 });
+
+        // Trigger onHit when the tip reaches the end (at 75% of duration)
+        const hitTimeout = setTimeout(() => {
+          if (isMounted) onHit();
+        }, duration * 750);
 
         await controls.start({
-          pathLength: [0, 1],
-          opacity: [0, 1, 1, 0],
+          pathLength: [0, 0.25, 0.25, 0],
+          pathOffset: [0, 0, 0.75, 1],
+          opacity: [0, 0.5, 0.5, 0],
           transition: { 
             duration, 
-            ease: "easeInOut",
-            times: [0, 0.1, 0.9, 1]
+            ease: "linear",
+            times: [0, 0.25, 0.75, 1] 
           }
         });
 
-        if (isMounted) onHit();
+        clearTimeout(hitTimeout);
         
-        await new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
+        // Continuous flow with small pause
+        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
       }
     };
     animate();
@@ -57,57 +65,74 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
       stroke="currentColor"
       strokeWidth={width}
       fill="none"
+      initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
       animate={controls}
       className={cn(
-        "transition-colors duration-500",
-        themeMode === 'light' ? "text-slate-400" : "text-emerald-500"
+        "transition-colors duration-1000",
+        themeMode === 'light' ? "text-slate-300" : "text-emerald-500/50"
       )}
     />
   );
 };
 
-export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: NebulaProps) => {
-  const [paths, setPaths] = useState<string[]>([]);
+export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: NebulaProps) => { 
   const [mounted, setMounted] = useState(false);
   const monitorControls = useAnimation();
+  const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-slate-400" : "text-emerald-500");
   
-  // Configuration for convergence point (percent of container)
-  const targetX = 25; // moved right
-  const targetY = 20; // moved up
-
+  // Sync color with theme if no impacts have happened yet
   useEffect(() => {
-    setMounted(true);
-    const newPaths = Array.from({ length: density }).map(() => {
-      // Determine random edge start point
-      const edge = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
+    setMonitorColor(themeMode === 'light' ? "text-slate-300" : "text-emerald-500/50");
+  }, [themeMode]);
+
+  // Parallax Scroll for Computer Icon
+  const { scrollY } = useScroll();
+  const yRange = useTransform(scrollY, [0, 1000], [0, 200]);
+
+  // Configuration for convergence point
+  const targetX = 25; 
+  const targetY = 20;
+
+  const paths = useMemo(() => {
+    return Array.from({ length: density }).map(() => {
+      const edge = Math.floor(Math.random() * 4);
       let startX = 50, startY = 50;
       
-      // Push start point well outside viewbox to ensure full coverage
       switch(edge) {
-        case 0: startX = Math.random() * 100; startY = -20; break; // Top
-        case 1: startX = 120; startY = Math.random() * 100; break; // Right
-        case 2: startX = Math.random() * 100; startY = 120; break; // Bottom
-        case 3: startX = -20; startY = Math.random() * 100; break; // Left
+        case 0: startX = Math.random() * 100; startY = -20; break;
+        case 1: startX = 120; startY = Math.random() * 100; break;
+        case 2: startX = Math.random() * 100; startY = 120; break;
+        case 3: startX = -20; startY = Math.random() * 100; break;
       }
 
-      // End at target point with small variance
-      const endX = targetX + (Math.random() - 0.5) * 5;
-      const endY = targetY + (Math.random() - 0.5) * 5;
-
-      // Control point for curve
+      const endX = targetX + (Math.random() - 0.5) * 4;
+      const endY = targetY + (Math.random() - 0.5) * 4;
       const cpX = (startX + endX) / 2 + (Math.random() - 0.5) * 50;
       const cpY = (startY + endY) / 2 + (Math.random() - 0.5) * 50;
       
       return `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`;
     });
-    setPaths(newPaths);
-  }, [density]); // Removed targetX/Y dep as constant
+  }, [density, themeMode]); // Regenerate on theme switch
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleHit = useCallback(() => {
+     const colors = [
+         "text-emerald-500", "text-blue-500", "text-purple-500", 
+         "text-indigo-500", "text-cyan-500", "text-rose-500", "text-amber-500"
+     ];
+     setMonitorColor(colors[Math.floor(Math.random() * colors.length)]);
+
      monitorControls.start({
-        scale: [1, 1.15, 1],
-        filter: ["brightness(1)", "brightness(1.5)", "brightness(1)"],
-        transition: { duration: 0.3 }
+        scale: [1, 1.2, 1],
+        filter: [
+          "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))", 
+          "brightness(1.5) drop-shadow(0 0 20px currentColor)", 
+          "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))"
+        ],
+        transition: { duration: 4, ease: "easeInOut" } 
      });
   }, [monitorControls]);
 
@@ -116,17 +141,20 @@ export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: Neb
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
       
-      {/* "Computer" Icon positioned via inline styles to match physics target exactly */}
       <motion.div 
-        className="absolute -translate-x-1/2 -translate-y-1/2 z-10 opacity-30 dark:opacity-50"
-        style={{ left: `${targetX}%`, top: `${targetY}%` }}
+        className="absolute -translate-x-1/2 -translate-y-1/2 z-20 opacity-40 dark:opacity-60"
+        style={{ 
+          left: `${targetX}%`, 
+          top: `${targetY}%`,
+          y: yRange
+        }}
         animate={monitorControls}
       >
         <Monitor 
           size={64} 
           className={cn(
-            "transition-colors duration-1000",
-            themeMode === 'light' ? "text-slate-400" : "text-emerald-500"
+            "transition-colors duration-2000",
+            monitorColor
           )} 
         />
       </motion.div>
@@ -134,15 +162,15 @@ export const NebulaField = ({ className, density = 20, themeMode = 'dark' }: Neb
       <svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
-        className="w-full h-full opacity-60 dark:opacity-80 absolute inset-0"
+        className="w-full h-full opacity-40 dark:opacity-70 absolute inset-0"
       >
-        {paths.map((d, i) => (
+        {paths.map((d: string, i: number) => (
           <StreamLine
-            key={i}
+            key={`${themeMode}-${i}`}
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={themeMode === 'light' ? 0.1 : 0.2}
+            width={themeMode === 'light' ? 0.05 : 0.15}
           />
         ))}
       </svg>
