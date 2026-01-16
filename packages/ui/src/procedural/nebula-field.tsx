@@ -39,7 +39,7 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
         await controls.start({
           pathLength: [0, 0.20, 0.20, 0],
           pathOffset: [0, 0, 0.75, 0.98], // Avoid overshooting center too much
-          opacity: [0, 0.3, 0.3, 0], // Muted streamers
+          opacity: [0, 0.5, 0.5, 0], // More visible streamers
           transition: { 
             duration, 
             ease: "linear",
@@ -65,7 +65,7 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
       animate={controls}
       className={cn(
         "transition-colors duration-1000",
-        themeMode === 'light' ? "text-slate-300" : "text-emerald-500/30"
+        themeMode === 'light' ? "text-slate-400" : "text-emerald-500/50"
       )}
     />
   );
@@ -90,7 +90,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
   const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
 
   // Configuration for convergence point
-  const targetX = 10; // Even further left to clear centered H1s
+  const targetX = 18; // Moved right to clear margins better
   const targetY = 18; // High up near the title line
 
   const paths = useMemo(() => {
@@ -122,10 +122,10 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
      setMonitorColor(colors[Math.floor(Math.random() * colors.length)]);
 
      monitorControls.start({
-        scale: [1, 1.05, 1], // Very subtle
+        scale: [1, 1.1, 1], // Slightly more pronounced pulse
         filter: [
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))", 
-          "brightness(1.1) drop-shadow(0 0 8px currentColor)", // Muted glow
+          "brightness(1.3) drop-shadow(0 0 12px currentColor)", // Stronger glow
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))"
         ],
         transition: { duration: 2.5, ease: "easeOut" } 
@@ -141,7 +141,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
         className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
-          opacity: themeMode === 'light' ? 0.3 : 0.4, 
+          opacity: themeMode === 'light' ? 0.4 : 0.6, // More visible computer
           scale: 1 
         }}
         transition={{ duration: 1.5 }}
@@ -153,7 +153,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
       >
         <motion.div animate={monitorControls}>
           <Monitor 
-            size={40} // Smaller, more subtle icon
+            size={56} // Bigger icon as requested
             className={cn(
               "transition-colors duration-2000",
               monitorColor
@@ -165,7 +165,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
       <motion.svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
-        className="w-full h-full opacity-30 dark:opacity-50 absolute inset-0"
+        className="w-full h-full opacity-50 dark:opacity-70 absolute inset-0"
         style={{ y: yRange }} 
       >
         {paths.map((d: string, i: number) => (
@@ -174,7 +174,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={themeMode === 'light' ? 0.06 : 0.1} 
+            width={themeMode === 'light' ? 0.08 : 0.12} 
           />
         ))}
       </motion.svg>
