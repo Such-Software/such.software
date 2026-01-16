@@ -16,30 +16,35 @@ interface StreamLineProps {
   themeMode: 'light' | 'dark';
   onHit: () => void;
   width: number;
+  index: number;
 }
 
-const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
+const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
   const controls = useAnimation();
 
   useEffect(() => {
     let isMounted = true;
     const animate = async () => {
-      // Very short initial delay for first streamers
-      await new Promise(resolve => setTimeout(resolve, Math.random() * 800));
+      // Spread out initial starts so they don't all hit at once
+      await new Promise(resolve => setTimeout(resolve, index * 1500 + Math.random() * 1000));
       
       while (isMounted) {
-        const duration = 6 + Math.random() * 4; // Snappier, more frequent small impacts
+        // Calmer, longer durations (8-14 seconds)
+        const duration = 8 + Math.random() * 6; 
         
         controls.set({ pathLength: 0, pathOffset: 0, opacity: 0 });
 
+        // Timing: In the animation below, pathOffset reaches 0.8 at 80% of duration.
+        // With pathLength 0.2, the head hits the target (1.0) exactly at 80%.
         const hitTimeout = setTimeout(() => {
           if (isMounted) onHit();
-        }, duration * 750);
+        }, duration * 1000 * 0.8); 
 
+        // Animate the streamer path
         await controls.start({
-          pathLength: [0, 0.20, 0.20, 0],
-          pathOffset: [0, 0, 0.75, 0.98], // Avoid overshooting center too much
-          opacity: [0, 0.5, 0.5, 0], // More visible streamers
+          pathLength: [0, 0.2, 0.2, 0], 
+          pathOffset: [0, 0, 0.8, 1.0], 
+          opacity: [0, 0.4, 0.4, 0], 
           transition: { 
             duration, 
             ease: "linear",
@@ -48,12 +53,13 @@ const StreamLine = ({ d, themeMode, onHit, width }: StreamLineProps) => {
         });
 
         clearTimeout(hitTimeout);
-        await new Promise(resolve => setTimeout(resolve, 300 + Math.random() * 1000));
+        // Longer pause between streaks for a more ambient feel
+        await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
       }
     };
     animate();
     return () => { isMounted = false; };
-  }, [controls, onHit]);
+  }, [controls, onHit, index]);
 
   return (
     <motion.path
@@ -85,16 +91,25 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
     setMonitorColor(themeMode === 'light' ? "text-slate-300" : "text-emerald-500/40");
   }, [themeMode]);
 
-  // Parallax Scroll for Computer Icon
+  // --- POSITIONING & ANIMATION CONTROLS ---
+
+  // Parallax Scroll: Vertical movement of the computer icon as you scroll.
+  // [0, 1000] is the scroll pixel range, [0, 250] is the movement in pixels.
   const { scrollY } = useScroll();
   const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
 
-  // Configuration for convergence point
-  const targetX = 18; // Moved right to clear margins better
-  const targetY = 18; // High up near the title line
+  // 1. Computer Position: Where the icon sits on the screen (%)
+  const computerX = 18; 
+  const computerY = 18;
+
+  // 2. Streamer Convergence: Where the streamers actually head (%)
+  // If streamers hit "up and to the left", increase these values slightly.
+  const targetX = 19.8; // Tweak this to move streamer hit point right
+  const targetY = 19.8; // Tweak this to move streamer hit point down
 
   const paths = useMemo(() => {
     return Array.from({ length: density }).map(() => {
+      // Streamer start position (random edge)
       const edge = Math.floor(Math.random() * 4);
       let startX = 50, startY = 50;
       
@@ -128,7 +143,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
           "brightness(1.3) drop-shadow(0 0 12px currentColor)", // Stronger glow
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))"
         ],
-        transition: { duration: 2.5, ease: "easeOut" } 
+        transition: { duration: 1.5, ease: "easeOut" } // Smoother, longer pulse
      });
   }, [monitorControls, themeMode]);
 
@@ -146,8 +161,8 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
         }}
         transition={{ duration: 1.5 }}
         style={{ 
-          left: `${targetX}%`, 
-          top: `${targetY}%`,
+          left: `${computerX}%`, 
+          top: `${computerY}%`,
           y: yRange
         }}
       >
@@ -155,7 +170,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
           <Monitor 
             size={56} // Bigger icon as requested
             className={cn(
-              "transition-colors duration-2000",
+              "transition-colors duration-1000", // Back to smoother color shift
               monitorColor
             )} 
           />
@@ -175,6 +190,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
             themeMode={themeMode}
             onHit={handleHit}
             width={themeMode === 'light' ? 0.08 : 0.12} 
+            index={i}
           />
         ))}
       </motion.svg>
