@@ -3,13 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/layout/footer";
+import { DynamicBackground } from "@/components/landing/dynamic-background";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Such Software LLC",
-  description: "Next-Generation Monorepo Platform",
-};
+// ... (metadata omitted)
 
 export default function RootLayout({
   children,
@@ -25,8 +23,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <Footer />
+            <DynamicBackground />
+            <div className="relative z-10 flex flex-col min-h-screen">
+               {children}
+               <Footer />
+            </div>
           </ThemeProvider>
       </body>
     </html>

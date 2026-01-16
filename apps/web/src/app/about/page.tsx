@@ -6,9 +6,8 @@ import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-ic
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground overflow-hidden">
-      <DynamicBackground />
-
+    <main className="relative flex flex-col items-center overflow-hidden">
+      
       <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-sm sticky top-0">
         <div className="flex items-center gap-6">
           <Link href="/" className="text-2xl font-bold tracking-tighter">Such Software</Link>

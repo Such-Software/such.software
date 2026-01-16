@@ -9,11 +9,9 @@ import { Button } from "@repo/ui/components/button";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-between overflow-hidden bg-background text-foreground transition-colors duration-500">
+    <main className="relative flex flex-col items-center justify-between overflow-hidden">
       
-      <DynamicBackground />
-
-      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6">
+      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 pb-2">
         <div className="flex items-center gap-6">
           <h1 className="text-2xl font-bold tracking-tighter">Such Software</h1>
           <nav className="hidden md:flex gap-4 text-sm font-medium">
