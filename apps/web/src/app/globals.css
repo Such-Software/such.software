@@ -74,3 +74,29 @@
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  /* High-contrast content masking for accessibility and streamer protection */
+  .mask-backdrop {
+    background-color: hsl(var(--card) / 0.98);
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+    border-width: 2px;
+    border-color: hsl(var(--border) / 0.5);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    position: relative;
+    overflow: hidden;
+    transition: all 300ms;
+  }
+  
+  .section-container {
+    @apply mask-backdrop rounded-[2.5rem] p-10 md:p-16 text-card-foreground;
+  }
+
+  .glass-card {
+    @apply mask-backdrop rounded-[2rem] p-8 text-card-foreground;
+  }
+  
+  .glass-card:hover {
+    border-color: hsl(var(--primary) / 0.3);
+  }
+}

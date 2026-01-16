@@ -7,7 +7,20 @@ import { DynamicBackground } from "@/components/landing/dynamic-background";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// ... (metadata omitted)
+export const metadata: Metadata = {
+  title: "Such Software | Digital Craftsmanship",
+  description: "Next-generation web applications engineered for scale, compliance, and performance.",
+  icons: {
+    icon: [
+      { url: "/images/favicon_192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/images/favicon_192.png",
+    apple: [
+      { url: "/images/favicon_192.png", sizes: "192x192", type: "image/png" },
+    ],
+  },
+  manifest: "/manifest.json",
+};
 
 export default function RootLayout({
   children,

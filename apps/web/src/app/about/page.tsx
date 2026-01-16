@@ -1,17 +1,29 @@
 import { DynamicBackground } from "@/components/landing/dynamic-background";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { FounderSignature } from "@/components/about/founder-signature";
+import { SiteLogo } from "@/components/layout/site-logo";
 import Link from "next/link";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About | Such Software",
+  description: "Full-service software provider in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
+  openGraph: {
+    title: "About | Such Software",
+    description: "Full-service software provider in Kennett Square, PA. Founded by John Winter Murphy.",
+    type: "website",
+  },
+};
 
 export default function AboutPage() {
   return (
     <main className="relative flex flex-col items-center overflow-hidden">
       
-      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-sm sticky top-0">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="text-2xl font-bold tracking-tighter">Such Software</Link>
-          <nav className="hidden md:flex gap-4 text-sm font-medium">
+      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 rounded-b-3xl border-b border-border/50">
+        <div className="flex items-center gap-8">
+          <SiteLogo />
+          <nav className="hidden md:flex gap-6 text-sm font-medium">
              <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
              <Link href="/about" className="text-primary transition-colors">About</Link>
           </nav>
@@ -19,10 +31,10 @@ export default function AboutPage() {
         <ThemeToggle />
       </header>
 
-      <div className="z-10 w-full max-w-4xl mx-auto py-20 px-4">
+      <div className="z-10 w-full max-w-6xl mx-auto py-20 px-4">
         <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">About Us</h1>
 
-        <div className="bg-card/80 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-xl border border-border/50">
+        <div className="section-container">
           
           <div className="prose dark:prose-invert max-w-none mb-12">
             <p className="text-xl leading-relaxed">

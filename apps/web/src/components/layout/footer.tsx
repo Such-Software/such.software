@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import { SiteLogo } from "./site-logo";
 import { FaXTwitter, FaTelegram, FaReddit, FaPhone } from "react-icons/fa6";
 
 export function Footer() {
@@ -9,7 +10,7 @@ export function Footer() {
       <div className="container px-4 md:px-6 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold">Such Software</h3>
+            <SiteLogo />
             <p className="text-sm text-muted-foreground">
               Full-service software provider in the heart of Mushroom Country.
             </p>
