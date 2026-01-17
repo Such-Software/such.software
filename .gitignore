@@ -49,5 +49,10 @@ next-env.d.ts
 .cache/
 coverage/
 
+# Playwright
+playwright-report/
+test-results/
+.last-run.json
+
 # AI / Assistant
 .claude/
