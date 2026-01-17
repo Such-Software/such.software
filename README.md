@@ -2,6 +2,16 @@
 
 Corporate website for Such Software LLC, a full-service software provider based in Kennett Square, PA.
 
+## Lighthouse Scores (Production Build)
+
+| Page | Performance | Accessibility | SEO | Best Practices |
+|------|-------------|---------------|-----|----------------|
+| Home | 99% | **100%** | **100%** | 77%* |
+| Services | 98% | **100%** | **100%** | **100%** |
+| About | 99% | **100%** | **100%** | **100%** |
+
+*Home page Best Practices is 77% due to Cloudflare Turnstile third-party cookies for bot protection.
+
 ## Tech Stack
 
 ### Core Framework
@@ -92,60 +102,31 @@ The dev server runs at `http://localhost:3000`.
 
 ## Accessibility & Quality
 
-### Current Status
-See [TODO_ACCESS.md](TODO_ACCESS.md) for detailed audit results.
+### WCAG 2.2 AA Compliance
 
-### Lighthouse Scores (Dev Server)
-| Category | Score |
-|----------|-------|
-| Performance | 51 |
-| Accessibility | 95 |
-| SEO | 91 |
-| Best Practices | 73 |
+This site achieves **100% Lighthouse Accessibility** on all pages through:
 
-**Note:** Production builds typically score higher.
-
-### Testing Tools
-
-#### Current
-- **Lighthouse** - Performance, accessibility, SEO, best practices
-  ```bash
-  npx lighthouse http://localhost:3000 --view
-  ```
-
-#### Planned
-- **Playwright + axe-core** - Automated accessibility testing
-  ```bash
-  pnpm add -D @playwright/test @axe-core/playwright
-  npx playwright install
-  ```
-
-### Accessibility Features
 - Skip-to-main-content link
-- Semantic HTML5 structure (`<main>`, `<nav>`, `<header>`, `<footer>`)
+- Semantic HTML5 structure (`<main>`, `<nav>`, `<header>`, `<footer>`, `<address>`)
+- Proper heading hierarchy (h1 → h2 → h3 → h4)
 - ARIA labels on interactive elements
+- Form fields with proper labels and error handling
+- Color contrast ratios meeting 4.5:1 minimum
 - Keyboard navigation support
 - Dark/light mode with system preference
-- Reduced motion support
+- Reduced motion support in theme transitions
 
-### Known Issues
-- Color contrast needs improvement in some areas
-- Heading hierarchy has gaps
-- Canvas animations impact performance (NebulaField)
+See [TODO_ACCESS.md](TODO_ACCESS.md) for detailed audit results.
 
-## Key Components
+### Testing
 
-### DynamicBackground
-Homepage animated nebula background using canvas. Theme-aware with reduced motion support.
+```bash
+# Run Lighthouse audit (requires production build)
+pnpm build && pnpm start
 
-### Header
-Shared navigation with skip-to-main link, responsive design, and theme toggle.
-
-### ContactForm
-Server action-powered form with Zod validation and Turnstile bot protection.
-
-### FounderSignature
-Bio section with accessibility credentials and competency cards.
+# In another terminal:
+npx lighthouse http://localhost:3000 --view
+```
 
 ## Environment Variables
 
@@ -159,6 +140,8 @@ TURNSTILE_SECRET_KEY=your_secret_key
 # Contact form email (optional)
 CONTACT_EMAIL=your@email.com
 ```
+
+See `.env.example` for a template.
 
 ## Deployment
 

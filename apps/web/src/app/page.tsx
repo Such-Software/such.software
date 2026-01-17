@@ -38,7 +38,7 @@ export default function Home() {
          
          <div className="w-full max-w-6xl mx-auto mb-16 px-4">
             <div className="text-left mb-8 section-container border-l-4 border-l-blue-500">
-                <h3 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h3>
+                <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                     A curated gallery of recent projects where we've pushed the boundaries of 
                     performance, accessibility, and user experience.
@@ -49,7 +49,7 @@ export default function Home() {
 
          <div className="w-full max-w-6xl mx-auto mb-20 px-4">
             <div className="text-left mb-12 section-container border-l-4 border-l-purple-500">
-                <h3 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Inclusive by Design</h3>
+                <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Inclusive by Design</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                     We believe the web is for everyone. Every line of code we write is 
                     audited for WCAG 2.2 compliance and high-performance across all devices.
@@ -60,7 +60,7 @@ export default function Home() {
 
          <div id="contact" className="w-full mt-20 mb-20 flex flex-col items-center">
             <div className="w-full max-w-6xl text-left mb-12 section-container border-l-4 border-l-cyan-500">
-                <h3 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Start a Project</h3>
+                <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Start a Project</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                     Ready to build something exceptional? Drop us a line and let's discuss 
                     how we can help you scale your digital presence.

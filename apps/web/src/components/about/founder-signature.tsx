@@ -25,7 +25,7 @@ export const FounderSignature = () => {
            </div>
            <div>
               <p className="font-mono text-xs uppercase tracking-[0.4em] text-primary/80 mb-1">Founder & Principal Engineer</p>
-              <h2 className="text-3xl font-bold tracking-tight">John Winter Murphy</h2>
+              <h3 className="text-3xl font-bold tracking-tight">John Winter Murphy</h3>
            </div>
         </div>
 
@@ -46,7 +46,7 @@ export const FounderSignature = () => {
       <div className="space-y-6">
         <Card className="glass-card hover:border-purple-500/30">
           <h4 className="text-base font-bold mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500 text-[10px]">01</span>
+            <span className="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-white text-[10px] font-bold" aria-hidden="true">01</span>
             A11y First Architecture
           </h4>
           <p className="text-muted-foreground text-sm leading-relaxed font-medium">
@@ -56,7 +56,7 @@ export const FounderSignature = () => {
 
         <Card className="glass-card hover:border-blue-500/30">
           <h4 className="text-base font-bold mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 text-[10px]">02</span>
+            <span className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold" aria-hidden="true">02</span>
             Edge Performance
           </h4>
           <p className="text-muted-foreground text-sm leading-relaxed font-medium">
@@ -66,21 +66,21 @@ export const FounderSignature = () => {
 
         <Card className="glass-card hover:border-emerald-500/30 border-dashed">
           <h4 className="text-base font-bold mb-4 flex items-center gap-2">
-            <span className="text-emerald-500 text-[10px]">03</span>
+            <span className="w-6 h-6 rounded-full bg-emerald-700 flex items-center justify-center text-white text-[10px] font-bold" aria-hidden="true">03</span>
             Core Competencies
           </h4>
           <ul className="grid grid-cols-1 gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span> WCAG 2.2 AA Compliance
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> WCAG 2.2 AA Compliance
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span> Section 508 & ADA
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Section 508 & ADA
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span> Semantic HTML5 Architecture
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Semantic HTML5 Architecture
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span> Playwright A11y Automation
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Playwright A11y Automation
             </li>
           </ul>
         </Card>

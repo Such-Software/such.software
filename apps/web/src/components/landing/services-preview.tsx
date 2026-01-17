@@ -4,7 +4,7 @@ export function ServicesPreview() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-8 mb-16 relative z-10">
         <div className="text-left mb-8 section-container border-l-4 border-l-emerald-500">
-            <h3 className="text-3xl font-bold mb-3 tracking-tight">High-Performance Webshops</h3>
+            <h2 className="text-3xl font-bold mb-3 tracking-tight">High-Performance Webshops</h2>
             <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                 We build commerce infrastructure that scales with you. From complex supply chains 
                 to global payments, we handle the technical heavy lifting so you can focus on your brand.

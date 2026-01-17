@@ -6,17 +6,12 @@ import { Button } from "@repo/ui/components/button";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { setTheme, resolvedTheme, theme, systemTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Debug
-  useEffect(() => {
-    console.log('[ThemeToggle] mounted:', mounted, 'theme:', theme, 'resolvedTheme:', resolvedTheme);
-  }, [mounted, theme, resolvedTheme]);
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     const isDark = resolvedTheme === "dark";

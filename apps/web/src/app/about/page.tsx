@@ -33,10 +33,10 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 gap-10 mb-12">
             <div>
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                <FaBuilding className="text-primary" /> 
+              <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                <FaBuilding className="text-primary" />
                 Headquarters
-              </h3>
+              </h2>
               <address className="not-italic text-muted-foreground space-y-1 pl-7 border-l-2 border-border ml-2">
                 <p>Such Software LLC</p>
                 <p>110 E State St</p>
@@ -65,7 +65,7 @@ export default function AboutPage() {
             
             <div className="flex flex-col justify-center items-center bg-muted/30 rounded-xl p-6">
                <div className="text-center">
-                  <h3 className="text-lg font-semibold mb-2">Connect</h3>
+                  <h2 className="text-lg font-semibold mb-2">Connect</h2>
                   <p className="text-sm text-muted-foreground mb-4">Find us on your favorite platforms</p>
                   <div className="flex gap-6 justify-center">
                     <a href="https://x.com/such_software" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
@@ -86,7 +86,7 @@ export default function AboutPage() {
           </div>
 
           <div className="border-t border-border/50 pt-10">
-            <h3 className="text-2xl font-bold mb-6 text-center">Leadership</h3>
+            <h2 className="text-2xl font-bold mb-6 text-center">Leadership</h2>
             <FounderSignature />
           </div>
 

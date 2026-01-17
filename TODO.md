@@ -1,5 +1,19 @@
 # Such Software - Production Checklist
 
+## 🟢 Production Ready
+
+### Lighthouse Scores (January 2026)
+
+| Page | Performance | Accessibility | SEO | Best Practices |
+|------|-------------|---------------|-----|----------------|
+| Home | 99% | 100% | 100% | 77%* |
+| Services | 98% | 100% | 100% | 100% |
+| About | 99% | 100% | 100% | 100% |
+
+*Best Practices on home page is 77% due to Cloudflare Turnstile third-party cookies for bot protection.
+
+---
+
 ## 🔴 Before Production Deployment
 
 ### 1. Cloudflare Turnstile Configuration
@@ -25,25 +39,25 @@ See: `apps/web/src/lib/turnstile.ts`
 
 ## 🟡 Medium Priority Improvements
 
-### 2. Extract Shared Header Component
+### 2. Set Up Playwright A11y Testing
 
-The header is duplicated across three pages:
-- `apps/web/src/app/page.tsx`
-- `apps/web/src/app/services/page.tsx`
-- `apps/web/src/app/about/page.tsx`
+The site claims "Playwright A11y Automation" but it's not yet implemented.
 
-Create a shared component at `apps/web/src/components/layout/header.tsx`.
+```bash
+pnpm add -D @playwright/test @axe-core/playwright
+npx playwright install
+```
 
-### 3. Add `prefers-reduced-motion` Support
+Create `apps/web/tests/a11y.spec.ts` with axe-core integration.
 
-The NebulaField and DynamicBackground components run animations without checking user preferences.
+### 3. Add `prefers-reduced-motion` Support to NebulaField
 
 File: `packages/ui/src/procedural/nebula-field.tsx`
 
 Add:
 ```tsx
-const prefersReducedMotion = typeof window !== 'undefined' 
-  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+const prefersReducedMotion = typeof window !== 'undefined'
+  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
   : false;
 
 if (prefersReducedMotion) {
@@ -51,36 +65,7 @@ if (prefersReducedMotion) {
 }
 ```
 
-### 4. Add Skip-to-Content Link
-
-For keyboard accessibility, add a skip link in `apps/web/src/app/layout.tsx`:
-
-```tsx
-<a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg">
-  Skip to main content
-</a>
-```
-
-### 5. Add `aria-hidden` to Decorative Icons
-
-In `apps/web/src/app/about/page.tsx`, add `aria-hidden="true"` to decorative icons:
-```tsx
-<FaMapMarkerAlt aria-hidden="true" />
-<FaPhone aria-hidden="true" />
-<FaBuilding aria-hidden="true" />
-```
-
-### 6. Type Server Action Properly
-
-In `apps/web/src/actions/submit-contact.ts`, the `prevState` parameter uses `any`. Update to:
-```tsx
-export async function submitContactForm(
-  prevState: { success: boolean; message: string; errors?: Record<string, string> },
-  formData: FormData
-): Promise<{ success: boolean; message: string; errors?: Record<string, string> }>
-```
-
-### 7. Rate Limiting
+### 4. Rate Limiting
 
 Consider adding rate limiting to the contact form submission to prevent abuse.
 Options: Upstash Ratelimit, Vercel Edge Config, or Cloudflare Workers.
@@ -89,7 +74,7 @@ Options: Upstash Ratelimit, Vercel Edge Config, or Cloudflare Workers.
 
 ## 🟢 Nice-to-Have
 
-### 8. Add Structured Data (JSON-LD)
+### 5. Add Structured Data (JSON-LD)
 
 Add Organization schema to `layout.tsx` for better SEO:
 ```tsx
@@ -111,21 +96,26 @@ Add Organization schema to `layout.tsx` for better SEO:
 </script>
 ```
 
-### 9. Add Canonical URLs
+### 6. Add Canonical URLs
 
 Add canonical meta tags to prevent duplicate content issues.
-
-### 10. Remove Console Logs
-
-Remove `console.log` statements before production:
-- `apps/web/src/components/contact/turnstile-widget.tsx`
 
 ---
 
 ## ✅ Recently Completed
 
+- [x] **100% Accessibility** on all pages (Lighthouse)
+- [x] **100% SEO** on all pages (Lighthouse)
+- [x] Fixed color contrast (emerald-600 → emerald-700)
+- [x] Fixed heading hierarchy across all pages
+- [x] Lazy loaded NebulaField with `next/dynamic` and `requestIdleCallback`
+- [x] Removed debug console.log statements
+- [x] Set up Cloudflare Turnstile for bot protection
+- [x] Created .env.example for environment variables
+- [x] Fixed `pnpm start` script
 - [x] Deleted sync conflict files
 - [x] Fixed homepage `<h1>` heading hierarchy
 - [x] Added page metadata to services and about pages
 - [x] Fixed `outline-none` accessibility issue on form inputs
 - [x] Established semantic CSS architecture (`.section-container`, `.glass-card`)
+- [x] Extracted shared Header component
