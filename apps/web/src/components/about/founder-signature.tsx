@@ -31,7 +31,7 @@ export const FounderSignature = () => {
 
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-muted-foreground leading-relaxed italic border-l-4 border-primary/20 pl-6 text-lg">
-            "During my three years at <span className="text-foreground font-semibold">Cecil College</span>, I didn't just teach engineering—I re-engineered how it was taught.
+            "During my three years at <span className="text-foreground font-semibold">Cecil College</span>, I didn't just teach engineering: I re-engineered how it was taught.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-6">
             Transitioning the curriculum from PDFs and Powerpoints to web-based content, I focused on transforming complex technical lessons into highly accessible HTML using <span className="text-foreground font-semibold underline decoration-primary/50">Quarto markdown</span>. This allowed us to consistently generate semantic content including accessible equations and guaranteed descriptive alt text for every visual asset.

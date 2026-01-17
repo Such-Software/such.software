@@ -3,12 +3,14 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { FounderSignature } from "@/components/about/founder-signature";
 import { ServicesPreview } from "@/components/landing/services-preview";
 import { Header } from "@/components/layout/header";
+import { DynamicBackground } from "@/components/landing/dynamic-background";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
 
 export default function Home() {
   return (
     <main className="relative flex flex-col items-center justify-between overflow-hidden">
+      <DynamicBackground />
       <Header />
 
       <div id="main-content" className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-20 pb-10 px-4 text-center">

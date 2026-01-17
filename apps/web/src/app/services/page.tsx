@@ -22,50 +22,58 @@ export default function ServicesPage() {
       <Header />
 
       <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
-        {/* Context Header */}
+        {/* Page Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
+            Specialized Solutions
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            We solve complex business problems with elegant architecture.
+          </p>
+        </div>
+
+        {/* Philosophy Card */}
         <div className="mb-20">
-            <div className="text-left mb-8 section-container border-l-4 border-l-emerald-500">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
-                  Specialized Solutions
-                </h1>
-                <p className="text-xl text-muted-foreground max-w-2xl">
-                   We solve complex business problems with elegant architecture. 
-                   Whether you're scaling a commerce empire or building a new financial protocol, 
-                   we provide the technical firepower.
+            <div className="text-left section-container border-l-4 border-l-emerald-500">
+                <h2 className="text-3xl font-bold mb-2">Partnership-First Development</h2>
+                <p className="text-muted-foreground text-lg max-w-3xl">
+                   Whether you're scaling a commerce empire or building a new financial protocol,
+                   we provide the technical firepower. We don't just write code—we architect
+                   systems that grow with your business.
                 </p>
             </div>
         </div>
 
-        {/* Medusa / Webshops Section */}
+        {/* E-Commerce Section */}
         <div className="mb-24">
             <div className="text-left mb-10 section-container border-l-4 border-l-blue-500">
-                <h2 className="text-3xl font-bold mb-2">Medusa v2 Development</h2>
+                <h2 className="text-3xl font-bold mb-2">Custom E-Commerce Engines</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl">
-                    We build proprietary, headless commerce engines that scale with your business logic. 
+                    We build proprietary, headless commerce engines that scale with your business logic.
                     Stop fighting with Shopify's limitations and own your infrastructure.
                 </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
                 <Card className="glass-card hover:border-indigo-500/30">
-                    <h3 className="text-xl font-bold mb-3">Unlimited Data Modeling</h3>
+                    <h3 className="text-xl font-bold mb-3">Flexible Architecture</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Natively model complex entities like "DNA Sequences" or "Royalty Logic" 
-                        directly in the database without hacky metadata.
+                        Model your exact business logic—subscriptions, bundles, B2B pricing,
+                        multi-warehouse inventory—without platform constraints.
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-indigo-500/30">
-                    <h3 className="text-xl font-bold mb-3">Zero Capital Upfront</h3>
+                    <h3 className="text-xl font-bold mb-3">Revenue-Share Model</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Our revenue-share partnership means no setup fees or monthly subscriptions—we
-                        only earn when you're making sales.
+                        No massive setup fees or monthly retainers. We invest in your success
+                        and earn a percentage of sales—aligned incentives from day one.
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-indigo-500/30">
-                    <h3 className="text-xl font-bold mb-3">Headless SEO</h3>
+                    <h3 className="text-xl font-bold mb-3">Performance-First Frontend</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Custom Next.js frontends engineered for perfect lighthouse scores and 
-                        superior organic search conversion.
+                        Custom Next.js storefronts optimized for Core Web Vitals, accessibility,
+                        and conversion—not template bloat.
                     </p>
                 </Card>
             </div>
