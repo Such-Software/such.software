@@ -87,7 +87,7 @@
     overflow: hidden;
     transition: all 300ms;
   }
-  
+
   .section-container {
     @apply mask-backdrop rounded-[2.5rem] p-12 md:p-20 text-card-foreground;
   }
@@ -95,8 +95,20 @@
   .glass-card {
     @apply mask-backdrop rounded-[2rem] p-10 text-card-foreground;
   }
-  
+
   .glass-card:hover {
     border-color: hsl(var(--primary) / 0.3);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

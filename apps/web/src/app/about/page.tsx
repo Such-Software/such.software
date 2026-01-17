@@ -1,9 +1,7 @@
-import { DynamicBackground } from "@/components/landing/dynamic-background";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { FounderSignature } from "@/components/about/founder-signature";
-import { SiteLogo } from "@/components/layout/site-logo";
-import Link from "next/link";
+import { Header } from "@/components/layout/header";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
+import { FaXTwitter, FaTelegram, FaReddit } from "react-icons/fa6";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,19 +17,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="relative flex flex-col items-center overflow-hidden">
-      
-      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 rounded-b-3xl border-b border-border/50">
-        <div className="flex items-center gap-2">
-          <SiteLogo />
-          <nav className="hidden md:flex gap-6 text-sm font-medium">
-             <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
-             <Link href="/about" className="text-primary transition-colors">About</Link>
-          </nav>
-        </div>
-        <ThemeToggle />
-      </header>
+      <Header />
 
-      <div className="z-10 w-full max-w-6xl mx-auto py-20 px-4">
+      <div id="main-content" className="z-10 w-full max-w-6xl mx-auto py-20 px-4">
         <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">About Us</h1>
 
         <div className="section-container">
@@ -78,8 +66,21 @@ export default function AboutPage() {
             <div className="flex flex-col justify-center items-center bg-muted/30 rounded-xl p-6">
                <div className="text-center">
                   <h3 className="text-lg font-semibold mb-2">Connect</h3>
-                   <p className="text-sm text-muted-foreground mb-4">Find us on your favorite platforms</p>
-                   {/* Social links are in the footer, but we can highlight them here or leave for footer */}
+                  <p className="text-sm text-muted-foreground mb-4">Find us on your favorite platforms</p>
+                  <div className="flex gap-6 justify-center">
+                    <a href="https://x.com/such_software" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaXTwitter className="h-6 w-6" />
+                      <span className="sr-only">X (Twitter)</span>
+                    </a>
+                    <a href="https://t.me/j_winter_m" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaTelegram className="h-6 w-6" />
+                      <span className="sr-only">Telegram</span>
+                    </a>
+                    <a href="https://reddit.com/r/SuchSoftware" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaReddit className="h-6 w-6" />
+                      <span className="sr-only">Reddit</span>
+                    </a>
+                  </div>
                </div>
             </div>
           </div>

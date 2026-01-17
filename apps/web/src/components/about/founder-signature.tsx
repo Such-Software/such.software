@@ -7,12 +7,13 @@ export const FounderSignature = () => {
       {/* Left Column: Bio */}
       <div className="space-y-8 text-left section-container">
         <div className="flex items-center gap-6 relative z-10">
-           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary/10 bg-white dark:bg-zinc-900 shadow-xl ring-4 ring-primary/5">
-              <Image 
-                src="/images/logo_w_circle_trans.jpg" 
-                alt="Such Software Icon" 
-                fill 
-                className="object-cover scale-[1.02]"
+           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary/10 bg-white dark:bg-zinc-900 shadow-xl ring-4 ring-primary/5 flex items-center justify-center">
+              <Image
+                src="/images/favicon.svg"
+                alt="Such Software Icon"
+                width={72}
+                height={72}
+                className="object-contain"
               />
            </div>
            <div>
@@ -23,13 +24,13 @@ export const FounderSignature = () => {
 
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-muted-foreground leading-relaxed italic border-l-4 border-primary/20 pl-6 text-lg">
-            "During my three years at <span className="text-foreground font-semibold">Cecil College</span>, I didn't just teach web engineering—I re-engineered how it was taught.
+            "During my three years at <span className="text-foreground font-semibold">Cecil College</span>, I didn't just teach engineering—I re-engineered how it was taught.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-6">
-            Transitioning the curriculum toward from PDFs and Powerpoints to web-based content, I focused on transforming complex technical lessons into highly accessible HTML using <span className="text-foreground font-semibold underline decoration-primary/50">Quarto markdown</span> as our source. This allowed us to consistently generate semantic content including accessible equations and guaranteed descriptive alt text for every visual asset.
+            Transitioning the curriculum from PDFs and Powerpoints to web-based content, I focused on transforming complex technical lessons into highly accessible HTML using <span className="text-foreground font-semibold underline decoration-primary/50">Quarto markdown</span>. This allowed us to consistently generate semantic content including accessible equations and guaranteed descriptive alt text for every visual asset.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-4 italic border-l-4 border-primary/20 pl-6 text-lg">
-            This wasn't just academic theory; it was a rigorous discipline of semantic architecture, ARIA compliance, and cognitive load management. Today, I bring that same technical rigor to Such Software’s commercial projects. We don't retroactively fix accessibility; we architect for it from line one."
+            This wasn't just theory; it was a methodical implementation of semantic architecture, ARIA compliance, and cognitive load management. Today, I bring that same technical rigor to Such Software’s commercial projects. We don't retroactively fix accessibility; we architect for it from line one."
           </p>
         </div>
       </div>
@@ -61,18 +62,18 @@ export const FounderSignature = () => {
             <span className="text-emerald-500 text-[10px]">03</span>
             Core Competencies
           </h4>
-          <ul className="grid grid-cols-1 gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground/80">
+          <ul className="grid grid-cols-1 gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500 text-sm">✓</span> WCAG 2.2 AA Compliance
+              <span className="text-emerald-500">✓</span> WCAG 2.2 AA Compliance
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500 text-sm">✓</span> Section 508 & ADA
+              <span className="text-emerald-500">✓</span> Section 508 & ADA
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500 text-sm">✓</span> Semantic HTML5 Architecture
+              <span className="text-emerald-500">✓</span> Semantic HTML5 Architecture
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-500 text-sm">✓</span> Playwright A11y Automation
+              <span className="text-emerald-500">✓</span> Playwright A11y Automation
             </li>
           </ul>
         </Card>

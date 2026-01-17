@@ -77,14 +77,9 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
   );
 };
 
-export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: NebulaProps) => { 
-  const [mounted, setMounted] = useState(false);
+export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: NebulaProps) => {
   const monitorControls = useAnimation();
   const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-slate-400" : "text-emerald-500/60");
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Sync color with theme if no impacts have happened yet
   useEffect(() => {
@@ -130,24 +125,22 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
   }, [density, themeMode, targetX, targetY]);
 
   const handleHit = useCallback(() => {
-     const colors = themeMode === 'light' 
+     const colors = themeMode === 'light'
         ? ["text-slate-400", "text-blue-400", "text-indigo-400", "text-emerald-400"]
         : ["text-emerald-500/50", "text-blue-500/50", "text-purple-500/50", "text-cyan-500/50", "text-teal-500/50"];
-     
+
      setMonitorColor(colors[Math.floor(Math.random() * colors.length)]);
 
      monitorControls.start({
-        scale: [1, 1.1, 1], // Slightly more pronounced pulse
+        scale: [1, 1.1, 1],
         filter: [
-          "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))", 
-          "brightness(1.3) drop-shadow(0 0 12px currentColor)", // Stronger glow
+          "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))",
+          "brightness(1.3) drop-shadow(0 0 12px currentColor)",
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))"
         ],
-        transition: { duration: 1.5, ease: "easeOut" } // Smoother, longer pulse
+        transition: { duration: 1.5, ease: "easeOut" }
      });
   }, [monitorControls, themeMode]);
-
-  if (!mounted) return null;
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>

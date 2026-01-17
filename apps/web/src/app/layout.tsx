@@ -12,9 +12,10 @@ export const metadata: Metadata = {
   description: "Next-generation web applications engineered for scale, compliance, and performance.",
   icons: {
     icon: [
+      { url: "/images/favicon.svg", type: "image/svg+xml" },
       { url: "/images/favicon_192.png", sizes: "192x192", type: "image/png" },
     ],
-    shortcut: "/images/favicon_192.png",
+    shortcut: "/images/favicon.svg",
     apple: [
       { url: "/images/favicon_192.png", sizes: "192x192", type: "image/png" },
     ],

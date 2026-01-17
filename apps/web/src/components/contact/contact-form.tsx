@@ -1,16 +1,17 @@
 'use client';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { submitContactForm } from '@/actions/submit-contact';
 import { TurnstileWidget } from './turnstile-widget';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from '@repo/ui/components/button';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button 
-      type="submit" 
-      disabled={pending} 
+    <Button
+      type="submit"
+      disabled={pending}
       size="lg"
       className="w-full md:w-64 rounded-xl text-lg font-semibold"
     >
@@ -20,12 +21,22 @@ function SubmitButton() {
 }
 
 export function ContactForm() {
-  const [state, formAction] = useFormState(submitContactForm, { success: false, message: '' });
+  const [state, formAction] = useActionState(submitContactForm, { success: false, message: '' });
   const [token, setToken] = useState<string>('');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Reset form on successful submission
+  useEffect(() => {
+    if (state.success && formRef.current) {
+      formRef.current.reset();
+      setToken('');
+    }
+  }, [state.success]);
 
   return (
-    <form 
-      action={formAction} 
+    <form
+      ref={formRef}
+      action={formAction}
       className="space-y-8 w-full max-w-6xl mx-auto section-container"
     >
        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32" />
@@ -41,40 +52,46 @@ export function ContactForm() {
       <div className="grid md:grid-cols-2 gap-8 relative z-10">
         <div className="space-y-3">
           <label htmlFor="name" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">Full Name</label>
-          <input 
-            name="name" 
-            id="name" 
+          <input
+            name="name"
+            id="name"
             placeholder="Jamie Doe"
-            required 
-            className="w-full p-4 border-2 border-border/50 rounded-2xl bg-background/50 focus:ring-4 focus:ring-primary/10 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all text-lg" 
+            required
+            aria-describedby={state?.errors?.name ? "name-error" : undefined}
+            aria-invalid={state?.errors?.name ? "true" : undefined}
+            className="w-full p-4 border-2 border-border/50 rounded-2xl bg-background/50 focus:ring-4 focus:ring-primary/10 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all text-lg"
           />
-          {state?.errors?.name && <p className="text-red-500 text-sm px-1">{state.errors.name}</p>}
+          {state?.errors?.name && <p id="name-error" className="text-red-500 text-sm px-1" role="alert">{state.errors.name}</p>}
         </div>
 
         <div className="space-y-3">
           <label htmlFor="email" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">Work Email</label>
-          <input 
-            name="email" 
-            id="email" 
-            type="email" 
+          <input
+            name="email"
+            id="email"
+            type="email"
             placeholder="jamie@example.com"
-            required 
-            className="w-full p-4 border-2 border-border/50 rounded-2xl bg-background/50 focus:ring-4 focus:ring-primary/10 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all text-lg" 
+            required
+            aria-describedby={state?.errors?.email ? "email-error" : undefined}
+            aria-invalid={state?.errors?.email ? "true" : undefined}
+            className="w-full p-4 border-2 border-border/50 rounded-2xl bg-background/50 focus:ring-4 focus:ring-primary/10 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all text-lg"
           />
-          {state?.errors?.email && <p className="text-red-500 text-sm px-1">{state.errors.email}</p>}
+          {state?.errors?.email && <p id="email-error" className="text-red-500 text-sm px-1" role="alert">{state.errors.email}</p>}
         </div>
       </div>
 
       <div className="space-y-3 relative z-10">
         <label htmlFor="message" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">Project Details</label>
-        <textarea 
-          name="message" 
-          id="message" 
+        <textarea
+          name="message"
+          id="message"
           placeholder="What are you building? Mention any specific constraints, timelines, or technologies..."
-          required 
-          className="w-full p-6 border-2 border-border/50 rounded-2xl bg-background/50 h-56 resize-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all text-lg leading-relaxed" 
+          required
+          aria-describedby={state?.errors?.message ? "message-error" : undefined}
+          aria-invalid={state?.errors?.message ? "true" : undefined}
+          className="w-full p-6 border-2 border-border/50 rounded-2xl bg-background/50 h-56 resize-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all text-lg leading-relaxed"
         />
-        {state?.errors?.message && <p className="text-red-500 text-sm px-1">{state.errors.message}</p>}
+        {state?.errors?.message && <p id="message-error" className="text-red-500 text-sm px-1" role="alert">{state.errors.message}</p>}
       </div>
 
       <input type="hidden" name="token" value={token} />
@@ -92,13 +109,17 @@ export function ContactForm() {
       </div>
       
       {state?.message && (
-        <div className={`mt-8 p-6 rounded-2xl text-base border-l-4 relative z-10 ${
-          state.success 
-            ? "bg-emerald-500/10 border-emerald-500 text-emerald-700 dark:text-emerald-400" 
-            : "bg-red-500/10 border-red-500 text-red-700 dark:text-red-400"
-        }`}>
+        <div
+          role="status"
+          aria-live="polite"
+          className={`mt-8 p-6 rounded-2xl text-base border-l-4 relative z-10 ${
+            state.success
+              ? "bg-emerald-500/10 border-emerald-500 text-emerald-700 dark:text-emerald-400"
+              : "bg-red-500/10 border-red-500 text-red-700 dark:text-red-400"
+          }`}
+        >
           <div className="flex items-center gap-3">
-            <span className="text-xl">{state.success ? "✓" : "⚠"}</span>
+            <span className="text-xl" aria-hidden="true">{state.success ? "✓" : "⚠"}</span>
             <p className="font-medium">{state.message}</p>
           </div>
         </div>

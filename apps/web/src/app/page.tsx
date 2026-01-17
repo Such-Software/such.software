@@ -1,30 +1,17 @@
-import { DynamicBackground } from "@/components/landing/dynamic-background";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { PortfolioGrid } from "@/components/portfolio/bento-grid";
 import { ContactForm } from "@/components/contact/contact-form";
 import { FounderSignature } from "@/components/about/founder-signature";
 import { ServicesPreview } from "@/components/landing/services-preview";
-import { SiteLogo } from "@/components/layout/site-logo";
+import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
-import { Card } from "@repo/ui/components/card";
 
 export default function Home() {
   return (
     <main className="relative flex flex-col items-center justify-between overflow-hidden">
-      
-      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 rounded-b-3xl border-b border-border/50">
-        <div className="flex items-center gap-2">
-          <SiteLogo />
-          <nav className="hidden md:flex gap-6 text-sm font-medium">
-             <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
-             <Link href="/about" className="hover:text-primary transition-colors">About</Link>
-          </nav>
-        </div>
-        <ThemeToggle />
-      </header>
-      
-      <div className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-20 pb-10 px-4 text-center">
+      <Header />
+
+      <div id="main-content" className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-20 pb-10 px-4 text-center">
          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500 pb-2">
            Digital Craftsmanship
          </h1>

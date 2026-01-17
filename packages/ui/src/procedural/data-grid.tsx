@@ -24,7 +24,7 @@ export const DataGrid = () => {
          width="2" height="2" fill="currentColor"
          className="text-blue-500 dark:text-blue-400"
        >
-         <motion.animateMotion 
+         <animateMotion
            path="M 0 50 H 100"
            dur="5s"
            repeatCount="indefinite"

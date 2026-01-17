@@ -1,7 +1,6 @@
 import { DataGrid } from "@repo/ui/procedural/data-grid";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@repo/ui/components/button";
-import { SiteLogo } from "@/components/layout/site-logo";
+import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import { Card } from "@repo/ui/components/card";
 import type { Metadata } from "next";
@@ -19,22 +18,10 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground overflow-hidden">
-      
-      {/* Option B: Data Grid Background for Technical Feel */}
       <DataGrid />
+      <Header />
 
-      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 border-b border-border/50 rounded-b-3xl">
-        <div className="flex items-center gap-2">
-          <SiteLogo />
-          <nav className="hidden md:flex gap-6 text-sm font-medium">
-             <Link href="/services" className="text-primary transition-colors">Services</Link>
-             <Link href="/about" className="hover:text-primary transition-colors">About</Link>
-          </nav>
-        </div>
-        <ThemeToggle />
-      </header>
-
-      <div className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
+      <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
         {/* Context Header */}
         <div className="mb-20">
             <div className="text-left mb-8 section-container border-l-4 border-l-emerald-500">
@@ -70,8 +57,8 @@ export default function ServicesPage() {
                 <Card className="glass-card hover:border-indigo-500/30">
                     <h3 className="text-xl font-bold mb-3">Zero Capital Upfront</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Our "Toast" style partnership means we win when you win. Low friction onboarding 
-                        with performance-based incentives.
+                        Our revenue-share partnership means no setup fees or monthly subscriptions—we
+                        only earn when you're making sales.
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-indigo-500/30">

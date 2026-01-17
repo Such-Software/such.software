@@ -6,18 +6,24 @@ import { Button } from "@repo/ui/components/button";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme, theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Debug
+  useEffect(() => {
+    console.log('[ThemeToggle] mounted:', mounted, 'theme:', theme, 'resolvedTheme:', resolvedTheme);
+  }, [mounted, theme, resolvedTheme]);
+
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     const isDark = resolvedTheme === "dark";
-    
-    // Fallback for browsers without startViewTransition
-    if (!document.startViewTransition) {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Skip animation if user prefers reduced motion or browser doesn't support view transitions
+    if (prefersReducedMotion || !document.startViewTransition) {
       setTheme(isDark ? "light" : "dark");
       return;
     }
@@ -51,18 +57,21 @@ export function ThemeToggle() {
     });
   };
 
+  const isDark = resolvedTheme === "dark";
+
   return (
-    <Button 
-      variant="ghost" 
-      size="icon" 
+    <Button
+      variant="ghost"
+      size="icon"
       onClick={mounted ? toggleTheme : undefined}
       className="rounded-full"
-      aria-label="Toggle theme"
+      aria-label={mounted ? (isDark ? "Switch to light mode" : "Switch to dark mode") : "Toggle theme"}
     >
-      {mounted && resolvedTheme === "dark" ? (
-        <Moon className="h-5 w-5" />
-      ) : (
+      {/* Show the icon representing what clicking will switch TO */}
+      {mounted && isDark ? (
         <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
       )}
     </Button>
   );
