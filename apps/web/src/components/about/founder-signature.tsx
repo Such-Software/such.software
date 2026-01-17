@@ -7,13 +7,20 @@ export const FounderSignature = () => {
       {/* Left Column: Bio */}
       <div className="space-y-8 text-left section-container">
         <div className="flex items-center gap-6 relative z-10">
-           <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary/10 bg-white dark:bg-zinc-900 shadow-xl ring-4 ring-primary/5 flex items-center justify-center">
+           <div className="relative w-16 h-16 flex items-center justify-center">
               <Image
-                src="/images/favicon.svg"
+                src="/images/logo_dark.svg"
                 alt="Such Software Icon"
-                width={72}
-                height={72}
-                className="object-contain"
+                width={56}
+                height={56}
+                className="hidden dark:block object-contain"
+              />
+              <Image
+                src="/images/logo_light.svg"
+                alt="Such Software Icon"
+                width={56}
+                height={56}
+                className="block dark:hidden object-contain"
               />
            </div>
            <div>
