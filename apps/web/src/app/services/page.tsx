@@ -8,6 +8,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Services | Such Software",
   description: "Medusa v2 development, custom web applications, and cryptocurrency consulting. High-performance headless commerce, real-time platforms, and Web3 integration.",
+  alternates: {
+    canonical: "/services",
+  },
   openGraph: {
     title: "Services | Such Software",
     description: "Medusa v2 development, custom web applications, and cryptocurrency consulting.",

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "playwright test",
+    "test:a11y": "playwright test tests/a11y.spec.ts",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.0.2",
@@ -22,6 +25,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.57.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

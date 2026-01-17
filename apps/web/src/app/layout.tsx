@@ -7,8 +7,12 @@ import { Footer } from "@/components/layout/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://such.software"),
   title: "Such Software | Digital Craftsmanship",
   description: "Next-generation web applications engineered for scale, compliance, and performance.",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/images/favicon.svg", type: "image/svg+xml" },
@@ -22,6 +26,32 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Such Software LLC",
+  url: "https://such.software",
+  logo: "https://such.software/images/logo_dark.svg",
+  description: "Next-generation web applications engineered for scale, compliance, and performance.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "110 E State St, Suite 300",
+    addressLocality: "Kennett Square",
+    addressRegion: "PA",
+    postalCode: "19348",
+    addressCountry: "US",
+  },
+  founder: {
+    "@type": "Person",
+    name: "John Winter Murphy",
+    jobTitle: "Founder & Principal Engineer",
+  },
+  sameAs: [
+    "https://github.com/suchsoftware",
+    "https://linkedin.com/company/suchsoftware",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +59,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className={inter.className}>
           <ThemeProvider
             attribute="class"

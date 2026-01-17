@@ -7,6 +7,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About | Such Software",
   description: "Full-service software provider in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About | Such Software",
     description: "Full-service software provider in Kennett Square, PA. Founded by John Winter Murphy.",

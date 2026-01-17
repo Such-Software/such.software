@@ -80,6 +80,30 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
 export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: NebulaProps) => {
   const monitorControls = useAnimation();
   const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-slate-400" : "text-emerald-500/60");
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Check for reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // Return static background for reduced motion users
+  if (prefersReducedMotion) {
+    return (
+      <div className={cn(
+        "absolute inset-0 overflow-hidden pointer-events-none z-0",
+        themeMode === 'light'
+          ? "bg-gradient-to-br from-slate-100 via-slate-50 to-white"
+          : "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",
+        className
+      )} />
+    );
+  }
 
   // Sync color with theme if no impacts have happened yet
   useEffect(() => {
