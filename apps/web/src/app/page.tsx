@@ -1,3 +1,5 @@
+"use client";
+
 import { PortfolioGrid } from "@/components/portfolio/bento-grid";
 import { ContactForm } from "@/components/contact/contact-form";
 import { FounderSignature } from "@/components/about/founder-signature";
@@ -6,15 +8,62 @@ import { Header } from "@/components/layout/header";
 import { DynamicBackground } from "@/components/landing/dynamic-background";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
+import { useRef, useState, useEffect } from "react";
 
 export default function Home() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [nebulaPosition, setNebulaPosition] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const updatePosition = () => {
+      if (titleRef.current) {
+        const rect = titleRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // Position nebula to the left of the title with a comfortable margin
+        // Convert pixel position to percentage of viewport
+        const titleLeftPercent = (rect.left / viewportWidth) * 100;
+        const titleTopPercent = (rect.top / viewportHeight) * 100;
+        
+        // Place the nebula 8% to the left of where the title starts
+        // and vertically aligned with the title's top area
+        const nebulaX = Math.max(5, titleLeftPercent - 8);
+        const nebulaY = Math.max(10, titleTopPercent - 2);
+        
+        setNebulaPosition({ x: nebulaX, y: nebulaY });
+      }
+    };
+
+    updatePosition();
+    
+    // Update on resize
+    window.addEventListener('resize', updatePosition);
+    
+    // Also update after fonts load (can affect title width)
+    document.fonts?.ready.then(updatePosition);
+    
+    return () => window.removeEventListener('resize', updatePosition);
+  }, []);
+
   return (
     <main className="relative flex flex-col items-center justify-between overflow-hidden">
-      <DynamicBackground />
+      <DynamicBackground nebulaPosition={nebulaPosition} />
       <Header />
 
       <div id="main-content" className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-20 pb-10 px-4 text-center">
-         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500 pb-2">
+         <h1 
+           ref={titleRef}
+           className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500 pb-2"
+           style={{
+             // Calculated max-width to prevent nebula overlap:
+             // Monitor right edge = 5% of vw + 28px (half of 56px icon)
+             // Title left edge for centered text = (vw - titleWidth) / 2
+             // For no overlap: titleWidth < 0.9 * vw - 56px
+             // Adding 64px buffer for comfortable spacing
+             maxWidth: 'min(calc(90vw - 120px), 100%)',
+           }}
+         >
            Digital Craftsmanship
          </h1>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">

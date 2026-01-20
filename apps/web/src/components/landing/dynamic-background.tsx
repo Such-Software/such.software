@@ -13,7 +13,11 @@ const NebulaField = dynamic(
   }
 );
 
-export function DynamicBackground() {
+interface DynamicBackgroundProps {
+  nebulaPosition?: { x: number; y: number } | null;
+}
+
+export function DynamicBackground({ nebulaPosition }: DynamicBackgroundProps) {
   const { resolvedTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [showNebula, setShowNebula] = useState(false);
@@ -51,6 +55,7 @@ export function DynamicBackground() {
     <NebulaField
       className="fixed inset-0 z-0 h-screen w-screen"
       themeMode={themeMode}
+      position={nebulaPosition ?? undefined}
     />
   );
 }

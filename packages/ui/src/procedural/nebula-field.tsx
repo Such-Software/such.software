@@ -9,6 +9,8 @@ interface NebulaProps {
   className?: string;
   density?: number;
   themeMode?: 'light' | 'dark';
+  /** Dynamic position as percentage of viewport. If not provided, uses default fixed position. */
+  position?: { x: number; y: number };
 }
 
 interface StreamLineProps {
@@ -77,7 +79,7 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
   );
 };
 
-export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: NebulaProps) => {
+export const NebulaField = ({ className, density = 8, themeMode = 'dark', position }: NebulaProps) => {
   const monitorControls = useAnimation();
   const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-slate-400" : "text-emerald-500/60");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -118,13 +120,14 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark' }: Nebu
   const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
 
   // 1. Computer Position: Where the icon sits on the screen (%)
-  const computerX = 18; 
-  const computerY = 18;
+  // Use dynamic position if provided, otherwise fall back to defaults
+  const computerX = position?.x ?? 18; 
+  const computerY = position?.y ?? 18;
 
   // 2. Streamer Convergence: Where the streamers actually head (%)
-  // If streamers hit "up and to the left", increase these values slightly.
-  const targetX = 19.8; // Tweak this to move streamer hit point right
-  const targetY = 19.8; // Tweak this to move streamer hit point down
+  // Offset from computer position so streamers hit the center of the monitor
+  const targetX = computerX + 2.5;
+  const targetY = computerY + 2.5;
 
   const paths = useMemo(() => {
     return Array.from({ length: density }).map(() => {
