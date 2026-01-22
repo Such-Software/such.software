@@ -25,15 +25,22 @@ export function DynamicBackground({ nebulaPosition }: DynamicBackgroundProps) {
   useEffect(() => {
     setMounted(true);
     // Delay nebula render to prioritize main content (LCP)
-    const timer = requestIdleCallback
-      ? requestIdleCallback(() => setShowNebula(true))
-      : setTimeout(() => setShowNebula(true), 100);
+    // Use typeof check for Safari compatibility (requestIdleCallback not supported)
+    let idleHandle: number | undefined;
+    let timeoutHandle: number | undefined;
+    
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      idleHandle = window.requestIdleCallback(() => setShowNebula(true));
+    } else {
+      timeoutHandle = window.setTimeout(() => setShowNebula(true), 100);
+    }
 
     return () => {
-      if (typeof timer === 'number') {
-        clearTimeout(timer);
-      } else if (cancelIdleCallback) {
-        cancelIdleCallback(timer as unknown as number);
+      if (timeoutHandle !== undefined) {
+        window.clearTimeout(timeoutHandle);
+      }
+      if (idleHandle !== undefined && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleHandle);
       }
     };
   }, []);
