@@ -27,17 +27,17 @@ export function DynamicBackground({ nebulaPosition }: DynamicBackgroundProps) {
     // Delay nebula render to prioritize main content (LCP)
     // Use typeof check for Safari compatibility (requestIdleCallback not supported)
     let idleHandle: number | undefined;
-    let timeoutHandle: number | undefined;
+    let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
     
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    if ('requestIdleCallback' in window) {
       idleHandle = window.requestIdleCallback(() => setShowNebula(true));
     } else {
-      timeoutHandle = window.setTimeout(() => setShowNebula(true), 100);
+      timeoutHandle = setTimeout(() => setShowNebula(true), 100);
     }
 
     return () => {
       if (timeoutHandle !== undefined) {
-        window.clearTimeout(timeoutHandle);
+        clearTimeout(timeoutHandle);
       }
       if (idleHandle !== undefined && 'cancelIdleCallback' in window) {
         window.cancelIdleCallback(idleHandle);
