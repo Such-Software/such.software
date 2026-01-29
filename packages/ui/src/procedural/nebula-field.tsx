@@ -80,9 +80,20 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
 };
 
 export const NebulaField = ({ className, density = 8, themeMode = 'dark', position }: NebulaProps) => {
+  // === ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL RETURNS ===
   const monitorControls = useAnimation();
   const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-slate-400" : "text-emerald-500/60");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Parallax Scroll hooks (called unconditionally)
+  const { scrollY } = useScroll();
+  const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
+
+  // Position calculations
+  const computerX = position?.x ?? 18;
+  const computerY = position?.y ?? 18;
+  const targetX = computerX + 2.5;
+  const targetY = computerY + 2.5;
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -94,47 +105,18 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  // Return static background for reduced motion users
-  if (prefersReducedMotion) {
-    return (
-      <div className={cn(
-        "absolute inset-0 overflow-hidden pointer-events-none z-0",
-        themeMode === 'light'
-          ? "bg-gradient-to-br from-slate-100 via-slate-50 to-white"
-          : "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",
-        className
-      )} />
-    );
-  }
-
-  // Sync color with theme if no impacts have happened yet
+  // Sync color with theme
   useEffect(() => {
-    setMonitorColor(themeMode === 'light' ? "text-slate-300" : "text-emerald-500/40");
-  }, [themeMode]);
-
-  // --- POSITIONING & ANIMATION CONTROLS ---
-
-  // Parallax Scroll: Vertical movement of the computer icon as you scroll.
-  // [0, 1000] is the scroll pixel range, [0, 250] is the movement in pixels.
-  const { scrollY } = useScroll();
-  const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
-
-  // 1. Computer Position: Where the icon sits on the screen (%)
-  // Use dynamic position if provided, otherwise fall back to defaults
-  const computerX = position?.x ?? 18; 
-  const computerY = position?.y ?? 18;
-
-  // 2. Streamer Convergence: Where the streamers actually head (%)
-  // Offset from computer position so streamers hit the center of the monitor
-  const targetX = computerX + 2.5;
-  const targetY = computerY + 2.5;
+    if (!prefersReducedMotion) {
+      setMonitorColor(themeMode === 'light' ? "text-slate-300" : "text-emerald-500/40");
+    }
+  }, [themeMode, prefersReducedMotion]);
 
   const paths = useMemo(() => {
     return Array.from({ length: density }).map(() => {
-      // Streamer start position (random edge)
       const edge = Math.floor(Math.random() * 4);
       let startX = 50, startY = 50;
-      
+
       switch(edge) {
         case 0: startX = Math.random() * 100; startY = -20; break;
         case 1: startX = 120; startY = Math.random() * 100; break;
@@ -142,11 +124,11 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
         case 3: startX = -20; startY = Math.random() * 100; break;
       }
 
-      const endX = targetX + (Math.random() - 0.5) * 1.5; // Even tighter
-      const endY = targetY + (Math.random() - 0.5) * 1.5; 
+      const endX = targetX + (Math.random() - 0.5) * 1.5;
+      const endY = targetY + (Math.random() - 0.5) * 1.5;
       const cpX = (startX + endX) / 2 + (Math.random() - 0.5) * 40;
       const cpY = (startY + endY) / 2 + (Math.random() - 0.5) * 40;
-      
+
       return `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`;
     });
   }, [density, themeMode, targetX, targetY]);
@@ -168,6 +150,21 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
         transition: { duration: 1.5, ease: "easeOut" }
      });
   }, [monitorControls, themeMode]);
+
+  // === CONDITIONAL RETURNS AFTER ALL HOOKS ===
+
+  // Return static background for reduced motion users
+  if (prefersReducedMotion) {
+    return (
+      <div className={cn(
+        "absolute inset-0 overflow-hidden pointer-events-none z-0",
+        themeMode === 'light'
+          ? "bg-gradient-to-br from-slate-100 via-slate-50 to-white"
+          : "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",
+        className
+      )} />
+    );
+  }
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
