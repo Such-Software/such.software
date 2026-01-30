@@ -52,15 +52,11 @@ export default function Home() {
       <Header />
 
       <div id="main-content" className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-20 pb-10 px-4 text-center">
-         <h1 
+         <h1
            ref={titleRef}
-           className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500 pb-2"
+           className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-emerald-500 pb-2"
            style={{
-             // Calculated max-width to prevent nebula overlap:
-             // Monitor right edge = 5% of vw + 28px (half of 56px icon)
-             // Title left edge for centered text = (vw - titleWidth) / 2
-             // For no overlap: titleWidth < 0.9 * vw - 56px
-             // Adding 64px buffer for comfortable spacing
+             // Calculated max-width to prevent nebula overlap (only matters on larger screens)
              maxWidth: 'min(calc(90vw - 120px), 100%)',
            }}
          >
