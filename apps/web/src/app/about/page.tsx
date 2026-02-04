@@ -1,7 +1,7 @@
 import { FounderSignature } from "@/components/about/founder-signature";
 import { Header } from "@/components/layout/header";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
-import { FaXTwitter, FaTelegram, FaReddit } from "react-icons/fa6";
+import { FaXTwitter, FaTelegram, FaDiscord } from "react-icons/fa6";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -79,9 +79,9 @@ export default function AboutPage() {
                       <FaTelegram className="h-6 w-6" />
                       <span className="sr-only">Telegram</span>
                     </a>
-                    <a href="https://reddit.com/r/SuchSoftware" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                      <FaReddit className="h-6 w-6" />
-                      <span className="sr-only">Reddit</span>
+                    <a href="https://discord.com/users/392547150480932864" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaDiscord className="h-6 w-6" />
+                      <span className="sr-only">Discord</span>
                     </a>
                   </div>
                </div>

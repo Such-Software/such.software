@@ -25,7 +25,11 @@ export const FounderSignature = () => {
            </div>
            <div>
               <p className="font-mono text-xs uppercase tracking-[0.4em] text-primary/80 mb-1">Founder & Principal Engineer</p>
-              <h3 className="text-3xl font-bold tracking-tight">John Winter Murphy</h3>
+              <h3 className="text-3xl font-bold tracking-tight">
+                <a href="https://jwinterm.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  John Winter Murphy
+                </a>
+              </h3>
            </div>
         </div>
 

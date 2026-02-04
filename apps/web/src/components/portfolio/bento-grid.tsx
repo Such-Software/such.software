@@ -85,6 +85,25 @@ export const PortfolioGrid = () => {
            </div>
         </Card>
       </Link>
+
+      {/* Quinary: Smirk Wallet */}
+      <Link href="https://smirk.cash" target="_blank" rel="noopener noreferrer" className="md:col-span-2">
+        <Card className="h-full glass-card group min-h-[300px] rounded-[2.5rem] !bg-amber-50/95 dark:!bg-amber-950/95 !border-amber-500/20 cursor-pointer">
+           <div className="absolute inset-x-0 top-0 z-20 p-6 bg-gradient-to-b from-background/95 to-transparent pointer-events-none">
+            <h3 className="text-xl font-bold text-amber-700 dark:text-amber-400">Smirk Wallet</h3>
+            <p className="text-sm mt-1 text-foreground font-semibold">Non-custodial browser wallet with encrypted social tipping.</p>
+          </div>
+           <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border border-amber-500/10 shadow-inner">
+               <Image
+                src="/images/smirk-wallet.png"
+                alt="Screenshot of Smirk Wallet browser extension showing multi-currency support for BTC, LTC, XMR, WOW, and GRIN"
+                fill
+                className="object-contain p-2 opacity-50 transition-transform duration-1000 group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+           </div>
+        </Card>
+      </Link>
     </section>
   );
 };
