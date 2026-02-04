@@ -6,7 +6,7 @@ export const PortfolioGrid = () => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-4 auto-rows-[300px] gap-6 w-full max-w-7xl mx-auto p-4 z-10 relative">
       {/* Hero Project: r/CryptoCurrency */}
-      <Link href="https://rcryptocurrency.com" target="_blank" rel="noopener noreferrer" className="md:col-span-2 md:row-span-2">
+      <Link href="https://rcryptocurrency.com" target="_blank" rel="noopener noreferrer" className="md:col-span-2">
         <Card className="h-full glass-card group min-h-[300px] rounded-[2.5rem] !bg-slate-950/90 cursor-pointer">
           <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/95 via-black/20 to-transparent p-12 flex flex-col justify-end items-center text-center pointer-events-none pb-20">
             <h3 className="text-4xl font-bold text-white shadow-black drop-shadow-xl tracking-tight">r/CryptoCurrency</h3>
