@@ -1,5 +1,6 @@
 import { FounderSignature } from "@/components/about/founder-signature";
 import { Header } from "@/components/layout/header";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
 import { FaXTwitter, FaTelegram, FaDiscord } from "react-icons/fa6";
 import type { Metadata } from "next";
@@ -22,7 +23,7 @@ export default function AboutPage() {
     <main className="relative flex flex-col items-center overflow-hidden">
       <Header />
 
-      <div id="main-content" className="z-10 w-full max-w-6xl mx-auto py-20 px-4">
+      <div id="main-content" className="z-10 w-full max-w-6xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">About Us</h1>
 
         <div className="section-container">
@@ -95,6 +96,7 @@ export default function AboutPage() {
 
         </div>
       </div>
+      <MobileNav />
     </main>
   );
 }

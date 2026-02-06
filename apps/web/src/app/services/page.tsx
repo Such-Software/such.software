@@ -1,6 +1,7 @@
 import { DataGrid } from "@repo/ui/procedural/data-grid";
 import { Button } from "@repo/ui/components/button";
 import { Header } from "@/components/layout/header";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import Link from "next/link";
 import { Card } from "@repo/ui/components/card";
 import type { Metadata } from "next";
@@ -150,7 +151,7 @@ export default function ServicesPage() {
             </Link>
         </div>
       </div>
-
+      <MobileNav />
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { FounderSignature } from "@/components/about/founder-signature";
 import { ServicesPreview } from "@/components/landing/services-preview";
 import { Header } from "@/components/layout/header";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import { DynamicBackground } from "@/components/landing/dynamic-background";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
@@ -103,7 +104,7 @@ export default function Home() {
             <FounderSignature />
          </div>
 
-         <div id="contact" className="w-full mt-20 mb-20 flex flex-col items-center">
+         <div id="contact" className="w-full mt-20 mb-20 pb-16 md:pb-0 flex flex-col items-center">
             <div className="w-full max-w-6xl text-left mb-12 section-container border-l-4 border-l-cyan-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Start a Project</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
@@ -114,6 +115,7 @@ export default function Home() {
             <ContactForm />
          </div>
       </div>
+      <MobileNav />
     </main>
   );
 }

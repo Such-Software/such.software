@@ -21,10 +21,22 @@ export function Header() {
           <SiteLogo />
           <nav className="hidden md:flex gap-6 text-sm font-medium" aria-label="Main navigation">
             <Link
+              href="/products"
+              className={pathname.startsWith("/products") ? "text-primary" : "hover:text-primary transition-colors"}
+            >
+              Products
+            </Link>
+            <Link
               href="/services"
               className={pathname === "/services" ? "text-primary" : "hover:text-primary transition-colors"}
             >
               Services
+            </Link>
+            <Link
+              href="/blog"
+              className={pathname.startsWith("/blog") ? "text-primary" : "hover:text-primary transition-colors"}
+            >
+              Blog
             </Link>
             <Link
               href="/about"
