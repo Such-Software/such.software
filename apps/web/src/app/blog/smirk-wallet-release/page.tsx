@@ -13,17 +13,19 @@ export default function SmirkWalletReleasePost() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
-      <article id="main-content" className="z-10 w-full max-w-3xl mx-auto py-20 px-4 pb-24 md:pb-20">
-        <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">
+      <article id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
+        <Link href="/blog" className="text-sm text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 mb-8 inline-flex items-center gap-2 transition-colors">
           ← Back to Blog
         </Link>
 
-        <header className="mb-12">
-          <time className="text-sm text-muted-foreground">February 6, 2026</time>
-          <h1 className="text-3xl md:text-4xl font-bold mt-2">Smirk Wallet v0.1.6</h1>
-        </header>
+        <div className="glass-card mt-6">
+          <header className="mb-8 pb-6 border-b border-border">
+            <time className="text-sm text-muted-foreground">February 6, 2026</time>
+            <h1 className="text-3xl md:text-4xl font-bold mt-2">Smirk Wallet v0.1.6</h1>
+            <p className="text-muted-foreground mt-3">Non-custodial social tipping for Telegram and Discord</p>
+          </header>
 
-        <div className="prose dark:prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none">
           <p>
             Smirk Wallet is a non-custodial browser extension that lets you tip people cryptocurrency 
             by their Telegram or Discord username. We have shipped six releases and the extension is 
@@ -106,6 +108,7 @@ export default function SmirkWalletReleasePost() {
             </a>
             .
           </p>
+        </div>
         </div>
       </article>
       <MobileNav />

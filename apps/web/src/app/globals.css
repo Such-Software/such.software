@@ -99,6 +99,74 @@
   .glass-card:hover {
     border-color: hsl(var(--primary) / 0.3);
   }
+
+  /* Typography customization for blog posts */
+  .prose {
+    --tw-prose-body: hsl(var(--foreground));
+    --tw-prose-headings: hsl(var(--foreground));
+    --tw-prose-lead: hsl(var(--muted-foreground));
+    --tw-prose-links: hsl(var(--primary));
+    --tw-prose-bold: hsl(var(--foreground));
+    --tw-prose-counters: hsl(var(--muted-foreground));
+    --tw-prose-bullets: hsl(var(--muted-foreground));
+    --tw-prose-hr: hsl(var(--border));
+    --tw-prose-quotes: hsl(var(--foreground));
+    --tw-prose-quote-borders: hsl(var(--border));
+    --tw-prose-captions: hsl(var(--muted-foreground));
+    --tw-prose-code: hsl(var(--foreground));
+    --tw-prose-pre-code: hsl(var(--foreground));
+    --tw-prose-pre-bg: hsl(var(--muted));
+    --tw-prose-th-borders: hsl(var(--border));
+    --tw-prose-td-borders: hsl(var(--border));
+  }
+
+  .prose h2 {
+    @apply text-xl font-semibold mt-10 mb-4 pb-2 border-b border-border;
+  }
+
+  .prose h3 {
+    @apply text-lg font-medium mt-6 mb-3;
+  }
+
+  .prose p {
+    @apply leading-relaxed mb-4;
+  }
+
+  .prose ul {
+    @apply my-4 ml-4 space-y-2;
+  }
+
+  .prose li {
+    @apply leading-relaxed;
+  }
+
+  .prose a {
+    @apply text-emerald-600 dark:text-emerald-400 underline underline-offset-2 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors;
+  }
+
+  .prose strong {
+    @apply font-semibold;
+  }
+
+  .prose hr {
+    @apply my-8 border-border;
+  }
+
+  .prose table {
+    @apply w-full my-6 text-sm;
+  }
+
+  .prose thead th {
+    @apply text-left font-semibold p-3 bg-muted/50 border-b border-border;
+  }
+
+  .prose tbody td {
+    @apply p-3 border-b border-border;
+  }
+
+  .prose tbody tr:hover {
+    @apply bg-muted/30;
+  }
 }
 
 /* Respect users who prefer reduced motion */

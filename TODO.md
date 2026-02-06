@@ -6,14 +6,13 @@
 
 ## Nice to Have
 
-- [ ] **Blog** - Consider adding blog/articles section (MDX, Contentlayer, or headless CMS)
 - [ ] **Rate limiting** - Turnstile handles bots; add rate limiting only if abuse observed
 - [ ] Manual screen reader testing (NVDA, VoiceOver)
 - [ ] Further canvas performance optimization
+- [ ] **Blog migration** - Move to MDX/Contentlayer when post count grows
 
 ## Future Projects
 
-- [ ] Puzzle game (mobile app with web demo)
 - [ ] Decision making app (mobile app with web demo)
 
 ---
@@ -61,6 +60,17 @@ packages/
 - Consider Expo Web for code sharing between mobile and web demo
 
 ## Completed
+
+### Products & Blog (February 2026)
+- [x] **Products section** - Landing page + 4 product pages (Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo)
+- [x] **Bauhaus Echo** - Full product page with game modes, features, app store links, privacy policy
+- [x] **Smirk Wallet** - Full product page with features, supported currencies, community links
+- [x] **Blog infrastructure** - Blog listing with draft system, individual post pages
+- [x] **Blog posts** - Website Relaunch (published), Smirk Wallet v0.1.6 (published), Bauhaus Echo Launch (draft)
+- [x] **Mobile bottom navigation** - Fixed nav bar for mobile with 5 items (Home, Products, Services, Blog, About)
+- [x] **Header updates** - Desktop nav now includes Products and Blog links
+- [x] **Portfolio bento grid** - Added Smirk Wallet card (1x2 tall)
+- [x] **Footer/About** - Replaced Reddit with Discord, added jwinterm.com link
 
 ### Lighthouse Scores (January 2026)
 
