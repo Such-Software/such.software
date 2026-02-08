@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 632.87714 200"
+   version="1.1"
+   id="svg642"
+   sodipodi:docname="clean_dark_w_text.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   width="632.87714"
+   height="200"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview644"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.641875"
+     inkscape:cx="222.00584"
+     inkscape:cy="239.14314"
+     inkscape:window-width="1452"
+     inkscape:window-height="1233"
+     inkscape:window-x="4173"
+     inkscape:window-y="670"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg642" />
+  <defs
+     id="defs628">
+    <filter
+       id="glow"
+       x="-0.026918605"
+       y="-0.026918605"
+       width="1.0538372"
+       height="1.0538372">
+      <feGaussianBlur
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur619" />
+      <feMerge
+         id="feMerge625">
+        <feMergeNode
+           in="blur"
+           id="feMergeNode621" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode623" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <!-- Border -->
+  <rect
+     width="632.87714"
+     height="200"
+     fill="#0a0a0a"
+     id="rect2"
+     x="0"
+     y="0"
+     style="stroke-width:1.77887"
+     ry="22.926825" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:84px;line-height:81.6378px;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black,  Bold';fill:#ffffff;stroke:#ffffff;stroke-width:15"
+     x="206.31992"
+     y="88.012764"
+     id="text1510"><tspan
+       sodipodi:role="line"
+       id="tspan1508"
+       x="206.31992"
+       y="88.012764"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:84px;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';fill:#ffffff;fill-opacity:1;stroke:none">Such</tspan><tspan
+       sodipodi:role="line"
+       x="206.31992"
+       y="169.65056"
+       id="tspan1512"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:84px;font-family:'Archivo Black';-inkscape-font-specification:'Archivo Black, ';fill:#ffffff;fill-opacity:1;stroke:none">Software</tspan></text>
+  <rect
+     x="14"
+     y="14"
+     width="172"
+     height="172"
+     rx="16"
+     fill="none"
+     stroke="#45c99e"
+     stroke-width="3.5"
+     filter="url(#glow)"
+     opacity="0.7"
+     id="rect632" />
+  <!-- S - green (5.1:1) -->
+  <path
+     d="M 78,36 H 36 V 58 H 78 V 82 H 36"
+     fill="none"
+     stroke="#35925c"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path634" />
+  <!-- U - rose (6.5:1) -->
+  <path
+     d="m 118,36 v 34 c 0,12.15 9.85,14 22,14 12.15,0 22,-1.85 22,-14 V 36"
+     fill="none"
+     stroke="#e8689e"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path636" />
+  <!-- C - blue (7.9:1) -->
+  <path
+     d="M 78,118 H 36 v 46 h 42"
+     fill="none"
+     stroke="#4aade0"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path638" />
+  <!-- H - teal (9.5:1) -->
+  <path
+     d="m 118,118 v 46 m 44,-46 v 46 m -44,-23 h 44"
+     fill="none"
+     stroke="#45c99e"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path640" />
+</svg>

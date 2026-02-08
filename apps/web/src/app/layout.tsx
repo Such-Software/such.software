@@ -15,12 +15,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/images/favicon.svg", type: "image/svg+xml" },
-      { url: "/images/favicon_192.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/branding/favicon_dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
+      { url: "/images/branding/favicon_light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      { url: "/images/branding/favicon_dark.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/images/branding/favicon_light.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: light)" },
     ],
-    shortcut: "/images/favicon.svg",
+    shortcut: "/images/branding/favicon_dark.svg",
     apple: [
-      { url: "/images/favicon_192.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/branding/favicon_dark.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/images/branding/favicon_light.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: light)" },
     ],
   },
   manifest: "/manifest.json",
@@ -31,7 +34,7 @@ const structuredData = {
   "@type": "Organization",
   name: "Such Software LLC",
   url: "https://such.software",
-  logo: "https://such.software/images/logo_dark.svg",
+  logo: "https://such.software/images/branding/clean_dark_w_text.svg",
   description: "Next-generation web applications engineered for scale, compliance, and performance.",
   address: {
     "@type": "PostalAddress",

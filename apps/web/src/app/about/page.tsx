@@ -26,8 +26,8 @@ export default function AboutPage() {
       <div id="main-content" className="z-10 w-full max-w-6xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <h1 className="text-4xl md:text-5xl font-bold mb-10 text-center">About Us</h1>
 
-        <div className="section-container">
-          
+        <div className="section-container relative">
+
           <div className="prose dark:prose-invert max-w-none mb-12">
             <p className="text-xl leading-relaxed">
               Founded in 2021 by John Winter Murphy in Chester County, PA, and operating in Kennett Square since July 2025, 
@@ -94,6 +94,18 @@ export default function AboutPage() {
             <FounderSignature />
           </div>
 
+          <img
+            src="/images/animations/anim3_matrix_light.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-4 right-4 w-16 h-16 opacity-50 block dark:hidden motion-reduce:hidden"
+          />
+          <img
+            src="/images/animations/anim3_matrix.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute bottom-4 right-4 w-16 h-16 opacity-50 hidden dark:block motion-reduce:hidden"
+          />
         </div>
       </div>
       <MobileNav />

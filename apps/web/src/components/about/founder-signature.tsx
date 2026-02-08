@@ -9,14 +9,14 @@ export const FounderSignature = () => {
         <div className="flex items-center gap-6 relative z-10">
            <div className="relative w-16 h-16 flex items-center justify-center">
               <Image
-                src="/images/logo_dark.svg"
+                src="/images/branding/clean_dark.svg"
                 alt="Such Software Icon"
                 width={56}
                 height={56}
                 className="hidden dark:block object-contain"
               />
               <Image
-                src="/images/logo_light.svg"
+                src="/images/branding/clean_light.svg"
                 alt="Such Software Icon"
                 width={56}
                 height={56}

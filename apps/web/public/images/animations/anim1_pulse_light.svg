@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="pulseGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- The Z-trace path as reusable definition -->
+    <path id="trace" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 52"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="26" fill="#f5f5f5"/>
+
+  <!-- Base trace (dim) -->
+  <use href="#trace" fill="none" stroke="#1a7a5a" stroke-width="2" opacity="0.2"
+       stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Pulse 1: bright traveling dash -->
+  <use href="#trace" fill="none" stroke="#1a7a5a" stroke-width="3" opacity="0.7"
+       stroke-linecap="round" stroke-linejoin="round" filter="url(#pulseGlow)"
+       stroke-dasharray="30 568">
+    <animate attributeName="stroke-dashoffset" from="0" to="-598" dur="3s" repeatCount="indefinite"/>
+  </use>
+
+  <!-- Pulse 2: offset by half -->
+  <use href="#trace" fill="none" stroke="#2a9a6a" stroke-width="2" opacity="0.5"
+       stroke-linecap="round" stroke-linejoin="round" filter="url(#pulseGlow)"
+       stroke-dasharray="20 578">
+    <animate attributeName="stroke-dashoffset" from="-299" to="-897" dur="3s" repeatCount="indefinite"/>
+  </use>
+
+  <!-- Pulse 3: smaller, faster accent -->
+  <use href="#trace" fill="none" stroke="#333333" stroke-width="1.5" opacity="0.3"
+       stroke-linecap="round" stroke-linejoin="round"
+       stroke-dasharray="8 590">
+    <animate attributeName="stroke-dashoffset" from="-100" to="-698" dur="3s" repeatCount="indefinite"/>
+  </use>
+
+  <!-- Nodes that pulse as signal passes -->
+  <g filter="url(#pulseGlow)">
+    <!-- Entry node -->
+    <circle cx="20" cy="28" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;4.5;2.5" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Top chevron -->
+    <circle cx="92" cy="34" r="2" fill="#1a7a5a">
+      <animate attributeName="r" values="2;3.5;2" dur="3s" begin="0.28s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" begin="0.28s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="108" cy="34" r="2" fill="#1a7a5a">
+      <animate attributeName="r" values="2;3.5;2" dur="3s" begin="0.33s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" begin="0.33s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Top-right corner -->
+    <circle cx="178" cy="34" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;4.5;2.5" dur="3s" begin="0.55s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" begin="0.55s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Right bend -->
+    <circle cx="172" cy="100" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;4.5;2.5" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Center -->
+    <circle cx="100" cy="100" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;5;2.5" dur="3s" begin="1.25s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" begin="1.25s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Left bend -->
+    <circle cx="28" cy="100" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;4.5;2.5" dur="3s" begin="1.55s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" begin="1.55s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Bottom-left corner -->
+    <circle cx="22" cy="166" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;4.5;2.5" dur="3s" begin="1.9s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" begin="1.9s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Bottom chevron -->
+    <circle cx="92" cy="166" r="2" fill="#1a7a5a">
+      <animate attributeName="r" values="2;3.5;2" dur="3s" begin="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" begin="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="108" cy="166" r="2" fill="#1a7a5a">
+      <animate attributeName="r" values="2;3.5;2" dur="3s" begin="2.25s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" begin="2.25s" repeatCount="indefinite"/>
+    </circle>
+    <!-- Exit node -->
+    <circle cx="166" cy="172" r="2.5" fill="#1a7a5a">
+      <animate attributeName="r" values="2.5;4.5;2.5" dur="3s" begin="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" begin="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Border -->
+  <rect x="14" y="14" width="172" height="172" rx="16" fill="none"
+        stroke="#1a7a5a" stroke-width="3.5" filter="url(#glow)" opacity="0.5"/>
+
+  <!-- S -->
+  <path d="M 78,36 H 36 V 58 H 78 V 82 H 36"
+        fill="none" stroke="#1e6e45" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- U -->
+  <path d="m 118,36 v 34 c 0,12.15 9.85,14 22,14 12.15,0 22,-1.85 22,-14 V 36"
+        fill="none" stroke="#c44e7a" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- C -->
+  <path d="M 78,118 H 36 V 164 H 78"
+        fill="none" stroke="#2e85b8" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- H -->
+  <path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162"
+        fill="none" stroke="#1a7a5a" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

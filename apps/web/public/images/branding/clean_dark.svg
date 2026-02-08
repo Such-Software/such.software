@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="26" fill="#0a0a0a"/>
+
+  <!-- Border -->
+  <rect x="14" y="14" width="172" height="172" rx="16" fill="none"
+        stroke="#45c99e" stroke-width="3.5" filter="url(#glow)" opacity="0.7"/>
+
+  <!-- S - green (5.1:1) -->
+  <path d="M 78,36 H 36 V 58 H 78 V 82 H 36"
+        fill="none" stroke="#35925c" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- U - rose (6.5:1) -->
+  <path d="m 118,36 v 34 c 0,12.15 9.85,14 22,14 12.15,0 22,-1.85 22,-14 V 36"
+        fill="none" stroke="#e8689e" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- C - blue (7.9:1) -->
+  <path d="M 78,118 H 36 V 164 H 78"
+        fill="none" stroke="#4aade0" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- H - teal (9.5:1) -->
+  <path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162"
+        fill="none" stroke="#45c99e" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

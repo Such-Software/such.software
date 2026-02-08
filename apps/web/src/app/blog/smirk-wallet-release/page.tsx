@@ -76,7 +76,7 @@ export default function SmirkWalletReleasePost() {
 
           <h2>Open Source</h2>
           <p>
-            Everything is open source. The extension, backend, and WASM libraries are all on GitHub:
+            The extension and WASM libraries are open source on GitHub:
           </p>
           <ul>
             <li>

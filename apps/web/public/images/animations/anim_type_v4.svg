@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="bigGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="scan" patternUnits="userSpaceOnUse" width="200" height="4">
+      <rect width="200" height="1.5" fill="#ffffff" opacity="0.012"/>
+    </pattern>
+    <clipPath id="roundClip"><rect width="200" height="200" rx="26"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="26" fill="#08090c"/>
+  <rect width="200" height="200" rx="26" fill="url(#scan)"/>
+
+  <!-- Border -->
+  <rect x="14" y="14" width="172" height="172" rx="16" fill="none"
+        stroke="#45c99e" stroke-width="3" filter="url(#glow)" opacity="0.6"/>
+
+  <!-- Command prompt text: "> such_" typed out -->
+  <g clip-path="url(#roundClip)">
+    <!-- Prompt caret ">" always visible during typing phase -->
+    <text x="30" y="110" font-family="'SF Mono','Fira Code','Courier New',monospace" 
+          font-size="26" font-weight="bold" fill="#45c99e" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.5;0.5;0;0" 
+               keyTimes="0;0.04;0.05;0.35;0.38;1" dur="6s" repeatCount="indefinite"/>
+      >
+    </text>
+    <!-- "s" -->
+    <text x="52" y="110" font-family="'SF Mono','Fira Code','Courier New',monospace" 
+          font-size="26" font-weight="bold" fill="#35925c" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0;0" 
+               keyTimes="0;0.07;0.08;0.35;0.38;1" dur="6s" repeatCount="indefinite"/>
+      s
+    </text>
+    <!-- "u" -->
+    <text x="68" y="110" font-family="'SF Mono','Fira Code','Courier New',monospace" 
+          font-size="26" font-weight="bold" fill="#e8689e" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0;0" 
+               keyTimes="0;0.12;0.13;0.35;0.38;1" dur="6s" repeatCount="indefinite"/>
+      u
+    </text>
+    <!-- "c" -->
+    <text x="84" y="110" font-family="'SF Mono','Fira Code','Courier New',monospace" 
+          font-size="26" font-weight="bold" fill="#4aade0" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0;0" 
+               keyTimes="0;0.17;0.18;0.35;0.38;1" dur="6s" repeatCount="indefinite"/>
+      c
+    </text>
+    <!-- "h" -->
+    <text x="100" y="110" font-family="'SF Mono','Fira Code','Courier New',monospace" 
+          font-size="26" font-weight="bold" fill="#45c99e" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0;0" 
+               keyTimes="0;0.22;0.23;0.35;0.38;1" dur="6s" repeatCount="indefinite"/>
+      h
+    </text>
+
+    <!-- Blinking cursor for the command line -->
+    <rect x="116" y="90" width="13" height="22" rx="2" fill="#e8689e">
+      <animate attributeName="opacity" values="0;0;0.8;0;0.8;0;0.8;0;0.8;0;0" 
+               keyTimes="0;0.06;0.07;0.1;0.11;0.15;0.16;0.2;0.21;0.35;0.38"
+               dur="6s" repeatCount="indefinite"/>
+      <!-- Cursor follows text as it types -->
+      <animate attributeName="x" 
+               values="52;52;68;68;84;84;100;100;116;116" 
+               keyTimes="0;0.07;0.08;0.12;0.13;0.17;0.18;0.22;0.23;1"
+               dur="6s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- After typing, text fades and letters EXPAND into position -->
+  
+  <!-- S materializes -->
+  <path d="M 78,36 H 36 V 58 H 78 V 82 H 36"
+        fill="none" stroke="#35925c" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"
+        opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0" 
+             keyTimes="0;0.38;0.45;0.88;0.96" dur="6s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- U materializes -->
+  <path d="m 118,36 v 34 c 0,12.15 9.85,14 22,14 12.15,0 22,-1.85 22,-14 V 36"
+        fill="none" stroke="#e8689e" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"
+        opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0" 
+             keyTimes="0;0.42;0.49;0.88;0.96" dur="6s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- C materializes -->
+  <path d="M 78,118 H 36 V 164 H 78"
+        fill="none" stroke="#4aade0" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"
+        opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0" 
+             keyTimes="0;0.46;0.53;0.88;0.96" dur="6s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- H materializes -->
+  <path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162"
+        fill="none" stroke="#45c99e" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"
+        opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0" 
+             keyTimes="0;0.5;0.57;0.88;0.96" dur="6s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Flash when letters appear -->
+  <rect width="200" height="200" rx="26" fill="#45c99e" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.08;0;0" 
+             keyTimes="0;0.37;0.39;0.44;1" dur="6s" repeatCount="indefinite"/>
+  </rect>
+</svg>

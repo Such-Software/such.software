@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 200 200"
+   version="1.1"
+   id="svg205"
+   sodipodi:docname="clean_mono_on_white.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs209" />
+  <sodipodi:namedview
+     id="namedview207"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.5675"
+     inkscape:cx="96.397274"
+     inkscape:cy="132.61928"
+     inkscape:window-width="1452"
+     inkscape:window-height="1233"
+     inkscape:window-x="3922"
+     inkscape:window-y="481"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg205" />
+  <!-- Background -->
+  <rect
+     width="200"
+     height="200"
+     rx="26"
+     fill="#ffffff"
+     id="rect193" />
+  <!-- Border -->
+  <rect
+     x="14"
+     y="14"
+     width="172"
+     height="172"
+     rx="16"
+     fill="none"
+     stroke="#1a1a1a"
+     stroke-width="3.5"
+     opacity="0.35"
+     id="rect195"
+     style="opacity:1" />
+  <!-- S -->
+  <path
+     d="M 78,36 H 36 V 58 H 78 V 82 H 36"
+     fill="none"
+     stroke="#1a1a1a"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path197" />
+  <!-- U -->
+  <path
+     d="m 118,36 v 34 c 0,12.15 9.85,16 22,16 12.15,0 22,-3.85 22,-16 V 36"
+     fill="none"
+     stroke="#1a1a1a"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path199" />
+  <!-- C -->
+  <path
+     d="M 78,118 H 36 V 164 H 78"
+     fill="none"
+     stroke="#1a1a1a"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path201" />
+  <!-- H -->
+  <path
+     d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162"
+     fill="none"
+     stroke="#1a1a1a"
+     stroke-width="14"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path203" />
+</svg>

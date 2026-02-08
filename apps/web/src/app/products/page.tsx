@@ -84,6 +84,21 @@ export default function ProductsPage() {
             </Link>
           ))}
         </div>
+
+        <div className="flex justify-center mt-16 motion-reduce:hidden">
+          <img
+            src="/images/animations/anim3_matrix_light.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-20 h-20 opacity-40 block dark:hidden"
+          />
+          <img
+            src="/images/animations/anim3_matrix.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-20 h-20 opacity-50 hidden dark:block"
+          />
+        </div>
       </div>
       <MobileNav />
     </main>

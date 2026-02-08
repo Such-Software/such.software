@@ -16,7 +16,7 @@ export const PortfolioGrid = () => {
           </div>
           <div className="absolute inset-6 bottom-24 rounded-2xl overflow-hidden z-10 bg-slate-800/30">
               <Image
-                src="/images/r-cryptocurrency.png"
+                src="/images/products/r-cryptocurrency.png"
                 alt="Screenshot of r/CryptoCurrency subreddit homepage showing over 10 million subscribers, community links, and a cartoon moon mascot"
                 fill
                 className="object-contain p-4 opacity-80 transition-transform duration-1000 group-hover:scale-105"
@@ -35,7 +35,7 @@ export const PortfolioGrid = () => {
           </div>
            <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border border-indigo-500/10 shadow-inner">
                <Image
-                src="/images/moonplace.png"
+                src="/images/products/moonplace.png"
                 alt="Screenshot of MoonPlace collaborative pixel art canvas showing colorful community-created artwork"
                 fill
                 className="object-contain p-2 opacity-50 transition-transform duration-1000 group-hover:scale-110"
@@ -54,7 +54,7 @@ export const PortfolioGrid = () => {
           </div>
            <div className="absolute inset-x-4 bottom-4 top-28 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border border-amber-500/10 shadow-inner flex items-center justify-center">
                <Image
-                src="/images/smirk-wallet.png"
+                src="/images/products/smirk-wallet.png"
                 alt="Screenshot of Smirk Wallet browser extension showing multi-currency support for BTC, LTC, XMR, WOW, and GRIN"
                 fill
                 className="object-contain p-4 opacity-60 transition-transform duration-1000 group-hover:scale-110"
@@ -76,7 +76,7 @@ export const PortfolioGrid = () => {
           </div>
            <div className="absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border border-orange-500/10 shadow-inner">
               <Image
-                src="/images/privacy-labs.png"
+                src="/images/products/privacy-labs.png"
                 alt="Screenshots of Monerogue roguelike game and Wowne.ro WebAssembly wallet interface"
                 fill
                 className="object-contain p-2 opacity-50 transition-transform duration-1000 group-hover:scale-110"
@@ -95,7 +95,7 @@ export const PortfolioGrid = () => {
           </div>
           <div className="absolute inset-4 rounded-xl overflow-hidden z-10 bg-zinc-200/50 dark:bg-zinc-800/50">
                <Image
-                src="/images/occupy-wallets.png"
+                src="/images/products/occupy-wallets.png"
                 alt="Screenshot of Occupy Wallets gallery displaying illustrated artwork with political and economic commentary"
                 fill
                 className="object-contain p-4 opacity-60 transition-transform duration-1000 group-hover:scale-105"
