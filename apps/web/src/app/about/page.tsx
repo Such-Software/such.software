@@ -1,4 +1,5 @@
 import { FounderSignature } from "@/components/about/founder-signature";
+import { ContactForm } from "@/components/contact/contact-form";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
@@ -94,6 +95,14 @@ export default function AboutPage() {
             <FounderSignature />
           </div>
 
+        </div>
+
+        <div id="contact" className="mt-16 border-t border-border/50 pt-16">
+          <h2 className="text-3xl font-bold mb-3 tracking-tight">Get in Touch</h2>
+          <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
+            Have a project in mind? We'd love to hear about it.
+          </p>
+          <ContactForm />
         </div>
       </div>
       <MobileNav />

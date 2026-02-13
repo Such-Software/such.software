@@ -81,7 +81,7 @@ export default function CustomWebsitesPage() {
         </div>
 
         <div className="text-center">
-          <Link href="/about">
+          <Link href="/about#contact">
             <Button size="lg">Start a Project</Button>
           </Link>
         </div>

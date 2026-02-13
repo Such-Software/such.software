@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { DynamicFavicon } from "@/components/dynamic-favicon";
 import { Footer } from "@/components/layout/footer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -75,6 +76,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <DynamicFavicon />
             <div className="relative z-10 flex flex-col min-h-screen">
                {children}
                <Footer />

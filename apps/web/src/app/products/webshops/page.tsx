@@ -73,7 +73,7 @@ export default function WebshopsPage() {
         </div>
 
         <div className="text-center">
-          <Link href="/about">
+          <Link href="/about#contact">
             <Button size="lg">Get in Touch</Button>
           </Link>
         </div>
