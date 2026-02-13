@@ -139,13 +139,6 @@ export default function ServicesPage() {
 
         <div className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
             <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            {/* Animated pulse accent */}
-            <img
-              src="/images/animations/anim1_pulse.svg"
-              alt=""
-              aria-hidden="true"
-              className="absolute top-4 right-4 w-20 h-20 opacity-20 group-hover:opacity-40 transition-opacity motion-reduce:hidden"
-            />
             <h2 className="text-4xl font-bold mb-6 relative z-10 tracking-tight">Start building the future</h2>
             <p className="mb-10 text-slate-300 text-lg max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
                 We are currently accepting a limited number of partners for performance-based development. 
