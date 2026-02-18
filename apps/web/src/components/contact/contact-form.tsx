@@ -6,7 +6,7 @@ import { TurnstileWidget } from './turnstile-widget';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@repo/ui/components/button';
 
-function SubmitButton() {
+function SubmitButton({ label = "Send Message" }: { label?: string }) {
   const { pending } = useFormStatus();
   return (
     <Button
@@ -15,15 +15,21 @@ function SubmitButton() {
       size="lg"
       className="w-full md:w-64 rounded-xl text-lg font-semibold"
     >
-      {pending ? "Sending..." : "Send Message"}
+      {pending ? "Sending..." : label}
     </Button>
   );
 }
 
-export function ContactForm() {
+interface ContactFormProps {
+  source?: 'inquiry' | 'support';
+}
+
+export function ContactForm({ source = 'inquiry' }: ContactFormProps) {
   const [state, formAction] = useActionState(submitContactForm, { success: false, message: '' });
   const [token, setToken] = useState<string>('');
   const formRef = useRef<HTMLFormElement>(null);
+
+  const isSupport = source === 'support';
 
   // Reset form on successful submission
   useEffect(() => {
@@ -43,19 +49,27 @@ export function ContactForm() {
        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -ml-32 -mb-32" />
 
        <div className="text-left mb-10 relative z-10">
-          <h3 className="text-3xl font-bold tracking-tight">Project Inquiry</h3>
+          <h3 className="text-3xl font-bold tracking-tight">
+            {isSupport ? 'Send Feedback' : 'Project Inquiry'}
+          </h3>
           <p className="text-muted-foreground text-lg mt-3 max-w-2xl text-balance">
-            Tell us about your technical challenges. From Medusa v2 migrations to real-time custom engines, we're ready to architect your solution.
+            {isSupport
+              ? 'Found a bug? Have a feature request? We read every message and typically respond within 24 hours.'
+              : 'Tell us about your technical challenges. From Medusa v2 migrations to real-time custom engines, we\'re ready to architect your solution.'}
           </p>
        </div>
 
+      <input type="hidden" name="source" value={source} />
+
       <div className="grid md:grid-cols-2 gap-8 relative z-10">
         <div className="space-y-3">
-          <label htmlFor="name" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">Full Name</label>
+          <label htmlFor="name" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">
+            {isSupport ? 'Your Name' : 'Full Name'}
+          </label>
           <input
             name="name"
             id="name"
-            placeholder="Jamie Doe"
+            placeholder={isSupport ? "Your name" : "Jamie Doe"}
             required
             aria-describedby={state?.errors?.name ? "name-error" : undefined}
             aria-invalid={state?.errors?.name ? "true" : undefined}
@@ -65,12 +79,14 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-3">
-          <label htmlFor="email" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">Work Email</label>
+          <label htmlFor="email" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">
+            {isSupport ? 'Email' : 'Work Email'}
+          </label>
           <input
             name="email"
             id="email"
             type="email"
-            placeholder="jamie@example.com"
+            placeholder={isSupport ? "your@email.com" : "jamie@example.com"}
             required
             aria-describedby={state?.errors?.email ? "email-error" : undefined}
             aria-invalid={state?.errors?.email ? "true" : undefined}
@@ -81,11 +97,15 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-3 relative z-10">
-        <label htmlFor="message" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">Project Details</label>
+        <label htmlFor="message" className="text-sm font-semibold tracking-wide uppercase text-muted-foreground ml-1">
+          {isSupport ? 'Your Message' : 'Project Details'}
+        </label>
         <textarea
           name="message"
           id="message"
-          placeholder="What are you building? Mention any specific constraints, timelines, or technologies..."
+          placeholder={isSupport
+            ? "Describe the issue or suggestion. Include your device, OS version, and game version if reporting a bug..."
+            : "What are you building? Mention any specific constraints, timelines, or technologies..."}
           required
           aria-describedby={state?.errors?.message ? "message-error" : undefined}
           aria-invalid={state?.errors?.message ? "true" : undefined}
@@ -104,7 +124,7 @@ export function ContactForm() {
           </p>
         </div>
         <div className="w-full md:w-auto">
-          <SubmitButton />
+          <SubmitButton label={isSupport ? "Send Feedback" : "Send Message"} />
         </div>
       </div>
       
@@ -119,7 +139,7 @@ export function ContactForm() {
           }`}
         >
           <div className="flex items-center gap-3">
-            <span className="text-xl" aria-hidden="true">{state.success ? "✓" : "⚠"}</span>
+            <span className="text-xl" aria-hidden="true">{state.success ? "\u2713" : "\u26A0"}</span>
             <p className="font-medium">{state.message}</p>
           </div>
         </div>

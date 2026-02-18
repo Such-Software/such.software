@@ -9,8 +9,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const ContactSchema = z.object({
   name: z.string().min(2, "Name is too short"),
   email: z.string().email("Invalid email address"),
-  message: z.string().min(10, "Please tell us more about your project"),
-  token: z.string().min(1, "Security check failed")
+  message: z.string().min(10, "Please tell us more"),
+  token: z.string().min(1, "Security check failed"),
+  source: z.enum(["inquiry", "support"]).default("inquiry"),
 });
 
 export async function submitContactForm(prevState: any, formData: FormData) {
@@ -30,17 +31,23 @@ export async function submitContactForm(prevState: any, formData: FormData) {
 
   // 3. Send email via Resend
   try {
-    const { name, email, message } = validated.data;
+    const { name, email, message, source } = validated.data;
     const contactEmail = process.env.CONTACT_EMAIL || 'sales@such.software';
+
+    const isSupport = source === 'support';
+    const subject = isSupport
+      ? `App feedback from ${name}`
+      : `New inquiry from ${name}`;
+    const heading = isSupport ? 'App Support / Feedback' : 'New Project Inquiry';
 
     const { error } = await resend.emails.send({
       from: 'Such Software <noreply@such.software>',
-      to: contactEmail,
+      to: isSupport ? 'apps@such.software' : contactEmail,
       replyTo: email,
-      subject: `New inquiry from ${name}`,
+      subject,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
-        <h2>New Project Inquiry</h2>
+        <h2>${heading}</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
         <h3>Message:</h3>
@@ -53,7 +60,10 @@ export async function submitContactForm(prevState: any, formData: FormData) {
       return { success: false, message: "Failed to send message. Please try again." };
     }
 
-    return { success: true, message: "Request received. We will be in touch shortly." };
+    return { success: true, message: isSupport
+      ? "Thanks for your feedback! We'll get back to you shortly."
+      : "Request received. We will be in touch shortly."
+    };
   } catch (e) {
     console.error('Email error:', e);
     return { success: false, message: "System error. Please contact us via email." };

@@ -21,7 +21,7 @@ export default function BauhausEchoPrivacyPage() {
         <div className="glass-card mt-6">
           <header className="mb-8 pb-6 border-b border-border">
             <h1 className="text-3xl md:text-4xl font-bold">Privacy Policy for Bauhaus Echo</h1>
-            <p className="text-muted-foreground mt-2">Last Updated: February 6, 2026</p>
+            <p className="text-muted-foreground mt-2">Last Updated: February 18, 2026</p>
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
@@ -87,6 +87,20 @@ export default function BauhausEchoPrivacyPage() {
           </ul>
           <p>
             We do not have access to your payment information. We only receive confirmation of your purchase status.
+          </p>
+
+          <h3>High Scores &amp; Leaderboards</h3>
+          <p>
+            If you submit scores to our online leaderboards, we collect:
+          </p>
+          <ul>
+            <li>Your chosen display name (anonymous by default)</li>
+            <li>Your game scores and statistics</li>
+            <li>A randomly generated anonymous player ID</li>
+          </ul>
+          <p>
+            We do <strong>not</strong> require or collect your real name, email, or any other
+            personal information to use leaderboards.
           </p>
 
           <h3>Locally Stored Data</h3>
