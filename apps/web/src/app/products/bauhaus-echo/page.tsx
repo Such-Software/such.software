@@ -39,12 +39,15 @@ export default function BauhausEchoPage() {
         </div>
 
         <div className="flex flex-wrap gap-4 mb-12">
-          <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">
-            <Button size="lg">Google Play</Button>
+          <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">
+            <Button size="lg">Play on Web</Button>
           </a>
-          <a href="https://apps.apple.com/app/bauhaus-echo" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">App Store</Button>
-          </a>
+          <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
+            Google Play — Coming Soon
+          </Button>
+          <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
+            App Store — Coming Soon
+          </Button>
         </div>
 
         <h2 className="text-2xl font-bold mb-6">How It Works</h2>
