@@ -47,6 +47,11 @@ export default function SuchoicePrivacyPage() {
             <p>
               You can learn more about how Google uses information from sites or apps that use their services by visiting: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google's Privacy & Terms</a>.
             </p>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">In-App Purchases and Subscriptions</h3>
+            <p>
+              We use RevenueCat to manage in-app purchases and subscriptions. When you make a purchase, RevenueCat processes the transaction receipt provided by Apple or Google. RevenueCat may collect anonymous app user IDs and purchase history to validate subscriptions and provide analytics. We do not process or store your payment information (such as credit card numbers) directly; this is handled securely by Apple or Google.
+            </p>
           </section>
 
           <section>
@@ -55,6 +60,7 @@ export default function SuchoicePrivacyPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li>Provide the core functionality of the App (extracting text from menu images).</li>
               <li>Serve advertisements to support the free version of the App.</li>
+              <li>Process and manage your subscriptions and in-app purchases.</li>
               <li>Monitor and analyze usage and trends to improve your experience.</li>
             </ul>
           </section>
@@ -68,6 +74,7 @@ export default function SuchoicePrivacyPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Play Services</a></li>
               <li><a href="https://support.google.com/admob/answer/6128543?hl=en" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">AdMob</a></li>
+              <li><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">RevenueCat</a></li>
             </ul>
           </section>
 
