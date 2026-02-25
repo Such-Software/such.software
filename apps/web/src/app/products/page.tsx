@@ -43,7 +43,7 @@ const products = [
   {
     slug: "suchoice",
     title: "Suchoice",
-    description: "Can't decide what to eat? Snap a picture of a menu and let AI choose for you. Android, iOS, Web.",
+    description: "Can't decide what to eat? Snap a picture of a menu and let AI choose for you. Android and iOS.",
     color: "pink",
   },
 ];

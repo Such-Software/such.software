@@ -7,14 +7,14 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Suchoice | Such Software",
-  description: "Can't decide what to eat? Snap a picture of a menu and let AI choose for you. Android, iOS, Web.",
+  description: "Can't decide what to eat? Snap a picture of a menu and let AI choose for you. Android and iOS.",
   alternates: { canonical: "/products/suchoice" },
 };
 
 const features = [
   { name: "AI Menu Parsing", description: "Take a photo of any menu and our AI instantly extracts the options." },
   { name: "Random Choice", description: "Spin the wheel to let fate decide your next meal." },
-  { name: "Cross-Platform", description: "Available on Android, iOS, and Web." },
+  { name: "Cross-Platform", description: "Available on Android and iOS." },
 ];
 
 export default function SuchoicePage() {
@@ -26,7 +26,7 @@ export default function SuchoicePage() {
           ← Back to Products
         </Link>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-blue-600 dark:text-blue-400">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pink-600 dark:text-pink-400">
           Suchoice
         </h1>
 
@@ -38,9 +38,6 @@ export default function SuchoicePage() {
         </div>
 
         <div className="flex flex-wrap gap-4 mb-12">
-          <a href="https://suchoice.such.software" target="_blank" rel="noopener noreferrer">
-            <Button size="lg">Play on Web</Button>
-          </a>
           <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
             Google Play — Coming Soon
           </Button>

@@ -42,9 +42,11 @@ export default function BauhausEchoPage() {
           <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">
             <Button size="lg">Play on Web</Button>
           </a>
-          <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
-            Google Play — Coming Soon
-          </Button>
+          <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg">
+              Get it on Google Play
+            </Button>
+          </a>
           <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
             App Store — Coming Soon
           </Button>
