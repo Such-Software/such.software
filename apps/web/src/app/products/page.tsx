@@ -40,6 +40,12 @@ const products = [
     description: "Visual memory puzzle game inspired by Bauhaus design. Android, iOS, Web.",
     color: "blue",
   },
+  {
+    slug: "suchoice",
+    title: "Suchoice",
+    description: "Can't decide what to eat? Snap a picture of a menu and let AI choose for you. Android, iOS, Web.",
+    color: "pink",
+  },
 ];
 
 const colorClasses: Record<string, string> = {
@@ -47,6 +53,7 @@ const colorClasses: Record<string, string> = {
   purple: "border-purple-500/30 hover:border-purple-500/60",
   amber: "border-amber-500/30 hover:border-amber-500/60",
   blue: "border-blue-500/30 hover:border-blue-500/60",
+  pink: "border-pink-500/30 hover:border-pink-500/60",
 };
 
 const titleColors: Record<string, string> = {
@@ -54,6 +61,7 @@ const titleColors: Record<string, string> = {
   purple: "text-purple-600 dark:text-purple-400",
   amber: "text-amber-600 dark:text-amber-400",
   blue: "text-blue-600 dark:text-blue-400",
+  pink: "text-pink-600 dark:text-pink-400",
 };
 
 export default function ProductsPage() {
