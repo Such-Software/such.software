@@ -42,14 +42,21 @@ export default function BauhausEchoPage() {
           <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">
             <Button size="lg">Play on Web</Button>
           </a>
+          <a href="https://apps.apple.com/us/app/bauhaus-echo/id6759010657" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg">
+              Download on App Store
+            </Button>
+          </a>
           <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="lg">
               Get it on Google Play
             </Button>
           </a>
-          <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
-            App Store — Coming Soon
-          </Button>
+          <a href="https://suchsoftware.itch.io/bauhaus-echo" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg">
+              Buy on itch.io — $2
+            </Button>
+          </a>
         </div>
 
         <h2 className="text-2xl font-bold mb-6">How It Works</h2>

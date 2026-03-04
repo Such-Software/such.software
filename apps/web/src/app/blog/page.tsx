@@ -29,9 +29,9 @@ const posts = [
   {
     slug: "bauhaus-echo-launch",
     title: "Bauhaus Echo is Live",
-    date: "2026-02-06",
-    excerpt: "Our first mobile game is available on Android and iOS. A visual memory puzzle inspired by Bauhaus design.",
-    draft: true,
+    date: "2026-03-04",
+    excerpt: "Our first mobile game is available on App Store, Google Play, itch.io, and the web. A visual memory puzzle inspired by Bauhaus design.",
+    draft: false,
   },
 ];
 

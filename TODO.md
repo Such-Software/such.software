@@ -1,8 +1,12 @@
 # Such Software - TODO
 
-## Before Production
+## 🔥 Priority: Website Updates (March 2026)
 
-- [x] **Turnstile keys** - Set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY` in production environment
+- [ ] **Publish Bauhaus Echo Launch blog post** (currently draft)
+- [ ] **Update Bauhaus Echo product page** — latest screenshots, itch.io link, embedded trailer
+- [ ] **Write dev journey / post-mortem blog post** for Bauhaus Echo
+- [ ] **Verify all store links** — App Store, Google Play, itch.io, web demo
+- [ ] **Add itch.io link** to Bauhaus Echo product page and footer where relevant
 
 ## Nice to Have
 

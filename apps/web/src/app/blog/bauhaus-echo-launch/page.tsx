@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Bauhaus Echo is Live | Such Software Blog",
-  description: "Our first mobile game is available on Android and iOS. A visual memory puzzle inspired by Bauhaus design.",
+  description: "Our first mobile game is available on App Store, Google Play, itch.io, and the web. A visual memory puzzle inspired by Bauhaus design.",
   alternates: { canonical: "/blog/bauhaus-echo-launch" },
 };
 
@@ -20,21 +20,26 @@ export default function BauhausEchoLaunchPost() {
 
         <div className="glass-card mt-6">
           <header className="mb-8 pb-6 border-b border-border">
-            <time className="text-sm text-muted-foreground">February 6, 2026</time>
+            <time className="text-sm text-muted-foreground">March 4, 2026</time>
             <h1 className="text-3xl md:text-4xl font-bold mt-2">Bauhaus Echo is Live</h1>
-            <p className="text-muted-foreground mt-3">A visual memory puzzle inspired by Bauhaus design</p>
+            <p className="text-muted-foreground mt-3">A visual memory puzzle inspired by Bauhaus design — now on every platform</p>
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
             <p>
-              Bauhaus Echo is now available on Google Play and the App Store. It is a visual memory game 
-              where you memorize tile arrangements, watch them shuffle, and reconstruct the original pattern.
+              Bauhaus Echo is now available on the{" "}
+              <a href="https://apps.apple.com/us/app/bauhaus-echo/id6759010657" target="_blank" rel="noopener noreferrer">App Store</a>,{" "}
+              <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">Google Play</a>,{" "}
+              <a href="https://suchsoftware.itch.io/bauhaus-echo" target="_blank" rel="noopener noreferrer">itch.io</a>, and{" "}
+              <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">the web</a>.
+              It is a visual memory game where you memorize tile arrangements, watch them shuffle, and
+              reconstruct the original pattern.
             </p>
 
             <h2>The Concept</h2>
             <p>
-              The game shows you a grid of colorful geometric tiles inspired by Bauhaus design. You get a 
-              few seconds to memorize their positions. Then the tiles spin, shrink, and scatter to the 
+              The game shows you a grid of colorful geometric tiles inspired by Bauhaus design. You get a
+              few seconds to memorize their positions. Then the tiles spin, shrink, and scatter to the
               bottom of the screen. Your job is to drag them back to where they belong.
             </p>
 
@@ -46,25 +51,43 @@ export default function BauhausEchoLaunchPost() {
               <li><strong>Memory</strong> — Traditional card-matching pairs.</li>
             </ul>
 
-            <h2>Tech Stack</h2>
             <p>
-              Built with libGDX, a cross-platform Java game framework. The same codebase runs on Android, 
-              iOS (via RoboVM), desktop, and web (via GWT). The tile assets are packed into a TextureAtlas 
-              for efficient rendering.
+              Each mode supports 2×2 through 5×5 grids and three difficulty levels. Global leaderboards
+              let you compete against other players across all platforms.
             </p>
 
-            <h2>Download</h2>
+            <h2>500 Bauhaus Tiles</h2>
             <p>
-              Get it on{" "}
-              <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">
-                Google Play
-              </a>{" "}
-              or the{" "}
-              <a href="https://apps.apple.com/app/bauhaus-echo" target="_blank" rel="noopener noreferrer">
-                App Store
-              </a>
-              . Free with ads, or pay once to remove them.
+              The tile collection features 500 hand-curated geometric designs drawn from the Bauhaus
+              aesthetic — bold shapes, primary colors, clean lines. Each tile has beveled 3D edges and
+              the game board is styled like a wood-and-felt craft table.
             </p>
+
+            <h2>Tech Stack</h2>
+            <p>
+              Built with{" "}
+              <a href="https://libgdx.com/" target="_blank" rel="noopener noreferrer">libGDX</a>,
+              a cross-platform Java game framework. One codebase runs on Android, iOS (via RoboVM),
+              desktop (LWJGL3), and web (via GWT). The tile assets are packed into a TextureAtlas
+              for efficient GPU rendering.
+            </p>
+
+            <h2>Get It</h2>
+            <ul>
+              <li>
+                <strong>Mobile (free with ads)</strong> —{" "}
+                <a href="https://apps.apple.com/us/app/bauhaus-echo/id6759010657" target="_blank" rel="noopener noreferrer">App Store</a>{" | "}
+                <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">Google Play</a>
+              </li>
+              <li>
+                <strong>Desktop ($2, no ads)</strong> —{" "}
+                <a href="https://suchsoftware.itch.io/bauhaus-echo" target="_blank" rel="noopener noreferrer">itch.io</a>
+              </li>
+              <li>
+                <strong>Web (free)</strong> —{" "}
+                <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">bauhaus.such.software</a>
+              </li>
+            </ul>
           </div>
         </div>
       </article>
