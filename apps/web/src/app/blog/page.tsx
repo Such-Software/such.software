@@ -46,7 +46,7 @@ export default function BlogPage() {
             {posts.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <Card className="glass-card hover:border-primary/30 transition-colors cursor-pointer">
-                  <time className="text-sm text-muted-foreground">{post.date}</time>
+                  <time className="text-sm text-muted-foreground">{post.dateDisplay}</time>
                   <h2 className="text-2xl font-bold mt-1 mb-2">{post.title}</h2>
                   <p className="text-muted-foreground">{post.excerpt}</p>
                 </Card>

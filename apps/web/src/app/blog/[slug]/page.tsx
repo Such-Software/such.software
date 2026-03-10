@@ -38,7 +38,7 @@ export default async function BlogPost({ params }: Props) {
 
         <div className="glass-card mt-6">
           <header className="mb-8 pb-6 border-b border-border">
-            <time className="text-sm text-muted-foreground">{post.date}</time>
+            <time className="text-sm text-muted-foreground">{post.dateDisplay}</time>
             <h1 className="text-3xl md:text-4xl font-bold mt-2">{post.title}</h1>
             {post.excerpt && (
               <p className="text-muted-foreground mt-3">{post.excerpt}</p>

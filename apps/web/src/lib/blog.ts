@@ -8,6 +8,7 @@ export type PostMeta = {
   slug: string;
   title: string;
   date: string;
+  dateDisplay: string;
   excerpt: string;
   draft: boolean;
 };
@@ -26,10 +27,12 @@ export function getAllPosts(): PostMeta[] {
       const slug = filename.replace(/\.mdx$/, "");
       const raw = fs.readFileSync(path.join(CONTENT_DIR, filename), "utf-8");
       const { data } = matter(raw);
+      const iso = data.date ?? "";
       return {
         slug,
         title: data.title ?? slug,
-        date: data.date ?? "",
+        date: iso,
+        dateDisplay: iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "",
         excerpt: data.excerpt ?? "",
         draft: data.draft === true,
       };
@@ -44,10 +47,12 @@ export function getPost(slug: string): Post | null {
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
+  const iso = data.date ?? "";
   return {
     slug,
     title: data.title ?? slug,
-    date: data.date ?? "",
+    date: iso,
+    dateDisplay: iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : "",
     excerpt: data.excerpt ?? "",
     draft: data.draft === true,
     content,
