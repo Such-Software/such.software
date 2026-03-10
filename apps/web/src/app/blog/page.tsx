@@ -3,6 +3,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog | Such Software",
@@ -10,34 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-// For now, hardcoded posts. Can migrate to MDX/CMS later.
-const posts = [
-  {
-    slug: "smirk-wallet-release",
-    title: "Smirk Wallet v0.1.6",
-    date: "2026-02-06",
-    excerpt: "Non-custodial browser extension for social tipping with BTC, LTC, XMR, WOW, and GRIN. Now on GitHub, Chrome Web Store pending.",
-    draft: false,
-  },
-  {
-    slug: "website-relaunch-2026",
-    title: "Website Relaunch",
-    date: "2026-02-06",
-    excerpt: "We rebuilt such.software from the ground up. Here is what we used and why.",
-    draft: false,
-  },
-  {
-    slug: "bauhaus-echo-launch",
-    title: "Bauhaus Echo is Live",
-    date: "2026-03-04",
-    excerpt: "Our first mobile game is available on App Store, Google Play, itch.io, and the web. A visual memory puzzle inspired by Bauhaus design.",
-    draft: false,
-  },
-];
-
-const publishedPosts = posts.filter((p) => !p.draft);
-
 export default function BlogPage() {
+  const posts = getAllPosts();
+
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
@@ -63,11 +39,11 @@ export default function BlogPage() {
           />
         </div>
 
-        {publishedPosts.length === 0 ? (
+        {posts.length === 0 ? (
           <p className="text-muted-foreground">No posts yet. Check back soon.</p>
         ) : (
           <div className="space-y-6">
-            {publishedPosts.map((post) => (
+            {posts.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}>
                 <Card className="glass-card hover:border-primary/30 transition-colors cursor-pointer">
                   <time className="text-sm text-muted-foreground">{post.date}</time>

@@ -1,0 +1,34 @@
+---
+title: "Website Relaunch"
+date: "February 6, 2026"
+excerpt: "New design, new infrastructure, same focus on quality"
+---
+
+We rebuilt such.software. New design, new infrastructure, same focus on performance and accessibility.
+
+## Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS with CSS variables for theming
+- **Animation:** Framer Motion
+- **Monorepo:** Turborepo + pnpm workspaces
+- **Testing:** Playwright with axe-core for accessibility
+- **Bot Protection:** Cloudflare Turnstile
+- **Email:** Resend
+
+## Procedural Graphics
+
+The site features two custom procedural animations: NebulaField and DataGrid. Both are SVG-based, theme-aware, and respect prefers-reduced-motion. NebulaField renders animated data streams flowing toward a central icon using quadratic Bezier curves on the homepage. DataGrid draws a pulsing grid with traveling data packets on the Services page.
+
+## Accessibility
+
+We run 42 automated accessibility tests across Chromium, Firefox, and WebKit on every build. Tests cover WCAG 2.2 AA compliance, heading hierarchy, color contrast, keyboard navigation, and form accessibility. Lighthouse scores are 99-100 across all pages.
+
+## Performance
+
+The NebulaField component is lazy loaded with next/dynamic and requestIdleCallback. Canvas rendering is throttled. Fonts are loaded via next/font for zero layout shift. Images use next/image for automatic optimization.
+
+## Structure
+
+The site now has Products, Services, Blog, and About sections. Products showcases our standalone offerings: Webshops, Custom Websites, Smirk Wallet, and Bauhaus Echo. Services covers our partnership model and consulting work. Mobile users get a bottom navigation bar.

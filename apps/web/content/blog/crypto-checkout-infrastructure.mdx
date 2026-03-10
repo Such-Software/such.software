@@ -1,0 +1,52 @@
+---
+title: "Crypto Checkout Infrastructure for Multi-Tenant Shops"
+date: "March 10, 2026"
+excerpt: "Non-custodial XMR and WOW checkout, plus Grin via BTCPayServer"
+---
+
+Our multi-tenant webshops run on [MedusaJS](https://medusajs.com) with a BTCPay plugin for Bitcoin and Lightning. We wanted to add privacy coins: Monero, Wownero, and Grin.
+
+BTCPayServer does have a built-in Monero plugin, but it is custodial (a single server-side wallet receives all payments) and only supports one wallet per instance. That does not work for multi-tenant shops where each merchant needs payments sent directly to their own wallet. So we forked [xmrcheckout](https://github.com/xmrcheckout/xmrcheckout), an existing non-custodial checkout, and built from there.
+
+## XMR Checkout
+
+xmrcheckout is self-hosted and non-custodial. Each merchant provides their primary address and secret view key. The system uses view-only access to derive unique subaddresses per invoice and detect payments. It never holds spend keys or moves funds.
+
+Stack: Python/FastAPI backend, Next.js frontend, wallet-rpc for chain queries, Postgres for state, all in Docker Compose. XMR/USD rates from the Kraken public API.
+
+Hosted at [xmrcheckout.such.software](https://xmrcheckout.such.software).
+
+## WOW Checkout
+
+[wowcheckout](https://github.com/Such-Software/wowcheckout) is a fork of xmrcheckout for [Wownero](https://wownero.org). File and folder structure is identical to upstream so merging fixes stays easy. The content-only differences:
+
+- **Network bytes** — Wownero address prefixes (53, 63, 54), patched at runtime
+- **Pricing** — WOW-BTC from [Nonlogs](https://api.nonlogs.io/api/markets) multiplied by BTC/USD from Kraken (no direct WOW/USD pair exists)
+- **Daemon** — Wownero node, [binaries from Codeberg](https://codeberg.org/wownero/wownero/releases)
+
+Hosted at [wowcheckout.such.software](https://wowcheckout.such.software).
+
+## Grin via BTCPayServer
+
+Grin's transaction protocol is interactive — sender and receiver exchange slates to build a transaction. The checkout system must hold a wallet with spend authority, making it semi-custodial by nature.
+
+We contributed a [Grin plugin for BTCPayServer](https://github.com/ArcticMining/btcpayserver-plugin-grin) that talks to grin-wallet's Owner API to issue invoices, finalize transactions, and track confirmations. It slots in alongside Bitcoin and Lightning with no extra Medusa integration work.
+
+## Trust Model
+
+- **XMR and WOW** — Fully non-custodial. View-only access. Funds go directly to the merchant wallet.
+- **Grin** — Semi-custodial. The server holds a Grin wallet with spend authority because the protocol requires it. Merchants trust the operator to forward funds. This is inherent to Grin, not a design choice.
+
+## Medusa Integration
+
+MedusaJS already has a BTCPay payment plugin that handles invoices and webhook callbacks. Because xmrcheckout and wowcheckout expose a BTCPay-compatible API, the same plugin works for all currencies with just a base URL change. One integration pattern for BTC, Lightning, XMR, WOW, and GRIN.
+
+## Source
+
+- [xmrcheckout](https://github.com/xmrcheckout/xmrcheckout) (upstream)
+- [wowcheckout](https://github.com/Such-Software/wowcheckout) (our Wownero fork)
+- [btcpayserver-plugin-grin](https://github.com/ArcticMining/btcpayserver-plugin-grin)
+
+## Work With Us
+
+If you want a managed webshop that accepts cryptocurrency — BTC, Lightning, XMR, WOW, GRIN, or a combination — we can set that up for you. [Get in touch](/#contact).

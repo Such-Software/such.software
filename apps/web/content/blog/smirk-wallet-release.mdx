@@ -1,0 +1,43 @@
+---
+title: "Smirk Wallet v0.1.6"
+date: "February 6, 2026"
+excerpt: "Non-custodial social tipping for Telegram and Discord"
+---
+
+Smirk Wallet is a non-custodial browser extension that lets you tip people cryptocurrency by their Telegram or Discord username. We have shipped six releases and the extension is available now on GitHub.
+
+## What It Does
+
+One 12-word seed phrase gives you addresses for five currencies: Bitcoin, Litecoin, Monero, Wownero, and Grin. Link your Telegram or Discord account on smirk.cash, and anyone running Smirk can send you crypto by username.
+
+Tips are encrypted with the recipient's public key. Only they can claim. If a tip goes unclaimed, the sender can claw it back. No funds get lost.
+
+## Non-Custodial by Design
+
+Your private spend keys are generated locally and never leave your browser. They are encrypted with your password. We store only public keys and view keys (for Monero/Wownero balance scanning). We cannot move your funds.
+
+## What We Built
+
+- Browser extension (TypeScript, Preact, Vite)
+- Backend API (Rust, Axum, PostgreSQL)
+- Light wallet servers for XMR and WOW
+- Grin wallet with client-side WASM
+- Telegram and Discord bots for tip notifications
+- User dashboard at smirk.cash
+
+## Chrome Web Store Status
+
+Our initial submission was rejected for requesting an unused permission (activeTab). We had included it for a planned feature that was not yet implemented. The fix is already in v0.1.6. We have removed the permission and resubmitted.
+
+In the meantime, you can install manually from [GitHub Releases](https://github.com/Such-Software/smirk-extension/releases). Firefox support is also available.
+
+## Open Source
+
+The extension and WASM libraries are open source on GitHub:
+
+- [smirk-extension](https://github.com/Such-Software/smirk-extension)
+- [monero-oxide](https://github.com/Such-Software/monero-oxide) (Monero WASM)
+
+## Get Started
+
+Visit [smirk.cash](https://smirk.cash) to learn more, or join the community on [Telegram](https://t.me/smirkwallet) or [Discord](https://discord.gg/7EnsaWTm6C).
