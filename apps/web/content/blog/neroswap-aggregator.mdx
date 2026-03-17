@@ -1,0 +1,59 @@
+---
+title: "Neroswap: a Privacy-First DEX & CEX Aggregator"
+date: "2025-06-28"
+excerpt: "How we built a real-time orderbook aggregator across 6 decentralized and centralized exchanges — with no KYC, no custody, and no tracking."
+---
+
+## The Problem
+
+If you want to trade Monero or Wownero today, your options are scattered across half a dozen exchanges — each with a different UI, different pair formats, and wildly different prices. Some are decentralized atomic swaps; others are no-KYC centralized platforms. Comparing prices means opening six browser tabs and doing mental math.
+
+[Neroswap](https://neroswap.com) fixes that.
+
+## What Neroswap Does
+
+Neroswap is a real-time aggregator that pulls orderbook and ticker data from six exchanges and displays it in a single, unified dashboard. You can see best prices at a glance, filter by exchange type (DEX vs CEX) or coin (XMR vs WOW), and click directly through to the source exchange to trade.
+
+The exchanges currently tracked are:
+
+- **BasicSwap** — SMSG-based atomic swaps for BTC, LTC, XMR, PART, WOW, FIRO, DASH, and more
+- **Retoswap** — P2P exchange for XMR fiat/crypto pairs, trades settle over Tor
+- **Eigenwallet** — BTC ↔ XMR trustless atomic swaps via Tor rendezvous
+- **Nonlogs** — No-KYC Wownero-focused exchange with WOW/BTC and WOW/USDT
+- **CexSwap** — Spot markets and AMM liquidity pools across 40+ coins
+- **AltQuick** — No-KYC altcoin exchange with 25+ BTC-quoted markets
+
+Kraken reference prices are used to compute approximate USD values for every pair.
+
+## How the Data Pipeline Works
+
+Neroswap runs a fleet of Python scrapers on a dedicated server. Each scraper targets one exchange and runs every 10 minutes via cron:
+
+1. **Scraping** — Each script queries its exchange via REST API, gRPC, HTML-over-Tor, or direct RPC. BasicSwap and Retoswap are scraped via local full nodes; Eigenwallet via its Tor onion; Nonlogs, CexSwap, and AltQuick via public APIs.
+
+2. **Normalization** — Raw data is transformed into a common JSON schema with fields like `pair`, `price`, `amount`, `type` (bid/ask), and `source`.
+
+3. **Sync** — The JSON files are rsync'd to a CDN edge server over SSH every 10 minutes, right after the scrapers finish.
+
+4. **Serving** — The [neroswap.com](https://neroswap.com) frontend is a Next.js app using ISR (Incremental Static Regeneration). It fetches the JSON data from the CDN on each request with a 5-minute revalidation window, so the data is always fresh.
+
+5. **Rendering** — The frontend computes best bid/ask prices across all sources, applies Kraken USD reference rates, and renders sortable, filterable tables. Every row links back to the source exchange.
+
+## Privacy by Design
+
+Neroswap has no user accounts, no cookies, no tracking pixels, and no analytics. There is nothing to log and nothing to sell. The entire site is a read-only dashboard — it never touches your funds or your identity.
+
+All the DEX sources (BasicSwap, Eigenwallet) are fully decentralized with on-chain or cross-chain atomic settlement. The CEX sources (Nonlogs, CexSwap, AltQuick) are all no-KYC platforms. Retoswap trades happen entirely over Tor.
+
+## The Stack
+
+- **Frontend**: Next.js (App Router), React, TypeScript, Tailwind CSS
+- **Scrapers**: Python scripts with requests, grpc, and stem (Tor)
+- **Data transport**: rsync over SSH to CDN, served as static JSON
+- **Infrastructure**: Systemd services, cron scheduling, PM2 process management
+
+## Try It
+
+Visit [neroswap.com](https://neroswap.com) to see the live dashboard.
+
+The project is built and maintained by [Such Software](/#contact). If you need a custom aggregator, scraping pipeline, or privacy-first web application, [get in touch](/#contact).

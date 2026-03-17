@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Products | Such Software",
-  description: "Tools and applications built by Such Software. Webshops, custom websites, Smirk Wallet, Bauhaus Echo, and Wownero Moon Launch.",
+  description: "Tools and applications built by Such Software. Neroswap, Webshops, custom websites, Smirk Wallet, Bauhaus Echo, and Wownero Moon Launch.",
   alternates: { canonical: "/products" },
   openGraph: {
     title: "Products | Such Software",
@@ -16,6 +16,12 @@ export const metadata: Metadata = {
 };
 
 const products = [
+  {
+    slug: "neroswap",
+    title: "Neroswap",
+    description: "Aggregated DEX & CEX orderbook data. Compare Monero, Wownero, and Bitcoin prices across 6 exchanges in real time.",
+    color: "yellow",
+  },
   {
     slug: "webshops",
     title: "Webshops",
@@ -61,6 +67,7 @@ const colorClasses: Record<string, string> = {
   blue: "border-blue-500/30 hover:border-blue-500/60",
   pink: "border-pink-500/30 hover:border-pink-500/60",
   orange: "border-orange-500/30 hover:border-orange-500/60",
+  yellow: "border-yellow-500/30 hover:border-yellow-500/60",
 };
 
 const titleColors: Record<string, string> = {
@@ -70,6 +77,7 @@ const titleColors: Record<string, string> = {
   blue: "text-blue-600 dark:text-blue-400",
   pink: "text-pink-600 dark:text-pink-400",
   orange: "text-orange-600 dark:text-orange-400",
+  yellow: "text-yellow-600 dark:text-yellow-400",
 };
 
 export default function ProductsPage() {

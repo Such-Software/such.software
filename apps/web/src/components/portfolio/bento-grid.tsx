@@ -64,7 +64,17 @@ export const PortfolioGrid = () => {
         </Card>
       </Link>
 
-      {/* Row 2: Privacy Labs (1x1) */}
+      {/* Row 2: Neroswap (1x1) */}
+      <Link href="https://neroswap.com" target="_blank" rel="noopener noreferrer" className="md:col-span-1">
+        <Card className="h-full glass-card group min-h-[300px] rounded-[2.5rem] !bg-yellow-50/95 dark:!bg-yellow-950/95 !border-yellow-500/20 cursor-pointer">
+          <div className="absolute inset-x-0 top-0 z-20 p-6 bg-gradient-to-b from-background/95 to-transparent pointer-events-none">
+            <h3 className="text-xl font-bold text-yellow-700 dark:text-yellow-400">Neroswap</h3>
+            <p className="text-sm mt-1 text-foreground font-semibold">DEX &amp; CEX orderbook aggregator.</p>
+          </div>
+        </Card>
+      </Link>
+
+      {/* Row 2-3: Privacy Labs (1x1) */}
       <Link href="https://play.wowne.ro" target="_blank" rel="noopener noreferrer" className="md:col-span-1">
         <Card className="h-full glass-card group min-h-[300px] rounded-[2.5rem] !bg-orange-50/95 dark:!bg-orange-950/95 !border-orange-500/20 cursor-pointer">
           <div className="absolute inset-x-0 top-0 z-20 p-6 bg-gradient-to-b from-background/95 to-transparent pointer-events-none">
