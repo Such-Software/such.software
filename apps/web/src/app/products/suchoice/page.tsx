@@ -46,18 +46,18 @@ export default function SuchoicePage() {
           </Button>
         </div>
 
-        <h2 className="text-2xl font-semibold mb-6">Features</h2>
+        <h2 className="text-2xl font-bold mb-6">Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {features.map((feature) => (
-            <Card key={feature.name} className="p-6">
-              <h3 className="text-xl font-medium mb-2">{feature.name}</h3>
+            <Card key={feature.name} className="glass-card border-pink-500/20">
+              <h3 className="text-xl font-bold mb-2">{feature.name}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </Card>
           ))}
         </div>
 
         <div className="mt-16 pt-8 border-t border-border">
-          <h2 className="text-2xl font-semibold mb-4">Legal</h2>
+          <h2 className="text-2xl font-bold mb-4">Legal</h2>
           <ul className="space-y-2">
             <li>
               <Link href="/products/suchoice/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">

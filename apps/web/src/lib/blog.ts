@@ -47,6 +47,7 @@ export function getPost(slug: string): Post | null {
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
+  if (data.draft === true) return null;
   const iso = data.date ?? "";
   return {
     slug,
@@ -65,5 +66,10 @@ export function getAllSlugs(): string[] {
   return fs
     .readdirSync(CONTENT_DIR)
     .filter((f) => f.endsWith(".mdx"))
+    .filter((f) => {
+      const raw = fs.readFileSync(path.join(CONTENT_DIR, f), "utf-8");
+      const { data } = matter(raw);
+      return data.draft !== true;
+    })
     .map((f) => f.replace(/\.mdx$/, ""));
 }

@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Products | Such Software",
-  description: "Tools and applications built by Such Software. Neroswap, Webshops, custom websites, Smirk Wallet, Bauhaus Echo, and Wownero Moon Launch.",
+  description: "Tools and applications built by Such Software. Neroswap, Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo, Suchoice, and Wownero Moon Launch.",
   alternates: { canonical: "/products" },
   openGraph: {
     title: "Products | Such Software",

@@ -112,6 +112,9 @@ export default function SmirkWalletPage() {
         </div>
 
         <div className="flex gap-4">
+          <Link href="/blog/smirk-wallet-release">
+            <Button>Read the Blog Post</Button>
+          </Link>
           <a href="https://t.me/smirkwallet" target="_blank" rel="noopener noreferrer">
             <Button variant="outline">Telegram</Button>
           </a>

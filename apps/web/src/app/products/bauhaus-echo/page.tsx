@@ -100,6 +100,10 @@ export default function BauhausEchoPage() {
             Privacy Policy
           </Link>
           <span>•</span>
+          <Link href="/blog/bauhaus-echo-launch" className="hover:text-foreground transition-colors">
+            Blog Post
+          </Link>
+          <span>•</span>
           <Link href="/support" className="hover:text-foreground transition-colors">
             Support &amp; Feedback
           </Link>

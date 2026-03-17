@@ -14,7 +14,7 @@ export default function BauhausEchoPrivacyPage() {
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
-        <Link href="/products/bauhaus-echo" className="text-sm text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 mb-8 inline-flex items-center gap-2 transition-colors">
+        <Link href="/products/bauhaus-echo" className="text-sm text-muted-foreground hover:text-blue-600 dark:hover:text-blue-400 mb-8 inline-flex items-center gap-2 transition-colors">
           ← Back to Bauhaus Echo
         </Link>
 
@@ -253,8 +253,8 @@ export default function BauhausEchoPrivacyPage() {
             <strong>Such Software LLC</strong><br />
             Email: apps@such.software<br />
             Website:{" "}
-            <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">
-              https://bauhaus.such.software
+            <a href="https://such.software" target="_blank" rel="noopener noreferrer">
+              https://such.software
             </a>
           </p>
 
