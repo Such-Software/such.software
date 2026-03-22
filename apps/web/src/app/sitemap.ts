@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://such.software";
-  return [
+
+  const staticPages: MetadataRoute.Sitemap = [
     { url: base, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/products`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/products/neroswap`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
@@ -16,11 +18,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/support`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${base}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/blog/neroswap-aggregator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/blog/crypto-checkout-infrastructure`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/blog/bauhaus-echo-launch`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/blog/smirk-wallet-release`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/blog/website-relaunch-2026`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/blog/wownero-moon-launch-release`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
   ];
+
+  const blogPosts: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${base}/blog/${post.slug}`,
+    lastModified: post.date ? new Date(post.date + "T12:00:00") : new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...blogPosts];
 }
