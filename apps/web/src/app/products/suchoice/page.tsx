@@ -33,7 +33,7 @@ export default function SuchoicePage() {
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
             Can't decide what to eat? Snap a picture of a menu and let AI choose for you. 
-            Suchoice uses advanced image recognition to extract menu items and randomly selects one for you.
+            Suchoice reads the menu with AI, extracts the items, and randomly picks one for you.
           </p>
         </div>
 

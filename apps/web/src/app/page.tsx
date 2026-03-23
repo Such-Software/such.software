@@ -61,10 +61,11 @@ export default function Home() {
              maxWidth: 'min(calc(90vw - 120px), 100%)',
            }}
          >
-           Digital Craftsmanship
+           <span className="block">Precision Engineering</span>
+           <span className="block">for Everyone</span>
          </h1>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-           Next-generation web applications engineered for scale, compliance, and performance.
+           Web applications engineered for scale, compliance, and performance.
          </p>
          
          <div className="flex gap-4 mb-10">
@@ -86,8 +87,7 @@ export default function Home() {
             <div className="text-left mb-8 section-container border-l-4 border-l-blue-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                    A curated gallery of recent projects where we've pushed the boundaries of 
-                    performance, accessibility, and user experience.
+                    Recent projects spanning governance tools, payment infrastructure, and interactive web applications.
                 </p>
             </div>
             <PortfolioGrid />
@@ -108,8 +108,7 @@ export default function Home() {
             <div className="w-full max-w-6xl text-left mb-12 section-container border-l-4 border-l-cyan-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Start a Project</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                    Ready to build something exceptional? Drop us a line and let's discuss 
-                    how we can help you scale your digital presence.
+                    Have a project in mind? Let's talk about what you need and how we can help.
                 </p>
             </div>
             <ContactForm />

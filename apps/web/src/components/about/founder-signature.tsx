@@ -35,13 +35,13 @@ export const FounderSignature = () => {
 
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-muted-foreground leading-relaxed italic border-l-4 border-primary/20 pl-6 text-lg">
-            "During my three years at <span className="text-foreground font-semibold">Cecil College</span>, I didn't just teach engineering: I re-engineered how it was taught.
+            "We don’t bolt on accessibility after the fact. It’s there from the first line of code."
           </p>
           <p className="text-muted-foreground leading-relaxed mt-6">
-            Transitioning the curriculum from PDFs and Powerpoints to web-based content, I focused on transforming complex technical lessons into highly accessible HTML using <span className="text-foreground font-semibold underline decoration-primary/50">Quarto markdown</span>. This allowed us to consistently generate semantic content including accessible equations and guaranteed descriptive alt text for every visual asset.
+            Before founding Such Software, I spent three years teaching engineering at <span className="text-foreground font-semibold">Cecil College</span>, where I replaced the entire curriculum’s slide decks and PDFs with semantic HTML generated through <span className="text-foreground font-semibold underline decoration-primary/50">Quarto</span>. Proper equation markup, enforced alt text on every visual. That work shaped how we approach every project today.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-4 italic border-l-4 border-primary/20 pl-6 text-lg">
-            This wasn't just theory; it was a methodical implementation of semantic architecture, ARIA compliance, and cognitive load management. Today, I bring that same technical rigor to Such Software’s commercial projects. We don't retroactively fix accessibility; we architect for it from line one."
+            "The same standards that made course materials work for every student now run through everything we ship. Semantic structure, keyboard navigation, WCAG compliance. That’s not overhead, it’s a core component of all our products."
           </p>
         </div>
       </div>

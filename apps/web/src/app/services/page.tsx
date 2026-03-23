@@ -32,7 +32,7 @@ export default function ServicesPage() {
             Specialized Solutions
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We solve complex business problems with elegant architecture.
+            Focused expertise in commerce, crypto, and custom web applications.
           </p>
         </div>
 
@@ -41,9 +41,8 @@ export default function ServicesPage() {
             <div className="text-left section-container border-l-4 border-l-emerald-500">
                 <h2 className="text-3xl font-bold mb-2">Partnership-First Development</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl">
-                   Whether you're scaling a commerce empire or building a new financial protocol,
-                   we provide the technical firepower. We don't just write code—we architect
-                   systems that grow with your business.
+                   Whether you're scaling a commerce operation or launching a new financial protocol,
+                   we provide the engineering. We design systems that grow with your business.
                 </p>
             </div>
         </div>
@@ -88,8 +87,8 @@ export default function ServicesPage() {
             <div className="text-left mb-10 section-container border-l-4 border-l-purple-500">
                 <h2 className="text-3xl font-bold mb-2">Custom Apps & Interactive Websites</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-                    Whether it's a real-time collaborative tool or a high-end brand experience, 
-                    we build performant web applications that delight users.
+                    Whether it's a real-time collaborative tool or a high-end brand experience,
+                    we deliver fast, accessible web applications.
                 </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -103,8 +102,7 @@ export default function ServicesPage() {
                 <Card className="glass-card hover:border-purple-500/30">
                     <h3 className="text-xl font-bold mb-3">Brand Motion</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Framermotion and Three.js powered interfaces that tell your brand's story 
-                        through motion and depth.
+                        Smooth, animated interfaces with purposeful motion and visual depth.
                     </p>
                 </Card>
             </div>
@@ -115,8 +113,7 @@ export default function ServicesPage() {
             <div className="text-left mb-10 section-container border-l-4 border-l-cyan-500">
                 <h2 className="text-3xl font-bold mb-2">Cryptocurrency & Payment Consulting</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-                    Navigate the complex world of global finance. We bridge the gap between 
-                    traditional banking and decentralized protocols.
+                    Bridge traditional payments and decentralized protocols with secure, auditable infrastructure.
                 </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -139,7 +136,7 @@ export default function ServicesPage() {
 
         <div className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
             <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <h2 className="text-4xl font-bold mb-6 relative z-10 tracking-tight">Start building the future</h2>
+            <h2 className="text-4xl font-bold mb-6 relative z-10 tracking-tight">Let's build together</h2>
             <p className="mb-10 text-slate-300 text-lg max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
                 We are currently accepting a limited number of partners for performance-based development. 
                 Let's see if we're a fit.

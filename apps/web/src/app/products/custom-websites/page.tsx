@@ -74,8 +74,7 @@ export default function CustomWebsitesPage() {
           <Card className="glass-card border-purple-500/20">
             <h3 className="text-xl font-bold mb-3">Brand Motion</h3>
             <p className="text-muted-foreground">
-              Framer Motion and Three.js powered interfaces that tell your brand's 
-              story through motion and depth.
+              Smooth, animated interfaces with purposeful motion and visual depth.
             </p>
           </Card>
         </div>

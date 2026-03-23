@@ -8,13 +8,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About | Such Software",
-  description: "Full-service software provider in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
+  description: "Software studio in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "About | Such Software",
-    description: "Full-service software provider in Kennett Square, PA. Founded by John Winter Murphy.",
+    description: "Software studio in Kennett Square, PA. Founded by John Winter Murphy.",
     type: "website",
   },
 };
@@ -32,7 +32,7 @@ export default function AboutPage() {
           <div className="prose dark:prose-invert max-w-none mb-12">
             <p className="text-xl leading-relaxed">
               Founded in 2021 by <a href="https://jwinterm.com">John Winter Murphy</a> in Chester County, PA, and operating in Kennett Square since July 2025, 
-              we are a full-service software provider in the heart of Mushroom Country.
+              we are a software studio in the heart of Mushroom Country.
             </p>
           </div>
 
