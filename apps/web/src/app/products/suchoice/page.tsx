@@ -7,13 +7,14 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Suchoice | Such Software",
-  description: "Can't decide what to eat? Snap a picture of a menu and let AI choose for you. Android and iOS.",
+  description: "Can't decide? Snap a photo, let AI read your options, and pick for you. Decision tools for when you're stuck. Android and iOS.",
   alternates: { canonical: "/products/suchoice" },
 };
 
 const features = [
-  { name: "AI Menu Parsing", description: "Take a photo of any menu and our AI instantly extracts the options." },
-  { name: "Random Choice", description: "Spin the wheel to let fate decide your next meal." },
+  { name: "AI Image Reading", description: "Point your camera at any text. Suchoice extracts the options automatically." },
+  { name: "Random Pick", description: "Spin the wheel and let the app choose for you." },
+  { name: "Decision Tools", description: "Coin flip, dice roll, and other quick ways to break a deadlock." },
   { name: "Cross-Platform", description: "Available on Android and iOS." },
 ];
 
@@ -32,17 +33,17 @@ export default function SuchoicePage() {
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Can't decide what to eat? Snap a picture of a menu and let AI choose for you. 
-            Suchoice reads the menu with AI, extracts the items, and randomly picks one for you.
+            Can't decide? Point your camera at any text with options, and Suchoice reads it, extracts the choices, and picks one for you.
+            Menus, lists, schedules, whatever. Plus a set of general decision tools for when you're stuck.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-4 mb-12">
           <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
-            Google Play — Coming Soon
+            Google Play — Under Review
           </Button>
           <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
-            App Store — Coming Soon
+            App Store — Under Review
           </Button>
         </div>
 
