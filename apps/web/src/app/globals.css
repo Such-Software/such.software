@@ -85,7 +85,9 @@
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     position: relative;
     overflow: hidden;
-    transition: all 300ms;
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 300ms ease;
   }
 
   .section-container {
@@ -98,6 +100,52 @@
 
   .glass-card:hover {
     border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* Bento grid entrance animation */
+  @keyframes bento-enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bento-item {
+    animation: bento-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Hover lift for bento links */
+  .bento-item:hover .glass-card {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 64px -16px rgb(0 0 0 / 0.3);
+  }
+
+  /* Focus-visible ring for keyboard navigation */
+  .bento-item:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 4px;
+    border-radius: 2.5rem;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .bento-item {
+      animation: none;
+    }
+    .bento-item:hover .glass-card {
+      transform: none;
+    }
+    .glass-card {
+      transition: border-color 300ms;
+    }
+    .glass-card .object-contain,
+    .glass-card .object-cover {
+      transition: none !important;
+    }
   }
 
   /* Typography customization for blog posts */
