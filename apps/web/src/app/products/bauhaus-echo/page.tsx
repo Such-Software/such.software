@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Bauhaus Echo | Such Software",
   description: "Visual memory puzzle game inspired by Bauhaus design. Memorize, shuffle, reconstruct. Android, iOS, Web, Desktop.",
   alternates: { canonical: "/products/bauhaus-echo" },
+  openGraph: {
+    title: "Bauhaus Echo | Such Software",
+    description: "Visual memory puzzle game inspired by Bauhaus design. Memorize, shuffle, reconstruct. Android, iOS, Web, Desktop.",
+    type: "website",
+  },
 };
 
 const gameModes = [

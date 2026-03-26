@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Suchoice | Such Software",
   description: "Can't decide? Snap a photo, let AI read your options, and pick for you. Decision tools for when you're stuck. Android and iOS.",
   alternates: { canonical: "/products/suchoice" },
+  openGraph: {
+    title: "Suchoice | Such Software",
+    description: "Can't decide? Snap a photo, let AI read your options, and pick for you. Decision tools for when you're stuck. Android and iOS.",
+    type: "website",
+  },
 };
 
 const features = [

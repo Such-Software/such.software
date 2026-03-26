@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://such.software"),
-  title: "Such Software | Digital Craftsmanship",
-  description: "Next-generation web applications engineered for scale, compliance, and performance.",
+  title: "Such Software | Precision Engineering for Everyone",
+  description: "E-commerce infrastructure, custom app development, and accessible web applications. Engineered for scale, compliance, and performance.",
   alternates: {
     canonical: "/",
   },
@@ -36,7 +36,7 @@ const structuredData = {
   name: "Such Software LLC",
   url: "https://such.software",
   logo: "https://such.software/images/branding/clean_dark_w_text.svg",
-  description: "Next-generation web applications engineered for scale, compliance, and performance.",
+  description: "E-commerce infrastructure, custom app development, and accessible web applications. Engineered for scale, compliance, and performance.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "110 E State St, Suite 300",

@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Wownero Moon Launch | Such Software",
   description: "Crypto-themed space landing game. Fly your rocket across the solar system, dodge hazards, collect crypto, upgrade your ship. Android, iOS, Web, Desktop.",
   alternates: { canonical: "/products/wownero-moon-launch" },
+  openGraph: {
+    title: "Wownero Moon Launch | Such Software",
+    description: "Crypto-themed space landing game. Fly your rocket across the solar system, dodge hazards, collect crypto, upgrade your ship. Android, iOS, Web, Desktop.",
+    type: "website",
+  },
 };
 
 const levels = [
@@ -55,19 +60,17 @@ export default function WowneroMoonLaunchPage() {
         </div>
 
         <div className="flex flex-wrap gap-4 mb-12">
-          <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.wowneromoonlaunch" target="_blank" rel="noopener noreferrer">
-            <Button size="lg">Get it on Google Play</Button>
-          </a>
-          <a href="https://apps.apple.com/app/wownero-moon-launch/id_PLACEHOLDER" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              Download on App Store
-            </Button>
+          <a href="https://moonlaunch.such.software" target="_blank" rel="noopener noreferrer">
+            <Button size="lg">Play on Web</Button>
           </a>
           <a href="https://suchsoftware.itch.io/wownero-moon-launch" target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="lg">
               Play on itch.io
             </Button>
           </a>
+          <p className="flex items-center text-sm text-muted-foreground">
+            Google Play &amp; App Store — Coming Soon
+          </p>
         </div>
 
         <h2 className="text-2xl font-bold mb-6">How It Works</h2>

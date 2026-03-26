@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Blog | Such Software",
   description: "News, updates, and technical articles from Such Software.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog | Such Software",
+    description: "News, updates, and technical articles from Such Software.",
+    type: "website",
+  },
 };
 
 export default function BlogPage() {

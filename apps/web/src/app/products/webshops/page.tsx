@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Webshops | Such Software",
   description: "Headless Medusa commerce engines with revenue-share pricing. No upfront costs, aligned incentives.",
   alternates: { canonical: "/products/webshops" },
+  openGraph: {
+    title: "Webshops | Such Software",
+    description: "Headless Medusa commerce engines with revenue-share pricing. No upfront costs, aligned incentives.",
+    type: "website",
+  },
 };
 
 export default function WebshopsPage() {

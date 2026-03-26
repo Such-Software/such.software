@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Custom Websites | Such Software",
   description: "Real-time platforms and interactive web experiences. See our work on rcryptocurrency.com and moonplace.io.",
   alternates: { canonical: "/products/custom-websites" },
+  openGraph: {
+    title: "Custom Websites | Such Software",
+    description: "Real-time platforms and interactive web experiences. See our work on rcryptocurrency.com and moonplace.io.",
+    type: "website",
+  },
 };
 
 export default function CustomWebsitesPage() {

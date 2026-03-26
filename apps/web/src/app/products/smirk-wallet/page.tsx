@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: "Smirk Wallet | Such Software",
   description: "Non-custodial browser wallet for social tipping. Send BTC, LTC, XMR, WOW, and GRIN by Telegram or Discord username.",
   alternates: { canonical: "/products/smirk-wallet" },
+  openGraph: {
+    title: "Smirk Wallet | Such Software",
+    description: "Non-custodial browser wallet for social tipping. Send BTC, LTC, XMR, WOW, and GRIN by Telegram or Discord username.",
+    type: "website",
+  },
 };
 
 const currencies = [

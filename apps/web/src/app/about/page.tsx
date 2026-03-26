@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "About | Such Software",
-    description: "Software studio in Kennett Square, PA. Founded by John Winter Murphy.",
+    description: "Software studio in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
     type: "website",
   },
 };

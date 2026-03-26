@@ -12,7 +12,7 @@ export function Footer() {
           <div className="space-y-4">
             <SiteLogo />
             <p className="text-sm text-muted-foreground">
-              Full-service software provider in the heart of Mushroom Country.
+              Software studio in the heart of Mushroom Country.
             </p>
           </div>
           

@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "Support | Such Software",
   description: "Get help with Bauhaus Echo or any Such Software product. Report bugs, request features, or send feedback.",
   alternates: { canonical: "/support" },
+  openGraph: {
+    title: "Support | Such Software",
+    description: "Get help with Bauhaus Echo or any Such Software product. Report bugs, request features, or send feedback.",
+    type: "website",
+  },
 };
 
 export default function SupportPage() {

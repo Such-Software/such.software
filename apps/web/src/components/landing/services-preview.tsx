@@ -22,8 +22,8 @@ export function ServicesPreview() {
             <Card className="glass-card hover:border-indigo-500/40 text-left">
                 <h3 className="text-xl font-bold mb-3">Zero Capital Upfront</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">
-                     We operate on a "Toast" style partnership model. No massive setup fees or 
-                     stiff monthly subscriptions—we only win when you're making sales.
+                     We operate on a revenue-share model, similar to Toast. No upfront costs
+                     and no fixed monthly fees. We only earn when you're making sales.
                 </p>
             </Card>
             <Card className="glass-card hover:border-indigo-500/40 text-left">
