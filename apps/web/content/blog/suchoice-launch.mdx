@@ -1,0 +1,42 @@
+---
+title: "Suchoice is Live"
+date: "2026-03-26"
+excerpt: "AI-powered decision making app with subscriptions and ad monetization: now on Android and iOS"
+---
+
+Suchoice is now available on [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice) and the [App Store](https://apps.apple.com/us/app/suchoice/id6759626658). Point your camera at a menu, list, or anything with options. AI reads them, loads them into a wheel, and you spin.
+
+## Four Ways to Decide
+
+- **Snap & Decide**: take a photo, AI extracts the items, spin the wheel. Works with menus, handwritten lists, printed schedules.
+- **Wheel**: type in your own options (up to 12) and spin.
+- **Coin Flip**: animated 50/50 with sound effects and confetti.
+- **Adventure**: enter a city, spin for a random activity, open the winner in Google Maps.
+
+## How Snap & Decide Works
+
+The app sends your photo to a Flask backend, which forwards it to Google's Gemini Flash for text extraction. Gemini returns a JSON array of item names. The app displays them in an editable list, then loads them into the wheel. The prompt is tuned to ignore prices, section headers, and decorative text.
+
+## Monetization
+
+Suchoice uses a hybrid model: rewarded ads (AdMob) and auto-renewable subscriptions (RevenueCat).
+
+Users get one free AI snap. After that, they can watch a short rewarded ad to unlock another snap, or subscribe to Suchoice Premium ($0.99/month, $9.99/year) for unlimited snaps and no ads. The wheel, coin flip, and adventure features are always free.
+
+Subscription state is managed through RevenueCat with a single "premium" entitlement. The app checks entitlement status on launch and on resume, gating only the AI snap feature behind the paywall.
+
+## Tech
+
+- **Client**: Flutter (Dart), single codebase for Android and iOS
+- **Backend**: Flask + Gunicorn, deployed on a VPS behind Nginx
+- **AI**: Google Gemini 2.5 Flash via the `google-generativeai` Python SDK
+- **Ads**: Google AdMob (banner, interstitial, rewarded)
+- **Subscriptions**: RevenueCat (handles both App Store and Google Play billing)
+- **Tracking**: App Tracking Transparency on iOS, requested before ad initialization
+
+## Get It
+
+- [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice)
+- [App Store](https://apps.apple.com/us/app/suchoice/id6759626658)
+
+See the [Suchoice product page](/products/suchoice) for more.

@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 };
 
 const features = [
-  { name: "AI Image Reading", description: "Point your camera at any text. Suchoice extracts the options automatically." },
-  { name: "Random Pick", description: "Spin the wheel and let the app choose for you." },
-  { name: "Decision Tools", description: "Coin flip, dice roll, and other quick ways to break a deadlock." },
-  { name: "Cross-Platform", description: "Available on Android and iOS." },
+  { name: "Snap & Decide", description: "Take a photo of any menu, list, or set of options. AI reads and extracts the items automatically." },
+  { name: "Spin the Wheel", description: "Add your own options or use the ones AI found. Spin and go with it." },
+  { name: "Coin Flip", description: "Quick 50/50 decisions with a satisfying animated flip." },
+  { name: "Adventure Mode", description: "Enter a city, spin for a random activity, and open the winner in Maps." },
 ];
 
 export default function SuchoicePage() {
@@ -33,18 +33,22 @@ export default function SuchoicePage() {
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Can't decide? Point your camera at any text with options, and Suchoice reads it, extracts the choices, and picks one for you.
-            Menus, lists, schedules, whatever. Plus a set of general decision tools for when you're stuck.
+            Stop overthinking every decision. Snap a photo of any menu, list, or set of options, let AI read them, then spin the wheel and go with it.
+            Plus a coin flip for quick 50/50 calls and an adventure mode that picks random activities in any city.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-4 mb-12">
-          <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
-            Google Play — Under Review
-          </Button>
-          <Button variant="outline" size="lg" disabled className="cursor-not-allowed">
-            App Store — Under Review
-          </Button>
+          <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg">
+              Google Play
+            </Button>
+          </a>
+          <a href="https://apps.apple.com/us/app/suchoice/id6759626658" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg">
+              App Store
+            </Button>
+          </a>
         </div>
 
         <h2 className="text-2xl font-bold mb-6">Features</h2>
