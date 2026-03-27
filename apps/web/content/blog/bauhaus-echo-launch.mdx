@@ -1,40 +1,144 @@
 ---
-title: "Bauhaus Echo is Live"
+title: "Building Bauhaus Echo: A Cross-Platform Puzzle Game from Scratch"
 date: "2026-03-04"
-excerpt: "A visual memory puzzle inspired by Bauhaus design, now on every platform"
+excerpt: "How we built a Bauhaus-inspired memory puzzle with libGDX, shipped it to five platforms, and added global leaderboards with HMAC-signed score submissions"
 ---
 
 Bauhaus Echo is now available on the [App Store](https://apps.apple.com/us/app/bauhaus-echo/id6759010657), [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho), [itch.io](https://suchsoftware.itch.io/bauhaus-echo), and [the web](https://bauhaus.such.software). It is a visual memory game where you memorize tile arrangements, watch them shuffle, and reconstruct the original pattern.
+
+- **Mobile (free, ads removable via IAP)**: [App Store](https://apps.apple.com/us/app/bauhaus-echo/id6759010657) | [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho)
+- **Desktop ($2, no ads)**: [itch.io](https://suchsoftware.itch.io/bauhaus-echo)
+- **Web (free)**: [bauhaus.such.software](https://bauhaus.such.software)
 
 ## The Concept
 
 The game shows you a grid of colorful geometric tiles inspired by Bauhaus design. You get a few seconds to memorize their positions. Then the tiles spin, shrink, and scatter to the bottom of the screen. Your job is to drag them back to where they belong.
 
+It started as a simple prototype: a 3x3 grid, a shuffle, and a timer. But the Bauhaus aesthetic gave the project a visual identity early on, and from there it grew into four distinct game modes with difficulty scaling, global leaderboards, and a full cross-platform release.
+
+## The Tiles: Bauhaus Blocks by art101
+
+The tile collection features 500 hand-curated geometric designs from the [Bauhaus Blocks collection by art101](https://art101.io/). Each tile is a 256x256 pixel sprite drawn in the Bauhaus tradition: bold primary shapes, clean geometry, and striking color contrasts. The tiles are packed into a libGDX TextureAtlas spread across three PNG sprite sheets for efficient GPU batching.
+
+We chose art101's Bauhaus Blocks because they capture the movement's aesthetic perfectly — circles, triangles, and rectangles in red, blue, yellow, black, and white — while providing enough variety across 500 designs that the game rarely repeats tiles in a session. We plan to add more tile packs from art101 in the future, introducing new visual themes while keeping the same core gameplay.
+
+Each tile in-game has beveled 3D edges and the game board is styled like a wood-and-felt craft table, giving the abstract designs a physical, tactile quality.
+
 ## Four Game Modes
 
-- **Classic**: the core experience. Memorize and reconstruct.
-- **Speed**: tiles appear one at a time. Place each before the next drops.
-- **Endless**: speed mode that loops forever. See how long you last.
-- **Memory**: traditional card-matching pairs.
+- **Classic**: the core experience. Memorize the full grid, watch the tiles scatter, then reconstruct the pattern before time runs out.
+- **Speed**: tiles appear one at a time in their correct position for a shrinking window of time, then drop to the tray. Place each before the next one arrives. The display time decays exponentially — starting at 28% of the Classic base time and shrinking with a 0.40 decay factor per tile.
+- **Endless**: Speed mode that never ends. Placed tiles have a lifespan of three more spawns, after which they fade out and rejoin the queue. Your score is total correct placements before you run out of lives.
+- **Memory**: traditional card-matching. All tiles face down. Flip two to find pairs. Matched pairs spin away, mismatches cost a life.
 
-Each mode supports 2×2 through 5×5 grids and three difficulty levels. Global leaderboards let you compete against other players across all platforms.
+Each mode supports 2x2 through 5x5 grids and three difficulty levels (Easy at 1.7x time, Medium at 1.35x, Hard at 1.0x). Lives scale with grid size and difficulty so larger grids give more room for error.
 
-## 500 Bauhaus Tiles
+## How We Built It
 
-The tile collection features 500 hand-curated geometric designs drawn from the Bauhaus aesthetic: bold shapes, primary colors, clean lines. Each tile has beveled 3D edges and the game board is styled like a wood-and-felt craft table.
+### The Stack
 
-## Tech Stack
+Bauhaus Echo is built with [libGDX](https://libgdx.com/), a Java-based cross-platform game framework. A single shared codebase in the `core` module runs on all platforms, with thin launcher modules for each target:
 
-Built with [libGDX](https://libgdx.com/), a cross-platform Java game framework. One codebase runs on Android, iOS (via RoboVM), desktop (LWJGL3), and web (via GWT). The tile assets are packed into a TextureAtlas for efficient GPU rendering.
+- **Android** via the standard Android SDK (compileSdk 35, minSdk 21)
+- **iOS and iPad** via [RoboVM/MobiVM](https://mobivm.com/) — an ahead-of-time compiler that translates Java bytecode to native ARM
+- **Desktop** via LWJGL3, packaged with [Construo](https://github.com/nicklaus-dev/construo) and bundled JRE via jlink for a self-contained native app
+- **Web** via [GWT](http://www.gwtproject.org/) (Google Web Toolkit), which compiles the Java source to JavaScript
+
+This means we write game logic once and it runs everywhere. Platform-specific code (ads, billing, leaderboard networking) is abstracted behind interfaces that each launcher implements.
+
+### Development Timeline
+
+The project started with a Scene2D UI menu and basic tile grid rendering. From there, development followed a roughly additive pattern:
+
+1. **Core gameplay**: grid rendering, tile dragging, snap-to-grid placement, and the show-shuffle-reconstruct loop for Classic mode
+2. **Configuration and polish**: a config screen for grid size and difficulty, custom fonts, tile selection tooltips, and extended memorization timers
+3. **New animations**: tile spin, shrink, and slide animations using libGDX's Action system — parallel and sequential action compositions for smooth transitions
+4. **Speed Mode**: the conveyor-belt mechanic where tiles arrive one at a time with decaying display windows
+5. **Endless Mode**: building on Speed with tile cycling, lifespan tracking, and an in-game settings overlay for pausing mid-run
+6. **Memory/Pairs Mode**: face-down card-matching with flip animations and pair detection
+7. **Audio**: a music system with randomized track selection from a pool of five game tracks, plus sound effects for pickup, drop, rejection, and UI interactions
+8. **Statistics and scores**: per-mode, per-grid tracking of wins, losses, and best times, displayed in an expandable stats UI
+9. **Monetization**: AdMob banner ads on mobile with a one-time "Remove Ads" in-app purchase, and a paid desktop build on itch.io
+10. **Cross-platform fixes**: GWT build compatibility, iOS RoboVM quirks, Android 48-second startup time reduction (pre-building the UI texture atlas), and desktop jlink module resolution
+
+One of the more satisfying fixes was smart tile snapping. Early on, dragging a tile near an occupied cell would try to place it there, causing overlap. The fix was straightforward: `Level.getClosestOpenTargetIndex()` finds the nearest unoccupied cell instead of just the nearest cell, so tiles always snap to valid positions.
+
+### Tile Mechanics Under the Hood
+
+Each tile is a `Tile` actor extending libGDX's `Image` class with custom drag handling. When you pick up a tile, it:
+
+1. Plays a pickup sound effect
+2. Renders a procedural drop shadow — a 64x64 soft-edge texture drawn at 35% alpha with an (8, -12) pixel offset, shared across all tile instances
+3. Tracks your finger position and updates the tile's screen coordinates
+
+When you release it above the split line (the boundary between the grid and the tray), the game checks `Level.getClosestOpenTargetIndex()` to find the nearest unoccupied grid cell. If one exists, the tile snaps into place with a 0.15-second MoveToAction and plays a drop sound. If all positions are occupied, the tile rejects — spinning 360 degrees, shrinking back to tray size, and sliding to the bottom in a 0.13-second parallel animation.
+
+### The GWT Challenge
+
+Getting the web build working was one of the trickier parts of the project. GWT compiles Java to JavaScript, but it only supports a subset of Java — no `javax.crypto`, no reflection, limited standard library. This became a problem when we added HMAC-SHA256 score signing for the leaderboard.
+
+The solution was a pure JavaScript SHA-256 implementation embedded via GWT's JSNI (JavaScript Native Interface). The GWT leaderboard client uses `RequestBuilder` instead of libGDX's `Gdx.net` API for proper CORS handling, and the HMAC secret is embedded at compile time so it doesn't appear in the distributed JavaScript source in plain text.
+
+## Global Leaderboards
+
+Every mode, grid size, and difficulty combination has its own leaderboard. Scores are submitted to our backend at `api.such.software` and ranked globally across all platforms.
+
+### Backend Architecture
+
+The leaderboard runs on a Flask API behind Nginx on a VPS, backed by PostgreSQL. The stack is deliberately simple:
+
+- **Flask** with Gunicorn (2 workers) handles API requests
+- **PostgreSQL 17** stores scores with composite indexes for fast per-mode/per-grid queries
+- **Nginx** terminates SSL (Let's Encrypt) and enforces rate limits: 10 requests/second globally, 6 requests/minute on score submission endpoints
+- **flask-limiter** adds a secondary rate limit of 100 requests/hour per IP
+
+No ORM — just parameterized SQL queries via `psycopg2`. The schema is straightforward: each score row stores the device UUID, nickname, mode, grid, difficulty, primary score value, an optional secondary tiebreaker, platform, and timestamp.
+
+### Scoring Logic
+
+Different modes rank differently:
+
+| Mode | Primary Score | Tiebreaker | Best = |
+|------|--------------|------------|--------|
+| Classic | Completion time | — | Lowest |
+| Speed | Completion time | Lives remaining | Lowest time, then highest lives |
+| Endless | Tiles placed | Survival time | Highest tiles, then longest time |
+| Memory | Lives remaining | Completion time | Highest lives, then fastest time |
+
+A UNIQUE constraint on (device_uuid, mode, grid, difficulty, score_value, score_secondary) prevents exact duplicate submissions. Conflicts upsert the nickname and platform fields so a player's display name stays current.
+
+### Anti-Cheat and Score Verification
+
+Score submissions are signed with HMAC-SHA256. The client computes `HMAC(secret, timestamp + request_body)` and sends it in the `X-Signature` header alongside an `X-Timestamp` header. The server verifies the signature using constant-time comparison and rejects any request with a timestamp older than 5 minutes (replay protection).
+
+Beyond signature verification, the server validates score bounds per mode:
+
+- Classic mode times must fall within plausible ranges for the grid size — you can't clear a 5x5 in 0.5 seconds
+- Speed mode lives are capped per grid and difficulty (1–6 depending on configuration)
+- Endless mode tile counts have per-grid maximums (e.g., 500 for 2x2, 200 for 5x5)
+- Memory mode lives can't exceed the configuration maximum (3–16 depending on grid and difficulty)
+
+Scores that fail validation are rejected outright. An admin endpoint (protected by a separate API key with constant-time comparison) allows manual moderation of suspicious entries.
+
+### Privacy
+
+Device UUIDs are never returned in API responses. When fetching a leaderboard, the client sends its own UUID as a query parameter, and the server returns an `is_self` boolean flag on matching entries. This lets the game highlight your own scores without exposing any player's device identifier to others.
+
+### Client Integration
+
+The game uses a `LeaderboardClient` interface with two implementations:
+
+- **HttpLeaderboardClient** for Android, iOS, and Desktop — uses libGDX's `Gdx.net.sendHttpRequest()` with Java's `javax.crypto.Mac` for HMAC computation
+- **GwtLeaderboardClient** for the web build — uses GWT's `RequestBuilder` with the pure-JS SHA-256 implementation
+
+All network calls are asynchronous with callbacks posted back to the rendering thread. Score submission is fire-and-forget: if the network call fails, the game continues normally. Local high scores always work regardless of connectivity.
 
 ## Monetization
 
-The mobile versions are free with AdMob banner ads. A one-time in-app purchase removes ads permanently. Desktop is a paid download ($2) with no ads. The web version is free.
+The mobile versions (Android and iOS) are free with AdMob banner ads. A one-time in-app purchase removes ads permanently. The desktop build is a paid download ($2) on itch.io with no ads. The web version is completely free with no ads.
 
-## Get It
+## What's Next
 
-- **Mobile (free, ads removable via IAP)**: [App Store](https://apps.apple.com/us/app/bauhaus-echo/id6759010657) | [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho)
-- **Desktop ($2, no ads)**: [itch.io](https://suchsoftware.itch.io/bauhaus-echo)
-- **Web (free)**: [bauhaus.such.software](https://bauhaus.such.software)
+We're looking at adding more tile packs from [art101](https://art101.io/) to introduce new visual themes — different art movements, color palettes, and geometric styles — while keeping the same core gameplay mechanics. The infrastructure is already there: the TextureAtlas system supports swappable tile sets, so new packs are primarily an art curation effort.
 
 See the full [Bauhaus Echo product page](/products/bauhaus-echo) for more details.
