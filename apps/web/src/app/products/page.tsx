@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Products | Such Software",
-  description: "Tools and applications built by Such Software. Neroswap, Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo, Suchoice, and Wownero Moon Launch.",
+  description: "Tools and applications built by Such Software. Neroswap, Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo, Suchoice, Vegan IQ, and Wownero Moon Launch.",
   alternates: { canonical: "/products" },
   openGraph: {
     title: "Products | Such Software",
@@ -53,6 +53,12 @@ const products = [
     color: "pink",
   },
   {
+    slug: "vegan-iq",
+    title: "Vegan IQ",
+    description: "Test your plant-based knowledge with 2000+ trivia questions across 8 categories. Verified data, swipe gameplay. Android and iOS.",
+    color: "green",
+  },
+  {
     slug: "wownero-moon-launch",
     title: "Wownero Moon Launch",
     description: "Crypto-themed space landing game. 11 levels, 4 weapons, endless mode. Android, iOS, Web, Desktop.",
@@ -68,6 +74,7 @@ const colorClasses: Record<string, string> = {
   pink: "border-pink-500/30 hover:border-pink-500/60",
   orange: "border-orange-500/30 hover:border-orange-500/60",
   yellow: "border-yellow-500/30 hover:border-yellow-500/60",
+  green: "border-green-500/30 hover:border-green-500/60",
 };
 
 const titleColors: Record<string, string> = {
@@ -78,6 +85,7 @@ const titleColors: Record<string, string> = {
   pink: "text-pink-600 dark:text-pink-400",
   orange: "text-orange-600 dark:text-orange-400",
   yellow: "text-yellow-600 dark:text-yellow-400",
+  green: "text-green-600 dark:text-green-400",
 };
 
 export default function ProductsPage() {

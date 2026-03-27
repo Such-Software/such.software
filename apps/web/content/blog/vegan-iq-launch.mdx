@@ -1,0 +1,65 @@
+---
+title: "Vegan IQ: Test Your Plant-Based Knowledge"
+date: "2026-03-26"
+excerpt: "2000+ trivia questions across 8 categories, all backed by verified data. Now on Android and iOS."
+draft: true
+---
+
+Vegan IQ is a trivia game that tests what you know about plant-based food, nutrition, and sustainability. Over 2000 questions across 8 categories, all grounded in real data from the USDA, Poore & Nemecek (2018), NIH, and FAOSTAT.
+
+## Why We Built It
+
+There is a lot of information out there about veganism, plant-based nutrition, and the environmental impact of food. Some of it is accurate, some of it is not. We wanted to make a game where every question is backed by verified data -- a fun way to learn real facts about what you eat and how it affects the planet.
+
+No LLM-generated content. Every question traces back to a specific data source.
+
+## 8 Categories
+
+- **Nutrition**: macronutrients, vitamins, minerals, and dietary facts about plant-based foods
+- **Environment**: water use, land use, greenhouse gas emissions, and ecological impact of food production
+- **Ingredients**: what is and is not vegan, hidden animal products, and food labeling
+- **Food History**: origins and cultural history of plant-based foods
+- **Animal Welfare**: facts about farming practices and animal agriculture
+- **Health**: plant-based diets and health outcomes from peer-reviewed research
+- **Cooking**: techniques, substitutions, and preparation of plant-based foods
+- **Culture**: veganism around the world, traditions, and cultural practices
+
+## How It Works
+
+Swipe right for true, left for false. Tap your answer for multiple choice questions. Sound effects and haptic feedback make every answer feel satisfying. Track your progress locally -- no account required, no data leaves your device.
+
+## Key Features
+
+- **2000+ curated questions** across 8 categories
+- **Swipe & tap gameplay** -- intuitive and fast
+- **Dark and light mode** -- play however you prefer
+- **SFX & haptics** -- satisfying audio and tactile feedback
+- **Share facts** -- send interesting questions to friends
+- **Fully offline** -- all questions bundled in the app
+- **No account required** -- open and play
+
+## Data Integrity
+
+All questions are generated deterministically from structured data files. The data pipeline is written in Python and pulls from:
+
+- **USDA FoodData Central** for nutritional composition
+- **Poore & Nemecek, Science (2018)** for environmental impact metrics
+- **NIH** for health and dietary reference data
+- **FAOSTAT** for global agricultural statistics
+
+Questions are not written by an LLM. The pipeline generates them from verified numbers and facts, ensuring accuracy.
+
+## Tech
+
+- **Client**: Flutter (Dart), single codebase for Android and iOS
+- **Data**: Python pipeline generating JSON question assets
+- **Ads**: Google AdMob (banner, interstitial)
+- **IAP**: Apple StoreKit and Google Play Billing via in_app_purchase
+- **Storage**: shared_preferences for local score and preference data
+
+## Get It
+
+- [Google Play](#)
+- [App Store](#)
+
+See the [Vegan IQ product page](/products/vegan-iq) for more.
