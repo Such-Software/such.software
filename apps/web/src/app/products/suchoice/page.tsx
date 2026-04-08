@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
-import { Button } from "@repo/ui/components/button";
+import { StoreButtons } from "@/components/store-buttons";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -43,17 +43,11 @@ export default function SuchoicePage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 mb-12">
-          <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              Google Play
-            </Button>
-          </a>
-          <a href="https://apps.apple.com/us/app/suchoice/id6759626658" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              App Store
-            </Button>
-          </a>
+        <div className="mb-12">
+          <StoreButtons links={[
+            { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice" },
+            { platform: "apple", href: "https://apps.apple.com/us/app/suchoice/id6759626658" },
+          ]} />
         </div>
 
         <h2 className="text-2xl font-bold mb-6">Features</h2>

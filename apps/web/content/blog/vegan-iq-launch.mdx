@@ -1,73 +1,52 @@
 ---
-title: "Vegan IQ: Test Your Plant-Based Knowledge"
+title: "Vegan IQ: 1,066 Data-Backed Trivia Questions"
 date: "2026-04-08"
-excerpt: "1000+ trivia questions across 8 categories, all backed by verified data. Now on Android and iOS."
+excerpt: "A plant-based trivia game built on USDA, Oxford, NIH, and FAOSTAT data. Flutter, Python data pipeline, deterministic question generation. Android and iOS."
 ---
 
-Vegan IQ is a trivia game that tests what you know about plant-based food, nutrition, and sustainability. Over 1,000 questions across 8 categories, all grounded in real data from the USDA, Poore & Nemecek (2018), NIH, and FAOSTAT.
+<VeganIqStoreButtons />
 
-## Why We Built It
+Vegan IQ is a trivia game about plant-based food, nutrition, and sustainability. 1,066 questions across 8 categories. Every answer traces back to a specific data source -- USDA FoodData Central, Poore & Nemecek (Science, 2018), NIH, or FAOSTAT. No LLM-generated content.
 
-There is a lot of information out there about veganism, plant-based nutrition, and the environmental impact of food. Some of it is accurate, some of it is not. We wanted to make a game where every question is backed by verified data -- a fun way to learn real facts about what you eat and how it affects the planet.
+## Data Pipeline
 
-No LLM-generated content. Every question traces back to a specific data source.
+Questions are generated deterministically from structured JSON data files by a Python pipeline. The pipeline pulls nutritional composition from USDA, environmental impact metrics (water, land, GHG per kg) from Poore & Nemecek, health data from NIH, and agricultural production stats from FAOSTAT.
+
+Raw generation produces ~2,461 candidates. Subcategory caps, `MINIMUM_MEANINGFUL` thresholds (protein >= 5g, fiber >= 1g, iron >= 1.5mg, calcium >= 30mg, vitamin C >= 5mg), and deduplication reduce this to 1,066 curated questions. A `primary_food` field on 426 questions lets the selection engine penalize same-food repetition within a single quiz (-100 weight).
+
+Template-generated questions account for 43% of the pool; the remaining 57% are hand-curated.
+
+## Question Selection
+
+An anti-repetition pacing engine selects questions at runtime. The algorithm tracks recently-seen questions and applies decay weights so quizzes feel fresh even across multiple sessions. A spaced repetition layer re-surfaces questions the player got wrong more frequently.
+
+Category selection uses dynamic counts with a 2-column grid UI. Plant milk questions are excluded from environmental per-kg generators via `_ENV_PER_KG_EXCLUDE` to avoid misleading comparisons.
+
+## v1.1.0
+
+This release adds:
+
+- **Streaks and stats** -- daily streaks, lifetime stats, per-category performance tracking
+- **Titles and badges** -- progression from "Sprout" to "Sage", plus category-specific badges with artist-drawn assets
+- **Share cards** -- off-screen `RepaintBoundary` renders branded PNG at 2x resolution, shared via `share_plus` with 5-minute delayed cleanup. Fallback to plain text if image generation fails.
+- **Onboarding flow** -- swipe/tap tutorial for new players
+- **Quiz length picker** -- 10, 15, or 20 questions per session
 
 ## 8 Categories
 
-- **Nutrition**: macronutrients, vitamins, minerals, and dietary facts about plant-based foods
-- **Environment**: water use, land use, greenhouse gas emissions, and ecological impact of food production
-- **Ingredients**: what is and is not vegan, hidden animal products, and food labeling
-- **Food History**: origins and cultural history of plant-based foods
-- **Animal Welfare**: facts about farming practices and animal agriculture
-- **Health**: plant-based diets and health outcomes from peer-reviewed research
-- **Cooking**: techniques, substitutions, and preparation of plant-based foods
-- **Culture**: veganism around the world, traditions, and cultural practices
+Nutrition, Environment, Ingredients, Food History, Animal Welfare, Health, Cooking, Culture.
 
-## How It Works
+## Stack
 
-Swipe right for true, left for false. Tap your answer for multiple choice questions. Sound effects and haptic feedback make every answer feel satisfying. Choose your quiz length -- 10, 15, or 20 questions -- and pick any category or mix them all.
-
-## What's in v1.1.0
-
-- **Streaks and stats** -- daily streaks, lifetime stats, and category-level performance tracking
-- **Titles and badges** -- earn titles like "Sprout" through "Sage" as you level up, plus category-specific badges
-- **Share cards** -- share interesting facts or your score as branded images directly from the app
-- **Onboarding flow** -- new players get a quick walkthrough of how the game works
-- **Anti-repetition engine** -- smarter question selection so quizzes feel fresh every time
-- **Spaced repetition** -- questions you get wrong come back more often until you learn them
-
-## Key Features
-
-- **1,000+ curated questions** across 8 categories
-- **Swipe & tap gameplay** -- intuitive and fast
-- **Dark and light mode** -- play however you prefer
-- **SFX & haptics** -- satisfying audio and tactile feedback
-- **Share facts** -- send interesting questions to friends as images or text
-- **Fully offline** -- all questions bundled in the app
-- **No account required** -- open and play
-
-## Data Integrity
-
-All questions are generated deterministically from structured data files. The data pipeline is written in Python and pulls from:
-
-- **USDA FoodData Central** for nutritional composition
-- **Poore & Nemecek, Science (2018)** for environmental impact metrics
-- **NIH** for health and dietary reference data
-- **FAOSTAT** for global agricultural statistics
-
-Questions are not written by an LLM. The pipeline generates them from verified numbers and facts, ensuring accuracy.
-
-## Tech
-
-- **Client**: Flutter (Dart), single codebase for Android and iOS
+- **Client**: Flutter/Dart, single codebase for Android and iOS
 - **Data**: Python pipeline generating JSON question assets
 - **Ads**: Google AdMob (banner, interstitial)
-- **IAP**: Apple StoreKit and Google Play Billing via in_app_purchase
-- **Storage**: shared_preferences for local score and preference data
+- **IAP**: StoreKit + Google Play Billing via `in_app_purchase`
+- **Storage**: `shared_preferences` for local scores and preferences
+- **Share**: `share_plus` + off-screen `RepaintBoundary` for image generation
 
 ## Get It
 
-- [Google Play](https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq)
-- [App Store](https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580)
+<VeganIqStoreButtons />
 
 See the [Vegan IQ product page](/products/vegan-iq) for more.

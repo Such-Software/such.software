@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
-import { Button } from "@repo/ui/components/button";
+import { StoreButtons } from "@/components/store-buttons";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -43,25 +43,17 @@ export default function BauhausEchoPage() {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 mb-12">
-          <a href="https://bauhaus.such.software" target="_blank" rel="noopener noreferrer">
-            <Button size="lg">Play on Web</Button>
-          </a>
-          <a href="https://apps.apple.com/us/app/bauhaus-echo/id6759010657" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              Download on App Store
-            </Button>
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              Get it on Google Play
-            </Button>
-          </a>
-          <a href="https://suchsoftware.itch.io/bauhaus-echo" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              Buy on itch.io — $2
-            </Button>
-          </a>
+        <div className="mb-12">
+          <StoreButtons
+            links={[
+              { platform: "apple", href: "https://apps.apple.com/us/app/bauhaus-echo/id6759010657" },
+              { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" },
+            ]}
+            extraLinks={[
+              { href: "https://bauhaus.such.software", label: "Play on Web" },
+              { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io — $2" },
+            ]}
+          />
         </div>
 
         <h2 className="text-2xl font-bold mb-6">How It Works</h2>

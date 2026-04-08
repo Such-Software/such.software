@@ -1,5 +1,11 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import {
+  StoreButtons,
+  VeganIqStoreButtons,
+  SuchoiceStoreButtons,
+  BauhausEchoStoreButtons,
+} from "@/components/store-buttons";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -58,7 +64,12 @@ export default async function BlogPost({ params }: Props) {
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
-            <MDXRemote source={post.content} />
+            <MDXRemote source={post.content} components={{
+              StoreButtons,
+              VeganIqStoreButtons,
+              SuchoiceStoreButtons,
+              BauhausEchoStoreButtons,
+            }} />
           </div>
         </div>
       </article>
