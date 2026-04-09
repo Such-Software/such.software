@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { StoreButtons } from "@/components/store-buttons";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -14,6 +15,7 @@ const apps = [
   {
     name: "Vegan IQ",
     tagline: "Plant-based trivia backed by real data",
+    icon: "/images/products/vegan-iq.png",
     color: "text-green-600 dark:text-green-400",
     borderColor: "border-green-500/20",
     href: "/products/vegan-iq",
@@ -25,6 +27,7 @@ const apps = [
   {
     name: "Bauhaus Echo",
     tagline: "Visual memory puzzle inspired by Bauhaus design",
+    icon: "/images/products/bauhaus-echo.png",
     color: "text-blue-600 dark:text-blue-400",
     borderColor: "border-blue-500/20",
     href: "/products/bauhaus-echo",
@@ -36,6 +39,7 @@ const apps = [
   {
     name: "Suchoice",
     tagline: "AI-powered decision making",
+    icon: "/images/products/suchoice.png",
     color: "text-pink-600 dark:text-pink-400",
     borderColor: "border-pink-500/20",
     href: "/products/suchoice",
@@ -57,16 +61,42 @@ export default function LinksPage() {
         <div className="space-y-8">
           {apps.map((app) => (
             <div key={app.name} className={`rounded-xl border ${app.borderColor} bg-card p-6`}>
-              <Link href={app.href}>
-                <h2 className={`text-xl font-bold ${app.color} hover:underline`}>{app.name}</h2>
-              </Link>
-              <p className="text-sm text-muted-foreground mt-1 mb-4">{app.tagline}</p>
+              <div className="flex items-center gap-4 mb-3">
+                <Image
+                  src={app.icon}
+                  alt={`${app.name} icon`}
+                  width={56}
+                  height={56}
+                  className="rounded-xl"
+                />
+                <div>
+                  <Link href={app.href}>
+                    <h2 className={`text-xl font-bold ${app.color} hover:underline`}>{app.name}</h2>
+                  </Link>
+                  <p className="text-sm text-muted-foreground">{app.tagline}</p>
+                </div>
+              </div>
               <StoreButtons links={app.links} />
             </div>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="flex justify-center mt-12 mb-6 motion-reduce:hidden">
+          <img
+            src="/images/animations/anim1_pulse_light.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-20 h-20 opacity-50 block dark:hidden"
+          />
+          <img
+            src="/images/animations/anim1_pulse.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-20 h-20 opacity-50 hidden dark:block"
+          />
+        </div>
+
+        <div className="text-center">
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             such.software
           </Link>

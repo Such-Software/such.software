@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { StoreButtons } from "@/components/store-buttons";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -34,9 +35,18 @@ export default function VeganIqPage() {
           ← Back to Products
         </Link>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-green-600 dark:text-green-400">
-          Vegan IQ
-        </h1>
+        <div className="flex items-center gap-5 mb-6">
+          <Image
+            src="/images/products/vegan-iq.png"
+            alt="Vegan IQ icon"
+            width={80}
+            height={80}
+            className="rounded-2xl"
+          />
+          <h1 className="text-4xl md:text-5xl font-bold text-green-600 dark:text-green-400">
+            Vegan IQ
+          </h1>
+        </div>
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
