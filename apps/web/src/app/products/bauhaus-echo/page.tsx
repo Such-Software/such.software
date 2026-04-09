@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     title: "Bauhaus Echo | Such Software",
     description: "Visual memory puzzle game inspired by Bauhaus design. Memorize, shuffle, reconstruct. Android, iOS, Web, Desktop.",
     type: "website",
+    images: [{ url: "/images/products/bauhaus-echo.png", width: 512, height: 512, alt: "Bauhaus Echo" }],
   },
 };
 

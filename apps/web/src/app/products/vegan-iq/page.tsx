@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     title: "Vegan IQ | Such Software",
     description: "Test your plant-based knowledge with 1000+ trivia questions across 8 categories. Swipe and tap gameplay with verified data. Android and iOS.",
     type: "website",
+    images: [{ url: "/images/products/vegan-iq.png", width: 512, height: 512, alt: "Vegan IQ" }],
   },
 };
 

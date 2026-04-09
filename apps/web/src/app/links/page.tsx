@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   title: "Links | Such Software",
   description: "Download our apps on App Store and Google Play.",
   alternates: { canonical: "/links" },
+  openGraph: {
+    title: "Such Software Apps",
+    description: "Download our apps on App Store and Google Play.",
+    type: "website",
+    images: [{ url: "/images/branding/OG_banner_v2_light.png", width: 1200, height: 630, alt: "Such Software" }],
+  },
 };
 
 const apps = [

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     title: "Suchoice | Such Software",
     description: "Can't decide? Snap a photo, let AI read your options, and pick for you. Decision tools for when you're stuck. Android and iOS.",
     type: "website",
+    images: [{ url: "/images/products/suchoice.png", width: 512, height: 512, alt: "Suchoice" }],
   },
 };
 

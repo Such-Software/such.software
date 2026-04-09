@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Terms of Service | Such Software",
   description: "Terms of service for Such Software LLC websites and applications.",
   alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms of Service | Such Software",
+    description: "Terms of service for Such Software LLC websites and applications.",
+    type: "website",
+  },
 };
 
 export default function TermsPage() {

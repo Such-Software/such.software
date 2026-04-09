@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Such Software",
   description: "Privacy policy for Such Software LLC and its websites and applications.",
   alternates: { canonical: "/privacy" },
+  openGraph: {
+    title: "Privacy Policy | Such Software",
+    description: "Privacy policy for Such Software LLC and its websites and applications.",
+    type: "website",
+  },
 };
 
 export default function PrivacyPage() {

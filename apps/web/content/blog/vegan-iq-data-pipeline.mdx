@@ -1,0 +1,199 @@
+---
+title: "Building a Data-Driven Trivia Engine: No LLMs, Just Verified Facts"
+date: "2026-04-09"
+excerpt: "How we built Vegan IQ's question pipeline — deterministic generation from USDA, Oxford, and FAOSTAT data, quality filtering from 2,461 to 1,066 questions, and a greedy anti-repetition algorithm that makes every quiz feel fresh."
+draft: true
+---
+
+Vegan IQ ships with 1,066 trivia questions. None of them were written by an LLM. Every question traces back to a specific data source — USDA FoodData Central, Poore & Nemecek (Science, 2018), NIH, or FAOSTAT. The pipeline that produces them is a deterministic Python script that generates questions from structured data, filters them for quality, and outputs a single JSON file that the Flutter app bundles as an asset.
+
+This post covers the full pipeline: data sourcing, question generation, quality filtering, and the runtime pacing algorithm that prevents repetitive quizzes.
+
+## The Data Layer
+
+All source data lives in a single Python module (`food_data.py`, ~2,800 lines). No API calls at generation time — everything is embedded as Python dicts and lists, verified against the original sources.
+
+### Nutritional Data (USDA FoodData Central)
+
+69 foods (56 vegan, 13 animal products), each with per-100g values for calories, protein, fat, carbs, fiber, iron, calcium, and vitamin C. The animal products exist so the app can generate fair head-to-head comparisons — "Which has more iron per 100g: hemp seeds or ground beef?" — where the plant food wins on data.
+
+### Environmental Impact (Poore & Nemecek, 2018)
+
+The largest meta-analysis of food systems ever published: 38,700 farms across 119 countries. We use their global mean values for GHG emissions (kg CO2eq/kg), land use (m2/kg), water use (liters/kg), and eutrophication (gPO4eq/kg) across 40 food products.
+
+### Other Sources
+
+- **NIH Office of Dietary Supplements** — RDA values, bioavailability, deficiency risks for B12, vitamin D, omega-3, iron, calcium
+- **FAOSTAT** — top-3 producing countries and global production percentages for 45+ foods
+- **Oxford Companion to Food** — etymology and historical origins for 60+ foods
+- **FDA labeling guidelines** — 38 animal-derived ingredients (carmine, casein, confectioners glaze, etc.)
+- **Faunalytics + peer-reviewed studies** — animal cognition and behavior research
+- **USDA NASS** — retail prices for protein cost-efficiency comparisons
+
+## Question Generation
+
+`generate_questions.py` (~2,000 lines) contains 22 generator functions. Each takes structured data and outputs a list of question dicts. The script seeds Python's random with `seed(42)` so every run produces identical output.
+
+### Combinatorial Generators
+
+These produce the bulk of raw questions by iterating over food combinations:
+
+```python
+# Simplified example of a per-100-calorie comparison generator
+for combo in itertools.combinations(all_foods, 4):
+    if not _max_one_animal(combo):
+        continue
+    winner = max(combo, key=lambda f: f["protein_g"] / f["calories_kcal"] * 100)
+    if winner["protein_per_100cal"] < MINIMUM_MEANINGFUL["protein_g"]:
+        continue
+    # Generate question with 4 options, winner as correct answer
+```
+
+`_max_one_animal()` enforces at most one animal product per set of four options. This keeps the odds vegan-positive without making every question trivially obvious.
+
+### MINIMUM_MEANINGFUL Thresholds
+
+Early versions produced questions like "Which has the most protein per 100g?" where the winner had 2.5g. Technically correct. Completely uninteresting. The `MINIMUM_MEANINGFUL` dict gates all winners:
+
+| Nutrient | Threshold |
+|----------|-----------|
+| Protein | >= 5g |
+| Fiber | >= 1g |
+| Iron | >= 1.5mg |
+| Calcium | >= 30mg |
+| Vitamin C | >= 5mg |
+
+### Curated Generators
+
+Not everything is combinatorial. Hidden ingredient questions ("Is carmine vegan?"), food history questions ("Where did tempeh originate?"), and the "Would You Believe" two-truths format are hand-structured data fed through simpler generators. These produce more varied, narrative-style questions.
+
+### Vegan-Positive Framing
+
+When an animal product wins a nutrition comparison (34 of 1,066 questions), the explanation is reframed with environmental context:
+
+> "Chicken breast has 22.5g protein per 100g vs black beans at 8.9g. However, chicken costs 9.9 kg CO2eq, 12.2 m2 land, and 660L water per kg."
+
+Eight phrasing variants are randomly selected. The `isAnimalCorrect` boolean on the question model flags these for the app's UI to use muted feedback ("Technically correct..." instead of "Nailed it!").
+
+## From 2,461 to 1,066: The Curation Step
+
+Raw generation produces 2,461 questions. The quality filter cuts this to 1,066 — a 43% acceptance rate.
+
+### Subcategory Caps
+
+The combinatorial generators are prolific. Without caps, "Which has the most protein per 100 calories?" would appear 160+ times with different food options. Same question text, different foods. After 3-4 of these in a quiz, it feels like a spreadsheet.
+
+Each template subcategory is capped:
+
+- Per-nutrient comparisons: 25 each
+- Binary showdowns: 35-50 each
+- Environment comparisons: 25 each
+
+This dropped the template-to-curated ratio from 77/23 to 43/57. In a 15-question quiz, roughly 6 are templated comparisons and 9 are diverse curated questions.
+
+### Scenario-Based Phrasings
+
+Even within caps, the same question text repeated 14+ times across a pool gets stale. Five phrasing variants per template type add surface variety:
+
+- "Which food has the most protein per 100 calories?"
+- "Calorie for calorie, which food packs the most protein?"
+- "You're counting calories but need maximum protein. Which delivers the most per 100 cal?"
+
+Same underlying data, different framing. Unique question texts went from ~30 to 658 across the pool.
+
+### primary_food Deduplication
+
+426 questions are tagged with a `primary_food` field (e.g., "tempeh", "mango"). The runtime pacing algorithm penalizes (-100) same-food questions within a single quiz. This prevents "Where did mango originate?" followed by "Which country produces the most mangoes?"
+
+### Plant Milk Exclusion
+
+Plant milks are ~90% water by weight. Per-kg environmental comparisons are misleading — oat milk looks absurdly efficient compared to almonds, but that's comparing a beverage to a solid food. A `_ENV_PER_KG_EXCLUDE` set filters all plant milks from the 5 environmental per-kg generators. Plant milks still appear in nutrition per-100g questions where the comparison is fair.
+
+## Runtime: The Pacing Algorithm
+
+Good questions don't matter if the quiz feels monotonous. The `QuestionService` in the Flutter app implements a greedy scoring algorithm that selects questions one at a time, penalizing candidates that would create repetitive sequences.
+
+### Four Levels of Deduplication
+
+1. **Session-level (hard block):** Questions shown in the current app session are never repeated. `_sessionSeenIds` is a `Set<int>` reset on app restart.
+
+2. **Cross-session (soft penalty):** The last 300 question IDs are persisted in `SharedPreferences`. Questions in this set receive a -15 penalty but aren't blocked — you'll eventually cycle through the full pool.
+
+3. **Subcategory spacing:** No two adjacent questions can share a subcategory (-100 penalty). Two questions back: -60. Three back: -30.
+
+4. **Category spacing (all-categories mode):** If 3 of the last 5 questions share a category: -80 penalty. Same category as previous question: -40.
+
+### Scoring Candidates
+
+For each position in the quiz, the algorithm scores up to 60 candidates from the pool and picks the highest-scoring one:
+
+| Condition | Penalty |
+|-----------|---------|
+| Same subcategory as previous | -100 |
+| Same question text as previous | -120 |
+| Same `primaryFood` anywhere in sequence | -100 |
+| Same category in 3 of last 5 | -80 |
+| 3+ overlapping options with previous | -60 |
+| Same subcategory 2 back | -60 |
+| Same question text in last 5 | -50 |
+| Same category as previous | -40 |
+| Same subcategory 3 back | -30 |
+| 2 overlapping options | -20 |
+| Same category 2 of last 5 | -20 |
+| In cross-session recent set | -15 |
+| Switch between binary/multi-choice | +10 |
+
+The +10 bonus for format switching means quizzes alternate between swipe (true/false) and tap (multiple choice) questions, which keeps the interaction varied.
+
+### Pool Partitioning
+
+Before scoring, the pool is split into three tiers:
+
+1. **Preferred:** Not seen this session AND not in recent-300
+2. **Fallback:** In recent-300 (soft deprioritized via -15)
+3. **Emergency:** Seen this session (only used if pools are exhausted)
+
+Preferred candidates are scored first. With 1,066 questions and 300 recent IDs tracked, the preferred pool stays above 700 for most users — enough for 40+ unique 15-question quizzes before any soft repeats.
+
+### Spaced Repetition
+
+Up to 3 questions the user previously answered incorrectly are pre-seeded into each quiz. These come from a missed-questions pool (max 200 entries) tracked in `SharedPreferences`, prioritizing questions missed 1-2 days ago. Correctly answering a review question removes it from the pool.
+
+### Complexity
+
+The greedy approach runs in O(count x min(poolSize, 60)) — well under a millisecond for 15-20 question quizzes on any modern phone. No noticeable latency between tapping a category and seeing the first question.
+
+## Output
+
+The pipeline outputs a single `questions.json` (623 KB, 1,066 entries). The Flutter app bundles this as an asset and caches it in memory on first load. No network requests, no server dependency, fully offline.
+
+```json
+{
+  "id": 42,
+  "category": "nutrition",
+  "subcategory": "protein_per_100cal",
+  "question": "Which has more protein per 100 calories: Soybeans or Cheddar Cheese?",
+  "options": ["Soybeans", "Cheddar Cheese"],
+  "correct_index": 0,
+  "explanation": "Soybeans: 9.6g per 100 cal vs Cheddar Cheese: 6.2g per 100 cal.",
+  "data_source": "USDA FoodData Central (SR Legacy)",
+  "primary_food": null,
+  "is_animal_correct": false
+}
+```
+
+Every question carries its citation in `data_source`. The app displays this in the explanation screen after the user answers. No trust-me-bro — you can verify any answer against the original dataset.
+
+## What We Learned
+
+**Template fatigue is real.** The first version had 77% templated questions. Users noticed by quiz 3. Subcategory caps and phrasing variants were the fix.
+
+**Per-kg comparisons lie.** Comparing the environmental footprint of almonds (a solid) to oat milk (90% water) per kilogram is misleading. We had to exclude plant milks from per-kg environmental generators entirely.
+
+**The pacing algorithm matters more than the questions.** A great pool of 1,066 questions can feel repetitive if the selection is random. The greedy scoring approach — with its layered penalties for subcategory, category, text, option overlap, and primary food — is what makes each quiz feel curated.
+
+**Deterministic generation is underrated.** `seed(42)` means every team member, CI run, and release build produces the exact same question set. No drift, no surprises, no "the questions changed and I don't know why."
+
+The full pipeline — data → generators → quality filter → JSON → pacing engine — runs in under 2 seconds on a laptop. The output is a single file that ships with the app. No servers, no APIs, no LLMs. Just data.
+
+See the [Vegan IQ product page](/products/vegan-iq) for more.

@@ -14,6 +14,26 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    title: "Such Software",
+    description: "E-commerce infrastructure, custom app development, and accessible web applications.",
+    type: "website",
+    siteName: "Such Software",
+    images: [
+      {
+        url: "/images/branding/OG_banner_v2_light.png",
+        width: 1200,
+        height: 630,
+        alt: "Such Software",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Such Software",
+    description: "E-commerce infrastructure, custom app development, and accessible web applications.",
+    images: ["/images/branding/OG_banner_v2_light.png"],
+  },
   icons: {
     icon: [
       { url: "/images/branding/favicon_dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
