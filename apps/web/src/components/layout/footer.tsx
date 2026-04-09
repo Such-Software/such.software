@@ -35,6 +35,8 @@ export function Footer() {
             <nav className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
               <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+              <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
               <a href="https://maps.app.goo.gl/JeGx1rHFcriMdngn9" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                 Google Business
               </a>
