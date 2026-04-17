@@ -1,0 +1,192 @@
+---
+title: "3D Physics in Flutter: Building a Dice Roller with three_js and cannon_physics"
+date: "2026-04-17"
+excerpt: "Implementing real-time 3D rendering and rigid body physics in a Flutter mobile app, including the bugs, workarounds, and a quaternion convention that cost us hours."
+draft: false
+---
+
+We added a 3D dice roller to [Suchoice](https://such.software/products/suchoice), our decision-making app. The dice needed to tumble realistically, land flat on faces, and display the correct number. Sounds simple. It was not.
+
+This post covers the technical journey: getting three_js and cannon_physics working together in Flutter, the rendering bug that made nothing move, the quaternion convention that silently inverted our face detection, and the vertex clustering trick that finally made it all work.
+
+## The Stack
+
+- **three_js** (v0.2.7) — Dart port of three.js for 3D rendering
+- **cannon_physics** (v0.0.3) — Dart port of cannon.js for rigid body physics
+- **flutter_angle** (v0.3.9) — OpenGL ES bridge between three_js and Flutter's texture system
+- **Blender** — 3D models (GLB) with baked number text geometry
+
+All three packages are early-stage. The three_js ecosystem is the only viable option for programmatic 3D in Flutter right now: alternatives like `flutter_cube` and `model_viewer` only load static files.
+
+## Bug #1: Nothing Moves
+
+The first build rendered the scene correctly — ground plane, lighting, a die sitting in the middle. But when physics stepped, the die didn't move. Not a pixel.
+
+The physics engine was running. We confirmed with debug prints: the body position changed from y=25 to y=2 over 30 frames, bounced, settled. The mesh position was being set from the body position every frame, but the visual was frozen on the first frame.
+
+**Root cause:** flutter_angle's `updateTexture()` calls `glBindFramebuffer(GL_FRAMEBUFFER, 0)` at the end of each frame, resetting the GL framebuffer to the default. But three_js's `WebGLState` caches the current framebuffer binding and only re-binds when it detects a change. Since flutter_angle changes the binding behind three_js's back, the renderer thinks the render target FBO is still bound, skips the bind call, and renders to framebuffer 0 (invisible) on every subsequent frame.
+
+**Fix:** Before each render, clear the three_js framebuffer cache and explicitly re-set the render target:
+
+```dart
+threeJs.rendererUpdate = () {
+  threeJs.renderer?.state.currentBoundFramebuffers.clear();
+  threeJs.renderer?.setRenderTarget(threeJs.renderTarget);
+};
+```
+
+This runs via the `rendererUpdate` callback, which fires before `renderer.render()` in the three_js animation loop. Every three_js app using `useSourceTexture: true` in Flutter will hit this bug.
+
+## Bug #2: Mesh.clone() Drops Children
+
+Each GLB die model has two meshes: the body (beveled cube) and the numbers (3D text as a child node). When we tried caching models and cloning them per roll, the numbers disappeared.
+
+The three_js `Mesh.clone()` method hardcodes `recursive = false` in its `copy()` call:
+
+```dart
+// three_js_core Mesh.copy():
+Mesh copy(Object3D source, [bool? recursive]) {
+  super.copy(source, false); // ignores the recursive parameter!
+  // ...copies geometry and material but NOT children
+}
+```
+
+**Fix:** Load a fresh `GLTFLoader()` instance for each spawn instead of cloning. The GLB files are small (280KB–1.2MB) and load fast.
+
+## Physics Shapes from Blender
+
+The Blender dice models aren't regular polyhedra — they're "Die Scaled D10" variants with beveled edges. Each GLB includes three nodes:
+
+1. **Body mesh** — beveled, smooth-shaded, for display
+2. **Numbers mesh** — 3D text geometry, child of the body
+3. **Primitive mesh** — clean polyhedron with exact vertex/face counts
+
+The primitive mesh is the collision shape. We extract its vertices and triangle indices and build `cannon.ConvexPolyhedron` shapes from them, scaled to match the visual model. This guarantees the physics shape matches the visual exactly — no sinking, no clipping.
+
+```dart
+cannon.ConvexPolyhedron _d8Shape(double scale) {
+  // Vertices from Blender primitive mesh
+  final v = <vmath.Vector3>[
+    vmath.Vector3(-0.269334 * scale, -0.134680 * scale, 0.232469 * scale),
+    // ... 5 more vertices
+  ];
+  // Triangle faces from GLB indices
+  return cannon.ConvexPolyhedron(vertices: v, faces: [
+    [0,3,1],[0,4,3],[0,2,4],[0,1,2],[3,5,1],[4,5,3],[2,5,4],[1,5,2],
+  ]);
+}
+```
+
+## Bug #3: Two Bugs Hiding as One
+
+With rendering and physics working, we needed to read which die face pointed up after settling. The approach: define a normal vector for each face, rotate it by the physics body's quaternion, find which rotated normal has the highest Y component.
+
+Faces 1 and 6 (top and bottom, on the Y axis) always worked. But faces 2–5 (on the X/Z axes) appeared to give random results — the same visible number would report different values across rolls. We spent hours trying different face-to-number mappings, ASCII-rendering text vertices to identify numbers, and building calibration toggles. Nothing was consistent.
+
+It turned out to be two separate bugs compounding into apparent randomness:
+
+**Bug 3a: Text vertex offset.** The 3D text mesh has a translation offset in the GLB file (e.g., `y: +0.252` for the d6 numbers node). When computing which face each text vertex belongs to, this offset biased all vertex directions toward +Y. The X/Z face clusters ended up with wrong vertex counts, making the count-to-number fingerprint mapping unreliable. Fix: compute vertex directions from the die center using normalized direction vectors, ignoring the translation.
+
+**Bug 3b: Quaternion rotation convention.** `vector_math`'s `Quaternion.rotated()` implements the *inverse* rotation: `q_conjugate * v * q` instead of the standard `q * v * q_conjugate`. This meant rotating a face normal by the body quaternion gave the opposite direction on the X/Z axes. The Y axis appeared unaffected because the die falls along Y, where the inverse coincidentally gives similar results.
+
+```dart
+// vector_math Quaternion.rotate() — INVERSE convention:
+// conjugate(this) * [v,0] * this → q_conj * v * q
+
+// cannon_physics Quaternion.vmult() — CORRECT convention:
+// q * v * q_conj
+final worldPos = bodyQuaternion.vmult(faceNormal);
+```
+
+After fixing the offset bias, results became consistent (same face always mapped to the same number) but still wrong. Only after switching from `rotated()` to `vmult()` did the face detection finally match the visual. Two bugs, each making the other harder to diagnose.
+
+## Reading the Top Face: Vertex Count Fingerprints
+
+Even with correct rotation, we needed to know which number the Blender model painted on which face. The 3D text is a single merged mesh — no per-face metadata.
+
+The solution: cluster text vertices by direction and use vertex counts as fingerprints.
+
+**At load time:**
+1. Transform all text mesh vertices to body-local space
+2. For each vertex, compute the normalized direction from the die center
+3. Assign to the face whose direction it most closely matches (dot product)
+4. Count vertices per face — each die number has a unique count determined by font complexity
+
+**At settle time:**
+1. Rotate each face direction by the body quaternion (using `vmult`)
+2. The face with the highest Y is on top
+3. Look up the vertex count → die number from a calibrated map
+
+The calibration was done empirically: roll the die, note the visual top face and the reported vertex count, build the mapping. For a d6 with Blender's default font:
+
+```dart
+_vertCountToNumber = {
+  32: 1,     // "1" — simplest glyph, fewest vertices
+  1316: 2,
+  2336: 3,
+  112: 4,    // "4" — straight lines, few vertices
+  1643: 5,
+  2386: 6,   // "6" — most complex glyph
+};
+```
+
+For d8 and d20, the same approach works after centering the text vertices (subtracting the text mesh centroid) to remove the translation offset that biases the direction computation. The d6 calibration was done without centering — mixing the two caused a regression that took another round of debugging to find.
+
+For d20, we calibrated 15 of 20 faces from user testing and derived the remaining 5 using the opposite-faces-sum-to-21 rule, verified across all 10 pairs.
+
+## Settle Detection
+
+Detecting when a die has "stopped rolling" is harder than it sounds. We went through several iterations:
+
+- **Too eager:** `velocity < 0.3` for 30 frames — resolves while die is still rocking
+- **Too strict:** `velocity < 0.1` for 60 frames — never triggers for polyhedra with micro-vibrations
+- **Timing mismatch:** Safety timeout fires from a previous roll's `Future.delayed`, forcing an early result
+- **Final approach:** `velocity < 0.5 AND angularVelocity < 0.5 AND flatness > 0.95` for 40 frames (~0.67s), with a generation counter that invalidates stale timeouts
+
+The generation counter was critical: each roll increments `_rollGeneration`, and the safety timeout checks `_rollGeneration == gen` before firing. Without this, rapidly re-rolling causes old timeouts to trigger during new rolls.
+
+## Angled Bouncy Walls
+
+Dice would wedge against flat vertical walls at awkward angles, never settling flat. The fix: tilt the walls inward ~20° so dice naturally bounce back toward center. Combined with higher wall restitution (0.8) and increased angular damping (0.5), the dice settle flat reliably.
+
+```dart
+final qLeft = vmath.Quaternion.axisAngle(vmath.Vector3(0, 0, 1), -0.35);
+world.addBody(cannon.Body(
+  shape: wallShape,
+  position: vmath.Vector3(-12, 3, 0),
+  quaternion: qLeft,
+  material: wallMat, // restitution: 0.8
+));
+```
+
+## Performance
+
+The three_js + cannon_physics stack runs at 60fps on recent iOS devices (simulator and device). On a mid-range Android phone (Moto G Stylus 2025), debug builds are noticeably sluggish but release builds are smooth. The physics simulation is lightweight — one or two rigid bodies with simple collision shapes.
+
+We considered driving the dice with real-time accelerometer input (shake the phone, die reacts in real-time) but deferred it to a future release. The current approach uses shake detection as a trigger: a sharp shake re-rolls the die with random velocity and spin.
+
+## Packages and Versions
+
+| Package | Version | Role |
+|---------|---------|------|
+| three_js | 0.2.7 | 3D rendering (scenes, meshes, materials, lighting) |
+| three_js_advanced_loaders | 0.2.5 | GLB/GLTF model loading |
+| three_js_geometry | 0.2.1 | Polyhedron geometry primitives |
+| cannon_physics | 0.0.3 | Rigid body physics simulation |
+| flutter_angle | 0.3.9 | OpenGL ES bridge for Flutter textures |
+| vector_math | 2.2.0 | Vector/quaternion math (beware rotation convention) |
+| sensors_plus | 6.1.0 | Accelerometer for shake detection |
+
+## Key Takeaways
+
+1. **The three_js Flutter ecosystem works**, but expect to debug rendering pipeline issues. The framebuffer cache desync is a blocker that every project will hit.
+
+2. **Don't trust quaternion conventions.** `vector_math` and `cannon_physics` use opposite conventions for rotating vectors. Always verify with a known test case (rotate +X by a 90° Y rotation, check the result).
+
+3. **Blender models carry more information than you think.** The primitive mesh solved our collision shape problem. The text mesh vertices solved face identification. Use what the artist gave you.
+
+4. **Empirical calibration beats analytical derivation.** We spent hours trying to determine face-to-number mappings from vertex analysis and ASCII rendering. In the end, rolling the die 15 times and writing down what we saw was faster and more reliable.
+
+5. **Settle detection is a state machine problem.** Simple velocity thresholds aren't enough — you need flatness checks, generation counters for timeout invalidation, and tuned frame counts. The "feels right" threshold took five iterations.
+
+Suchoice is available on [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice) and the [App Store](https://apps.apple.com/us/app/suchoice/id6759626658).
