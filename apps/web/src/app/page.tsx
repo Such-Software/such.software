@@ -61,11 +61,12 @@ export default function Home() {
              maxWidth: 'min(calc(90vw - 120px), 100%)',
            }}
          >
-           <span className="block">Precision Engineering</span>
-           <span className="block">for Everyone</span>
+           <span className="block">E-Commerce &amp; Apps</span>
+           <span className="block">Built to Scale</span>
          </h1>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-           Web applications engineered for scale, compliance, and performance.
+           High-performance online stores, custom app development, and our own published titles.
+           From concept to launch, we build software that works.
          </p>
          
          <div className="flex gap-4 mb-10">
@@ -87,7 +88,7 @@ export default function Home() {
             <div className="text-left mb-8 section-container border-l-4 border-l-blue-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                    Recent projects spanning governance tools, payment infrastructure, and interactive web applications.
+                    Recent projects spanning e-commerce, games, payment infrastructure, and interactive web applications.
                 </p>
             </div>
             <PortfolioGrid />

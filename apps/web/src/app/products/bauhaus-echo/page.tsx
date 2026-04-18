@@ -8,11 +8,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Bauhaus Echo | Such Software",
-  description: "Visual memory puzzle game inspired by Bauhaus design. Memorize, shuffle, reconstruct. Android, iOS, Web, Desktop.",
+  description: "Visual memory puzzle game inspired by Bauhaus design. Five modes including a pressure-free Zen sandbox. Android, iOS, Web, Desktop.",
   alternates: { canonical: "/products/bauhaus-echo" },
   openGraph: {
     title: "Bauhaus Echo | Such Software",
-    description: "Visual memory puzzle game inspired by Bauhaus design. Memorize, shuffle, reconstruct. Android, iOS, Web, Desktop.",
+    description: "Visual memory puzzle game inspired by Bauhaus design. Five modes including a pressure-free Zen sandbox. Android, iOS, Web, Desktop.",
     type: "website",
     images: [{ url: "/images/products/bauhaus-echo.png", width: 512, height: 512, alt: "Bauhaus Echo" }],
   },
@@ -23,6 +23,7 @@ const gameModes = [
   { name: "Speed", description: "Tiles drop one at a time, place each before the next appears" },
   { name: "Endless", description: "Speed mode with tile cycling, play forever" },
   { name: "Memory", description: "Traditional card-matching pairs game" },
+  { name: "Zen", description: "No timer, no score. Compose freely with beautiful tiles at your own pace" },
 ];
 
 export default function BauhausEchoPage() {
@@ -51,6 +52,7 @@ export default function BauhausEchoPage() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             A visual memory puzzle game inspired by Bauhaus design aesthetics. 
             Memorize arrangements of geometric tiles, watch them shuffle, then reconstruct the pattern.
+            Or unwind in Zen mode — a pressure-free sandbox where you compose with tiles at your own pace.
           </p>
         </div>
 
@@ -90,8 +92,8 @@ export default function BauhausEchoPage() {
         <h2 className="text-2xl font-bold mb-6">Features</h2>
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <Card className="glass-card border-blue-500/20">
-            <h3 className="font-bold mb-2">500+ Tile Designs</h3>
-            <p className="text-sm text-muted-foreground">Curated Bauhaus-style geometric art</p>
+            <h3 className="font-bold mb-2">8,000+ Tile Designs</h3>
+            <p className="text-sm text-muted-foreground">Curated Bauhaus-style geometric art with DLC packs</p>
           </Card>
           <Card className="glass-card border-blue-500/20">
             <h3 className="font-bold mb-2">Multiple Grid Sizes</h3>

@@ -12,22 +12,23 @@ Bauhaus Echo is now available on the [App Store](https://apps.apple.com/us/app/b
 
 The game shows you a grid of colorful geometric tiles inspired by Bauhaus design. You get a few seconds to memorize their positions. Then the tiles spin, shrink, and scatter to the bottom of the screen. Your job is to drag them back to where they belong.
 
-It started as a simple prototype: a 3x3 grid, a shuffle, and a timer. But the Bauhaus aesthetic gave the project a visual identity early on, and from there it grew into four distinct game modes with difficulty scaling, global leaderboards, and a full cross-platform release.
+It started as a simple prototype: a 3x3 grid, a shuffle, and a timer. But the Bauhaus aesthetic gave the project a visual identity early on, and from there it grew into five distinct game modes with difficulty scaling, global leaderboards, and a full cross-platform release.
 
 ## The Tiles: Bauhaus Blocks by art101
 
-The tile collection features 500 hand-curated geometric designs from the [Bauhaus Blocks collection by art101](https://art101.io/). Each tile is a 256x256 pixel sprite drawn in the Bauhaus tradition: bold primary shapes, clean geometry, and striking color contrasts. The tiles are packed into a libGDX TextureAtlas spread across three PNG sprite sheets for efficient GPU batching.
+The tile collection features over 8,000 geometric designs from the [Bauhaus Blocks collection by art101](https://art101.io/), with 500 hand-curated core tiles bundled in the app and additional DLC palette packs available for download. Each tile is a 256x256 pixel sprite drawn in the Bauhaus tradition: bold primary shapes, clean geometry, and striking color contrasts. The tiles are packed into a libGDX TextureAtlas spread across PNG sprite sheets for efficient GPU batching.
 
-We chose art101's Bauhaus Blocks because they capture the movement's aesthetic perfectly — circles, triangles, and rectangles in red, blue, yellow, black, and white — while providing enough variety across 500 designs that the game rarely repeats tiles in a session. We plan to add more tile packs from art101 in the future, introducing new visual themes while keeping the same core gameplay.
+We chose art101's Bauhaus Blocks because they capture the movement's aesthetic perfectly — circles, triangles, and rectangles in red, blue, yellow, black, and white — while providing enough variety that the game rarely repeats tiles in a session. DLC packs introduce new palettes and styles — darkly, pop, pastel, and randomized variants — unlocked automatically with the ad-free purchase.
 
 Each tile in-game has beveled 3D edges and the game board is styled like a wood-and-felt craft table, giving the abstract designs a physical, tactile quality.
 
-## Four Game Modes
+## Five Game Modes
 
 - **Classic**: the core experience. Memorize the full grid, watch the tiles scatter, then reconstruct the pattern before time runs out.
 - **Speed**: tiles appear one at a time in their correct position for a shrinking window of time, then drop to the tray. Place each before the next one arrives. The display time decays exponentially — starting at 28% of the Classic base time and shrinking with a 0.40 decay factor per tile.
 - **Endless**: Speed mode that never ends. Placed tiles have a lifespan of three more spawns, after which they fade out and rejoin the queue. Your score is total correct placements before you run out of lives.
 - **Memory**: traditional card-matching. All tiles face down. Flip two to find pairs. Matched pairs spin away, mismatches cost a life.
+- **Zen**: no timer, no score, no pressure. A free-form sandbox where you compose with tiles at your own pace. Filter tiles by palette, format, or collection, and browse the full catalog including DLC packs.
 
 Each mode supports 2x2 through 5x5 grids and three difficulty levels (Easy at 1.7x time, Medium at 1.35x, Hard at 1.0x). Lives scale with grid size and difficulty so larger grids give more room for error.
 
@@ -133,10 +134,10 @@ All network calls are asynchronous with callbacks posted back to the rendering t
 
 ## Monetization
 
-The mobile versions (Android and iOS) are free with AdMob banner ads. A one-time in-app purchase removes ads permanently. The desktop build is a paid download ($2) on itch.io with no ads. The web version is completely free with no ads.
+The mobile versions (Android and iOS) are free with AdMob banner ads. A one-time in-app purchase removes ads permanently and unlocks DLC tile packs. The desktop build is a paid download ($2) on itch.io with no ads. The web version is completely free with no ads.
 
 ## What's Next
 
-We're looking at adding more tile packs from [art101](https://art101.io/) to introduce new visual themes — different art movements, color palettes, and geometric styles — while keeping the same core gameplay mechanics. The infrastructure is already there: the TextureAtlas system supports swappable tile sets, so new packs are primarily an art curation effort.
+Since launch we've shipped Zen mode — a pressure-free creative sandbox — along with four DLC tile packs (darkly, pop, pastel, and rands) bringing the total to over 8,000 tiles. We also added a hint system for Classic mode, a milestone progression system, and expanded the soundtrack to 13 tracks with mode-specific playlists. We're continuing to explore new tile collections from [art101](https://art101.io/) and gameplay ideas.
 
 See the full [Bauhaus Echo product page](/products/bauhaus-echo) for more details.
