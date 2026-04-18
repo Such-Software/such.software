@@ -61,12 +61,11 @@ export default function Home() {
              maxWidth: 'min(calc(90vw - 120px), 100%)',
            }}
          >
-           <span className="block">E-Commerce &amp; Apps</span>
-           <span className="block">Built to Scale</span>
+           <span className="block">We Ship Software</span>
+           <span className="block">That Sells</span>
          </h1>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-           High-performance online stores, custom app development, and our own published titles.
-           From concept to launch, we build software that works.
+           Storefronts, apps, and products — engineered for performance and built to grow with you.
          </p>
          
          <div className="flex gap-4 mb-10">

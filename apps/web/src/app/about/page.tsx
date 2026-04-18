@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
-import { FaXTwitter, FaTelegram, FaDiscord } from "react-icons/fa6";
+import { FaXTwitter, FaTelegram, FaDiscord, FaBluesky, FaTiktok, FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaPinterestP } from "react-icons/fa6";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -72,16 +72,44 @@ export default function AboutPage() {
                <div className="text-center">
                   <h2 className="text-lg font-semibold mb-2">Connect</h2>
                   <p className="text-sm text-muted-foreground mb-4">Find us on your favorite platforms</p>
-                  <div className="flex gap-6 justify-center">
+                  <div className="flex flex-wrap gap-5 justify-center">
                     <a href="https://x.com/such_software" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                       <FaXTwitter className="h-6 w-6" />
                       <span className="sr-only">X (Twitter)</span>
                     </a>
-                    <a href="https://t.me/j_winter_m" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href="https://bsky.app/profile/suchsoftware.bsky.social" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaBluesky className="h-6 w-6" />
+                      <span className="sr-only">Bluesky</span>
+                    </a>
+                    <a href="https://www.youtube.com/@SuchSoftware" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaYoutube className="h-6 w-6" />
+                      <span className="sr-only">YouTube</span>
+                    </a>
+                    <a href="https://www.instagram.com/such_software/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaInstagram className="h-6 w-6" />
+                      <span className="sr-only">Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@such.software" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaTiktok className="h-6 w-6" />
+                      <span className="sr-only">TikTok</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/such-software" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaLinkedinIn className="h-6 w-6" />
+                      <span className="sr-only">LinkedIn</span>
+                    </a>
+                    <a href="https://www.facebook.com/people/Such-Software/61572076196412/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaFacebookF className="h-6 w-6" />
+                      <span className="sr-only">Facebook</span>
+                    </a>
+                    <a href="https://www.pinterest.com/SuchSoftware/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      <FaPinterestP className="h-6 w-6" />
+                      <span className="sr-only">Pinterest</span>
+                    </a>
+                    <a href="https://t.me/SuchSoftware" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                       <FaTelegram className="h-6 w-6" />
                       <span className="sr-only">Telegram</span>
                     </a>
-                    <a href="https://discord.com/users/392547150480932864" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href="https://discord.gg/5Wb8URrQ5e" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                       <FaDiscord className="h-6 w-6" />
                       <span className="sr-only">Discord</span>
                     </a>

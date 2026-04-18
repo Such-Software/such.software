@@ -72,7 +72,15 @@ const structuredData = {
   },
   sameAs: [
     "https://github.com/suchsoftware",
-    "https://linkedin.com/company/suchsoftware",
+    "https://www.linkedin.com/company/such-software",
+    "https://x.com/such_software",
+    "https://bsky.app/profile/suchsoftware.bsky.social",
+    "https://www.youtube.com/@SuchSoftware",
+    "https://www.instagram.com/such_software/",
+    "https://www.tiktok.com/@such.software",
+    "https://www.facebook.com/people/Such-Software/61572076196412/",
+    "https://www.pinterest.com/SuchSoftware/",
+    "https://t.me/SuchSoftware",
   ],
 };
 
