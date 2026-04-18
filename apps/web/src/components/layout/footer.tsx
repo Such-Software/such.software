@@ -45,7 +45,7 @@ export function Footer() {
 
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Connect</h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-5 gap-3 max-w-[180px]">
               <a href="https://x.com/such_software" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <FaXTwitter className="h-5 w-5" />
                 <span className="sr-only">X (Twitter)</span>

@@ -61,11 +61,11 @@ export default function Home() {
              maxWidth: 'min(calc(90vw - 120px), 100%)',
            }}
          >
-           <span className="block">We Ship Software</span>
-           <span className="block">That Sells</span>
+           <span className="block">Precision Engineering</span>
+           <span className="block">for Everyone</span>
          </h1>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-           Storefronts, apps, and products — engineered for performance and built to grow with you.
+           E-commerce, mobile apps, and custom solutions: we build accessible software to perform at scale.
          </p>
          
          <div className="flex gap-4 mb-10">
