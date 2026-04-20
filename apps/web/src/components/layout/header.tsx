@@ -24,7 +24,13 @@ export function Header() {
               href="/products"
               className={pathname.startsWith("/products") ? "text-primary" : "hover:text-primary transition-colors"}
             >
-              Products
+              Portfolio
+            </Link>
+            <Link
+              href="/apps"
+              className={pathname.startsWith("/apps") ? "text-primary" : "hover:text-primary transition-colors"}
+            >
+              Apps
             </Link>
             <Link
               href="/services"

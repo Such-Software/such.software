@@ -6,9 +6,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Links | Such Software",
+  title: "Apps | Such Software",
   description: "Download our apps on App Store and Google Play.",
-  alternates: { canonical: "/links" },
+  alternates: { canonical: "/apps" },
   openGraph: {
     title: "Such Software Apps",
     description: "Download our apps on App Store and Google Play.",

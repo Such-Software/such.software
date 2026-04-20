@@ -6,7 +6,7 @@ import { FaHouse, FaBoxesStacked, FaNewspaper, FaCircleInfo, FaGear } from "reac
 
 const navItems = [
   { href: "/", label: "Home", icon: FaHouse },
-  { href: "/products", label: "Products", icon: FaBoxesStacked },
+  { href: "/products", label: "Portfolio", icon: FaBoxesStacked },
   { href: "/services", label: "Services", icon: FaGear },
   { href: "/blog", label: "Blog", icon: FaNewspaper },
   { href: "/about", label: "About", icon: FaCircleInfo },
