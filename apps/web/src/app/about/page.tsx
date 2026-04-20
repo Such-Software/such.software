@@ -31,8 +31,7 @@ export default function AboutPage() {
 
           <div className="prose dark:prose-invert max-w-none mb-12">
             <p className="text-xl leading-relaxed">
-              Founded in 2021 by <a href="https://jwinterm.com">John Winter Murphy</a> in Chester County, PA, and operating in Kennett Square since July 2025, 
-              we are a software studio in the heart of Mushroom Country.
+              Such Software is a software studio in Kennett Square, PA. Founded by <a href="https://jwinterm.com">John Winter Murphy</a>, we build accessible e-commerce websites, crypto infrastructure, and original mobile apps and games.
             </p>
           </div>
 

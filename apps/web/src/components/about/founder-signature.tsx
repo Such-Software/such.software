@@ -35,13 +35,16 @@ export const FounderSignature = () => {
 
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-muted-foreground leading-relaxed italic border-l-4 border-primary/20 pl-6 text-lg">
-            "We don’t bolt on accessibility after the fact. It’s there from the first line of code."
+            "Accessibility isn't bolted on. It's there from the first line of code."
           </p>
           <p className="text-muted-foreground leading-relaxed mt-6">
-            Before founding Such Software, I spent three years teaching engineering at <span className="text-foreground font-semibold">Cecil College</span>, where I replaced the entire curriculum’s slide decks and PDFs with semantic HTML generated through <span className="text-foreground font-semibold underline decoration-primary/50">Quarto</span>. Proper equation markup, enforced alt text on every visual. That work shaped how we approach every project today.
+            John Winter Murphy holds a <span className="text-foreground font-semibold">PhD in Materials Engineering from UT-Dallas (2014)</span>, focused on semiconductor device fabrication for radiation detectors. From <span className="text-foreground font-semibold">2015 to 2021 he was a scientist at Lawrence Livermore National Laboratory</span>, developing radiation detector systems and the lab's nuclear battery program.
           </p>
-          <p className="text-muted-foreground leading-relaxed mt-4 italic border-l-4 border-primary/20 pl-6 text-lg">
-            "The same standards that made course materials work for every student now run through everything we ship. Semantic structure, keyboard navigation, WCAG compliance. That’s not overhead, it’s a core component of all our products."
+          <p className="text-muted-foreground leading-relaxed mt-4">
+            He previously co-founded <span className="text-foreground font-semibold">Patrn LLC</span> (art101.io), a series of art-history NFT drops, and <span className="text-foreground font-semibold">Tabby Labs</span>, which was developing a cryptocurrency wallet with an interactive world inside.
+          </p>
+          <p className="text-muted-foreground leading-relaxed mt-4">
+            He most recently taught engineering at <span className="text-foreground font-semibold">Cecil College</span> and senior-level materials engineering (microfabrication, nanomaterials) at <span className="text-foreground font-semibold">Frostburg State University</span>. Active in cryptocurrency since 2014; <a href="https://github.com/jwinterm" target="_blank" rel="noopener noreferrer" className="text-foreground font-semibold underline decoration-primary/50 hover:text-primary transition-colors">GitHub</a> for the receipts.
           </p>
         </div>
       </div>
@@ -54,7 +57,7 @@ export const FounderSignature = () => {
             A11y First Architecture
           </h4>
           <p className="text-muted-foreground text-sm leading-relaxed font-medium">
-            Semantic HTML, ARIA patterns, and keyboard navigation aren't afterthoughts—they are the foundation of our build process.
+            Semantic HTML, ARIA patterns, and keyboard navigation are the foundation of every build, not the finishing touch.
           </p>
         </Card>
 
