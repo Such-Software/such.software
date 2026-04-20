@@ -65,13 +65,13 @@ export default function Home() {
            <span className="block">for Everyone</span>
          </h1>
          <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-           E-commerce, mobile apps, and custom solutions: we build accessible software to perform at scale.
+           Custom e-commerce, websites, apps, and consulting. Plus our own mobile apps and games. A software studio in Kennett Square, PA.
          </p>
-         
+
          <div className="flex gap-4 mb-10">
-            <Link href="/services">
+            <Link href="/products">
               <Button size="lg" className="rounded-full">
-                Explore Services
+                View Portfolio
               </Button>
             </Link>
             <Link href="#contact">

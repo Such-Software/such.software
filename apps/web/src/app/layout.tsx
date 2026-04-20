@@ -35,16 +35,18 @@ export const metadata: Metadata = {
     images: ["/images/branding/OG_banner_v2_light.png"],
   },
   icons: {
+    // Favicons are served inverse to the browser chrome: dark chrome gets the
+    // light-tile file for contrast, light chrome gets the dark-tile file.
     icon: [
-      { url: "/images/branding/favicon_dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
-      { url: "/images/branding/favicon_light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
-      { url: "/images/branding/favicon_dark.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: dark)" },
-      { url: "/images/branding/favicon_light.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: light)" },
+      { url: "/images/branding/favicon_light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
+      { url: "/images/branding/favicon_dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      { url: "/images/branding/favicon_light.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/images/branding/favicon_dark.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: light)" },
     ],
-    shortcut: "/images/branding/favicon_dark.svg",
+    shortcut: "/images/branding/favicon_light.svg",
     apple: [
-      { url: "/images/branding/favicon_dark.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: dark)" },
-      { url: "/images/branding/favicon_light.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: light)" },
+      { url: "/images/branding/favicon_light.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/images/branding/favicon_dark.png", sizes: "192x192", type: "image/png", media: "(prefers-color-scheme: light)" },
     ],
   },
   manifest: "/manifest.json",

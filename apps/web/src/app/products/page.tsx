@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -21,48 +22,56 @@ const products = [
     title: "Neroswap",
     description: "Aggregated DEX & CEX orderbook data. Compare Monero, Wownero, and Bitcoin prices across 6 exchanges in real time.",
     color: "yellow",
+    icon: "/images/products/neroswap.png",
   },
   {
     slug: "webshops",
     title: "Webshops",
     description: "Headless Medusa commerce with revenue-share pricing. No upfront costs.",
     color: "emerald",
+    icon: "/images/products/occupy-wallets.png",
   },
   {
     slug: "custom-websites",
     title: "Custom Websites",
     description: "Real-time platforms and interactive experiences. See rcryptocurrency.com and moonplace.io.",
     color: "purple",
+    icon: "/images/products/r-cryptocurrency.png",
   },
   {
     slug: "smirk-wallet",
     title: "Smirk Wallet",
     description: "Non-custodial browser wallet for social tipping. BTC, LTC, XMR, WOW, GRIN.",
     color: "amber",
+    icon: "/images/products/smirk-wallet.png",
   },
   {
     slug: "bauhaus-echo",
     title: "Bauhaus Echo",
     description: "Visual memory puzzle game inspired by Bauhaus design. Android, iOS, Web.",
     color: "blue",
+    icon: "/images/products/bauhaus-echo.png",
   },
   {
     slug: "suchoice",
     title: "Suchoice",
     description: "Stop overthinking decisions. Snap a photo, let AI read the options, spin the wheel. Plus coin flip and adventure mode. Android and iOS.",
     color: "pink",
+    icon: "/images/products/suchoice.png",
   },
   {
     slug: "vegan-iq",
     title: "Vegan IQ",
     description: "Test your plant-based knowledge with 2000+ trivia questions across 8 categories. Verified data, swipe gameplay. Android and iOS.",
     color: "green",
+    icon: "/images/products/vegan-iq.png",
   },
   {
     slug: "wownero-moon-launch",
     title: "Wownero Moon Launch",
     description: "Crypto-themed space landing game. 11 levels, 4 weapons, endless mode. Android, iOS, Web, Desktop.",
     color: "orange",
+    icon: "/images/products/such-moon-launch.png",
   },
 ];
 
@@ -95,7 +104,7 @@ export default function ProductsPage() {
       <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-purple-500">
-            Our Products
+            Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Tools we have built, from commerce infrastructure to consumer apps.
@@ -106,9 +115,18 @@ export default function ProductsPage() {
           {products.map((product) => (
             <Link key={product.slug} href={`/products/${product.slug}`}>
               <Card className={`glass-card h-full min-h-[200px] ${colorClasses[product.color]} transition-all cursor-pointer`}>
-                <h2 className={`text-2xl font-bold mb-3 ${titleColors[product.color]}`}>
-                  {product.title}
-                </h2>
+                <div className="flex items-center gap-4 mb-3">
+                  <Image
+                    src={product.icon}
+                    alt={`${product.title} icon`}
+                    width={56}
+                    height={56}
+                    className="rounded-xl flex-shrink-0"
+                  />
+                  <h2 className={`text-2xl font-bold ${titleColors[product.color]}`}>
+                    {product.title}
+                  </h2>
+                </div>
                 <p className="text-muted-foreground leading-relaxed">
                   {product.description}
                 </p>

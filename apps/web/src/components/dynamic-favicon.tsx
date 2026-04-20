@@ -9,7 +9,9 @@ export function DynamicFavicon() {
   useEffect(() => {
     if (!resolvedTheme) return;
 
-    const variant = resolvedTheme === 'dark' ? 'dark' : 'light';
+    // Favicons contrast with browser chrome, so we serve the opposite-tone tile:
+    // dark mode → light tile, light mode → dark tile.
+    const variant = resolvedTheme === 'dark' ? 'light' : 'dark';
 
     // Update all favicon link elements
     const links = document.querySelectorAll<HTMLLinkElement>('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
