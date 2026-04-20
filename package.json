@@ -21,5 +21,10 @@
   },
   "dependencies": {
     "@types/react": "^18.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "yaml": "^2.8.3"
+    }
   }
 }

@@ -2,6 +2,7 @@ import { DataGrid } from "@repo/ui/procedural/data-grid";
 import { Button } from "@repo/ui/components/button";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@repo/ui/components/card";
 import type { Metadata } from "next";
@@ -68,8 +69,7 @@ export default function ServicesPage() {
                 <Card className="glass-card hover:border-indigo-500/30">
                     <h3 className="text-xl font-bold mb-3">Revenue-Share Model</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        No massive setup fees or monthly retainers. We invest in your success
-                        and earn a percentage of sales—aligned incentives from day one.
+                        No upfront fees. No monthly retainers. We earn a low percentage of sales after launch. Aligned incentives, no fixed-cost risk.
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-indigo-500/30">
@@ -100,9 +100,9 @@ export default function ServicesPage() {
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-purple-500/30">
-                    <h3 className="text-xl font-bold mb-3">Brand Motion</h3>
+                    <h3 className="text-xl font-bold mb-3">Brand Motion & Interactive UX</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Smooth, animated interfaces with purposeful motion and visual depth.
+                        Interfaces that move with intent, not decoration. Scroll-driven narratives, data-reactive visuals, and 3D scenes for brands that need to feel alive.
                     </p>
                 </Card>
             </div>
@@ -132,6 +132,41 @@ export default function ServicesPage() {
                     </p>
                 </Card>
             </div>
+        </div>
+
+        {/* Recent Work */}
+        <div className="mb-24">
+            <div className="text-left mb-10 section-container border-l-4 border-l-amber-500">
+                <h2 className="text-3xl font-bold mb-2">Recent Work</h2>
+                <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+                    Long-term partnerships over one-off projects.
+                </p>
+            </div>
+            <Card className="glass-card hover:border-amber-500/30">
+                <div className="flex items-start gap-4 mb-4">
+                    <Image
+                        src="/images/products/occupy-wallets.png"
+                        alt="Occupy Wallets"
+                        width={72}
+                        height={72}
+                        className="rounded-xl flex-shrink-0"
+                    />
+                    <div>
+                        <h3 className="text-xl font-bold mb-1">Occupy Wallets</h3>
+                        <a
+                            href="https://occupywallets.art"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                        >
+                            occupywallets.art
+                        </a>
+                    </div>
+                </div>
+                <p className="text-base text-muted-foreground leading-relaxed">
+                    With us since day one. Five years on WordPress, migrating to a custom Medusa v2 storefront this spring.
+                </p>
+            </Card>
         </div>
 
         <div className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
