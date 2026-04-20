@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { Card } from "@repo/ui/components/card";
 import Image from "next/image";
 import Link from "next/link";
@@ -112,26 +113,28 @@ export default function ProductsPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {products.map((product) => (
-            <Link key={product.slug} href={`/products/${product.slug}`}>
-              <Card className={`glass-card h-full min-h-[200px] ${colorClasses[product.color]} transition-all cursor-pointer`}>
-                <div className="flex items-center gap-4 mb-3">
-                  <Image
-                    src={product.icon}
-                    alt={`${product.title} icon`}
-                    width={56}
-                    height={56}
-                    className="rounded-xl flex-shrink-0"
-                  />
-                  <h2 className={`text-2xl font-bold ${titleColors[product.color]}`}>
-                    {product.title}
-                  </h2>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {product.description}
-                </p>
-              </Card>
-            </Link>
+          {products.map((product, i) => (
+            <ScrollReveal key={product.slug} delay={(i % 2) * 0.08}>
+              <Link href={`/products/${product.slug}`}>
+                <Card className={`glass-card h-full min-h-[200px] ${colorClasses[product.color]} transition-all cursor-pointer`}>
+                  <div className="flex items-center gap-4 mb-3">
+                    <Image
+                      src={product.icon}
+                      alt={`${product.title} icon`}
+                      width={56}
+                      height={56}
+                      className="rounded-xl flex-shrink-0"
+                    />
+                    <h2 className={`text-2xl font-bold ${titleColors[product.color]}`}>
+                      {product.title}
+                    </h2>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {product.description}
+                  </p>
+                </Card>
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
 

@@ -2,6 +2,7 @@ import { FounderSignature } from "@/components/about/founder-signature";
 import { ContactForm } from "@/components/contact/contact-form";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
 import { FaXTwitter, FaTelegram, FaDiscord, FaBluesky, FaTiktok, FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaPinterestP } from "react-icons/fa6";
 import type { Metadata } from "next";
@@ -117,20 +118,22 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="border-t border-border/50 pt-10">
+          <ScrollReveal className="border-t border-border/50 pt-10">
             <h2 className="text-2xl font-bold mb-6 text-center">Leadership</h2>
             <FounderSignature />
+          </ScrollReveal>
+
+        </div>
+
+        <ScrollReveal as="section" className="mt-16 border-t border-border/50 pt-16">
+          <div id="contact">
+            <h2 className="text-3xl font-bold mb-3 tracking-tight">Get in Touch</h2>
+            <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
+              Have a project in mind? We'd love to hear about it.
+            </p>
+            <ContactForm />
           </div>
-
-        </div>
-
-        <div id="contact" className="mt-16 border-t border-border/50 pt-16">
-          <h2 className="text-3xl font-bold mb-3 tracking-tight">Get in Touch</h2>
-          <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
-            Have a project in mind? We'd love to hear about it.
-          </p>
-          <ContactForm />
-        </div>
+        </ScrollReveal>
       </div>
       <MobileNav />
     </main>

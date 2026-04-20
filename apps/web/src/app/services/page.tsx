@@ -2,6 +2,7 @@ import { DataGrid } from "@repo/ui/procedural/data-grid";
 import { Button } from "@repo/ui/components/button";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@repo/ui/components/card";
@@ -38,7 +39,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Philosophy Card */}
-        <div className="mb-20">
+        <ScrollReveal className="mb-20">
             <div className="text-left section-container border-l-4 border-l-emerald-500">
                 <h2 className="text-3xl font-bold mb-2">Partnership-First Development</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl">
@@ -46,10 +47,10 @@ export default function ServicesPage() {
                    we provide the engineering. We design systems that grow with your business.
                 </p>
             </div>
-        </div>
+        </ScrollReveal>
 
         {/* E-Commerce Section */}
-        <div className="mb-24">
+        <ScrollReveal className="mb-24">
             <div className="text-left mb-10 section-container border-l-4 border-l-blue-500">
                 <h2 className="text-3xl font-bold mb-2">Custom E-Commerce Engines</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl">
@@ -80,10 +81,10 @@ export default function ServicesPage() {
                     </p>
                 </Card>
             </div>
-        </div>
+        </ScrollReveal>
 
         {/* Custom Apps Section */}
-        <div className="mb-24">
+        <ScrollReveal className="mb-24">
             <div className="text-left mb-10 section-container border-l-4 border-l-purple-500">
                 <h2 className="text-3xl font-bold mb-2">Custom Apps & Interactive Websites</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
@@ -95,7 +96,7 @@ export default function ServicesPage() {
                 <Card className="glass-card hover:border-purple-500/30">
                     <h3 className="text-xl font-bold mb-3">Real-time Platforms</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Socket.io and WebRTC integration for collaborative tools, dashboards, 
+                        Socket.io and WebRTC integration for collaborative tools, dashboards,
                         and live data visualization.
                     </p>
                 </Card>
@@ -106,10 +107,10 @@ export default function ServicesPage() {
                     </p>
                 </Card>
             </div>
-        </div>
+        </ScrollReveal>
 
         {/* Crypto Section */}
-        <div className="mb-24">
+        <ScrollReveal className="mb-24">
             <div className="text-left mb-10 section-container border-l-4 border-l-cyan-500">
                 <h2 className="text-3xl font-bold mb-2">Cryptocurrency & Payment Consulting</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
@@ -120,22 +121,22 @@ export default function ServicesPage() {
                 <Card className="glass-card hover:border-cyan-500/30">
                     <h3 className="text-xl font-bold mb-3">Payment Orchestration</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Multi-PSP routing, automated reconciliation, and fraud prevention for 
+                        Multi-PSP routing, automated reconciliation, and fraud prevention for
                         high-volume merchants.
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-cyan-500/30">
                     <h3 className="text-xl font-bold mb-3">Web3 Integration</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Non-custodial wallet auth, on/off ramp solutions, and smart contract 
+                        Non-custodial wallet auth, on/off ramp solutions, and smart contract
                         interactions for modern dApps.
                     </p>
                 </Card>
             </div>
-        </div>
+        </ScrollReveal>
 
         {/* Recent Work */}
-        <div className="mb-24">
+        <ScrollReveal className="mb-24">
             <div className="text-left mb-10 section-container border-l-4 border-l-amber-500">
                 <h2 className="text-3xl font-bold mb-2">Recent Work</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
@@ -167,9 +168,9 @@ export default function ServicesPage() {
                     With us since day one. Five years on WordPress, migrating to a custom Medusa v2 storefront this spring.
                 </p>
             </Card>
-        </div>
+        </ScrollReveal>
 
-        <div className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
+        <ScrollReveal className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
             <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             <h2 className="text-4xl font-bold mb-6 relative z-10 tracking-tight">Let's build together</h2>
             <p className="mb-10 text-slate-300 text-lg max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
@@ -181,7 +182,7 @@ export default function ServicesPage() {
                     Request a Consultation
                 </Button>
             </Link>
-        </div>
+        </ScrollReveal>
       </div>
       <MobileNav />
     </main>

@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { StoreButtons } from "@/components/store-buttons";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,25 +66,27 @@ export default function LinksPage() {
         <p className="text-muted-foreground text-center mb-10">Our apps</p>
 
         <div className="space-y-8">
-          {apps.map((app) => (
-            <div key={app.name} className={`rounded-xl border ${app.borderColor} bg-card p-6`}>
-              <div className="flex items-center gap-4 mb-3">
-                <Image
-                  src={app.icon}
-                  alt={`${app.name} icon`}
-                  width={56}
-                  height={56}
-                  className="rounded-xl"
-                />
-                <div>
-                  <Link href={app.href}>
-                    <h2 className={`text-xl font-bold ${app.color} hover:underline`}>{app.name}</h2>
-                  </Link>
-                  <p className="text-sm text-muted-foreground">{app.tagline}</p>
+          {apps.map((app, i) => (
+            <ScrollReveal key={app.name} delay={i * 0.08}>
+              <div className={`rounded-xl border ${app.borderColor} bg-card p-6`}>
+                <div className="flex items-center gap-4 mb-3">
+                  <Image
+                    src={app.icon}
+                    alt={`${app.name} icon`}
+                    width={56}
+                    height={56}
+                    className="rounded-xl"
+                  />
+                  <div>
+                    <Link href={app.href}>
+                      <h2 className={`text-xl font-bold ${app.color} hover:underline`}>{app.name}</h2>
+                    </Link>
+                    <p className="text-sm text-muted-foreground">{app.tagline}</p>
+                  </div>
                 </div>
+                <StoreButtons links={app.links} />
               </div>
-              <StoreButtons links={app.links} />
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 

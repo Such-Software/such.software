@@ -7,6 +7,7 @@ import { ServicesPreview } from "@/components/landing/services-preview";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { DynamicBackground } from "@/components/landing/dynamic-background";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
 import { useRef, useState, useEffect } from "react";
@@ -82,8 +83,8 @@ export default function Home() {
          </div>
 
          <ServicesPreview />
-         
-         <div className="w-full max-w-6xl mx-auto mb-16 px-4">
+
+         <ScrollReveal className="w-full max-w-6xl mx-auto mb-16 px-4">
             <div className="text-left mb-8 section-container border-l-4 border-l-blue-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
@@ -91,28 +92,28 @@ export default function Home() {
                 </p>
             </div>
             <PortfolioGrid />
-         </div>
+         </ScrollReveal>
 
-         <div className="w-full max-w-6xl mx-auto mb-20 px-4">
+         <ScrollReveal className="w-full max-w-6xl mx-auto mb-20 px-4">
             <div className="text-left mb-12 section-container border-l-4 border-l-purple-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Inclusive by Design</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                    We believe the web is for everyone. Every line of code we write is 
+                    We believe the web is for everyone. Every line of code we write is
                     audited for WCAG 2.2 compliance and high-performance across all devices.
                 </p>
             </div>
             <FounderSignature />
-         </div>
+         </ScrollReveal>
 
-         <div id="contact" className="w-full mt-20 mb-20 pb-16 md:pb-0 flex flex-col items-center">
-            <div className="w-full max-w-6xl text-left mb-12 section-container border-l-4 border-l-cyan-500">
+         <ScrollReveal as="section" className="w-full mt-20 mb-20 pb-16 md:pb-0 flex flex-col items-center">
+            <div id="contact" className="w-full max-w-6xl text-left mb-12 section-container border-l-4 border-l-cyan-500">
                 <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Start a Project</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                     Have a project in mind? Let's talk about what you need and how we can help.
                 </p>
             </div>
             <ContactForm />
-         </div>
+         </ScrollReveal>
       </div>
       <MobileNav />
     </main>
