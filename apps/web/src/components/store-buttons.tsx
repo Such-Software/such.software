@@ -5,7 +5,8 @@ import { Button } from "@repo/ui/components/button";
 
 type StoreLink = {
   platform: "apple" | "google";
-  href: string;
+  /** Live store URL, or `null` to render a disabled "Coming Soon" button. */
+  href: string | null;
 };
 
 type StoreButtonsProps = {
@@ -23,6 +24,14 @@ export function StoreButtons({ links, extraLinks }: StoreButtonsProps) {
     <div className="flex flex-wrap gap-4 not-prose">
       {links.map(({ platform, href }) => {
         const { icon: Icon, label } = platformConfig[platform];
+        if (href === null) {
+          return (
+            <Button key={platform} variant="outline" size="lg" disabled>
+              <Icon className="h-5 w-5 mr-2" aria-hidden="true" />
+              {label} — Coming Soon
+            </Button>
+          );
+        }
         return (
           <a key={platform} href={href} target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="lg">
@@ -59,6 +68,23 @@ export function SuchoiceStoreButtons() {
       { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice" },
       { platform: "apple", href: "https://apps.apple.com/us/app/suchoice/id6759626658" },
     ]} />
+  );
+}
+
+export function SuchMoonLaunchStoreButtons() {
+  // Both stores submitted 2026-05-18; pending review. Flip null → real URLs
+  // once the app is live (Apple assigns the appstore.com /id<NUM> at first
+  // approval; Google URL is predictable as id=com.suchsoftware.suchmoonlaunch).
+  return (
+    <StoreButtons
+      links={[
+        { platform: "google", href: null },
+        { platform: "apple", href: null },
+      ]}
+      extraLinks={[
+        { href: "https://moonlaunch.such.software", label: "Play on Web" },
+      ]}
+    />
   );
 }
 

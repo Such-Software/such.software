@@ -4,29 +4,29 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Wownero Moon Launch | Such Software",
-  description: "Terms of service for Wownero Moon Launch mobile game.",
-  alternates: { canonical: "/products/wownero-moon-launch/terms" },
+  title: "Terms of Service | Such Moon Launch | Such Software",
+  description: "Terms of service for Such Moon Launch mobile game.",
+  alternates: { canonical: "/products/such-moon-launch/terms" },
 };
 
-export default function WowneroMoonLaunchTermsPage() {
+export default function SuchMoonLaunchTermsPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
-        <Link href="/products/wownero-moon-launch" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 transition-colors">
-          ← Back to Wownero Moon Launch
+        <Link href="/products/such-moon-launch" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 transition-colors">
+          ← Back to Such Moon Launch
         </Link>
 
         <div className="glass-card mt-6">
           <header className="mb-8 pb-6 border-b border-border">
-            <h1 className="text-3xl md:text-4xl font-bold">Terms of Service for Wownero Moon Launch</h1>
-            <p className="text-muted-foreground mt-2">Last Updated: March 12, 2026</p>
+            <h1 className="text-3xl md:text-4xl font-bold">Terms of Service for Such Moon Launch</h1>
+            <p className="text-muted-foreground mt-2">Last Updated: May 18, 2026</p>
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
             <p>
-              These Terms of Service (&quot;Terms&quot;) govern your use of the Wownero Moon Launch application
+              These Terms of Service (&quot;Terms&quot;) govern your use of the Such Moon Launch application
               (the &quot;App&quot;) operated by <strong>Such Software LLC</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;).
               By downloading, installing, or using the App, you agree to be bound by these Terms.
             </p>
@@ -35,7 +35,7 @@ export default function WowneroMoonLaunchTermsPage() {
 
             <h2>1. Use of the App</h2>
             <p>
-              Wownero Moon Launch is a video game provided for entertainment purposes. You may use the App
+              Such Moon Launch is a video game provided for entertainment purposes. You may use the App
               on any supported device for personal, non-commercial use.
             </p>
             <p>You agree not to:</p>
@@ -100,7 +100,7 @@ export default function WowneroMoonLaunchTermsPage() {
             <p>
               You may remove ads by purchasing the &quot;Remove Ads&quot; upgrade within the App.
               Ad display is subject to our{" "}
-              <Link href="/products/wownero-moon-launch/privacy">Privacy Policy</Link>.
+              <Link href="/products/such-moon-launch/privacy">Privacy Policy</Link>.
             </p>
 
             <hr />

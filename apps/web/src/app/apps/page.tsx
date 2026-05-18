@@ -20,6 +20,19 @@ export const metadata: Metadata = {
 
 const apps = [
   {
+    name: "Such Moon Launch",
+    tagline: "Vry rocket. Much landing. Wow!",
+    icon: "/images/products/such-moon-launch.png",
+    color: "text-amber-600 dark:text-amber-400",
+    borderColor: "border-amber-500/20",
+    href: "/products/such-moon-launch",
+    links: [
+      // null = render disabled "Coming Soon" button; flip to real URLs once live.
+      { platform: "google" as const, href: null },
+      { platform: "apple" as const, href: null },
+    ],
+  },
+  {
     name: "Vegan IQ",
     tagline: "Plant-based trivia backed by real data",
     icon: "/images/products/vegan-iq.png",

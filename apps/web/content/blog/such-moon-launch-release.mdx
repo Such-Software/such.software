@@ -1,0 +1,64 @@
+---
+title: "Such Moon Launch — Rebuilding My First Game, Years Later"
+date: "2026-05-18"
+excerpt: "The expanded re-release of the very first game I ever wrote. 11 levels, 4 weapons, an endless mode, and proper tilt-to-steer controls. Wownero-themed pixel-art rocket arcade."
+draft: false
+---
+
+import { SuchMoonLaunchStoreButtons } from "@/components/store-buttons";
+
+**Such Moon Launch** is now submitted to [Google Play](https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch) and the App Store, and live on [the web](https://moonlaunch.such.software). Apple and Play store listings will go live as the review queues clear.
+
+<SuchMoonLaunchStoreButtons />
+
+## The Backstory
+
+This was **the very first game I ever wrote**. The original — *Wownero Moon Launch* — was a single-level rocket-landing prototype I shipped years ago as a fun side project. The we released a slightly upgraded version as a test app called "Meowlet Moon Launch" under our old **Tabby Labs** developer account. One level in the original and four levels in Tabby Labs version. Basic physics. No music. No juice. But it worked, and people played it.
+
+It sat there, mostly forgotten, for a long time. Every once in a while I'd open the project and think *there's something here.* The core loop — gravity, fuel, an unforgiving landing, is one of the all-time classics, going back to the 1969 [Lunar Lander mainframe game](https://en.wikipedia.org/wiki/Lunar_Lander_(video_game_genre)). Done right, it never gets old.
+
+So we rebuilt it. And really gave it some juice.
+
+## What Changed
+
+What started as a single-level prototype is now a full game:
+
+- **11 hand-tuned story levels** across the solar system — Moon, Mars, Venus, Io, Jupiter, Saturn, Neptune, Pluto, an asteroid belt, a rotating space station, and a Martian mothership boss fight
+- **Procedural endless mode** — escalating waves with random target planets, more enemies, tighter hazard timing
+- **8 ship upgrades** — thrust, fuel capacity, fuel efficiency, shield, armor, landing gear, rotation speed, crypto magnet
+- **4 weapons** — auto-aim cannon, homing missiles, continuous laser, area-effect EMP
+- **13 ship skins** — 8 purchasable cosmetics plus 4 achievement unlocks
+- **Tilt-to-steer controls** on mobile, calibrated properly (no baseline drift, no "wait, which way is up" problem on phones)
+- **3D landing mini-game** on final approach, with cockpit HUD, altimeter, and tilt indicator
+- **Warp tunnel** transitions between levels
+- **Global leaderboards** powered by our own backend at `api.such.software`
+- **Cloud save** — progress synced to our servers, restorable on any device
+- **13 achievements** — Google Play Games on Android, Game Center on iOS
+- **Crypto-themed collectibles** — WOW, XMR, BTC, and DOGE pickups as in-game currency (no real cryptocurrency, no blockchain, no wallets — just pixel-art coins)
+- **Cross-platform** — Android, iOS, Web, Windows, macOS, Linux, all from a single Godot 4 codebase
+
+Same rocket. Same Moon. Almost everything else is new.
+
+## Tilt Controls Done Right
+
+If you've ever played a mobile tilt game and thought *why does this fight me?*, you're not imagining it. The mistake (as we learned) is tracking a moving baseline so the rest position can "drift" — but that same logic eats slow, intentional tilts before they ever register. Doodle Jump, Crossy Road, and Asphalt all use **single-shot calibration plus a low-pass filter**, never continuous baseline drift. So that's what we did:
+
+- Calibrate the player's neutral hold once at level start
+- Low-pass filter the raw gravity vector to kill 60 Hz jitter without losing slow tilts
+- Project onto a screen-relative axis (with the device locked to a single landscape orientation so the axis sign never flips)
+- Tight deadzone (~2°), proportional steering with a sensitivity curve
+
+Result: you can tilt 5° from neutral and the rocket responds immediately. Hold 20° and it turns at a constant rate without the input being eaten. Try it.
+
+## Tech Stack
+
+Built with [Godot 4](https://godotengine.org/) in pure GDScript. Leaderboards and cloud save run on our own backend at `api.such.software`. Ads use AdMob on mobile and AdSense on web. There's an optional **Remove Ads** in-app purchase ($1.99 once, ad-free forever), plus two optional Moonrock packs if you want to skip the grind. Every upgrade can still be earned by playing — there are no IAP-gated levels. Desktop builds are always ad-free.
+
+## Get It
+
+<SuchMoonLaunchStoreButtons />
+
+- **Web (free)** — [moonlaunch.such.software](https://moonlaunch.such.software)
+- **Mobile** — Google Play and App Store listings going live as reviews clear
+
+*Such moon. Many crypto. Wow.*

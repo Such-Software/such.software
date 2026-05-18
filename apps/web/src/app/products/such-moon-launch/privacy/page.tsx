@@ -4,29 +4,29 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Wownero Moon Launch | Such Software",
-  description: "Privacy policy for Wownero Moon Launch mobile game. GDPR and CPRA compliant.",
-  alternates: { canonical: "/products/wownero-moon-launch/privacy" },
+  title: "Privacy Policy | Such Moon Launch | Such Software",
+  description: "Privacy policy for Such Moon Launch mobile game. GDPR and CPRA compliant.",
+  alternates: { canonical: "/products/such-moon-launch/privacy" },
 };
 
-export default function WowneroMoonLaunchPrivacyPage() {
+export default function SuchMoonLaunchPrivacyPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
-        <Link href="/products/wownero-moon-launch" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 transition-colors">
-          ← Back to Wownero Moon Launch
+        <Link href="/products/such-moon-launch" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 transition-colors">
+          ← Back to Such Moon Launch
         </Link>
 
         <div className="glass-card mt-6">
           <header className="mb-8 pb-6 border-b border-border">
-            <h1 className="text-3xl md:text-4xl font-bold">Privacy Policy for Wownero Moon Launch</h1>
-            <p className="text-muted-foreground mt-2">Last Updated: March 12, 2026</p>
+            <h1 className="text-3xl md:text-4xl font-bold">Privacy Policy for Such Moon Launch</h1>
+            <p className="text-muted-foreground mt-2">Last Updated: May 18, 2026</p>
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
             <p>
-              <strong>Such Software LLC</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the Wownero Moon Launch
+              <strong>Such Software LLC</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the Such Moon Launch
               application (the &quot;App&quot;). This page informs you of our policies regarding the collection,
               use, and disclosure of personal data when you use our App.
             </p>
@@ -197,7 +197,7 @@ export default function WowneroMoonLaunchPrivacyPage() {
 
             <h2>Cryptocurrency</h2>
             <p>
-              Wownero Moon Launch is a <strong>crypto-themed game</strong>. The in-game collectibles (WOW, XMR, BTC, DOGE)
+              Such Moon Launch is a <strong>crypto-themed game</strong>. The in-game collectibles (WOW, XMR, BTC, DOGE)
               are purely virtual game items with no real-world monetary value. The App does not:
             </p>
             <ul>
@@ -236,7 +236,7 @@ export default function WowneroMoonLaunchPrivacyPage() {
                 <strong>Opt out of personalized ads</strong> via your device settings:
                 <ul>
                   <li>Android: Settings → Google → Ads → Opt out of Ads Personalization</li>
-                  <li>iOS: Settings → Privacy → Tracking → Disable tracking for Wownero Moon Launch</li>
+                  <li>iOS: Settings → Privacy → Tracking → Disable tracking for Such Moon Launch</li>
                 </ul>
               </li>
               <li><strong>Request deletion</strong> of your leaderboard or cloud save data by contacting us</li>
@@ -288,7 +288,7 @@ export default function WowneroMoonLaunchPrivacyPage() {
             <hr />
 
             <h2>Consent</h2>
-            <p>By using Wownero Moon Launch, you consent to this Privacy Policy.</p>
+            <p>By using Such Moon Launch, you consent to this Privacy Policy.</p>
           </div>
         </div>
       </div>

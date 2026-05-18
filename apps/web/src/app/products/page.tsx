@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Products | Such Software",
-  description: "Tools and applications built by Such Software. Neroswap, Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo, Suchoice, Vegan IQ, and Wownero Moon Launch.",
+  description: "Tools and applications built by Such Software. Neroswap, Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo, Suchoice, Vegan IQ, and Such Moon Launch.",
   alternates: { canonical: "/products" },
   openGraph: {
     title: "Products | Such Software",
@@ -68,10 +68,10 @@ const products = [
     icon: "/images/products/vegan-iq.png",
   },
   {
-    slug: "wownero-moon-launch",
-    title: "Wownero Moon Launch",
-    description: "Crypto-themed space landing game. 11 levels, 4 weapons, endless mode. Android, iOS, Web, Desktop.",
-    color: "orange",
+    slug: "such-moon-launch",
+    title: "Such Moon Launch",
+    description: "Vry rocket. Much landing. Wow! Wownero-themed pixel rocket arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Android, iOS, Web, Desktop.",
+    color: "amber",
     icon: "/images/products/such-moon-launch.png",
   },
 ];
