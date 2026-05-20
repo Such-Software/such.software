@@ -21,7 +21,7 @@ export default function SuchMoonLaunchPrivacyPage() {
         <div className="glass-card mt-6">
           <header className="mb-8 pb-6 border-b border-border">
             <h1 className="text-3xl md:text-4xl font-bold">Privacy Policy for Such Moon Launch</h1>
-            <p className="text-muted-foreground mt-2">Last Updated: May 18, 2026</p>
+            <p className="text-muted-foreground mt-2">Last Updated: May 20, 2026</p>
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
@@ -77,9 +77,10 @@ export default function SuchMoonLaunchPrivacyPage() {
               </a>
             </p>
             <p>
-              <strong>iOS Users:</strong> We will ask for your permission via App Tracking Transparency (ATT)
-              before collecting data for personalized advertising. You can deny this request and still use
-              the app with non-personalized ads.
+              <strong>iOS Users:</strong> Such Moon Launch does not present an App Tracking Transparency
+              prompt and does not track you across apps or websites owned by other companies. On iOS,
+              Google AdMob serves only non-personalized advertising; your Advertising Identifier (IDFA)
+              is not accessed.
             </p>
 
             <h3>Google Play Games Services (Android Only)</h3>
@@ -236,7 +237,7 @@ export default function SuchMoonLaunchPrivacyPage() {
                 <strong>Opt out of personalized ads</strong> via your device settings:
                 <ul>
                   <li>Android: Settings → Google → Ads → Opt out of Ads Personalization</li>
-                  <li>iOS: Settings → Privacy → Tracking → Disable tracking for Such Moon Launch</li>
+                  <li>iOS: Personalized ads are already disabled on iOS for this app; no opt-out is required.</li>
                 </ul>
               </li>
               <li><strong>Request deletion</strong> of your leaderboard or cloud save data by contacting us</li>
