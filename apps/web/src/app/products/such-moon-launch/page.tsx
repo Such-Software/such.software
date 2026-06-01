@@ -2,16 +2,17 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { SuchMoonLaunchStoreButtons } from "@/components/store-buttons";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Such Moon Launch | Such Software",
-  description: "Vry rocket. Much landing. Wow! A pixel-art rocket-flying arcade with 11 levels, 4 weapons, and an endless mode. Wownero-themed. Android, iOS, Web, Desktop.",
+  title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
+  description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
   alternates: { canonical: "/products/such-moon-launch" },
   openGraph: {
-    title: "Such Moon Launch | Such Software",
-    description: "Vry rocket. Much landing. Wow! A pixel-art rocket-flying arcade with 11 levels, 4 weapons, and an endless mode. Wownero-themed.",
+    title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
+    description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
     type: "website",
   },
 };
@@ -41,6 +42,20 @@ const weapons = [
 export default function SuchMoonLaunchPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Such Moon Launch", path: "/products/such-moon-launch" },
+      ])} />
+      <JsonLd data={softwareAppLd({
+        name: "Such Moon Launch",
+        path: "/products/such-moon-launch",
+        description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
+        category: "GameApplication",
+        operatingSystem: "Android, iOS, Web, Windows, macOS, Linux",
+        price: "0",
+        offerUrl: "https://moonlaunch.such.software",
+      })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">

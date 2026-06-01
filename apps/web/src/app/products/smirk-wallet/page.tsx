@@ -3,15 +3,16 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { Button } from "@repo/ui/components/button";
 import Link from "next/link";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Smirk Wallet | Such Software",
-  description: "Non-custodial browser wallet for social tipping. Send BTC, LTC, XMR, WOW, and GRIN by Telegram or Discord username.",
+  title: "Smirk Wallet: Non-Custodial Crypto Tipping by Username | Such Software",
+  description: "Tip BTC, LTC, XMR, WOW, and GRIN on Telegram or Discord by username. A non-custodial browser wallet: your keys never leave your device.",
   alternates: { canonical: "/products/smirk-wallet" },
   openGraph: {
-    title: "Smirk Wallet | Such Software",
-    description: "Non-custodial browser wallet for social tipping. Send BTC, LTC, XMR, WOW, and GRIN by Telegram or Discord username.",
+    title: "Smirk Wallet: Non-Custodial Crypto Tipping by Username",
+    description: "Tip BTC, LTC, XMR, WOW, and GRIN on Telegram or Discord by username. A non-custodial browser wallet: your keys never leave your device.",
     type: "website",
   },
 };
@@ -27,6 +28,20 @@ const currencies = [
 export default function SmirkWalletPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Smirk Wallet", path: "/products/smirk-wallet" },
+      ])} />
+      <JsonLd data={softwareAppLd({
+        name: "Smirk Wallet",
+        path: "/products/smirk-wallet",
+        description: "Tip BTC, LTC, XMR, WOW, and GRIN on Telegram or Discord by username. A non-custodial browser wallet: your keys never leave your device.",
+        category: "FinanceApplication",
+        operatingSystem: "Chrome, Firefox (browser extension)",
+        price: "0",
+        offerUrl: "https://smirk.cash",
+      })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">
@@ -130,6 +145,13 @@ export default function SmirkWalletPage() {
             <Button variant="outline">GitHub</Button>
           </a>
         </div>
+
+        <p className="text-sm text-muted-foreground mt-12">
+          Related:{" "}
+          <Link href="/products/neroswap" className="text-amber-600 dark:text-amber-400 hover:underline">Neroswap</Link>,{" "}
+          <Link href="/products/wownerogue" className="text-amber-600 dark:text-amber-400 hover:underline">Wownerogue</Link>, and{" "}
+          <Link href="/products/such-moon-launch" className="text-amber-600 dark:text-amber-400 hover:underline">Such Moon Launch</Link>.
+        </p>
       </div>
       <MobileNav />
     </main>

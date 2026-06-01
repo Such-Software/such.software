@@ -7,12 +7,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Apps | Such Software",
-  description: "Download our apps on App Store and Google Play.",
+  title: "Our Apps: Games & Tools for iOS, Android & Web | Such Software",
+  description: "Download Such Software's apps and games: Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
   alternates: { canonical: "/apps" },
   openGraph: {
-    title: "Such Software Apps",
-    description: "Download our apps on App Store and Google Play.",
+    title: "Our Apps: Games & Tools for iOS, Android & Web | Such Software",
+    description: "Download Such Software's apps and games: Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
     type: "website",
     images: [{ url: "/images/branding/OG_banner_v2_light.png", width: 1200, height: 630, alt: "Such Software" }],
   },

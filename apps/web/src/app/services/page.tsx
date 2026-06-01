@@ -9,14 +9,14 @@ import { Card } from "@repo/ui/components/card";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services | Such Software",
-  description: "Medusa v2 development, custom web applications, and cryptocurrency consulting. High-performance headless commerce, real-time platforms, and Web3 integration.",
+  title: "Medusa, Web App & Crypto Development Services | Such Software",
+  description: "Custom e-commerce on Medusa v2, real-time web apps, and Monero/crypto consulting. A Kennett Square, PA studio building for scale, accessibility, and performance.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Services | Such Software",
-    description: "Medusa v2 development, custom web applications, and cryptocurrency consulting.",
+    title: "Medusa, Web App & Crypto Development Services | Such Software",
+    description: "Custom e-commerce on Medusa v2, real-time web apps, and Monero/crypto consulting. A Kennett Square, PA studio building for scale, accessibility, and performance.",
     type: "website",
   },
 };

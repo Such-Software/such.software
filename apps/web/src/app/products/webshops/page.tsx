@@ -2,16 +2,17 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { Button } from "@repo/ui/components/button";
+import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Webshops | Such Software",
-  description: "Headless Medusa commerce engines with revenue-share pricing. No upfront costs, aligned incentives.",
+  title: "Custom Online Stores & E-Commerce Development | Such Software",
+  description: "Custom online stores with no upfront cost and revenue-share pricing. Own your data, escape template limits, and hit 100/100 Lighthouse. Built on Medusa.",
   alternates: { canonical: "/products/webshops" },
   openGraph: {
-    title: "Webshops | Such Software",
-    description: "Headless Medusa commerce engines with revenue-share pricing. No upfront costs, aligned incentives.",
+    title: "Custom Online Stores & E-Commerce Development | Such Software",
+    description: "Custom online stores with no upfront cost and revenue-share pricing. Own your data and escape template limits. Built on Medusa.",
     type: "website",
   },
 };
@@ -19,20 +20,27 @@ export const metadata: Metadata = {
 export default function WebshopsPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Custom Online Stores", path: "/products/webshops" },
+      ])} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">
           ← Back to Products
         </Link>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-emerald-600 dark:text-emerald-400">
-          Webshops
+        <h1 className="text-4xl md:text-5xl font-bold mb-2 text-emerald-600 dark:text-emerald-400">
+          Custom Online Stores
         </h1>
+        <p className="text-base text-muted-foreground mb-6">Webshops built and run on revenue share.</p>
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            We build headless commerce platforms on Medusa v2 with a revenue-share model. 
-            No massive setup fees, no monthly retainers. We only win when you make sales.
+            We build custom online stores with a revenue-share model: no large setup fee, no monthly
+            retainer. We only win when you make sales. Under the hood it is a headless Medusa v2
+            backend with a Next.js storefront, so you own your data and your business logic.
           </p>
         </div>
 
@@ -81,6 +89,12 @@ export default function WebshopsPage() {
           <Link href="/about#contact">
             <Button size="lg">Get in Touch</Button>
           </Link>
+          <p className="text-sm text-muted-foreground mt-6">
+            See also our{" "}
+            <Link href="/services" className="text-emerald-600 dark:text-emerald-400 hover:underline">development services</Link>
+            {" "}and{" "}
+            <Link href="/products/custom-websites" className="text-emerald-600 dark:text-emerald-400 hover:underline">custom web apps</Link>.
+          </p>
         </div>
       </div>
       <MobileNav />

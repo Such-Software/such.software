@@ -2,17 +2,18 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { StoreButtons } from "@/components/store-buttons";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bauhaus Echo | Such Software",
-  description: "Visual memory puzzle game inspired by Bauhaus design. Five modes including a pressure-free Zen sandbox. Android, iOS, Web, Desktop.",
+  title: "Bauhaus Echo: Visual Memory Puzzle Game | Such Software",
+  description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
   alternates: { canonical: "/products/bauhaus-echo" },
   openGraph: {
-    title: "Bauhaus Echo | Such Software",
-    description: "Visual memory puzzle game inspired by Bauhaus design. Five modes including a pressure-free Zen sandbox. Android, iOS, Web, Desktop.",
+    title: "Bauhaus Echo: Visual Memory Puzzle Game | Such Software",
+    description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
     type: "website",
     images: [{ url: "/images/products/bauhaus-echo.png", width: 512, height: 512, alt: "Bauhaus Echo" }],
   },
@@ -29,6 +30,19 @@ const gameModes = [
 export default function BauhausEchoPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Bauhaus Echo", path: "/products/bauhaus-echo" },
+      ])} />
+      <JsonLd data={softwareAppLd({
+        name: "Bauhaus Echo",
+        path: "/products/bauhaus-echo",
+        description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
+        category: "GameApplication",
+        operatingSystem: "Android, iOS, Web, Windows, macOS, Linux",
+        price: "0",
+      })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">

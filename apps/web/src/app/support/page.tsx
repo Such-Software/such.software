@@ -5,12 +5,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Support | Such Software",
-  description: "Get help with Bauhaus Echo or any Such Software product. Report bugs, request features, or send feedback.",
+  title: "Support & Feedback | Such Software",
+  description: "Get help with any Such Software app or game. Report a bug, request a feature, or send feedback. We read every message.",
   alternates: { canonical: "/support" },
   openGraph: {
-    title: "Support | Such Software",
-    description: "Get help with Bauhaus Echo or any Such Software product. Report bugs, request features, or send feedback.",
+    title: "Support & Feedback | Such Software",
+    description: "Get help with any Such Software app or game. Report a bug, request a feature, or send feedback. We read every message.",
     type: "website",
   },
 };
@@ -39,13 +39,13 @@ export default function SupportPage() {
           <div className="section-container border-l-4 border-emerald-500">
             <h3 className="font-bold mb-2">Feature Requests</h3>
             <p className="text-sm text-muted-foreground">
-              Have an idea to make the game better? We&apos;re always looking for ways to improve.
+              Have an idea to make your app or game better? We&apos;re always looking for ways to improve.
             </p>
           </div>
           <div className="section-container border-l-4 border-amber-500">
             <h3 className="font-bold mb-2">General Feedback</h3>
             <p className="text-sm text-muted-foreground">
-              Enjoying the game? Hate something? All feedback is welcome and helps us prioritize.
+              Enjoying one of our apps? Hate something? All feedback is welcome and helps us prioritize.
             </p>
           </div>
         </div>

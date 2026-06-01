@@ -2,17 +2,18 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { StoreButtons } from "@/components/store-buttons";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Suchoice | Such Software",
-  description: "Six ways to decide: AI photo reader, spin the wheel, coin flip, 3D dice, head-to-head duel, and city explorer. Android and iOS.",
+  title: "Suchoice: Spin the Wheel & AI Decision Maker App | Such Software",
+  description: "Can't decide? Snap a photo and let AI read your options, spin the wheel, flip a coin, or roll 3D dice. The fun decision-maker app for iOS and Android.",
   alternates: { canonical: "/products/suchoice" },
   openGraph: {
-    title: "Suchoice | Such Software",
-    description: "Six ways to decide: AI photo reader, spin the wheel, coin flip, 3D dice, head-to-head duel, and city explorer. Android and iOS.",
+    title: "Suchoice: Spin the Wheel & AI Decision Maker App | Such Software",
+    description: "Can't decide? Snap a photo and let AI read your options, spin the wheel, flip a coin, or roll 3D dice. The fun decision-maker app for iOS and Android.",
     type: "website",
     images: [{ url: "/images/products/suchoice.png", width: 512, height: 512, alt: "Suchoice" }],
   },
@@ -30,6 +31,19 @@ const features = [
 export default function SuchoicePage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Suchoice", path: "/products/suchoice" },
+      ])} />
+      <JsonLd data={softwareAppLd({
+        name: "Suchoice",
+        path: "/products/suchoice",
+        description: "Can't decide? Snap a photo and let AI read your options, spin the wheel, flip a coin, or roll 3D dice. The fun decision-maker app for iOS and Android.",
+        category: "LifestyleApplication",
+        operatingSystem: "Android, iOS",
+        price: "0",
+      })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">

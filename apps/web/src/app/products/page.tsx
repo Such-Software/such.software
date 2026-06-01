@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk tipping wallet, headless Webshops, and our mobile games.",
   alternates: { canonical: "/products" },
   openGraph: {
-    title: "Products | Such Software",
-    description: "Tools and applications built by Such Software.",
+    title: "Our Products & Apps: Crypto Tools, Games & Commerce | Such Software",
+    description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk tipping wallet, headless Webshops, and our mobile games.",
     type: "website",
   },
 };
@@ -35,7 +35,7 @@ const products = [
   {
     slug: "webshops",
     title: "Webshops",
-    description: "Headless Medusa commerce with revenue-share pricing. No upfront costs.",
+    description: "Custom online stores on revenue-share pricing. No upfront cost. Built on headless Medusa.",
     color: "emerald",
     icon: "/images/products/occupy-wallets.png",
   },
@@ -70,7 +70,7 @@ const products = [
   {
     slug: "vegan-iq",
     title: "Vegan IQ",
-    description: "Test your plant-based knowledge with 2000+ trivia questions across 8 categories. Verified data, swipe gameplay. Android and iOS.",
+    description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Android and iOS.",
     color: "green",
     icon: "/images/products/vegan-iq.png",
   },

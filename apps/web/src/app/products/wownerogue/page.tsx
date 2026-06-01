@@ -3,6 +3,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { WownerogueLinks } from "@/components/store-buttons";
 import Link from "next/link";
+import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -70,6 +71,11 @@ const steps = [
 export default function WowneroguePage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Wownerogue", path: "/products/wownerogue" },
+      ])} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">

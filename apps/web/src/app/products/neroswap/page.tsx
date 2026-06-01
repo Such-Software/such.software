@@ -3,17 +3,18 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { Button } from "@repo/ui/components/button";
 import Link from "next/link";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Neroswap — Aggregated DEX & CEX Orderbook Data | Such Software",
+  title: "Neroswap: No-KYC Monero & Bitcoin Price Aggregator | Such Software",
   description:
-    "Real-time aggregated orderbook data across decentralized and centralized exchanges. Compare Monero, Wownero, and Bitcoin prices across BasicSwap, Retoswap, Eigenwallet, Nonlogs, CexSwap, and AltQuick — no KYC, no custody.",
+    "Compare live Monero, Wownero, and Bitcoin prices across 6 DEX and no-KYC CEX orderbooks in real time. No accounts, no custody, no tracking.",
   alternates: { canonical: "/products/neroswap" },
   openGraph: {
-    title: "Neroswap — DEX & CEX Aggregator",
+    title: "Neroswap: No-KYC Monero & Bitcoin Price Aggregator",
     description:
-      "Compare crypto prices across 6 exchanges in real time. Privacy-focused, self-sovereign, no KYC.",
+      "Compare live Monero, Wownero, and Bitcoin prices across 6 DEX and no-KYC CEX orderbooks in real time. No accounts, no custody, no tracking.",
     type: "website",
     url: "https://such.software/products/neroswap",
   },
@@ -95,6 +96,20 @@ const features = [
 export default function NeroswapPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Neroswap", path: "/products/neroswap" },
+      ])} />
+      <JsonLd data={softwareAppLd({
+        name: "Neroswap",
+        path: "/products/neroswap",
+        description: "Compare live Monero, Wownero, and Bitcoin prices across 6 DEX and no-KYC CEX orderbooks in real time. No accounts, no custody, no tracking.",
+        category: "FinanceApplication",
+        operatingSystem: "Web browser",
+        price: "0",
+        offerUrl: "https://neroswap.com",
+      })} />
       <Header />
       <div
         id="main-content"
@@ -214,6 +229,13 @@ export default function NeroswapPage() {
             <Button variant="outline">Read the Blog Post</Button>
           </Link>
         </div>
+
+        <p className="text-sm text-muted-foreground mt-12">
+          Related:{" "}
+          <Link href="/products/smirk-wallet" className="text-yellow-600 dark:text-yellow-400 underline">Smirk Wallet</Link>,{" "}
+          <Link href="/products/wownerogue" className="text-yellow-600 dark:text-yellow-400 underline">Wownerogue</Link>, and our{" "}
+          <Link href="/services" className="text-yellow-600 dark:text-yellow-400 underline">crypto consulting</Link>.
+        </p>
       </div>
       <MobileNav />
     </main>

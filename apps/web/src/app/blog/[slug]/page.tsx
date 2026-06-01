@@ -13,6 +13,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllSlugs, getPost } from "@/lib/blog";
+import { JsonLd, articleLd, breadcrumbLd } from "@/components/seo/json-ld";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -50,6 +51,12 @@ export default async function BlogPost({ params }: Props) {
 
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={articleLd({ title: post.title, description: post.excerpt, slug, date: post.date })} />
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Blog", path: "/blog" },
+        { name: post.title, path: `/blog/${slug}` },
+      ])} />
       <Header />
       <article id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/blog" className="text-sm text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 mb-8 inline-flex items-center gap-2 transition-colors">

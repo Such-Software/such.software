@@ -2,25 +2,28 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { StoreButtons } from "@/components/store-buttons";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vegan IQ | Such Software",
-  description: "Test your plant-based knowledge with 1000+ trivia questions across 8 categories. Swipe and tap gameplay with verified data. Android and iOS.",
+  title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
+  description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
   alternates: { canonical: "/products/vegan-iq" },
   openGraph: {
-    title: "Vegan IQ | Such Software",
-    description: "Test your plant-based knowledge with 1000+ trivia questions across 8 categories. Swipe and tap gameplay with verified data. Android and iOS.",
+    title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
+    description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
     type: "website",
     images: [{ url: "/images/products/vegan-iq.png", width: 512, height: 512, alt: "Vegan IQ" }],
   },
 };
 
 const features = [
-  { name: "1000+ Questions", description: "Curated trivia questions backed by verified data from USDA, Poore & Nemecek, NIH, and FAOSTAT. No AI-generated content." },
+  { name: "1,000+ Questions", description: "Curated trivia questions backed by verified data from USDA, Poore & Nemecek, NIH, and FAOSTAT. No AI-generated content." },
   { name: "8 Categories", description: "Nutrition, environment, ingredients, food history, animal welfare, health, cooking, and culture." },
+  { name: "Daily Challenge", description: "A fresh set of questions every day. Build a streak and keep your knowledge sharp." },
+  { name: "Weekly Quiz", description: "New themed quiz each week with fresh content to test how far you've come." },
   { name: "Swipe & Tap", description: "Swipe right for true, left for false. Tap your answer for multiple choice. Fast, intuitive gameplay." },
   { name: "Dark & Light Mode", description: "Play in whichever theme you prefer. Automatic or manual switching." },
   { name: "SFX & Haptics", description: "Satisfying sound effects and haptic feedback on correct and incorrect answers." },
@@ -30,6 +33,19 @@ const features = [
 export default function VeganIqPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
+      <JsonLd data={breadcrumbLd([
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "Vegan IQ", path: "/products/vegan-iq" },
+      ])} />
+      <JsonLd data={softwareAppLd({
+        name: "Vegan IQ",
+        path: "/products/vegan-iq",
+        description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
+        category: "GameApplication",
+        operatingSystem: "Android, iOS",
+        price: "0",
+      })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">
@@ -51,7 +67,7 @@ export default function VeganIqPage() {
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Think you know your vegan facts? Vegan IQ puts your plant-based knowledge to the test with over 1000 trivia questions across 8 categories.
+            Think you know your vegan facts? Vegan IQ puts your plant-based knowledge to the test with over 1,000 trivia questions across 8 categories.
             Every question is backed by verified data from sources like the USDA, Poore & Nemecek (2018), NIH, and FAOSTAT.
           </p>
         </div>

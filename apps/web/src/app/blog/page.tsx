@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog | Such Software",
-  description: "News, updates, and technical articles from Such Software.",
+  title: "Blog: Build Notes on Crypto, Commerce & Apps | Such Software",
+  description: "Technical write-ups from Such Software on provably-fair games, Monero tooling, custom e-commerce, and the apps we ship.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Blog | Such Software",
-    description: "News, updates, and technical articles from Such Software.",
+    title: "Blog: Build Notes on Crypto, Commerce & Apps | Such Software",
+    description: "Technical write-ups from Such Software on provably-fair games, Monero tooling, custom e-commerce, and the apps we ship.",
     type: "website",
   },
 };

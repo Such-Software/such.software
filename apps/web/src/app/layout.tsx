@@ -9,14 +9,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://such.software"),
-  title: "Such Software | Precision Engineering for Everyone",
-  description: "E-commerce infrastructure, custom app development, and accessible web applications. Engineered for scale, compliance, and performance.",
+  title: "Custom E-Commerce, App & Crypto Development | Such Software",
+  description: "Such Software is a Kennett Square, PA studio building custom online stores, web apps, mobile games, and Monero & crypto tools. Start a project today.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Such Software",
-    description: "E-commerce infrastructure, custom app development, and accessible web applications.",
+    title: "Such Software: Custom E-Commerce, Apps & Crypto Development",
+    description: "A Kennett Square, PA software studio building custom online stores, web apps, mobile games, and Monero & crypto tools.",
     type: "website",
     siteName: "Such Software",
     images: [
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Such Software",
-    description: "E-commerce infrastructure, custom app development, and accessible web applications.",
+    title: "Such Software: Custom E-Commerce, Apps & Crypto Development",
+    description: "A Kennett Square, PA software studio building custom online stores, web apps, mobile games, and Monero & crypto tools.",
     images: ["/images/branding/OG_banner_v2_light.png"],
   },
   icons: {
@@ -86,6 +86,14 @@ const structuredData = {
   ],
 };
 
+const websiteData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Such Software",
+  url: "https://such.software",
+  publisher: { "@type": "Organization", name: "Such Software LLC" },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -97,6 +105,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
         />
       </head>
       <body className={inter.className}>

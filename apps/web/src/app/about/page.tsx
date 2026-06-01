@@ -8,14 +8,14 @@ import { FaXTwitter, FaTelegram, FaDiscord, FaBluesky, FaTiktok, FaYoutube, FaIn
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Such Software",
-  description: "Software studio in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
+  title: "About: A Kennett Square, PA Software Studio | Such Software",
+  description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto tools, and games with WCAG 2.2 compliance.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About | Such Software",
-    description: "Software studio in Kennett Square, PA. Founded by John Winter Murphy, specializing in accessible web engineering and WCAG 2.2 compliance.",
+    title: "About: A Kennett Square, PA Software Studio | Such Software",
+    description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto tools, and games with WCAG 2.2 compliance.",
     type: "website",
   },
 };
