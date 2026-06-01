@@ -6,12 +6,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Custom Websites | Such Software",
-  description: "Real-time platforms and interactive web experiences. See our work on rcryptocurrency.com and moonplace.io.",
+  title: "Custom Web Apps & Real-Time Platforms | Such Software",
+  description: "We build fast, accessible real-time web apps: multiplayer games, live dashboards, and crypto platforms with WebSocket sync. Next.js, Socket.io, WebRTC.",
   alternates: { canonical: "/products/custom-websites" },
   openGraph: {
-    title: "Custom Websites | Such Software",
-    description: "Real-time platforms and interactive web experiences. See our work on rcryptocurrency.com and moonplace.io.",
+    title: "Custom Web Apps & Real-Time Platforms | Such Software",
+    description: "Fast, accessible real-time web apps: multiplayer games, live dashboards, and crypto platforms with WebSocket sync. Next.js, Socket.io, WebRTC.",
     type: "website",
   },
 };
@@ -38,31 +38,32 @@ export default function CustomWebsitesPage() {
 
         <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <a href="https://rcryptocurrency.com" target="_blank" rel="noopener noreferrer">
+          <Link href="/products/wownerogue">
             <Card className="glass-card border-purple-500/20 hover:border-purple-500/50 transition-colors cursor-pointer h-full">
-              <h3 className="text-xl font-bold mb-3">rcryptocurrency.com</h3>
+              <h3 className="text-xl font-bold mb-3">Wownerogue</h3>
               <p className="text-muted-foreground mb-4">
-                Governance dashboard for the r/CryptoCurrency subreddit with 10M+ members. 
-                Real-time DAO metrics, proposal tracking, and community analytics.
+                A provably-fair multiplayer roguelike that runs entirely in the browser, with
+                game rounds synced to Monero and Wownero block times. Live spectating, a shared
+                chat lobby, and on-chain payouts.
               </p>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>Real-time data via WebSocket</li>
-                <li>Reddit API integration</li>
-                <li>On-chain governance tracking</li>
+                <li>Socket.io real-time game state and spectating</li>
+                <li>SHA-256 commit-reveal for provable fairness</li>
+                <li>Wallet-RPC payment and payout pipeline</li>
               </ul>
             </Card>
-          </a>
-          <a href="https://moonplace.io" target="_blank" rel="noopener noreferrer">
+          </Link>
+          <a href="https://neroswap.com" target="_blank" rel="noopener noreferrer">
             <Card className="glass-card border-purple-500/20 hover:border-purple-500/50 transition-colors cursor-pointer h-full">
-              <h3 className="text-xl font-bold mb-3">moonplace.io</h3>
+              <h3 className="text-xl font-bold mb-3">Neroswap</h3>
               <p className="text-muted-foreground mb-4">
-                Collaborative pixel art canvas with real-time multiplayer. 
-                Thousands of concurrent users painting together.
+                A live orderbook aggregator that pulls prices from six DEX and no-KYC CEX venues
+                and compares Monero, Wownero, and Bitcoin markets in real time.
               </p>
               <ul className="text-sm text-muted-foreground space-y-1">
-                <li>WebSocket real-time sync</li>
-                <li>Canvas rendering optimization</li>
-                <li>User authentication and cooldowns</li>
+                <li>Real-time price feeds via WebSocket</li>
+                <li>Multi-exchange orderbook normalization</li>
+                <li>No accounts, no custody, no tracking</li>
               </ul>
             </Card>
           </a>

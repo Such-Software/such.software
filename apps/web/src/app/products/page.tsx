@@ -7,8 +7,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Products | Such Software",
-  description: "Tools and applications built by Such Software. Neroswap, Webshops, Custom Websites, Smirk Wallet, Bauhaus Echo, Suchoice, Vegan IQ, and Such Moon Launch.",
+  title: "Our Products & Apps: Crypto Tools, Games & Commerce | Such Software",
+  description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk tipping wallet, headless Webshops, and our mobile games.",
   alternates: { canonical: "/products" },
   openGraph: {
     title: "Products | Such Software",
@@ -18,6 +18,13 @@ export const metadata: Metadata = {
 };
 
 const products = [
+  {
+    slug: "wownerogue",
+    title: "Wownerogue",
+    description: "A provably-fair multiplayer roguelike synced to Monero and Wownero block times. Play free in the browser, escape the dungeon, earn on-chain payouts.",
+    color: "orange",
+    icon: "/images/products/privacy-labs.png",
+  },
   {
     slug: "neroswap",
     title: "Neroswap",
@@ -35,9 +42,9 @@ const products = [
   {
     slug: "custom-websites",
     title: "Custom Websites",
-    description: "Real-time platforms and interactive experiences. See rcryptocurrency.com and moonplace.io.",
+    description: "Real-time web apps, multiplayer games, and live dashboards. Built on Next.js, Socket.io, and WebRTC.",
     color: "purple",
-    icon: "/images/products/r-cryptocurrency.png",
+    icon: "/images/products/neroswap.png",
   },
   {
     slug: "smirk-wallet",

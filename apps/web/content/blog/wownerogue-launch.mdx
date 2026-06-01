@@ -1,0 +1,55 @@
+---
+title: "Wownerogue: A Provably-Fair Roguelike on Block Time"
+date: "2026-06-01"
+excerpt: "A browser roguelike where the clock is the blockchain. How the commit-reveal fairness, random block-timing deadline, and Monero payout batching actually work."
+draft: false
+---
+
+**Wownerogue** is a multiplayer roguelike that runs in the browser. You drop into a dungeon, and you have until the next block to reach the exit. A monster is hunting you. There is a treasure bag worth grabbing on the way out. That is the whole game, and the catch is in the clock: the deadline is a new block on the Monero or Wownero chain, so it is genuinely random.
+
+It runs in two places. [play.wowne.ro](https://play.wowne.ro) is the Wownero instance: free to play, with paid entry feeding a separate leaderboard, and no crypto payouts. [monerogue.app](https://monerogue.app) is the Monero stagenet instance, where escaping pays out stagenet XMR from a house wallet. Stagenet coins are worthless, which makes it a safe place to run the full payment-and-payout loop in the open.
+
+<WownerogueLinks />
+
+## The clock is the point
+
+Most timed games give you a countdown. Wownerogue gives you a block. Monero and Wownero target roughly two-minute block times, but proof-of-work timing is a Poisson process: the next block might land in fifteen seconds or in five minutes, and nothing on the server can predict which. Your run starts when a block arrives, and a later block ends it.
+
+I had one early instinct to "fix" this by adding a minimum fairness floor so nobody got a fifteen-second round. That was wrong, and I tore it out. The random deadline is not a bug to smooth over: it is the entire reason the game is interesting. The only timing guard left is a two-second grace at the very start, so a block landing in the same instant your run begins cannot kill you before you have moved.
+
+## Provably fair, the boring honest way
+
+A game that holds money has to prove it is not cooking the board after you pay. Wownerogue uses a standard commit-reveal:
+
+1. Before your run, the server generates a 256-bit seed and shows you `SHA-256(seed)`: the commitment. You can copy it.
+2. The seed drives a deterministic RNG that lays out the whole dungeon: walls, the exit, the treasure, and the monster's behaviour.
+3. When the run ends, the server reveals the seed.
+4. You hash the revealed seed and confirm it equals the commitment you were shown up front.
+
+Because the commitment is published before you move, the server cannot reroll a dungeon it does not like once the round is live. Feed the seed into the verification page and it regenerates the exact board you played, then prints a layout fingerprint so you can compare. No trust required, just a hash.
+
+## Two instances, one codebase
+
+The split between the two sites is config, not forks. The same server runs both; environment variables decide the currency, the network, whether payouts are on, and the branding. Mainnet Wownero runs free-to-play with payouts switched off. Stagenet Monero runs with payouts on. That meant being careful that a single flag actually gated the money path end to end, and not just part of it: an early version of the payout toggle disabled credits payouts but not direct ones, which is exactly the kind of gap you do not want in code that moves funds.
+
+## Paying out without tripping over Monero
+
+The interesting backend problem is payouts. When a Monero wallet spends, the change output (and the spent output) get locked for about ten blocks. Fire payouts naively and you will try to spend funds that are still locked, and the transfer fails.
+
+So payouts batch, and the batcher checks unlocked balance before it sends. If the wallet does not have enough unlocked balance to cover the batch right now, it does not fail the payouts: it defers them back to pending and retries on the next block tick and the next interval. Insufficient-funds errors are treated as safe to retry, because they happen before anything is broadcast. Anything ambiguous (an error that might mean the transaction already went out) gets parked for manual review instead of being auto-retried, so a flaky RPC response can never cause a double payout.
+
+## Keeping the free board honest
+
+Free play is the obvious abuse target: spin up sockets, farm the leaderboard. Scores are computed server-side from real game state, so you cannot just post a number. The rate limiter already capped new connections and game starts per IP, but nothing stopped one IP from holding a pile of sockets open, so I added a per-IP concurrent-socket cap. Not bulletproof against a determined botnet, but it raises the cost of the cheap attacks well past worthwhile.
+
+## Stack
+
+Node.js and Socket.io for real-time game state, chat, and live spectating. PostgreSQL for everything durable, with money handled in integer atomic units and idempotent, transactional writes. Monero and Wownero wallet-RPC for payments and payouts. The client is plain JavaScript with a tile renderer; no framework, because the game is a grid and a render loop.
+
+The whole thing is MIT-licensed and public: [github.com/Such-Software/wownerogue](https://github.com/Such-Software/wownerogue). If you want to see exactly how the fairness check, the block-timing loop, or the payout batching work, the answer is in there rather than in this post.
+
+## Play it
+
+<WownerogueLinks />
+
+Queue up, escape before the block lands, and check your seed afterward. If you escape with the bag on the Monero instance, the stagenet XMR is real (and worthless, which is the point).

@@ -88,6 +88,20 @@ export function SuchMoonLaunchStoreButtons() {
   );
 }
 
+export function WownerogueLinks() {
+  // Wownerogue is a browser game, not a store app: link the two live instances + source.
+  return (
+    <StoreButtons
+      links={[]}
+      extraLinks={[
+        { href: "https://play.wowne.ro", label: "Play Free (Wownero)" },
+        { href: "https://monerogue.app", label: "Monero Stagenet" },
+        { href: "https://github.com/Such-Software/wownerogue", label: "Source on GitHub" },
+      ]}
+    />
+  );
+}
+
 export function BauhausEchoStoreButtons() {
   return (
     <StoreButtons
