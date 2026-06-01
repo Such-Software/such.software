@@ -27,8 +27,8 @@ const apps = [
     borderColor: "border-green-500/20",
     href: "/products/vegan-iq",
     links: [
-      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq" },
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580" },
+      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq" },
     ],
   },
   {
@@ -51,8 +51,8 @@ const apps = [
     borderColor: "border-pink-500/20",
     href: "/products/suchoice",
     links: [
-      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice" },
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/suchoice/id6759626658" },
+      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchoice" },
     ],
   },
   {
@@ -63,9 +63,9 @@ const apps = [
     borderColor: "border-amber-500/20",
     href: "/products/such-moon-launch",
     links: [
+      { platform: "apple" as const, href: null },
       // Google Play live; Apple in review (null renders a disabled "Coming Soon").
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },
-      { platform: "apple" as const, href: null },
     ],
   },
 ];
