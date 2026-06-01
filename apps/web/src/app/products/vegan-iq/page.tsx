@@ -15,7 +15,11 @@ export const metadata: Metadata = {
     title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
     description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
     type: "website",
-    images: [{ url: "/images/products/vegan-iq.png", width: 512, height: 512, alt: "Vegan IQ" }],
+    images: ["/images/og/vegan-iq.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/vegan-iq.png"],
   },
 };
 

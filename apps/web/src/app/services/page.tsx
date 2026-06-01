@@ -6,7 +6,16 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@repo/ui/components/card";
+import { JsonLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
+
+const faqs = [
+  { q: "What does Such Software build?", a: "Custom e-commerce on Medusa v2, real-time web apps and multiplayer experiences, and cryptocurrency and Monero integrations and consulting. We work across the stack, from backend infrastructure to accessible front-ends." },
+  { q: "Where are you based?", a: "We are a software studio in Kennett Square, Pennsylvania, working with clients remotely across the US and beyond." },
+  { q: "Do you build for accessibility?", a: "Yes. We build to WCAG 2.2 and audit for accessibility and Core Web Vitals as part of every project, not as an afterthought." },
+  { q: "How does a project start?", a: "Reach out through the contact form with what you need. We scope it, propose an approach, and from there it can run as a fixed project or a performance-based revenue-share partnership." },
+  { q: "Do you take revenue-share work?", a: "Yes. For a limited number of partners we build and operate products (such as webshops) for a share of revenue instead of a large upfront fee, so our incentives line up with yours." },
+];
 
 export const metadata: Metadata = {
   title: "Medusa, Web App & Crypto Development Services | Such Software",
@@ -24,6 +33,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground overflow-hidden">
+      <JsonLd data={faqLd(faqs)} />
       <DataGrid />
       <Header />
 
@@ -168,6 +178,18 @@ export default function ServicesPage() {
                     With us since day one. Five years on WordPress, migrating to a custom Medusa v2 storefront this spring.
                 </p>
             </Card>
+        </ScrollReveal>
+
+        <ScrollReveal className="mt-20">
+            <h2 className="text-3xl font-bold mb-8 tracking-tight">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+                {faqs.map((f) => (
+                    <div key={f.q}>
+                        <h3 className="text-xl font-bold mb-1">{f.q}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{f.a}</p>
+                    </div>
+                ))}
+            </div>
         </ScrollReveal>
 
         <ScrollReveal className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">

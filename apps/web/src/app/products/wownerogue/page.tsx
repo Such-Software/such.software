@@ -3,7 +3,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { WownerogueLinks } from "@/components/store-buttons";
 import Link from "next/link";
-import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,8 +25,21 @@ export const metadata: Metadata = {
     description: "A provably-fair, blockchain-synced multiplayer roguelike. Escape the dungeon before the next block. Free in-browser at play.wowne.ro.",
     type: "website",
     url: "/products/wownerogue",
+    images: ["/images/og/wownerogue.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/wownerogue.png"],
   },
 };
+
+const faqs = [
+  { q: "What is a provably-fair game?", a: "A game whose outcome can be cryptographically verified after the fact. Before your run, the server publishes a SHA-256 commitment of a secret seed; afterward it reveals the seed. You hash the seed and confirm it matches the commitment, which proves the dungeon was fixed before you started and not rigged against you." },
+  { q: "Is Wownerogue free to play?", a: "Yes. play.wowne.ro is free to play, with optional paid entry for the Hall of Champions leaderboard. The monerogue.app instance runs on Monero stagenet, where coins have no real value." },
+  { q: "Do I need a wallet or a download?", a: "No download: it runs in your browser. You only need a Monero or Wownero address if you want to receive a payout on the payout instance." },
+  { q: "How does the block-timing deadline work?", a: "Each round ends on a new Monero or Wownero block. Block times are random (roughly two minutes on average), so your deadline to escape is never the same twice. That randomness is the core of the game." },
+  { q: "Is Wownerogue open source?", a: "Yes, it is MIT-licensed. The full server and client are public on GitHub at github.com/Such-Software/wownerogue." },
+];
 
 // VideoGame structured data: the highest-value rich result for a game query.
 const jsonLd = {
@@ -77,6 +90,7 @@ export default function WowneroguePage() {
         { name: "Wownerogue", path: "/products/wownerogue" },
       ])} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={faqLd(faqs)} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">
@@ -164,6 +178,16 @@ export default function WowneroguePage() {
             <li><strong>Storage:</strong> PostgreSQL with atomic, idempotent money handling in integer units.</li>
             <li><strong>Open source:</strong> MIT-licensed. The whole thing is on <a href="https://github.com/Such-Software/wownerogue" target="_blank" rel="noopener noreferrer" className="text-orange-600 dark:text-orange-400 hover:underline">GitHub</a>.</li>
           </ul>
+        </div>
+
+        <h2 className="text-2xl font-bold mb-6">FAQ</h2>
+        <div className="space-y-6 mb-12">
+          {faqs.map((f) => (
+            <div key={f.q}>
+              <h3 className="font-bold mb-1 text-orange-600 dark:text-orange-400">{f.q}</h3>
+              <p className="text-muted-foreground">{f.a}</p>
+            </div>
+          ))}
         </div>
 
         <p className="text-muted-foreground mb-12">

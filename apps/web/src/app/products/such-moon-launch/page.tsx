@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
     description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
     type: "website",
+    images: ["/images/og/such-moon-launch.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/such-moon-launch.png"],
   },
 };
 

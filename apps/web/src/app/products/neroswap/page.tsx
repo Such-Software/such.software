@@ -3,7 +3,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { Button } from "@repo/ui/components/button";
 import Link from "next/link";
-import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbLd, softwareAppLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,6 +17,11 @@ export const metadata: Metadata = {
       "Compare live Monero, Wownero, and Bitcoin prices across 6 DEX and no-KYC CEX orderbooks in real time. No accounts, no custody, no tracking.",
     type: "website",
     url: "https://such.software/products/neroswap",
+    images: ["/images/og/neroswap.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/neroswap.png"],
   },
   keywords: [
     "neroswap",
@@ -32,6 +37,13 @@ export const metadata: Metadata = {
     "privacy coin exchange",
   ],
 };
+
+const faqs = [
+  { q: "Is Neroswap KYC-free?", a: "Yes. Neroswap aggregates public orderbook data and never asks for an account or identity. Every exchange it lists is either fully decentralized or no-KYC." },
+  { q: "Does Neroswap hold my coins?", a: "No. Neroswap is a read-only price and orderbook aggregator, not an exchange or custodian. You trade on whichever source venue you choose; Neroswap never touches funds." },
+  { q: "What does Neroswap actually do?", a: "It pulls live prices from six DEX and no-KYC CEX venues and compares Monero, Wownero, and Bitcoin markets in real time, then links each row straight to the source market so you can trade at the best price." },
+  { q: "Which coins are supported?", a: "Monero (XMR), Wownero (WOW), and Bitcoin (BTC) are the headline markets, alongside other pairs offered by the supported exchanges." },
+];
 
 const exchanges = [
   {
@@ -110,6 +122,7 @@ export default function NeroswapPage() {
         price: "0",
         offerUrl: "https://neroswap.com",
       })} />
+      <JsonLd data={faqLd(faqs)} />
       <Header />
       <div
         id="main-content"
@@ -230,7 +243,17 @@ export default function NeroswapPage() {
           </Link>
         </div>
 
-        <p className="text-sm text-muted-foreground mt-12">
+        <h2 className="text-2xl font-bold mt-12 mb-6">FAQ</h2>
+        <div className="space-y-6 mb-12">
+          {faqs.map((f) => (
+            <div key={f.q}>
+              <h3 className="font-bold mb-1 text-yellow-600 dark:text-yellow-400">{f.q}</h3>
+              <p className="text-muted-foreground">{f.a}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-sm text-muted-foreground">
           Related:{" "}
           <Link href="/products/smirk-wallet" className="text-yellow-600 dark:text-yellow-400 underline">Smirk Wallet</Link>,{" "}
           <Link href="/products/wownerogue" className="text-yellow-600 dark:text-yellow-400 underline">Wownerogue</Link>, and our{" "}

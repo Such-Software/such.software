@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     title: "Custom Web Apps & Real-Time Platforms | Such Software",
     description: "Fast, accessible real-time web apps: multiplayer games, live dashboards, and crypto platforms with WebSocket sync. Next.js, Socket.io, WebRTC.",
     type: "website",
+    images: ["/images/og/custom-websites.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/custom-websites.png"],
   },
 };
 

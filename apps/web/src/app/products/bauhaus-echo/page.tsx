@@ -15,7 +15,11 @@ export const metadata: Metadata = {
     title: "Bauhaus Echo: Visual Memory Puzzle Game | Such Software",
     description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
     type: "website",
-    images: [{ url: "/images/products/bauhaus-echo.png", width: 512, height: 512, alt: "Bauhaus Echo" }],
+    images: ["/images/og/bauhaus-echo.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/bauhaus-echo.png"],
   },
 };
 

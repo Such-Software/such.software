@@ -70,6 +70,19 @@ export function softwareAppLd(opts: SoftwareAppOpts) {
   return data;
 }
 
+/** FAQPage node. Pair it with the SAME questions/answers rendered visibly on the page. */
+export function faqLd(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: it.q,
+      acceptedAnswer: { "@type": "Answer", text: it.a },
+    })),
+  };
+}
+
 /** BlogPosting node for an article page. */
 export function articleLd(opts: { title: string; description: string; slug: string; date: string }) {
   const url = `${SITE}/blog/${opts.slug}`;

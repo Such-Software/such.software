@@ -15,7 +15,11 @@ export const metadata: Metadata = {
     title: "Suchoice: Spin the Wheel & AI Decision Maker App | Such Software",
     description: "Can't decide? Snap a photo and let AI read your options, spin the wheel, flip a coin, or roll 3D dice. The fun decision-maker app for iOS and Android.",
     type: "website",
-    images: [{ url: "/images/products/suchoice.png", width: 512, height: 512, alt: "Suchoice" }],
+    images: ["/images/og/suchoice.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/suchoice.png"],
   },
 };
 

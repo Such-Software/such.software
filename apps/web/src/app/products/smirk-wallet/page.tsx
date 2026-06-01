@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     title: "Smirk Wallet: Non-Custodial Crypto Tipping by Username",
     description: "Tip BTC, LTC, XMR, WOW, and GRIN on Telegram or Discord by username. A non-custodial browser wallet: your keys never leave your device.",
     type: "website",
+    images: ["/images/og/smirk-wallet.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/og/smirk-wallet.png"],
   },
 };
 
