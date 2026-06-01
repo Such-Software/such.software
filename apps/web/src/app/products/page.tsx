@@ -19,20 +19,6 @@ export const metadata: Metadata = {
 
 const products = [
   {
-    slug: "wownerogue",
-    title: "Wownerogue",
-    description: "A provably-fair multiplayer roguelike synced to Monero and Wownero block times. Play free in the browser, escape the dungeon, earn on-chain payouts.",
-    color: "orange",
-    icon: "/images/products/privacy-labs.png",
-  },
-  {
-    slug: "neroswap",
-    title: "Neroswap",
-    description: "Aggregated DEX & CEX orderbook data. Compare Monero, Wownero, and Bitcoin prices across 6 exchanges in real time.",
-    color: "yellow",
-    icon: "/images/products/neroswap.png",
-  },
-  {
     slug: "webshops",
     title: "Webshops",
     description: "Custom online stores on revenue-share pricing. No upfront cost. Built on headless Medusa.",
@@ -80,6 +66,20 @@ const products = [
     description: "Vry rocket. Much landing. Wow! Wownero-themed pixel rocket arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Android, iOS, Web, Desktop.",
     color: "amber",
     icon: "/images/products/such-moon-launch.png",
+  },
+  {
+    slug: "wownerogue",
+    title: "Wownerogue",
+    description: "A provably-fair multiplayer roguelike synced to Monero and Wownero block times. Play free in the browser, escape the dungeon, earn on-chain payouts.",
+    color: "orange",
+    icon: "/images/products/privacy-labs.png",
+  },
+  {
+    slug: "neroswap",
+    title: "Neroswap",
+    description: "Aggregated DEX & CEX orderbook data. Compare Monero, Wownero, and Bitcoin prices across 6 exchanges in real time.",
+    color: "yellow",
+    icon: "/images/products/neroswap.png",
   },
 ];
 

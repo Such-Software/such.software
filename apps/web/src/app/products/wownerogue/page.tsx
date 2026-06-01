@@ -117,20 +117,24 @@ export default function WowneroguePage() {
 
         <h2 className="text-2xl font-bold mb-6">Two Worlds</h2>
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <Card className="glass-card border-orange-500/20">
-            <h3 className="text-xl font-bold mb-2">play.wowne.ro</h3>
-            <p className="text-muted-foreground text-sm">
-              The Wownero mainnet instance: free to play, with paid entry for the Hall of Champions.
-              No crypto payouts, all the tension. The friendly place to learn the game.
-            </p>
-          </Card>
-          <Card className="glass-card border-orange-500/20">
-            <h3 className="text-xl font-bold mb-2">monerogue.app</h3>
-            <p className="text-muted-foreground text-sm">
-              The Monero stagenet instance, where escaping pays out stagenet XMR from a house wallet.
-              Stagenet coins have no real value, so it is a safe sandbox for the full payout loop.
-            </p>
-          </Card>
+          <a href="https://play.wowne.ro" target="_blank" rel="noopener noreferrer">
+            <Card className="glass-card border-orange-500/20 hover:border-orange-500/50 transition-colors cursor-pointer h-full">
+              <h3 className="text-xl font-bold mb-2 text-orange-600 dark:text-orange-400">play.wowne.ro &rarr;</h3>
+              <p className="text-muted-foreground text-sm">
+                The Wownero mainnet instance: free to play, with paid entry for the Hall of Champions.
+                No crypto payouts, all the tension. The friendly place to learn the game.
+              </p>
+            </Card>
+          </a>
+          <a href="https://monerogue.app" target="_blank" rel="noopener noreferrer">
+            <Card className="glass-card border-orange-500/20 hover:border-orange-500/50 transition-colors cursor-pointer h-full">
+              <h3 className="text-xl font-bold mb-2 text-orange-600 dark:text-orange-400">monerogue.app &rarr;</h3>
+              <p className="text-muted-foreground text-sm">
+                The Monero stagenet instance, where escaping pays out stagenet XMR from a house wallet.
+                Stagenet coins have no real value, so it is a safe sandbox for the full payout loop.
+              </p>
+            </Card>
+          </a>
         </div>
 
         <h2 className="text-2xl font-bold mb-6">How a Run Works</h2>

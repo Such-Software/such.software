@@ -20,19 +20,6 @@ export const metadata: Metadata = {
 
 const apps = [
   {
-    name: "Such Moon Launch",
-    tagline: "Vry rocket. Much landing. Wow!",
-    icon: "/images/products/such-moon-launch.png",
-    color: "text-amber-600 dark:text-amber-400",
-    borderColor: "border-amber-500/20",
-    href: "/products/such-moon-launch",
-    links: [
-      // null = render disabled "Coming Soon" button; flip to real URLs once live.
-      { platform: "google" as const, href: null },
-      { platform: "apple" as const, href: null },
-    ],
-  },
-  {
     name: "Vegan IQ",
     tagline: "Plant-based trivia backed by real data",
     icon: "/images/products/vegan-iq.png",
@@ -68,20 +55,33 @@ const apps = [
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/suchoice/id6759626658" },
     ],
   },
+  {
+    name: "Such Moon Launch",
+    tagline: "Vry rocket. Much landing. Wow!",
+    icon: "/images/products/such-moon-launch.png",
+    color: "text-amber-600 dark:text-amber-400",
+    borderColor: "border-amber-500/20",
+    href: "/products/such-moon-launch",
+    links: [
+      // Google Play live; Apple in review (null renders a disabled "Coming Soon").
+      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },
+      { platform: "apple" as const, href: null },
+    ],
+  },
 ];
 
 export default function LinksPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
-      <div id="main-content" className="z-10 w-full max-w-lg mx-auto py-20 px-4 pb-24 md:pb-20">
+      <div id="main-content" className="z-10 w-full max-w-3xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <h1 className="text-3xl font-bold mb-2 text-center">Such Software</h1>
         <p className="text-muted-foreground text-center mb-10">Our apps</p>
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {apps.map((app, i) => (
-            <ScrollReveal key={app.name} delay={i * 0.08}>
-              <div className={`rounded-xl border ${app.borderColor} bg-card p-6`}>
+            <ScrollReveal key={app.name} delay={(i % 2) * 0.08}>
+              <div className={`h-full rounded-xl border ${app.borderColor} bg-card p-6`}>
                 <div className="flex items-center gap-4 mb-3">
                   <Image
                     src={app.icon}

@@ -72,13 +72,11 @@ export function SuchoiceStoreButtons() {
 }
 
 export function SuchMoonLaunchStoreButtons() {
-  // Both stores submitted 2026-05-18; pending review. Flip null → real URLs
-  // once the app is live (Apple assigns the appstore.com /id<NUM> at first
-  // approval; Google URL is predictable as id=com.suchsoftware.suchmoonlaunch).
+  // Google Play is live; Apple still in review (flip null → real URL once approved).
   return (
     <StoreButtons
       links={[
-        { platform: "google", href: null },
+        { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },
         { platform: "apple", href: null },
       ]}
       extraLinks={[

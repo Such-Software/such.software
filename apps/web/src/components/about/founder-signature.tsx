@@ -44,7 +44,7 @@ export const FounderSignature = () => {
             He previously co-founded <span className="text-foreground font-semibold">Patrn LLC</span> (art101.io), a series of art-history NFT drops, and <span className="text-foreground font-semibold">Tabby Labs</span>, which was developing a cryptocurrency wallet with an interactive world inside.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-4">
-            He most recently taught engineering at <span className="text-foreground font-semibold">Cecil College</span> and senior-level materials engineering (microfabrication, nanomaterials) at <span className="text-foreground font-semibold">Frostburg State University</span>. Active in cryptocurrency since 2014; <a href="https://github.com/jwinterm" target="_blank" rel="noopener noreferrer" className="text-foreground font-semibold underline decoration-primary/50 hover:text-primary transition-colors">GitHub</a> for the receipts.
+            He most recently taught engineering at <span className="text-foreground font-semibold">Cecil College</span> and senior-level materials engineering (microfabrication, nanomaterials) at <span className="text-foreground font-semibold">Frostburg State University</span>. Active in cryptocurrency since 2014, with a public track record on <a href="https://github.com/jwinterm" target="_blank" rel="noopener noreferrer" className="text-foreground font-semibold underline decoration-primary/50 hover:text-primary transition-colors">GitHub</a>.
           </p>
         </div>
       </div>
