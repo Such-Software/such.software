@@ -10,7 +10,8 @@ import { JsonLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 const faqs = [
-  { q: "What does Such Software build?", a: "Custom e-commerce on Medusa v2, real-time web apps and multiplayer experiences, and cryptocurrency and Monero integrations and consulting. We work across the stack, from backend infrastructure to accessible front-ends." },
+  { q: "What does Such Software build?", a: "Custom e-commerce on Medusa v2, real-time web apps and multiplayer experiences, cryptocurrency and Monero integrations, and PhD-led nuclear and radiation modeling. We work across the stack, from backend infrastructure to accessible front-ends." },
+  { q: "Do you offer nuclear and radiation consulting?", a: "Yes, for select engagements. Our founder holds a PhD in radiation-detector materials and spent six years at Lawrence Livermore National Laboratory, with a specialty in MCNP Monte Carlo transport, plus shielding and spent-fuel/dry-cask work at Holtec. We take on Monte Carlo modeling (MCNP, GEANT4), shielding and dose calculations, detector design, and radiation-science training. Contact us for rates." },
   { q: "Where are you based?", a: "We are a software studio in Kennett Square, Pennsylvania, working with clients remotely across the US and beyond." },
   { q: "Do you build for accessibility?", a: "Yes. We build to WCAG 2.2 and audit for accessibility and Core Web Vitals as part of every project, not as an afterthought." },
   { q: "How does a project start?", a: "Reach out through the contact form with what you need. We scope it, propose an approach, and from there it can run as a fixed project or a performance-based revenue-share partnership." },
@@ -18,14 +19,14 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "Medusa, Web App & Crypto Development Services | Such Software",
-  description: "Custom e-commerce on Medusa v2, real-time web apps, and Monero/crypto consulting. A Kennett Square, PA studio building for scale, accessibility, and performance.",
+  title: "Web, Crypto & Nuclear Modeling Services | Such Software",
+  description: "Custom e-commerce on Medusa v2, real-time web apps, Monero/crypto consulting, and PhD-led nuclear & radiation modeling (MCNP, GEANT4). A Kennett Square, PA studio.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Medusa, Web App & Crypto Development Services | Such Software",
-    description: "Custom e-commerce on Medusa v2, real-time web apps, and Monero/crypto consulting. A Kennett Square, PA studio building for scale, accessibility, and performance.",
+    title: "Web, Crypto & Nuclear Modeling Services | Such Software",
+    description: "Custom e-commerce on Medusa v2, real-time web apps, Monero/crypto consulting, and PhD-led nuclear & radiation modeling (MCNP, GEANT4). A Kennett Square, PA studio.",
     type: "website",
   },
 };
@@ -44,7 +45,8 @@ export default function ServicesPage() {
             Specialized Solutions
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Focused expertise in commerce, crypto, and custom web applications.
+            Focused expertise in commerce and custom web apps, plus consulting: from payments
+            and crypto to nuclear and radiation modeling.
           </p>
         </div>
 
@@ -73,8 +75,8 @@ export default function ServicesPage() {
                 <Card className="glass-card hover:border-indigo-500/30">
                     <h3 className="text-xl font-bold mb-3">Flexible Architecture</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Model your exact business logic—subscriptions, bundles, B2B pricing,
-                        multi-warehouse inventory—without platform constraints.
+                        Model your exact business logic (subscriptions, bundles, B2B pricing,
+                        multi-warehouse inventory) without platform constraints.
                     </p>
                 </Card>
                 <Card className="glass-card hover:border-indigo-500/30">
@@ -87,7 +89,7 @@ export default function ServicesPage() {
                     <h3 className="text-xl font-bold mb-3">Performance-First Frontend</h3>
                     <p className="text-base text-muted-foreground leading-relaxed">
                         Custom Next.js storefronts optimized for Core Web Vitals, accessibility,
-                        and conversion—not template bloat.
+                        and conversion, not template bloat.
                     </p>
                 </Card>
             </div>
@@ -119,10 +121,26 @@ export default function ServicesPage() {
             </div>
         </ScrollReveal>
 
+        {/* Consulting umbrella */}
+        <ScrollReveal className="mb-12">
+            <div className="text-left section-container border-l-4 border-l-teal-500">
+                <h2 className="text-3xl font-bold mb-2">Consulting</h2>
+                <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+                    Beyond build work, we consult where specialized, hard-won expertise matters. We
+                    advise on payment architecture and orchestration, and on cryptocurrency and Monero
+                    integration. Most distinctively, we take on nuclear and radiation modeling.
+                </p>
+                <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed mt-3">
+                    The nuclear work is our standout: PhD-led Monte Carlo transport, shielding analysis,
+                    detector design, and training, grounded in years at a national lab. Details below.
+                </p>
+            </div>
+        </ScrollReveal>
+
         {/* Crypto Section */}
         <ScrollReveal className="mb-24">
             <div className="text-left mb-10 section-container border-l-4 border-l-cyan-500">
-                <h2 className="text-3xl font-bold mb-2">Cryptocurrency & Payment Consulting</h2>
+                <h2 className="text-3xl font-bold mb-2">Cryptocurrency &amp; Payments</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
                     Bridge traditional payments and decentralized protocols with secure, auditable infrastructure.
                 </p>
@@ -143,6 +161,84 @@ export default function ServicesPage() {
                     </p>
                 </Card>
             </div>
+        </ScrollReveal>
+
+        {/* Nuclear & Radiation Modeling Section */}
+        <ScrollReveal className="mb-24">
+            <div className="text-left mb-10 section-container border-l-4 border-l-cyan-400">
+                <h2 className="text-3xl font-bold mb-2">Nuclear &amp; Radiation Modeling</h2>
+                <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+                    PhD-led radiation transport and nuclear expertise, available for select engagements.
+                    From Monte Carlo modeling to shielding analysis, we bring lab-grade rigor to hard
+                    problems: modeling, analysis, and consulting.
+                </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <Card className="glass-card hover:border-cyan-400/30">
+                    <h3 className="text-xl font-bold mb-3">Monte Carlo Transport</h3>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        Radiation transport modeling in <span className="font-semibold text-foreground">MCNP</span>{" "}
+                        (<a href="https://scholar.google.com/citations?user=xTyYIKkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground underline decoration-cyan-400/50 hover:text-primary transition-colors">multiple peer-reviewed papers</a>)
+                        and <span className="font-semibold text-foreground">GEANT4</span>, for
+                        detectors, sources, and complex geometries.
+                    </p>
+                </Card>
+                <Card className="glass-card hover:border-cyan-400/30">
+                    <h3 className="text-xl font-bold mb-3">Shielding &amp; Dose</h3>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        Shielding calculations and dose analysis, including spent-fuel handling and
+                        dry-cask storage optimization.
+                    </p>
+                </Card>
+                <Card className="glass-card hover:border-cyan-400/30">
+                    <h3 className="text-xl font-bold mb-3">Detectors &amp; Isotopes</h3>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        Radiation detector design and characterization, plus radioisotope power
+                        (RTG / betavoltaic) modeling.
+                    </p>
+                </Card>
+                <Card className="glass-card hover:border-cyan-400/30">
+                    <h3 className="text-xl font-bold mb-3">Training &amp; Curriculum</h3>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        Radiation-science training and coursework. See our open-source{" "}
+                        <a
+                            href="https://jwinterm.github.io/geant4-radiation-labs/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-foreground underline decoration-cyan-400/50 hover:text-primary transition-colors"
+                        >
+                            GEANT4 radiation labs
+                        </a>.
+                    </p>
+                </Card>
+            </div>
+            <Card className="glass-card border-cyan-400/20">
+                <h3 className="text-lg font-bold mb-4">Why us</h3>
+                <ul className="space-y-2 text-base text-muted-foreground leading-relaxed">
+                    <li>
+                        <span className="font-semibold text-foreground">PhD in radiation-detector materials</span>, UT-Dallas (2014)
+                    </li>
+                    <li>
+                        <span className="font-semibold text-foreground">Lawrence Livermore National Laboratory</span> (2015–2021): detector systems, radioisotope battery program, MCNP5 publications
+                    </li>
+                    <li>
+                        <span className="font-semibold text-foreground">Holtec International</span>: radiation shielding and spent-fuel-to-dry-cask optimization
+                    </li>
+                    <li>
+                        <span className="font-semibold text-foreground">College-level instructor</span>: author of open-source GEANT4 radiation labs
+                    </li>
+                </ul>
+                <p className="text-sm text-muted-foreground mt-5">
+                    Select engagements, PhD-led.{" "}
+                    <Link href="/#contact" className="font-semibold text-foreground underline decoration-cyan-400/50 hover:text-primary transition-colors">
+                        Contact us for rates
+                    </Link>.
+                </p>
+                <p className="text-xs text-muted-foreground/70 mt-3">
+                    We provide modeling, analysis, and consulting. We are not a licensed
+                    professional-engineering (PE) firm and do not provide stamped engineering deliverables.
+                </p>
+            </Card>
         </ScrollReveal>
 
         {/* Recent Work */}

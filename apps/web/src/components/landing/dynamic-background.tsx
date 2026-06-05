@@ -15,9 +15,11 @@ const NebulaField = dynamic(
 
 interface DynamicBackgroundProps {
   nebulaPosition?: { x: number; y: number } | null;
+  /** When false, the nebula stays hidden (e.g. while the home splash is active). */
+  visible?: boolean;
 }
 
-export function DynamicBackground({ nebulaPosition }: DynamicBackgroundProps) {
+export function DynamicBackground({ nebulaPosition, visible = true }: DynamicBackgroundProps) {
   const { resolvedTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [showNebula, setShowNebula] = useState(false);
@@ -54,15 +56,19 @@ export function DynamicBackground({ nebulaPosition }: DynamicBackgroundProps) {
   const effectiveTheme = resolvedTheme || systemTheme || 'dark';
   const themeMode = effectiveTheme === 'dark' ? 'dark' : 'light';
 
-  if (!showNebula) {
+  // While the splash is active (visible === false) keep the nebula/monitor hidden —
+  // the splash provides its own Cherenkov glow. Reveal it once the visitor enters.
+  if (!showNebula || !visible) {
     return <div className="fixed inset-0 z-0 h-screen w-screen bg-background" />;
   }
 
   return (
-    <NebulaField
-      className="fixed inset-0 z-0 h-screen w-screen"
-      themeMode={themeMode}
-      position={nebulaPosition ?? undefined}
-    />
+    <div className="fixed inset-0 z-0 h-screen w-screen animate-in fade-in duration-700">
+      <NebulaField
+        className="absolute inset-0 h-full w-full"
+        themeMode={themeMode}
+        position={nebulaPosition ?? undefined}
+      />
+    </div>
   );
 }

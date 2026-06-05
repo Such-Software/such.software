@@ -5,8 +5,19 @@ import { usePathname } from "next/navigation";
 import { SiteLogo } from "./site-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-export function Header() {
+/**
+ * On the home page the splash owns the first screen, so the header is `floating`
+ * (fixed) and only shown once the visitor has `visible`-entered the site. Other
+ * pages use the default always-on sticky header.
+ */
+export function Header({ floating = false, visible = true }: { floating?: boolean; visible?: boolean }) {
   const pathname = usePathname();
+
+  const positionClasses = floating
+    ? `fixed top-0 inset-x-0 transition-all duration-500 ${
+        visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 invisible"
+      }`
+    : "sticky top-0";
 
   return (
     <>
@@ -16,7 +27,7 @@ export function Header() {
       >
         Skip to main content
       </a>
-      <header className="z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl sticky top-0 rounded-b-3xl border-b border-border/50">
+      <header className={`z-50 w-full max-w-7xl mx-auto flex justify-between items-center p-6 bg-background/50 backdrop-blur-3xl rounded-b-3xl border-b border-border/50 ${positionClasses}`}>
         <div className="flex items-center gap-4">
           <SiteLogo />
           <nav className="hidden md:flex gap-6 text-sm font-medium" aria-label="Main navigation">

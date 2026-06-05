@@ -12,7 +12,11 @@ const navItems = [
   { href: "/about", label: "About", icon: FaCircleInfo },
 ];
 
-export function MobileNav() {
+/**
+ * `visible` is driven by the home-page "entered" state so the bottom bar stays
+ * hidden under the splash. Defaults to visible everywhere else.
+ */
+export function MobileNav({ visible = true }: { visible?: boolean }) {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
@@ -20,9 +24,13 @@ export function MobileNav() {
     return pathname.startsWith(href);
   };
 
+  const visibilityClasses = visible
+    ? "translate-y-0 opacity-100"
+    : "translate-y-full opacity-0 invisible";
+
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-xl border-t border-border/50"
+      className={`fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur-xl border-t border-border/50 transition-all duration-300 ${visibilityClasses}`}
       aria-label="Mobile navigation"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >

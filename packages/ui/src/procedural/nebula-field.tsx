@@ -73,7 +73,7 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
       animate={controls}
       className={cn(
         "transition-colors duration-1000",
-        themeMode === 'light' ? "text-slate-400" : "text-emerald-500/50"
+        themeMode === 'light' ? "text-sky-400/80" : "text-cyan-400/50"
       )}
     />
   );
@@ -82,7 +82,7 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
 export const NebulaField = ({ className, density = 8, themeMode = 'dark', position }: NebulaProps) => {
   // === ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL RETURNS ===
   const monitorControls = useAnimation();
-  const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-slate-400" : "text-emerald-500/60");
+  const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-sky-500" : "text-cyan-400/70");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   // Parallax Scroll hooks (called unconditionally)
@@ -108,7 +108,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   // Sync color with theme
   useEffect(() => {
     if (!prefersReducedMotion) {
-      setMonitorColor(themeMode === 'light' ? "text-slate-300" : "text-emerald-500/40");
+      setMonitorColor(themeMode === 'light' ? "text-sky-400" : "text-cyan-400/50");
     }
   }, [themeMode, prefersReducedMotion]);
 
@@ -135,8 +135,8 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
 
   const handleHit = useCallback(() => {
      const colors = themeMode === 'light'
-        ? ["text-slate-400", "text-blue-400", "text-indigo-400", "text-emerald-400"]
-        : ["text-emerald-500/50", "text-blue-500/50", "text-purple-500/50", "text-cyan-500/50", "text-teal-500/50"];
+        ? ["text-sky-400", "text-cyan-400", "text-blue-400", "text-sky-500"]
+        : ["text-cyan-400/60", "text-sky-400/50", "text-blue-400/50", "text-cyan-300/50", "text-teal-400/50"];
 
      setMonitorColor(colors[Math.floor(Math.random() * colors.length)]);
 
@@ -153,23 +153,51 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
 
   // === CONDITIONAL RETURNS AFTER ALL HOOKS ===
 
-  // Return static background for reduced motion users
+  // Cherenkov-blue radial glow ("reactor pool" bloom), positioned near the convergence point.
+  const glowColor = themeMode === 'light' ? "rgba(56,189,248,0.22)" : "rgba(34,211,238,0.18)";
+  const glowStyle = {
+    background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`,
+  } as const;
+
+  // Return static background for reduced motion users (still tinted Cherenkov blue, no motion).
   if (prefersReducedMotion) {
     return (
       <div className={cn(
         "absolute inset-0 overflow-hidden pointer-events-none z-0",
         themeMode === 'light'
-          ? "bg-gradient-to-br from-slate-100 via-slate-50 to-white"
-          : "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",
+          ? "bg-gradient-to-br from-sky-50 via-slate-50 to-white"
+          : "bg-gradient-to-br from-slate-950 via-slate-900 to-[#0a1622]",
         className
-      )} />
+      )}>
+        <div
+          className="absolute h-[70vmax] w-[70vmax] -translate-x-1/2 -translate-y-1/2"
+          style={{ ...glowStyle, left: `${computerX}%`, top: `${computerY}%` }}
+        />
+      </div>
     );
   }
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
-      
-      <motion.div 
+
+      {/* Base Cherenkov gradient wash */}
+      <div className={cn(
+        "absolute inset-0",
+        themeMode === 'light'
+          ? "bg-gradient-to-br from-sky-50/60 via-transparent to-transparent"
+          : "bg-gradient-to-br from-slate-950 via-slate-900/80 to-[#0a1622]"
+      )} />
+
+      {/* Slowly-pulsing Cherenkov "reactor pool" bloom */}
+      <motion.div
+        className="absolute h-[70vmax] w-[70vmax] -translate-x-1/2 -translate-y-1/2"
+        style={{ ...glowStyle, left: `${computerX}%`, top: `${computerY}%`, y: yRange }}
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: [0.55, 0.9, 0.55], scale: [0.95, 1.05, 0.95] }}
+        transition={{ duration: 11, ease: "easeInOut", repeat: Infinity }}
+      />
+
+      <motion.div
         className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 

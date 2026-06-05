@@ -1,36 +1,35 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { ScrollReveal } from "@/components/scroll-reveal";
-import { Card } from "@repo/ui/components/card";
-import Image from "next/image";
-import Link from "next/link";
+import { ProductsGrid, type Product } from "@/components/portfolio/products-grid";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Products & Apps: Crypto Tools, Games & Commerce | Such Software",
-  description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk tipping wallet, headless Webshops, and our mobile games.",
+  title: "Our Products & Apps: Crypto Tools, Nuclear Games & Commerce | Such Software",
+  description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
   alternates: { canonical: "/products" },
   openGraph: {
-    title: "Our Products & Apps: Crypto Tools, Games & Commerce | Such Software",
-    description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk tipping wallet, headless Webshops, and our mobile games.",
+    title: "Our Products & Apps: Crypto Tools, Nuclear Games & Commerce | Such Software",
+    description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
     type: "website",
   },
 };
 
-const products = [
+const products: Product[] = [
   {
     slug: "webshops",
     title: "Webshops",
     description: "Custom online stores on revenue-share pricing. No upfront cost. Built on headless Medusa.",
     color: "emerald",
     icon: "/images/products/occupy-wallets.png",
+    releaseDate: "2025-01-01",
   },
   {
     slug: "custom-websites",
     title: "Custom Websites",
     description: "Real-time web apps, multiplayer games, and live dashboards. Built on Next.js, Socket.io, and WebRTC.",
     color: "purple",
-    icon: "/images/products/neroswap.png",
+    icon: "/images/products/custom-websites.svg",
+    releaseDate: "2025-01-01",
   },
   {
     slug: "smirk-wallet",
@@ -38,6 +37,7 @@ const products = [
     description: "Non-custodial browser wallet for social tipping. BTC, LTC, XMR, WOW, GRIN.",
     color: "amber",
     icon: "/images/products/smirk-wallet.png",
+    releaseDate: "2026-03-01",
   },
   {
     slug: "bauhaus-echo",
@@ -45,6 +45,7 @@ const products = [
     description: "Visual memory puzzle game inspired by Bauhaus design. Android, iOS, Web.",
     color: "blue",
     icon: "/images/products/bauhaus-echo.png",
+    releaseDate: "2026-04-01",
   },
   {
     slug: "suchoice",
@@ -52,6 +53,7 @@ const products = [
     description: "Stop overthinking decisions. Snap a photo, let AI read the options, spin the wheel. Plus coin flip and adventure mode. Android and iOS.",
     color: "pink",
     icon: "/images/products/suchoice.png",
+    releaseDate: "2026-04-01",
   },
   {
     slug: "vegan-iq",
@@ -59,6 +61,7 @@ const products = [
     description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Android and iOS.",
     color: "green",
     icon: "/images/products/vegan-iq.png",
+    releaseDate: "2026-04-01",
   },
   {
     slug: "such-moon-launch",
@@ -66,6 +69,7 @@ const products = [
     description: "Vry rocket. Much landing. Wow! Wownero-themed pixel rocket arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Android, iOS, Web, Desktop.",
     color: "amber",
     icon: "/images/products/such-moon-launch.png",
+    releaseDate: "2026-05-01",
   },
   {
     slug: "wownerogue",
@@ -73,37 +77,44 @@ const products = [
     description: "A provably-fair multiplayer roguelike synced to Monero and Wownero block times. Play free in the browser, escape the dungeon, earn on-chain payouts.",
     color: "orange",
     icon: "/images/products/privacy-labs.png",
+    releaseDate: "2026-06-01",
   },
   {
     slug: "neroswap",
     title: "Neroswap",
     description: "Aggregated DEX & CEX orderbook data. Compare Monero, Wownero, and Bitcoin prices across 6 exchanges in real time.",
     color: "yellow",
-    icon: "/images/products/neroswap.png",
+    icon: "/images/products/neroswap.svg",
+    releaseDate: "2026-03-01",
+  },
+  {
+    slug: "barns-and-neutrons",
+    title: "Barns & Neutrons",
+    description: "A cozy exploration-puzzle game across the real Table of Nuclides—the anti-spreadsheet. Capture neutrons, coax decays, and light up the chart while learning honest nuclear physics. Desktop and mobile.",
+    color: "yellow",
+    icon: "/images/products/barns-and-neutrons.svg",
+    releaseDate: null,
+    comingSoon: true,
+  },
+  {
+    slug: "alpha-doc",
+    title: "Alpha Doc",
+    description: "A top-down academic-horror roguelike. You're the irradiated PhD student—master four kinds of radiation and descend through a warped physics facility to your thesis defense. Desktop and mobile.",
+    color: "orange",
+    icon: "/images/products/alpha-doc.svg",
+    releaseDate: null,
+    comingSoon: true,
+  },
+  {
+    slug: "decay-theory",
+    title: "Decay Theory",
+    description: "A side-scrolling platformer where the world is simulated atom by atom, decaying in real time. Play Erwin, a quantum cat, and learn real nuclear physics. Episode 1 coming to iOS and Android.",
+    color: "cyan",
+    icon: "/images/products/decay-theory.svg",
+    releaseDate: null,
+    comingSoon: true,
   },
 ];
-
-const colorClasses: Record<string, string> = {
-  emerald: "border-emerald-500/30 hover:border-emerald-500/60",
-  purple: "border-purple-500/30 hover:border-purple-500/60",
-  amber: "border-amber-500/30 hover:border-amber-500/60",
-  blue: "border-blue-500/30 hover:border-blue-500/60",
-  pink: "border-pink-500/30 hover:border-pink-500/60",
-  orange: "border-orange-500/30 hover:border-orange-500/60",
-  yellow: "border-yellow-500/30 hover:border-yellow-500/60",
-  green: "border-green-500/30 hover:border-green-500/60",
-};
-
-const titleColors: Record<string, string> = {
-  emerald: "text-emerald-600 dark:text-emerald-400",
-  purple: "text-purple-600 dark:text-purple-400",
-  amber: "text-amber-600 dark:text-amber-400",
-  blue: "text-blue-600 dark:text-blue-400",
-  pink: "text-pink-600 dark:text-pink-400",
-  orange: "text-orange-600 dark:text-orange-400",
-  yellow: "text-yellow-600 dark:text-yellow-400",
-  green: "text-green-600 dark:text-green-400",
-};
 
 export default function ProductsPage() {
   return (
@@ -115,35 +126,12 @@ export default function ProductsPage() {
             Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Tools we have built, from commerce infrastructure to consumer apps.
+            Tools we have built, from commerce infrastructure to consumer apps—plus a trio of
+            nuclear games in development.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {products.map((product, i) => (
-            <ScrollReveal key={product.slug} delay={(i % 2) * 0.08}>
-              <Link href={`/products/${product.slug}`}>
-                <Card className={`glass-card h-full min-h-[200px] ${colorClasses[product.color]} transition-all cursor-pointer`}>
-                  <div className="flex items-center gap-4 mb-3">
-                    <Image
-                      src={product.icon}
-                      alt={`${product.title} icon`}
-                      width={56}
-                      height={56}
-                      className="rounded-xl flex-shrink-0"
-                    />
-                    <h2 className={`text-2xl font-bold ${titleColors[product.color]}`}>
-                      {product.title}
-                    </h2>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {product.description}
-                  </p>
-                </Card>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
+        <ProductsGrid products={products} />
 
         <div className="flex justify-center mt-16 motion-reduce:hidden">
           <img

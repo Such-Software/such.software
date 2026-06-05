@@ -6,7 +6,8 @@ export function ServicesPreview() {
         <div className="text-left mb-8 section-container border-l-4 border-l-emerald-500">
             <h2 className="text-3xl font-bold mb-3 tracking-tight">What We Do</h2>
             <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                We build high-performance e-commerce stores, develop custom apps, and ship our own titles.
+                We build high-performance e-commerce stores, develop custom apps, and ship our own
+                titles, engineered with atomic precision by a studio that sweats the details.
                 Whether you need a storefront, a bespoke tool, or a full product build, we handle the engineering end to end.
             </p>
         </div>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <filter id="bn-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="128" height="128" rx="22" fill="#18202e"/>
+  <!-- faint nuclide-chart grid -->
+  <g stroke="#e6bf3f" stroke-width="1" opacity="0.12" fill="none">
+    <path d="M20 44h88M20 64h88M20 84h88M44 24v80M64 24v80M84 24v80"/>
+  </g>
+  <!-- amber orbit -->
+  <ellipse cx="60" cy="66" rx="40" ry="15" fill="none" stroke="#e6bf3f" stroke-width="2.5" opacity="0.55" transform="rotate(-18 60 66)"/>
+  <!-- nucleus: red protons + cream neutrons -->
+  <g>
+    <circle cx="54" cy="62" r="8" fill="#e0793c"/>
+    <circle cx="66" cy="60" r="8" fill="#ece3cf"/>
+    <circle cx="60" cy="70" r="8" fill="#e0793c"/>
+    <circle cx="70" cy="70" r="8" fill="#ece3cf"/>
+    <circle cx="58" cy="56" r="7" fill="#ece3cf"/>
+    <circle cx="68" cy="64" r="7" fill="#e0793c"/>
+  </g>
+  <!-- incoming neutron (radioactive green) with streak -->
+  <line x1="120" y1="36" x2="92" y2="52" stroke="#93d84f" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="90" cy="53" r="7" fill="#93d84f" filter="url(#bn-glow)"/>
+</svg>
