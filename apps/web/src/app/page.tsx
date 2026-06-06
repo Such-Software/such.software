@@ -105,9 +105,6 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col items-center overflow-hidden">
-      {/* The splash logo is the homepage LCP element on mobile; fetch it immediately
-          so it isn't queued behind render-blocking CSS/JS. */}
-      <link rel="preload" as="image" href="/images/branding/splash-such.svg" fetchPriority="high" />
       <DynamicBackground nebulaPosition={nebulaPosition} visible={entered} />
       <Header floating visible={entered} />
 

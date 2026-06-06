@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { SPLASH_LOGO_SRC } from "./splash-logo-data";
 
 const navButtons = [
   { label: "Portfolio", href: "/products", Icon: LayoutGrid, corner: "left-4 top-6 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
@@ -110,8 +111,10 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
           className={entering ? "splash-zoom" : undefined}
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
         >
+          {/* Data URI (no network request) so the logo paints with FCP; it is the
+              mobile LCP element. */}
           <img
-            src="/images/branding/splash-such.svg"
+            src={SPLASH_LOGO_SRC}
             alt="Such Software"
             fetchPriority="high"
             className="h-auto w-[min(72vw,42vh)]"
