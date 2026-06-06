@@ -25,6 +25,15 @@ export default function Home() {
   const splashRef = useRef<HTMLElement>(null);
   const restoreScroll = useRef(0);
 
+  // Respect prefers-reduced-motion: skip the splash entirely and land straight on
+  // the main hero, on desktop and mobile. Runs before paint, so the splash never
+  // flashes for these visitors.
+  useIsoLayoutEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setEntered(true);
+    }
+  }, []);
+
   // Deliberately place the nebula/monitor just to the left of the hero title, at any
   // screen width (restored from the original hero).
   const titleRef = useRef<HTMLHeadingElement>(null);
