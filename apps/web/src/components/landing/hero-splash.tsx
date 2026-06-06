@@ -145,7 +145,7 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
         />
         <motion.div
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
-          initial={{ opacity: 0, scale: 0.94 }}
+          initial={{ opacity: 1, scale: 1 }}
           animate={entering ? { opacity: [1, 1, 0], scale: [1, 1.06, 1.14] } : { opacity: 1, scale: 1, y: animate ? [0, -8, 0] : 0 }}
           transition={
             entering
