@@ -158,21 +158,28 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
       </button>
 
       {/* Cover text hidden on mobile (logo + corner icons carry it there); fades out on enter */}
-      <p className={`mt-10 hidden sm:block bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 ${entering ? "opacity-0" : "opacity-100"}`}>
+      <p
+        className={`mt-10 hidden sm:block bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 motion-safe:animate-in motion-safe:fade-in ${entering ? "opacity-0" : "opacity-100"}`}
+        style={{ animationDuration: "700ms", animationDelay: "120ms", animationFillMode: "backwards" }}
+      >
         Precision Engineering for Everyone
       </p>
-      <p className={`mt-4 hidden max-w-xl text-base text-muted-foreground sm:block sm:text-lg transition-opacity duration-700 ${entering ? "opacity-0" : "opacity-100"}`}>
+      <p
+        className={`mt-4 hidden max-w-xl text-base text-muted-foreground sm:block sm:text-lg transition-opacity duration-700 motion-safe:animate-in motion-safe:fade-in ${entering ? "opacity-0" : "opacity-100"}`}
+        style={{ animationDuration: "700ms", animationDelay: "240ms", animationFillMode: "backwards" }}
+      >
         A software studio in Kennett Square, PA. Custom e-commerce, apps, games,
         payments, and consulting.
       </p>
 
       {/* Nav buttons in the four corners: icon-only on mobile, labeled pills on larger screens */}
-      {navButtons.map((b) => (
+      {navButtons.map((b, i) => (
         <Link
           key={b.href}
           href={b.href}
           aria-label={b.label}
-          className={`absolute flex items-center justify-center rounded-2xl border border-cyan-400/25 bg-foreground/[0.06] backdrop-blur-md shadow-md shadow-black/20 ring-1 ring-inset ring-white/10 transition-all hover:scale-[1.03] hover:border-cyan-400/60 hover:bg-foreground/10 hover:text-cyan-600 dark:hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/15 h-12 w-12 sm:h-auto sm:w-36 sm:px-6 sm:py-4 lg:w-48 ${b.corner} ${entering ? "opacity-0 pointer-events-none" : ""}`}
+          style={{ animationDuration: "700ms", animationDelay: `${360 + i * 110}ms`, animationFillMode: "backwards" }}
+          className={`absolute flex items-center justify-center rounded-2xl border border-cyan-400/25 bg-foreground/[0.06] backdrop-blur-md shadow-md shadow-black/20 ring-1 ring-inset ring-white/10 transition-all motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95 hover:scale-[1.03] hover:border-cyan-400/60 hover:bg-foreground/10 hover:text-cyan-600 dark:hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/15 h-12 w-12 sm:h-auto sm:w-36 sm:px-6 sm:py-4 lg:w-48 ${b.corner} ${entering ? "opacity-0 pointer-events-none" : ""}`}
         >
           <b.Icon className="h-5 w-5 sm:hidden" aria-hidden="true" />
           <span className="hidden text-base font-semibold sm:inline">{b.label}</span>
@@ -183,7 +190,8 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
       <button
         type="button"
         onClick={handleEnter}
-        className={`absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs uppercase tracking-[0.3em] text-muted-foreground transition-all hover:text-foreground focus-visible:text-foreground ${entering ? "opacity-0 pointer-events-none" : ""}`}
+        style={{ animationDuration: "700ms", animationDelay: "700ms", animationFillMode: "backwards" }}
+        className={`absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs uppercase tracking-[0.3em] text-muted-foreground transition-all motion-safe:animate-in motion-safe:fade-in hover:text-foreground focus-visible:text-foreground ${entering ? "opacity-0 pointer-events-none" : ""}`}
       >
         <span>Explore</span>
         <ChevronDown className="h-5 w-5 motion-safe:animate-bounce" aria-hidden="true" />
