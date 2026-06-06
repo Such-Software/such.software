@@ -12,42 +12,10 @@ const navButtons = [
   { label: "About", href: "/about", Icon: Info, corner: "right-4 bottom-6 sm:right-6 sm:bottom-24 lg:right-8 lg:bottom-32" },
 ];
 
-/** The "SUCH" glyph mark (2x2 letter grid) with a Cherenkov-blue treatment. */
-function SuchMark() {
-  return (
-    <svg
-      viewBox="0 0 200 200"
-      role="img"
-      aria-label="Such Software"
-      className="h-auto w-[min(72vw,42vh)] drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
-    >
-      <defs>
-        <filter id="splash-glow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="1.6" result="b" />
-          <feMerge>
-            <feMergeNode in="b" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      {/* steady bounding box, Cherenkov cyan (static: the circling rings were
-          removed because stroke-dashoffset is non-composited and destabilized
-          mobile LCP; the pulsing glow behind the logo carries the motion) */}
-      <rect x="14" y="14" width="172" height="172" rx="16" fill="none" stroke="#22d3ee" strokeWidth="3.5" filter="url(#splash-glow)" opacity="0.45" />
-      {/* letters: static so they're a stable LCP candidate */}
-      <g>
-        {/* S */}
-        <path d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#35c98e" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
-        {/* U */}
-        <path d="m 118,36 v 34 c 0,12.15 9.85,14 22,14 12.15,0 22,-1.85 22,-14 V 36" fill="none" stroke="#e8689e" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
-        {/* C */}
-        <path d="M 78,118 H 36 V 164 H 78" fill="none" stroke="#4aade0" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
-        {/* H */}
-        <path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162" fill="none" stroke="#45c99e" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
-      </g>
-    </svg>
-  );
-}
+// The "SUCH" mark is served as /images/branding/splash-such.svg and rendered as an
+// <img> below: an <img> is a valid Largest-Contentful-Paint candidate, whereas an
+// inline <svg> is not, which is what was producing NO_LCP on mobile (where the
+// tagline text is hidden, leaving the logo as the only large element).
 
 export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => void; sectionRef?: any; leaving?: boolean }) {
   const prefersReduced = useReducedMotion();
@@ -71,9 +39,13 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
       return;
     }
     setEntering(true);
-    // Real water refraction: ramp the displacement scale up and back down while
-    // the turbulence drifts, so the logo ripples like a disturbed liquid surface.
-    const DURATION = 1200;
+    // Begin the cross-fade immediately so the water shimmer plays ON the splash as
+    // it fades into the revealed content (snappier and more blended than shimmer-
+    // then-cut).
+    onEnter();
+    // Water refraction: ramp the displacement scale up and back down while the
+    // turbulence drifts, so the logo ripples like a disturbed liquid surface.
+    const DURATION = 800;
     const MAX_SCALE = 40;
     const start = performance.now();
     const tick = (now: number) => {
@@ -85,7 +57,6 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
         turbRef.current.setAttribute("baseFrequency", `${f.toFixed(4)} ${(f * 1.3).toFixed(4)}`);
       }
       if (t < 1) requestAnimationFrame(tick);
-      else onEnter();
     };
     requestAnimationFrame(tick);
   };
@@ -109,7 +80,7 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
           style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.28), transparent 65%)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 0.9, 0] }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
         />
       )}
 
@@ -137,9 +108,13 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
           initial={{ opacity: 1, scale: 1 }}
           animate={entering ? { scale: [1, 1.06, 1.14] } : undefined}
-          transition={entering ? { duration: 1.2, ease: "easeInOut" } : undefined}
+          transition={entering ? { duration: 0.8, ease: "easeInOut" } : undefined}
         >
-          <SuchMark />
+          <img
+            src="/images/branding/splash-such.svg"
+            alt="Such Software"
+            className="h-auto w-[min(72vw,42vh)] drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+          />
         </motion.div>
       </button>
 
