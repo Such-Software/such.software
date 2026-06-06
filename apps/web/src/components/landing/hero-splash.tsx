@@ -35,29 +35,22 @@ function SuchMark({ animate }: { animate: boolean }) {
       {/* two Cherenkov glow segments circling the ring in opposite directions */}
       {animate && (
         <>
-          <motion.rect
+          <rect
             x="14" y="14" width="172" height="172" rx="16"
             fill="none" stroke="#a5f3fc" strokeWidth="4" strokeLinecap="round" filter="url(#splash-glow)"
             pathLength={1} strokeDasharray="0.16 0.84"
-            initial={{ strokeDashoffset: 0 }}
-            animate={{ strokeDashoffset: [0, -1] }}
-            transition={{ duration: 5, ease: "linear", repeat: Infinity }}
+            className="splash-ring-a"
           />
-          <motion.rect
+          <rect
             x="14" y="14" width="172" height="172" rx="16"
             fill="none" stroke="#67e8f9" strokeWidth="2.5" strokeLinecap="round" filter="url(#splash-glow)"
             pathLength={1} strokeDasharray="0.06 0.94" opacity="0.7"
-            initial={{ strokeDashoffset: 0 }}
-            animate={{ strokeDashoffset: [0, 1] }}
-            transition={{ duration: 7, ease: "linear", repeat: Infinity }}
+            className="splash-ring-b"
           />
         </>
       )}
       {/* letters with a gentle breath */}
-      <motion.g
-        animate={animate ? { opacity: [0.9, 1, 0.9] } : undefined}
-        transition={animate ? { duration: 5, ease: "easeInOut", repeat: Infinity } : undefined}
-      >
+      <g className={animate ? "splash-breath" : undefined}>
         {/* S */}
         <path d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#35c98e" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
         {/* U */}
@@ -66,7 +59,7 @@ function SuchMark({ animate }: { animate: boolean }) {
         <path d="M 78,118 H 36 V 164 H 78" fill="none" stroke="#4aade0" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
         {/* H */}
         <path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162" fill="none" stroke="#45c99e" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
-      </motion.g>
+      </g>
     </svg>
   );
 }
@@ -144,14 +137,11 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
           style={{ animationDuration: "4.5s" }}
         />
         <motion.div
+          className={!entering && animate ? "splash-float" : undefined}
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
           initial={{ opacity: 1, scale: 1 }}
-          animate={entering ? { opacity: [1, 1, 0], scale: [1, 1.06, 1.14] } : { opacity: 1, scale: 1, y: animate ? [0, -8, 0] : 0 }}
-          transition={
-            entering
-              ? { duration: 1.2, ease: "easeInOut", times: [0, 0.7, 1] }
-              : { opacity: { duration: 0.8 }, scale: { duration: 0.8 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }
-          }
+          animate={entering ? { opacity: [1, 1, 0], scale: [1, 1.06, 1.14] } : undefined}
+          transition={entering ? { duration: 1.2, ease: "easeInOut", times: [0, 0.7, 1] } : undefined}
         >
           <SuchMark animate={animate} />
         </motion.div>
