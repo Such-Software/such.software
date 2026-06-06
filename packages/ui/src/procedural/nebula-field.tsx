@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "../lib/utils";
 import { Monitor } from "lucide-react";
@@ -79,11 +79,15 @@ const StreamLine = ({ d, themeMode, onHit, width, index }: StreamLineProps) => {
   );
 };
 
-export const NebulaField = ({ className, density = 4, themeMode = 'dark', position }: NebulaProps) => {
+export const NebulaField = ({ className, density = 8, themeMode = 'dark', position }: NebulaProps) => {
   // === ALL HOOKS MUST BE CALLED BEFORE ANY CONDITIONAL RETURNS ===
   const monitorControls = useAnimation();
   const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-sky-500" : "text-cyan-400/70");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Parallax Scroll hooks (called unconditionally)
+  const { scrollY } = useScroll();
+  const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
 
   // Position calculations
   const computerX = position?.x ?? 18;
@@ -187,7 +191,7 @@ export const NebulaField = ({ className, density = 4, themeMode = 'dark', positi
       {/* Slowly-pulsing Cherenkov "reactor pool" bloom */}
       <motion.div
         className="absolute h-[70vmax] w-[70vmax] -translate-x-1/2 -translate-y-1/2"
-        style={{ ...glowStyle, left: `${computerX}%`, top: `${computerY}%` }}
+        style={{ ...glowStyle, left: `${computerX}%`, top: `${computerY}%`, y: yRange }}
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: [0.55, 0.9, 0.55], scale: [0.95, 1.05, 0.95] }}
         transition={{ duration: 11, ease: "easeInOut", repeat: Infinity }}
@@ -201,9 +205,10 @@ export const NebulaField = ({ className, density = 4, themeMode = 'dark', positi
           scale: 1 
         }}
         transition={{ duration: 1.5 }}
-        style={{
-          left: `${computerX}%`,
-          top: `${computerY}%`
+        style={{ 
+          left: `${computerX}%`, 
+          top: `${computerY}%`,
+          y: yRange
         }}
       >
         <motion.div animate={monitorControls}>
@@ -217,10 +222,11 @@ export const NebulaField = ({ className, density = 4, themeMode = 'dark', positi
         </motion.div>
       </motion.div>
 
-      <svg
+      <motion.svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         className="w-full h-full opacity-50 dark:opacity-70 absolute inset-0"
+        style={{ y: yRange }} 
       >
         {paths.map((d: string, i: number) => (
           <StreamLine
@@ -232,7 +238,7 @@ export const NebulaField = ({ className, density = 4, themeMode = 'dark', positi
             index={i}
           />
         ))}
-      </svg>
+      </motion.svg>
     </div>
   );
 };

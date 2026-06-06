@@ -49,8 +49,8 @@ function SuchMark({ animate }: { animate: boolean }) {
           />
         </>
       )}
-      {/* letters with a gentle breath */}
-      <g className={animate ? "splash-breath" : undefined}>
+      {/* letters: static so they're a stable LCP candidate */}
+      <g>
         {/* S */}
         <path d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#35c98e" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" />
         {/* U */}
@@ -137,7 +137,6 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
           style={{ animationDuration: "4.5s" }}
         />
         <motion.div
-          className={!entering && animate ? "splash-float" : undefined}
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
           initial={{ opacity: 1, scale: 1 }}
           animate={entering ? { opacity: [1, 1, 0], scale: [1, 1.06, 1.14] } : undefined}
