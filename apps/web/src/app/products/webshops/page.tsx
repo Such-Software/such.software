@@ -110,7 +110,7 @@ export default function WebshopsPage() {
         </div>
 
         <div className="text-center">
-          <Link href="/about#contact">
+          <Link href="/contact">
             <Button size="lg">Get in Touch</Button>
           </Link>
           <p className="text-sm text-muted-foreground mt-6">

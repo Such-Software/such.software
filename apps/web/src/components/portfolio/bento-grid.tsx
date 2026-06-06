@@ -46,10 +46,10 @@ type Item = {
 // Order matters: spans 2,1,1,2,2,1 tile a 3-column grid with no gaps while alternating the
 // wide side row to row for a balanced bento look.
 const items: Item[] = [
-  { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 2, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
-  { name: "Neroswap", tagline: "DEX & CEX orderbook aggregator.", color: "yellow", span: 1, image: "/images/products/neroswap.png", alt: "Screenshot of the Neroswap orderbook aggregator", href: "https://neroswap.com", external: true },
+  { name: "Occupy Wallets", tagline: "Custom e-commerce storefront we build and host for an artist.", color: "emerald", span: 2, image: "/images/products/occupy-wallets.png", alt: "Occupy Wallets online store and gallery", href: "https://occupywallets.art", external: true },
   { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true },
-  { name: "Occupy Wallets", tagline: "Custom e-commerce storefront we build and host for an art brand.", color: "emerald", span: 2, image: "/images/products/occupy-wallets.png", alt: "Occupy Wallets online store and gallery", href: "https://occupywallets.art", external: true },
+  { name: "Neroswap", tagline: "DEX & CEX orderbook aggregator.", color: "yellow", span: 1, image: "/images/products/neroswap.png", alt: "Screenshot of the Neroswap orderbook aggregator", href: "https://neroswap.com", external: true },
+  { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 2, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
   { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
   { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/images/products/vegan-iq.png", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq" },
 ];
