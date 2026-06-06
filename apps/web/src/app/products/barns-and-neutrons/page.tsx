@@ -7,7 +7,7 @@ import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Barns & Neutrons: A Game About the Table of Nuclides | Such Software",
+  title: "Barns & Neutrons: Table of Nuclides Game | Such Software",
   description: "Barns & Neutrons is a cozy exploration-puzzle game across the real Table of Nuclides. Capture neutrons, coax decays, and learn honest, cited nuclear physics. In development.",
   alternates: { canonical: "/products/barns-and-neutrons" },
   keywords: [

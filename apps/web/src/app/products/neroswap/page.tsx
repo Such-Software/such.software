@@ -7,7 +7,7 @@ import { JsonLd, breadcrumbLd, softwareAppLd, faqLd } from "@/components/seo/jso
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Neroswap: No-KYC Monero & Bitcoin Price Aggregator | Such Software",
+  title: "Neroswap: No-KYC Crypto Price Aggregator | Such Software",
   description:
     "Compare live Monero, Wownero, and Bitcoin prices across 6 DEX and no-KYC CEX orderbooks in real time. No accounts, no custody, no tracking.",
   alternates: { canonical: "/products/neroswap" },

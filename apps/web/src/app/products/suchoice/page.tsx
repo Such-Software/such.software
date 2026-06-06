@@ -8,11 +8,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Suchoice: Spin the Wheel & AI Decision Maker App | Such Software",
+  title: "Suchoice: AI Decision Maker & Spin Wheel | Such Software",
   description: "Can't decide? Snap a photo and let AI read your options, spin the wheel, flip a coin, or roll 3D dice. The fun decision-maker app for iOS and Android.",
   alternates: { canonical: "/products/suchoice" },
   openGraph: {
-    title: "Suchoice: Spin the Wheel & AI Decision Maker App | Such Software",
+    title: "Suchoice: AI Decision Maker & Spin Wheel | Such Software",
     description: "Can't decide? Snap a photo and let AI read your options, spin the wheel, flip a coin, or roll 3D dice. The fun decision-maker app for iOS and Android.",
     type: "website",
     images: ["/images/og/suchoice.png"],

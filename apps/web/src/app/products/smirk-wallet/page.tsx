@@ -7,7 +7,7 @@ import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Smirk Wallet: Non-Custodial Crypto Tipping by Username | Such Software",
+  title: "Smirk Wallet: Non-Custodial Crypto Tipping | Such Software",
   description: "Tip BTC, LTC, XMR, WOW, and GRIN on Telegram or Discord by username. A non-custodial browser wallet: your keys never leave your device.",
   alternates: { canonical: "/products/smirk-wallet" },
   openGraph: {

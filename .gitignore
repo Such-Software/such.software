@@ -60,3 +60,6 @@ test-results/
 # Private strategy / internal notes (never publish)
 STRATEGY.md
 docs/internal/
+
+# Private working notes
+TODO.md

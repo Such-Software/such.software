@@ -7,7 +7,7 @@ import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wownerogue: Provably-Fair Monero Multiplayer Roguelike | Such Software",
+  title: "Wownerogue: Provably-Fair Monero Roguelike | Such Software",
   description: "Play Wownerogue: a provably-fair, blockchain-synced multiplayer roguelike. Every run is verifiable, every round ends on a new block. Free in-browser, no download.",
   alternates: { canonical: "/products/wownerogue" },
   keywords: [

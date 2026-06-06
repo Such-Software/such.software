@@ -7,11 +7,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Custom Online Stores & E-Commerce Development | Such Software",
+  title: "Custom Online Stores & E-Commerce | Such Software",
   description: "Custom online stores with no upfront cost and revenue-share pricing. Own your data, escape template limits, and hit 100/100 Lighthouse. Built on Medusa.",
   alternates: { canonical: "/products/webshops" },
   openGraph: {
-    title: "Custom Online Stores & E-Commerce Development | Such Software",
+    title: "Custom Online Stores & E-Commerce | Such Software",
     description: "Custom online stores with no upfront cost and revenue-share pricing. Own your data and escape template limits. Built on Medusa.",
     type: "website",
     images: ["/images/og/webshops.png"],

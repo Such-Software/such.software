@@ -4,11 +4,11 @@ import { ProductsGrid, type Product } from "@/components/portfolio/products-grid
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Products & Apps: Crypto Tools, Nuclear Games & Commerce | Such Software",
+  title: "Products: Crypto Tools, Games & Commerce | Such Software",
   description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
   alternates: { canonical: "/products" },
   openGraph: {
-    title: "Our Products & Apps: Crypto Tools, Nuclear Games & Commerce | Such Software",
+    title: "Products: Crypto Tools, Games & Commerce | Such Software",
     description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
     type: "website",
   },
