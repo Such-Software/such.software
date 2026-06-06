@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
+import { useState } from "react";
 
 const navButtons = [
-  { label: "Portfolio", href: "/products", corner: "left-4 top-16 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
-  { label: "Apps", href: "/apps", corner: "right-4 top-16 sm:right-6 sm:top-24 lg:right-8 lg:top-32" },
-  { label: "Services", href: "/services", corner: "left-4 bottom-24 sm:left-6 lg:left-8 lg:bottom-32" },
-  { label: "About", href: "/about", corner: "right-4 bottom-24 sm:right-6 lg:right-8 lg:bottom-32" },
+  { label: "Portfolio", href: "/products", Icon: LayoutGrid, corner: "left-4 top-6 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
+  { label: "Apps", href: "/apps", Icon: Smartphone, corner: "right-4 top-6 sm:right-6 sm:top-24 lg:right-8 lg:top-32" },
+  { label: "Services", href: "/services", Icon: Wrench, corner: "left-4 bottom-6 sm:left-6 sm:bottom-24 lg:left-8 lg:bottom-32" },
+  { label: "About", href: "/about", Icon: Info, corner: "right-4 bottom-6 sm:right-6 sm:bottom-24 lg:right-8 lg:bottom-32" },
 ];
 
 /** The "SUCH" glyph mark (2x2 letter grid) with a Cherenkov-blue treatment. */
@@ -18,7 +19,7 @@ function SuchMark({ animate }: { animate: boolean }) {
       viewBox="0 0 200 200"
       role="img"
       aria-label="Such Software"
-      className="h-auto w-[min(74vw,44vh)] drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+      className="h-auto w-[min(72vw,42vh)] drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
     >
       <defs>
         <filter id="splash-glow" x="-30%" y="-30%" width="160%" height="160%">
@@ -30,20 +31,27 @@ function SuchMark({ animate }: { animate: boolean }) {
         </filter>
       </defs>
       {/* steady bounding box, Cherenkov cyan */}
-      <rect
-        x="14" y="14" width="172" height="172" rx="16"
-        fill="none" stroke="#22d3ee" strokeWidth="3.5" filter="url(#splash-glow)" opacity="0.45"
-      />
-      {/* a Cherenkov glow segment slowly circling the ring */}
+      <rect x="14" y="14" width="172" height="172" rx="16" fill="none" stroke="#22d3ee" strokeWidth="3.5" filter="url(#splash-glow)" opacity="0.45" />
+      {/* two Cherenkov glow segments circling the ring in opposite directions */}
       {animate && (
-        <motion.rect
-          x="14" y="14" width="172" height="172" rx="16"
-          fill="none" stroke="#a5f3fc" strokeWidth="4" strokeLinecap="round" filter="url(#splash-glow)"
-          pathLength={1} strokeDasharray="0.16 0.84"
-          initial={{ strokeDashoffset: 0 }}
-          animate={{ strokeDashoffset: [0, -1] }}
-          transition={{ duration: 5, ease: "linear", repeat: Infinity }}
-        />
+        <>
+          <motion.rect
+            x="14" y="14" width="172" height="172" rx="16"
+            fill="none" stroke="#a5f3fc" strokeWidth="4" strokeLinecap="round" filter="url(#splash-glow)"
+            pathLength={1} strokeDasharray="0.16 0.84"
+            initial={{ strokeDashoffset: 0 }}
+            animate={{ strokeDashoffset: [0, -1] }}
+            transition={{ duration: 5, ease: "linear", repeat: Infinity }}
+          />
+          <motion.rect
+            x="14" y="14" width="172" height="172" rx="16"
+            fill="none" stroke="#67e8f9" strokeWidth="2.5" strokeLinecap="round" filter="url(#splash-glow)"
+            pathLength={1} strokeDasharray="0.06 0.94" opacity="0.7"
+            initial={{ strokeDashoffset: 0 }}
+            animate={{ strokeDashoffset: [0, 1] }}
+            transition={{ duration: 7, ease: "linear", repeat: Infinity }}
+          />
+        </>
       )}
       {/* letters with a gentle breath */}
       <motion.g
@@ -63,57 +71,105 @@ function SuchMark({ animate }: { animate: boolean }) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; sectionRef?: any }) {
   const prefersReduced = useReducedMotion();
   const animate = !prefersReduced;
+  const [entering, setEntering] = useState(false);
+
+  const handleEnter = () => {
+    if (entering) return;
+    if (prefersReduced) {
+      onEnter();
+      return;
+    }
+    setEntering(true); // the wave plays, then onEnter fires on completion
+  };
 
   return (
     <section
       ref={sectionRef}
       aria-label="Such Software"
-      className="relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center px-4 py-12 text-center"
+      className="relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
     >
-      {/* Logo + pulsing Cherenkov glow */}
-      <div className="relative flex items-center justify-center">
+      {/* Click-to-enter Cherenkov wave: a full-screen wash + expanding rings */}
+      {entering && (
+        <>
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none fixed inset-0 z-20"
+            style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.35), transparent 60%)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.85, 0] }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          />
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
+            {[0, 0.12, 0.24].map((delay, i) => (
+              <motion.span
+                key={i}
+                className="absolute left-0 top-0 block h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-cyan-300/70"
+                style={{ boxShadow: "0 0 40px rgba(34,211,238,0.5)" }}
+                initial={{ scale: 0.2, opacity: 0.85 }}
+                animate={{ scale: 14, opacity: 0 }}
+                transition={{ duration: 0.95, delay, ease: "easeOut" }}
+                onAnimationComplete={i === 2 ? onEnter : undefined}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Logo (click to enter) + pulsing Cherenkov glow */}
+      <button
+        type="button"
+        onClick={handleEnter}
+        aria-label="Enter Such Software"
+        className="relative flex cursor-pointer items-center justify-center rounded-3xl border-0 bg-transparent p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+      >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute h-[120%] w-[120%] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.18),transparent_65%)] motion-safe:animate-pulse"
-          style={{ animationDuration: "5s" }}
+          className="pointer-events-none absolute h-[120%] w-[120%] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.2),transparent_65%)] motion-safe:animate-pulse"
+          style={{ animationDuration: "4.5s" }}
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          animate={entering ? { opacity: 0, scale: 1.2 } : { opacity: 1, scale: 1, y: animate ? [0, -8, 0] : 0 }}
+          transition={
+            entering
+              ? { duration: 0.6, ease: "easeIn" }
+              : { opacity: { duration: 0.8 }, scale: { duration: 0.8 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }
+          }
         >
           <SuchMark animate={animate} />
         </motion.div>
-      </div>
+      </button>
 
       {/* Cover tagline (the real page H1 lives in the hero revealed after entering) */}
       <p className="mt-10 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl">
         Precision Engineering for Everyone
       </p>
-      <p className="mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
+      {/* subheader hidden on mobile to avoid crowding the corner buttons */}
+      <p className="mt-4 hidden max-w-xl text-base text-muted-foreground sm:block sm:text-lg">
         A software studio in Kennett Square, PA. Custom e-commerce, apps, games,
         payments, and consulting.
       </p>
 
-      {/* Nav buttons in the four corners (all breakpoints) */}
+      {/* Nav buttons in the four corners: icon-only on mobile, labeled pills on larger screens */}
       {navButtons.map((b) => (
         <Link
           key={b.href}
           href={b.href}
-          className={`absolute flex items-center justify-center rounded-2xl border border-cyan-400/25 bg-foreground/[0.06] backdrop-blur-md shadow-md shadow-black/20 ring-1 ring-inset ring-white/10 px-4 py-3 text-sm font-semibold transition-all hover:scale-[1.03] hover:border-cyan-400/60 hover:bg-foreground/10 hover:text-cyan-600 dark:hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/15 w-28 sm:w-36 sm:px-6 sm:py-4 sm:text-base lg:w-48 ${b.corner}`}
+          aria-label={b.label}
+          className={`absolute flex items-center justify-center rounded-2xl border border-cyan-400/25 bg-foreground/[0.06] backdrop-blur-md shadow-md shadow-black/20 ring-1 ring-inset ring-white/10 transition-all hover:scale-[1.03] hover:border-cyan-400/60 hover:bg-foreground/10 hover:text-cyan-600 dark:hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/15 h-12 w-12 sm:h-auto sm:w-36 sm:px-6 sm:py-4 lg:w-48 ${b.corner}`}
         >
-          {b.label}
+          <b.Icon className="h-5 w-5 sm:hidden" aria-hidden="true" />
+          <span className="hidden text-base font-semibold sm:inline">{b.label}</span>
         </Link>
       ))}
 
       {/* Enter-the-site affordance */}
       <button
         type="button"
-        onClick={onEnter}
+        onClick={handleEnter}
         className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground"
       >
         <span>Explore</span>
