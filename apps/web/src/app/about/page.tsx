@@ -32,7 +32,10 @@ export default function AboutPage() {
 
           <div className="prose dark:prose-invert max-w-none mb-12">
             <p className="text-xl leading-relaxed">
-              Such Software is a software studio in Kennett Square, PA, founded by <a href="https://jwinterm.com">John Winter Murphy</a>, whose background is in nuclear and radiation science: a radiation-detector PhD and six years at Lawrence Livermore National Laboratory. We build accessible e-commerce websites, crypto infrastructure, and original mobile apps and games (including a series of nuclear-themed games), and offer nuclear and radiation modeling consulting.
+              Such Software is a software studio in Kennett Square, PA, founded by <a href="https://jwinterm.com">John Winter Murphy</a>, 
+              whose background is in semiconductor and nuclear engineering: a Materials Engineering PhD from UT-Dallas and six years at Lawrence Livermore National Laboratory. 
+              We build accessible e-commerce websites, crypto infrastructure, and original mobile apps and games, 
+              and offer consulting on payments, cryptocurrency, and radiation transport and interactions.
             </p>
           </div>
 
