@@ -33,7 +33,11 @@ export default function Home() {
   // the main hero, on desktop and mobile. Runs before paint, so the splash never
   // flashes for these visitors.
   useIsoLayoutEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // The splash is a one-time intro per session: once entered, a refresh (even
+    // from mid-page) skips it so you can't scroll back up into it.
+    const alreadyEntered = sessionStorage.getItem("such:entered") === "1";
+    if (reduced || alreadyEntered) {
       setEntered(true);
       setSplashUp(false);
     }
@@ -53,6 +57,7 @@ export default function Home() {
       ([entry]) => {
         if (!entry.isIntersecting) {
           restoreScroll.current = Math.max(0, window.scrollY - el.offsetHeight);
+          sessionStorage.setItem("such:entered", "1");
           setEntered(true);
           setSplashUp(false); // scrolled past: just unmount, no overlay fade needed
         }
@@ -90,6 +95,7 @@ export default function Home() {
 
   const enterFromButton = () => {
     restoreScroll.current = 0;
+    sessionStorage.setItem("such:entered", "1");
     setEntered(true);
     setLeaving(true);
     // Keep the splash mounted briefly as a fixed, fading overlay so it cross-fades
@@ -99,6 +105,9 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col items-center overflow-hidden">
+      {/* The splash logo is the homepage LCP element on mobile; fetch it immediately
+          so it isn't queued behind render-blocking CSS/JS. */}
+      <link rel="preload" as="image" href="/images/branding/splash-such.svg" fetchPriority="high" />
       <DynamicBackground nebulaPosition={nebulaPosition} visible={entered} />
       <Header floating visible={entered} />
 

@@ -1,0 +1,56 @@
+---
+title: "An Animated Hero Without the Core Web Vitals Hit"
+date: "2026-06-06"
+excerpt: "How we keep a custom animated splash and still score in the 90s on Lighthouse: animate on the right thread, and give the browser a real LCP element."
+draft: true
+---
+
+Our homepage opens with an animated splash: the SUCH mark over a Cherenkov-blue field, a water-ripple when you click through, and a cross-fade into the page. We like it. It is also exactly the kind of thing that quietly wrecks a Lighthouse score, because a rich animated hero pushes on two of the metrics Google cares about most. Here is how we kept the effect and the score, and the handful of rules that made the difference.
+
+This matters beyond a vanity number. Performance is part of accessibility. A hero that is smooth on our laptops can be unusable on a budget Android phone over a weak connection, and "works for everyone" is the whole pitch. Core Web Vitals is a rough proxy for that experience, so we treat it as a real constraint, not a scoreboard.
+
+## Two budgets: paint and main thread
+
+It helps to think of an animated hero as spending from two separate budgets.
+
+- **Paint timing** (First and Largest Contentful Paint): how quickly the big stuff shows up.
+- **Main-thread time** (Total Blocking Time, and Interaction to Next Paint): how much JavaScript the page has to chew through before it can respond to you.
+
+A fancy hero can blow either one. The trick is knowing which technique spends from which budget, and not spending where you do not have to.
+
+## Animate on the compositor, not the main thread
+
+The single biggest win: an always-on JavaScript animation runs a callback on the main thread every single frame. Drive a few looping effects that way and you can rack up *seconds* of blocking time on a mid-range phone, which tanks TBT and makes the page feel stuck.
+
+CSS animations on `transform` and `opacity` are different. The browser hands them to the compositor and they cost the main thread almost nothing. So the rule we follow now:
+
+- **Idle, always-on motion** (a logo float, a pulsing glow, a breathing outline): plain CSS `@keyframes`.
+- **One-shot, interaction-driven motion** (the click-to-enter water ripple): JavaScript is fine, because it runs once and then stops.
+
+Moving our splash's idle animations off the JS animation library and into CSS took the homepage's blocking time from "the page is janky for several seconds" to a rounding error, with no visible change to the effect. One caveat: not every CSS property is cheap. Animating something like `stroke-dashoffset` still forces a repaint every frame, so it is "CSS" but not free. Stick to `transform` and `opacity` for the things that loop forever.
+
+## Your LCP element cannot be an inline SVG
+
+This one cost us a day, so learn it for free: **Chrome does not count an inline `<svg>` as a Largest Contentful Paint candidate.** Text, `<img>`, `<video>`, and CSS background images all qualify. An inline SVG drawing does not.
+
+Our logo is an SVG. On desktop that was fine, because the large gradient tagline next to it is text, and text is a valid candidate. On mobile, where we hide the tagline and lean on the logo, the *only* large element in view was an inline SVG. The result was not a slow LCP. It was *no* LCP at all, which Lighthouse reports as an error and scores as a zero.
+
+The fix is small: serve the mark as a file and render it with `<img src="logo.svg">`. An `<img>` is a valid LCP candidate even when the source is an SVG. The visual is identical; the metric now has something to measure.
+
+## Do not gate the hero behind JavaScript
+
+Two related traps, both about making the browser paint your most important element as early and as plainly as possible.
+
+First, do not fade your LCP element in. An element animated from `opacity: 0` is not "contentful" until it becomes visible, so its LCP timestamp is whenever the fade runs. If that fade is driven by JavaScript that only starts after hydration, on a throttled phone you are reporting an LCP several seconds in. Paint the hero at full opacity from the server-rendered HTML, and animate the *decoration* around it instead.
+
+Second, keep the LCP element clean. A continuously animating wrapper, or a CSS filter on the image, can stop the metric from ever settling. We render the logo as a static, high-priority `<img>` with no filter and no animation of its own. The motion lives in the glow behind it and the elements staggering in around it.
+
+## No CDN required
+
+Worth saying plainly, because the advice you will get for a slow page is often "put a CDN in front of it." None of the above needed one. These were render-timing and which-thread-does-the-work problems, fixed in the markup and the styles. Images and static assets already get format conversion, resizing, and long cache lifetimes from the framework and the edge host. A CDN solves a different problem than the one most animated heroes have.
+
+## Performance is accessibility
+
+The last piece is the one most on-brand for us. We respect `prefers-reduced-motion` by skipping the splash entirely for visitors who ask for less motion: they land straight on the content, no shimmer, no ripple. And the whole exercise of getting the hero to paint fast on a cheap phone is an accessibility exercise, because that phone is somebody's only device.
+
+The effect survived all of it: the splash still shimmers and dissolves into the page. It just does so without making a slower visitor wait on our aesthetics. That is the bar we hold our own site to, and the bar we build to for clients.
