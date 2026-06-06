@@ -91,27 +91,27 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
       aria-label="Such Software"
       className="relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
     >
-      {/* Click-to-enter Cherenkov wave: a full-screen wash + expanding rings */}
+      {/* Click-to-enter Cherenkov wave: a watery blur wash + expanding ripples */}
       {entering && (
         <>
           <motion.div
             aria-hidden="true"
-            className="pointer-events-none fixed inset-0 z-20"
-            style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.35), transparent 60%)" }}
+            className="pointer-events-none fixed inset-0 z-20 backdrop-blur-md"
+            style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.30), transparent 65%)" }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.85, 0] }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ duration: 1.0, ease: "easeInOut" }}
           />
           <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
-            {[0, 0.12, 0.24].map((delay, i) => (
+            {[0, 0.1, 0.2, 0.3].map((delay, i) => (
               <motion.span
                 key={i}
                 className="absolute left-0 top-0 block h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-cyan-300/70"
-                style={{ boxShadow: "0 0 40px rgba(34,211,238,0.5)" }}
-                initial={{ scale: 0.2, opacity: 0.85 }}
-                animate={{ scale: 14, opacity: 0 }}
-                transition={{ duration: 0.95, delay, ease: "easeOut" }}
-                onAnimationComplete={i === 2 ? onEnter : undefined}
+                style={{ boxShadow: "0 0 50px rgba(34,211,238,0.55)" }}
+                initial={{ scale: 0.15, opacity: 0.85 }}
+                animate={{ scale: 16, opacity: 0 }}
+                transition={{ duration: 1.05, delay, ease: "easeOut" }}
+                onAnimationComplete={i === 3 ? onEnter : undefined}
               />
             ))}
           </div>
@@ -143,12 +143,11 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
         </motion.div>
       </button>
 
-      {/* Cover tagline (the real page H1 lives in the hero revealed after entering) */}
-      <p className="mt-10 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl">
+      {/* Cover text hidden on mobile (logo + corner icons carry it there); fades out on enter */}
+      <p className={`mt-10 hidden sm:block bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 ${entering ? "opacity-0" : "opacity-100"}`}>
         Precision Engineering for Everyone
       </p>
-      {/* subheader hidden on mobile to avoid crowding the corner buttons */}
-      <p className="mt-4 hidden max-w-xl text-base text-muted-foreground sm:block sm:text-lg">
+      <p className={`mt-4 hidden max-w-xl text-base text-muted-foreground sm:block sm:text-lg transition-opacity duration-700 ${entering ? "opacity-0" : "opacity-100"}`}>
         A software studio in Kennett Square, PA. Custom e-commerce, apps, games,
         payments, and consulting.
       </p>
@@ -159,7 +158,7 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
           key={b.href}
           href={b.href}
           aria-label={b.label}
-          className={`absolute flex items-center justify-center rounded-2xl border border-cyan-400/25 bg-foreground/[0.06] backdrop-blur-md shadow-md shadow-black/20 ring-1 ring-inset ring-white/10 transition-all hover:scale-[1.03] hover:border-cyan-400/60 hover:bg-foreground/10 hover:text-cyan-600 dark:hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/15 h-12 w-12 sm:h-auto sm:w-36 sm:px-6 sm:py-4 lg:w-48 ${b.corner}`}
+          className={`absolute flex items-center justify-center rounded-2xl border border-cyan-400/25 bg-foreground/[0.06] backdrop-blur-md shadow-md shadow-black/20 ring-1 ring-inset ring-white/10 transition-all hover:scale-[1.03] hover:border-cyan-400/60 hover:bg-foreground/10 hover:text-cyan-600 dark:hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/15 h-12 w-12 sm:h-auto sm:w-36 sm:px-6 sm:py-4 lg:w-48 ${b.corner} ${entering ? "opacity-0 pointer-events-none" : ""}`}
         >
           <b.Icon className="h-5 w-5 sm:hidden" aria-hidden="true" />
           <span className="hidden text-base font-semibold sm:inline">{b.label}</span>
@@ -170,7 +169,7 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
       <button
         type="button"
         onClick={handleEnter}
-        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground"
+        className={`absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-xs uppercase tracking-[0.3em] text-muted-foreground transition-all hover:text-foreground focus-visible:text-foreground ${entering ? "opacity-0 pointer-events-none" : ""}`}
       >
         <span>Explore</span>
         <ChevronDown className="h-5 w-5 motion-safe:animate-bounce" aria-hidden="true" />
