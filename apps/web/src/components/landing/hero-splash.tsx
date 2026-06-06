@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const navButtons = [
   { label: "Portfolio", href: "/products", Icon: LayoutGrid, corner: "left-4 top-6 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
@@ -75,6 +75,8 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
   const prefersReduced = useReducedMotion();
   const animate = !prefersReduced;
   const [entering, setEntering] = useState(false);
+  const dispRef = useRef<SVGFEDisplacementMapElement>(null);
+  const turbRef = useRef<SVGFETurbulenceElement>(null);
 
   const handleEnter = () => {
     if (entering) return;
@@ -82,7 +84,24 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
       onEnter();
       return;
     }
-    setEntering(true); // the wave plays, then onEnter fires on completion
+    setEntering(true);
+    // Real water refraction: ramp the displacement scale up and back down while
+    // the turbulence drifts, so the logo ripples like a disturbed liquid surface.
+    const DURATION = 1200;
+    const MAX_SCALE = 40;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / DURATION);
+      const env = Math.sin(Math.PI * t); // 0 -> 1 -> 0
+      if (dispRef.current) dispRef.current.setAttribute("scale", String(env * MAX_SCALE));
+      if (turbRef.current) {
+        const f = 0.008 + t * 0.02;
+        turbRef.current.setAttribute("baseFrequency", `${f.toFixed(4)} ${(f * 1.3).toFixed(4)}`);
+      }
+      if (t < 1) requestAnimationFrame(tick);
+      else onEnter();
+    };
+    requestAnimationFrame(tick);
   };
 
   return (
@@ -91,32 +110,26 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
       aria-label="Such Software"
       className="relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
     >
-      {/* Click-to-enter Cherenkov wave: a watery blur wash + expanding ripples */}
+      {/* Click-to-enter: soft Cherenkov wash. The ripple itself is the SVG water
+          filter refracting the logo (driven by handleEnter's rAF loop). */}
       {entering && (
-        <>
-          <motion.div
-            aria-hidden="true"
-            className="pointer-events-none fixed inset-0 z-20 backdrop-blur-md"
-            style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.30), transparent 65%)" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 1.0, ease: "easeInOut" }}
-          />
-          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
-            {[0, 0.1, 0.2, 0.3].map((delay, i) => (
-              <motion.span
-                key={i}
-                className="absolute left-0 top-0 block h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-cyan-300/70"
-                style={{ boxShadow: "0 0 50px rgba(34,211,238,0.55)" }}
-                initial={{ scale: 0.15, opacity: 0.85 }}
-                animate={{ scale: 16, opacity: 0 }}
-                transition={{ duration: 1.05, delay, ease: "easeOut" }}
-                onAnimationComplete={i === 3 ? onEnter : undefined}
-              />
-            ))}
-          </div>
-        </>
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-20 backdrop-blur-sm"
+          style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.28), transparent 65%)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.9, 0] }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+        />
       )}
+
+      {/* Water-refraction filter, animated by handleEnter */}
+      <svg aria-hidden="true" focusable="false" className="pointer-events-none absolute h-0 w-0">
+        <filter id="splash-water" x="-25%" y="-25%" width="150%" height="150%">
+          <feTurbulence ref={turbRef} type="fractalNoise" baseFrequency="0.008 0.0104" numOctaves={2} seed={7} result="noise" />
+          <feDisplacementMap ref={dispRef} in="SourceGraphic" in2="noise" scale={0} xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
 
       {/* Logo (click to enter) + pulsing Cherenkov glow */}
       <button
@@ -131,11 +144,12 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
           style={{ animationDuration: "4.5s" }}
         />
         <motion.div
+          style={{ filter: entering ? "url(#splash-water)" : undefined }}
           initial={{ opacity: 0, scale: 0.94 }}
-          animate={entering ? { opacity: 0, scale: 1.2 } : { opacity: 1, scale: 1, y: animate ? [0, -8, 0] : 0 }}
+          animate={entering ? { opacity: [1, 1, 0], scale: [1, 1.06, 1.14] } : { opacity: 1, scale: 1, y: animate ? [0, -8, 0] : 0 }}
           transition={
             entering
-              ? { duration: 0.6, ease: "easeIn" }
+              ? { duration: 1.2, ease: "easeInOut", times: [0, 0.7, 1] }
               : { opacity: { duration: 0.8 }, scale: { duration: 0.8 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }
           }
         >
