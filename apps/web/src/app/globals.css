@@ -228,15 +228,3 @@
     scroll-behavior: auto !important;
   }
 }
-
-/* Splash hero idle animations as CSS (browser/compositor driven) instead of
-   framer-motion, so they cost no JS main-thread time. The reduced-motion block
-   above neutralizes them. */
-@keyframes splash-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@keyframes splash-breath { 0%, 100% { opacity: 0.9; } 50% { opacity: 1; } }
-@keyframes splash-ring-a { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -1; } }
-@keyframes splash-ring-b { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 1; } }
-.splash-float { animation: splash-float 6s ease-in-out infinite; }
-.splash-breath { animation: splash-breath 5s ease-in-out infinite; }
-.splash-ring-a { animation: splash-ring-a 5s linear infinite; }
-.splash-ring-b { animation: splash-ring-b 7s linear infinite; }

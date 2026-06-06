@@ -92,8 +92,10 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   // Position calculations
   const computerX = position?.x ?? 18;
   const computerY = position?.y ?? 18;
-  const targetX = computerX + 2.5;
-  const targetY = computerY + 2.5;
+  // Aim the streamers at the monitor's screen: slightly up-and-left of the icon's
+  // geometric center. Tweak these two offsets to move the convergence point.
+  const targetX = computerX - 1;
+  const targetY = computerY - 1.5;
 
   // Check for reduced motion preference
   useEffect(() => {

@@ -22,6 +22,10 @@ export default function Home() {
   // header, bottom nav, and background take over. Scrolling back up lands on the hero,
   // never the splash again.
   const [entered, setEntered] = useState(false);
+  // `splashUp` keeps the splash mounted through its fade-out; `leaving` triggers the
+  // cross-fade overlay (button path only).
+  const [splashUp, setSplashUp] = useState(true);
+  const [leaving, setLeaving] = useState(false);
   const splashRef = useRef<HTMLElement>(null);
   const restoreScroll = useRef(0);
 
@@ -31,6 +35,7 @@ export default function Home() {
   useIsoLayoutEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntered(true);
+      setSplashUp(false);
     }
   }, []);
 
@@ -49,6 +54,7 @@ export default function Home() {
         if (!entry.isIntersecting) {
           restoreScroll.current = Math.max(0, window.scrollY - el.offsetHeight);
           setEntered(true);
+          setSplashUp(false); // scrolled past: just unmount, no overlay fade needed
         }
       },
       { threshold: 0 },
@@ -85,6 +91,10 @@ export default function Home() {
   const enterFromButton = () => {
     restoreScroll.current = 0;
     setEntered(true);
+    setLeaving(true);
+    // Keep the splash mounted briefly as a fixed, fading overlay so it cross-fades
+    // into the revealed content instead of hard-cutting.
+    setTimeout(() => setSplashUp(false), 800);
   };
 
   return (
@@ -92,7 +102,7 @@ export default function Home() {
       <DynamicBackground nebulaPosition={nebulaPosition} visible={entered} />
       <Header floating visible={entered} />
 
-      {!entered && <HeroSplash sectionRef={splashRef} onEnter={enterFromButton} />}
+      {splashUp && <HeroSplash sectionRef={splashRef} onEnter={enterFromButton} leaving={leaving} />}
 
       <div id="main-content" className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-32 pb-10 px-4 text-center scroll-mt-28">
          <h1

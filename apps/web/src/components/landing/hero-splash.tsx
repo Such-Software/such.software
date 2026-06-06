@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navButtons = [
   { label: "Portfolio", href: "/products", Icon: LayoutGrid, corner: "left-4 top-6 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
@@ -13,7 +13,7 @@ const navButtons = [
 ];
 
 /** The "SUCH" glyph mark (2x2 letter grid) with a Cherenkov-blue treatment. */
-function SuchMark({ animate }: { animate: boolean }) {
+function SuchMark() {
   return (
     <svg
       viewBox="0 0 200 200"
@@ -30,25 +30,10 @@ function SuchMark({ animate }: { animate: boolean }) {
           </feMerge>
         </filter>
       </defs>
-      {/* steady bounding box, Cherenkov cyan */}
+      {/* steady bounding box, Cherenkov cyan (static: the circling rings were
+          removed because stroke-dashoffset is non-composited and destabilized
+          mobile LCP; the pulsing glow behind the logo carries the motion) */}
       <rect x="14" y="14" width="172" height="172" rx="16" fill="none" stroke="#22d3ee" strokeWidth="3.5" filter="url(#splash-glow)" opacity="0.45" />
-      {/* two Cherenkov glow segments circling the ring in opposite directions */}
-      {animate && (
-        <>
-          <rect
-            x="14" y="14" width="172" height="172" rx="16"
-            fill="none" stroke="#a5f3fc" strokeWidth="4" strokeLinecap="round" filter="url(#splash-glow)"
-            pathLength={1} strokeDasharray="0.16 0.84"
-            className="splash-ring-a"
-          />
-          <rect
-            x="14" y="14" width="172" height="172" rx="16"
-            fill="none" stroke="#67e8f9" strokeWidth="2.5" strokeLinecap="round" filter="url(#splash-glow)"
-            pathLength={1} strokeDasharray="0.06 0.94" opacity="0.7"
-            className="splash-ring-b"
-          />
-        </>
-      )}
       {/* letters: static so they're a stable LCP candidate */}
       <g>
         {/* S */}
@@ -64,12 +49,20 @@ function SuchMark({ animate }: { animate: boolean }) {
   );
 }
 
-export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; sectionRef?: any }) {
+export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => void; sectionRef?: any; leaving?: boolean }) {
   const prefersReduced = useReducedMotion();
-  const animate = !prefersReduced;
   const [entering, setEntering] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
   const dispRef = useRef<SVGFEDisplacementMapElement>(null);
   const turbRef = useRef<SVGFETurbulenceElement>(null);
+
+  // When the page asks the splash to leave, it first becomes a fixed overlay; one
+  // frame later we drop opacity so it cross-fades into the revealed content.
+  useEffect(() => {
+    if (!leaving) return;
+    const id = requestAnimationFrame(() => setFadeOut(true));
+    return () => cancelAnimationFrame(id);
+  }, [leaving]);
 
   const handleEnter = () => {
     if (entering) return;
@@ -101,7 +94,11 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
     <section
       ref={sectionRef}
       aria-label="Such Software"
-      className="relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
+      className={
+        leaving
+          ? `fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden px-4 py-12 text-center pointer-events-none transition-opacity duration-700 ${fadeOut ? "opacity-0" : "opacity-100"}`
+          : "relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
+      }
     >
       {/* Click-to-enter: soft Cherenkov wash. The ripple itself is the SVG water
           filter refracting the logo (driven by handleEnter's rAF loop). */}
@@ -139,10 +136,10 @@ export function HeroSplash({ onEnter, sectionRef }: { onEnter: () => void; secti
         <motion.div
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
           initial={{ opacity: 1, scale: 1 }}
-          animate={entering ? { opacity: [1, 1, 0], scale: [1, 1.06, 1.14] } : undefined}
-          transition={entering ? { duration: 1.2, ease: "easeInOut", times: [0, 0.7, 1] } : undefined}
+          animate={entering ? { scale: [1, 1.06, 1.14] } : undefined}
+          transition={entering ? { duration: 1.2, ease: "easeInOut" } : undefined}
         >
-          <SuchMark animate={animate} />
+          <SuchMark />
         </motion.div>
       </button>
 
