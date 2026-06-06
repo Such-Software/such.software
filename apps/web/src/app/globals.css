@@ -228,3 +228,8 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Splash logo zoom on click-to-enter (CSS, so the logo needs no framer-motion
+   wrapper and stays a clean LCP candidate). */
+@keyframes splash-zoom { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1.14); } }
+.splash-zoom { animation: splash-zoom 0.8s ease-in-out forwards; }

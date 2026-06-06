@@ -104,18 +104,19 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
           className="pointer-events-none absolute h-[120%] w-[120%] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.2),transparent_65%)] motion-safe:animate-pulse"
           style={{ animationDuration: "4.5s" }}
         />
-        <motion.div
+        {/* Plain div, no framer: keeps the logo (the LCP element) a clean,
+            statically-painted image. The water filter + zoom only apply on enter. */}
+        <div
+          className={entering ? "splash-zoom" : undefined}
           style={{ filter: entering ? "url(#splash-water)" : undefined }}
-          initial={{ opacity: 1, scale: 1 }}
-          animate={entering ? { scale: [1, 1.06, 1.14] } : undefined}
-          transition={entering ? { duration: 0.8, ease: "easeInOut" } : undefined}
         >
           <img
             src="/images/branding/splash-such.svg"
             alt="Such Software"
-            className="h-auto w-[min(72vw,42vh)] drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+            fetchPriority="high"
+            className="h-auto w-[min(72vw,42vh)]"
           />
-        </motion.div>
+        </div>
       </button>
 
       {/* Cover text hidden on mobile (logo + corner icons carry it there); fades out on enter */}
