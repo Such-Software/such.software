@@ -84,6 +84,9 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   const monitorControls = useAnimation();
   const [monitorColor, setMonitorColor] = useState(themeMode === 'light' ? "text-sky-500" : "text-cyan-400/70");
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
+  );
 
   // Parallax Scroll hooks (called unconditionally)
   const { scrollY } = useScroll();
@@ -106,6 +109,17 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener('change', handler);
     return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // On small screens the monitor and streamers have nowhere to sit without crossing
+  // the hero text, and the scroll parallax drags them over it. Use the static glow
+  // there instead.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
   }, []);
 
   // Sync color with theme
@@ -162,8 +176,9 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`,
   } as const;
 
-  // Return static background for reduced motion users (still tinted Cherenkov blue, no motion).
-  if (prefersReducedMotion) {
+  // Static background for reduced-motion users and small screens (still Cherenkov-tinted,
+  // with no monitor or streamers to overlap the hero text).
+  if (prefersReducedMotion || isMobile) {
     return (
       <div className={cn(
         "absolute inset-0 overflow-hidden pointer-events-none z-0",
