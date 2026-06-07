@@ -67,8 +67,6 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
           alt={item.alt}
           fill
           className="object-contain p-2 opacity-60 transition-transform duration-1000 group-hover:scale-105"
-          {/* object-contain height-constrains the image, so it renders ~the same width
-              in either span (~360px); 66vw/100vw made Next serve up to ~750-1200w. */}
           sizes="(max-width: 768px) 90vw, 33vw"
         />
       </div>
