@@ -284,7 +284,10 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={themeMode === 'light' ? 0.08 : 0.12}
+            // preserveAspectRatio="none" squishes the stroke horizontally on a narrow
+            // phone, so the thin lines render sub-pixel and vanish. Fatten them on
+            // mobile to compensate (dial: the 2.5x factor).
+            width={(themeMode === 'light' ? 0.08 : 0.12) * (isMobile ? 2.5 : 1)}
             index={i}
           />
         ))}
