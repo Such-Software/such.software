@@ -73,21 +73,33 @@ export function HomeShell({ children }: { children: ReactNode }) {
   // Place the nebula/monitor just to the left of the hero title, at any screen width.
   // The title lives in the server-rendered children, so read it by id.
   useEffect(() => {
+    let lastWidth = window.innerWidth;
     const updatePosition = () => {
       const title = document.getElementById("hero-title");
       if (!title) return;
       const rect = title.getBoundingClientRect();
+      // Use the title's document-absolute top (rect.top + scrollY), not its
+      // viewport-relative top, so the value does not shift as the page scrolls.
+      // Mobile browsers fire `resize` on scroll when the address bar hides, and a
+      // viewport-relative read at that moment is what made the monitor jump.
       const titleLeftPercent = (rect.left / window.innerWidth) * 100;
-      const titleTopPercent = (rect.top / window.innerHeight) * 100;
+      const titleTopPercent = ((rect.top + window.scrollY) / window.innerHeight) * 100;
       setNebulaPosition({
         x: Math.max(5, titleLeftPercent - 8),
         y: Math.max(10, titleTopPercent - 2),
       });
     };
     updatePosition();
-    window.addEventListener("resize", updatePosition);
+    // Recompute only on a real width change (orientation / window resize). Ignore
+    // height-only changes, which on mobile are just the address bar showing or hiding.
+    const onResize = () => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      updatePosition();
+    };
+    window.addEventListener("resize", onResize);
     document.fonts?.ready.then(updatePosition);
-    return () => window.removeEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", onResize);
   }, [entered]);
 
   const enterFromButton = () => {

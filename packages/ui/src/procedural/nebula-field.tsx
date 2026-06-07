@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
+import { motion, useAnimation, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "../lib/utils";
 import { Monitor } from "lucide-react";
@@ -93,12 +93,20 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   // Desktop: gentle downward parallax. The monitor lives in the empty left gutter, so
   // drifting down stays clear of text.
   const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
-  // Mobile: there is no gutter, so instead of pinning the field to the screen we let it
-  // glide up and out with the hero (slower than scroll, which gives the same depth) and
-  // fade, so it never crosses the content below. PARALLAX/FADE ranges are easy dials.
-  const yRangeMobile = useTransform(scrollY, [0, 1000], [0, -650]);
+  // Mobile: there is no gutter, so instead of pinning the field to the screen we lift it
+  // up and away as you scroll (a touch faster than the scroll, so it rises off the top
+  // rather than drifting down over the text below) and fade it out. The ranges are dials.
+  const yRangeMobile = useTransform(scrollY, [0, 1000], [0, -1100]);
   const parallaxY = isMobile ? yRangeMobile : yRange;
   const heroOpacity = useTransform(scrollY, [0, 450], [1, 0]);
+
+  // Pointer parallax (desktop only): the whole field nudges a few px toward the
+  // cursor. Spring-smoothed, so it can never move abruptly. Touch devices have no
+  // mousemove, so there is no mobile cost.
+  const pointerXRaw = useMotionValue(0);
+  const pointerYRaw = useMotionValue(0);
+  const pointerX = useSpring(pointerXRaw, { stiffness: 60, damping: 18, mass: 0.4 });
+  const pointerY = useSpring(pointerYRaw, { stiffness: 60, damping: 18, mass: 0.4 });
 
   // Monitor position: just to the left of the hero title, on every screen. The extra
   // top room the hero gets on mobile (see page.tsx) keeps this clear of the header.
@@ -109,6 +117,9 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   // convergence point.
   const targetX = computerX + 1.5;
   const targetY = computerY + 1.5;
+
+  // Fewer, slightly thinner streamers on mobile for a cleaner read on a small screen.
+  const effectiveDensity = isMobile ? 5 : density;
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -130,6 +141,18 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     return () => mq.removeEventListener('change', handler);
   }, []);
 
+  // Pointer parallax driver (desktop only). Spring-smoothed via pointerX/Y above.
+  useEffect(() => {
+    if (isMobile) return;
+    const MAX = 12; // px of nudge at the screen edges
+    const onMove = (e: MouseEvent) => {
+      pointerXRaw.set(((e.clientX / window.innerWidth) - 0.5) * 2 * MAX);
+      pointerYRaw.set(((e.clientY / window.innerHeight) - 0.5) * 2 * MAX);
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, [isMobile, pointerXRaw, pointerYRaw]);
+
   // Sync color with theme
   useEffect(() => {
     if (!prefersReducedMotion) {
@@ -138,7 +161,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   }, [themeMode, prefersReducedMotion]);
 
   const paths = useMemo(() => {
-    return Array.from({ length: density }).map(() => {
+    return Array.from({ length: effectiveDensity }).map(() => {
       const edge = Math.floor(Math.random() * 4);
       let startX = 50, startY = 50;
 
@@ -156,7 +179,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
 
       return `M ${startX} ${startY} Q ${cpX} ${cpY} ${endX} ${endY}`;
     });
-  }, [density, themeMode, targetX, targetY]);
+  }, [effectiveDensity, themeMode, targetX, targetY]);
 
   const handleHit = useCallback(() => {
      const colors = themeMode === 'light'
@@ -215,7 +238,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
 
       {/* Monitor + streamers + glow. On mobile this layer glides up and fades as the
           hero scrolls away, so it never crosses the content below. */}
-      <motion.div className="absolute inset-0" style={{ opacity: isMobile ? heroOpacity : undefined }}>
+      <motion.div className="absolute inset-0" style={{ opacity: isMobile ? heroOpacity : undefined, x: pointerX, y: pointerY }}>
 
       {/* Slowly-pulsing Cherenkov "reactor pool" bloom */}
       <motion.div
@@ -240,13 +263,14 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
           y: parallaxY
         }}
       >
-        <motion.div animate={monitorControls}>
-          <Monitor 
-            size={56} // Bigger icon as requested
-            className={cn(
-              "transition-colors duration-1000", // Back to smoother color shift
-              monitorColor
-            )} 
+        <motion.div animate={monitorControls} className={cn("relative transition-colors duration-1000", monitorColor)}>
+          <Monitor size={56} />
+          {/* Live-terminal blink inside the screen. CSS opacity only, so it runs on the
+              compositor for essentially no main-thread cost. */}
+          <span
+            aria-hidden="true"
+            className="nebula-cursor pointer-events-none absolute left-1/2 top-[38%] h-[3px] w-[9px] -translate-x-1/2 rounded-[1px]"
+            style={{ backgroundColor: "currentColor" }}
           />
         </motion.div>
       </motion.div>
@@ -263,7 +287,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={themeMode === 'light' ? 0.08 : 0.12} 
+            width={(themeMode === 'light' ? 0.08 : 0.12) * (isMobile ? 0.85 : 1)}
             index={i}
           />
         ))}

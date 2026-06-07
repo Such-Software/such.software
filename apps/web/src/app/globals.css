@@ -233,3 +233,7 @@
    wrapper and stays a clean LCP candidate). */
 @keyframes splash-zoom { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1.14); } }
 .splash-zoom { animation: splash-zoom 0.8s ease-in-out forwards; }
+
+/* Blinking terminal cursor inside the nebula monitor (opacity only = compositor). */
+@keyframes nebula-cursor-blink { 0%, 49% { opacity: 0.85; } 50%, 100% { opacity: 0; } }
+.nebula-cursor { animation: nebula-cursor-blink 1.1s steps(1, end) infinite; }
