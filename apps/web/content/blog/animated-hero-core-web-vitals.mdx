@@ -1,7 +1,7 @@
 ---
 title: "My Animated Splash Was Tanking Our Mobile PageSpeed Score. It Wasn't the Image."
 date: "2026-06-06"
-excerpt: "An animated hero, a mobile score stuck in the 60s, and a day spent learning the fix had nothing to do with the image."
+excerpt: "An animated hero, a mobile score stuck in the 60s, and a fix that came down to one render-blocking stylesheet, not the image."
 draft: false
 ---
 
@@ -16,9 +16,10 @@ A "paint" is the browser drawing pixels to the screen. First paint is when anyth
 largest contentful paint is when the biggest piece of real content, usually a headline or an image,
 finishes drawing. Google weighs LCP heavily because it stands in for "the page looks ready."
 
-I chased that number, got it wrong the obvious way first, and one change fixed it. The short version:
-the fix was sending most of the page as plain HTML instead of as code the browser has to run. The
-image tricks I tried first barely moved it.
+I chased that number and got it wrong twice before the breakdown showed me the obvious thing. The short
+version: the logo was ready instantly, but the browser would not paint it until a separate stylesheet
+request came back. Inline the CSS so it ships with the page, and the logo paints right away. The image
+fixes I tried first barely moved it.
 
 ## The obvious suspect
 
@@ -53,76 +54,71 @@ bottleneck. Whatever held the logo back happened after the bytes were already in
 
 ## Where the time actually went
 
-The clue was in front of me, but I initially misread it. Total Blocking Time (TBT) was green: about 30
-milliseconds, which I took to mean the main thread was idle. It does not mean that. TBT only counts
-the part of a task that runs past 50 milliseconds, so a task that runs for 40 counts as zero. The page
-ran a lot of those, each just under the bar, and they added up.
+The clue was in front of me, and I read it backwards. Total Blocking Time (TBT, roughly how long the
+page is too busy to respond to a tap) was tiny, about 20 milliseconds. The main thread was free. So
+whatever held the logo back, it was not JavaScript either.
 
-Here is where they came from, and it is the part that is easy to get wrong. The page was already
-server-rendered: the framework sends real HTML, logo included, which is why it looked fine and ranked
-fine. But the whole page was also a client component, so the browser downloaded all of its JavaScript
-and re-ran it to wire up clicks and state. That second pass has a name, hydration, and it was a swarm
-of small tasks holding the main thread while the logo, already sitting in the HTML, waited to be
-drawn.
+Lighthouse splits LCP into two parts: loading the element, then drawing it. The breakdown was blunt.
+Time to first byte: basically zero. Load time: zero, since the logo is inline. Render delay: about two
+and a half seconds. The pixels were in the HTML, the server was fast, the main thread was idle, and
+still nothing drew for over two seconds.
 
-Lighthouse splits LCP into loading the element and then drawing it. My logo loaded instantly, since it
-was inline, so almost all of the five seconds was drawing: the pixels were ready and the browser was
-too busy hydrating to put them on screen. The filmstrip agreed, the logo showed up about halfway
-through the load, not at the start.
-
-In the end I did not hunt down the exact line holding the paint back. I did not need to. The image was
-not slow. The page was.
+There is one thing that makes a browser hold a ready element off the screen like that: it is waiting on
+render-blocking CSS. The page shipped its styles as one separate stylesheet, and a browser will not
+paint anything until that file is fetched and parsed. On a throttled phone that single extra round-trip
+was the whole gap, and its timing wobbled run to run, which is exactly why the score bounced between 70
+and 96 on identical code.
 
 ## The fix
 
-So this was never "turn on server-side rendering." That was already on. The trap is subtler, and easy
-to spring by accident: one `"use client"` at the top of the page, added for a single interactive piece
-(the splash), pulls the entire page under it into the client bundle. Everything below the mark becomes
-code that ships and re-runs in the browser, and it still emits correct HTML the whole time, so nothing
-looks broken until you test on a slow phone.
-
-The fix is to shrink that boundary. Most of a homepage is not interactive: a headline, some
-paragraphs, a few cards. That can stay server-only, plain HTML with nothing to ship and nothing to
-wake up. So I split it: the hero, the copy, and the sections are server-rendered now and hydrate to
-nothing, only the genuinely interactive parts (splash, header, bottom nav, animated background) ship
-as one small island of JavaScript.
+So the fix was to stop making the paint wait on a second request. Next can inline the CSS straight into
+the HTML, so the styles arrive in the same response as the markup. No separate stylesheet, no extra
+round-trip, nothing render-blocking between the HTML and the first paint.
 
 <figure>
-  <img src="/images/blog/animated-hero-core-web-vitals/server-vs-client.svg" alt="Before: one client component holding everything, all shipping as JavaScript, paints late. After: a small client island plus server-HTML content, paints early." />
-  <figcaption>Before, the entire page was interactive JavaScript. After, only a small island is; the rest is plain
-  HTML the browser can show immediately.</figcaption>
+  <img src="/images/blog/animated-hero-core-web-vitals/css-critical-path.svg" alt="Before: the HTML arrives, then the browser fetches and waits for a separate stylesheet, then the logo paints late. After: the HTML arrives with the CSS inlined, and the logo paints immediately." />
+  <figcaption>The logo was ready either way. Before, the paint waited on a separate render-blocking stylesheet
+  request; inlining the CSS removes that round-trip.</figcaption>
 </figure>
 
-Mobile went from the 60s to 95. Desktop held at 98. It stopped jumping between runs, because the
-largest paint no longer waits on a pile of JavaScript to settle.
+With the CSS inlined, render delay collapsed and the logo painted with the page. Mobile went from the
+60s to a steady 100, and the run-to-run bouncing stopped, because the thing that varied, that one CSS
+request, was no longer on the path.
+
+For the record, I also did the things you are supposed to do: moved most of the page to server-rendered
+HTML instead of one big client component, and dropped a JavaScript animation library off the first
+load. That cut the blocking time and is worth doing on its own. But the breakdown is what kept me
+honest. The LCP gate was the stylesheet, not the JavaScript, and only inlining the CSS made the number
+stick.
 
 ## What I would actually tell you
 
-- If a page is slow to appear, look at how much of it is interactive JavaScript. In the Next.js App
-  Router, one `"use client"` at the top makes the whole page client code; push that mark down to the
-  smallest piece that actually needs it.
-- To tell whether you are waiting on a file or on JavaScript, inline the slow image in the HTML and
-  measure again. If nothing improves, stop optimizing the file.
-- A "responds quickly" score is not a "draws quickly" score. A green Total Blocking Time can still
-  hide seconds of small tasks. Read the breakdown of the slow number, not the one next to it.
-- An image drawn straight into the HTML (inline SVG) will not count as the largest paint. Use an
-  `<img>` tag.
-- Animate looping effects with CSS, not JavaScript. The browser moves and fades things on a separate
-  track without interrupting your code; a JavaScript animation does work on every frame. (The desktop
-  half of this story: different number, same lesson.)
-- None of it needed a content delivery network (CDN). The standard advice for a slow page is "put a
-  CDN in front of it." This was about when things draw and what has to run as code. A CDN solves a
-  different problem.
+- Read the LCP breakdown, not just the number. If render delay dominates while time-to-first-byte and
+  load time are near zero, you are not waiting on the network or the server. You are waiting on
+  something that blocks rendering.
+- Render-blocking CSS is that something, more often than you would think. One stylesheet is one extra
+  round-trip between the HTML and the first paint, and on a slow connection that can be seconds. Inline
+  it, or split it so the above-the-fold styles ship with the page.
+- A data URI rules out the network in one move. If inlining the image does not change LCP, stop
+  optimizing the image.
+- An image drawn straight into the HTML (inline SVG) does not count as the largest paint. Use an `<img>`.
+- A green Total Blocking Time does not mean a fast paint. They measure different things, and a free main
+  thread can still sit behind a render-blocking request. Read the breakdown of the slow number, not the
+  one next to it.
+- Trimming JavaScript (server components, fewer libraries) is still worth doing for responsiveness and
+  weight, even when it is not what is gating your paint.
+- None of this needed a content delivery network (CDN). It was about what blocks the first paint, fixed
+  in the build.
 
 ## Why I care about the boring version
 
-Performance is part of accessibility, which is a core tenet of this studio. A hero that feels
-instant on my laptop can be unusable on a cheap phone over a weak connection, and that phone is
-somebody's only device. Getting it to appear fast there is part of the same work as getting it to run with a
-screen reader or at 400% zoom.
+Performance is part of accessibility, which is a core tenet of this studio. A hero that feels instant
+on my laptop can be unusable on a cheap phone over a weak connection, and that phone is somebody's only
+device. Getting it to appear fast there is part of the same work as getting it to run with a screen
+reader or at 400% zoom.
 
-The splash survived. It still shimmers and dissolves into the page, and it skips the intro entirely
-for anyone whose device asks for less motion.
+The splash survived. It still shimmers and dissolves into the page, and it skips the intro entirely for
+anyone whose device asks for less motion.
 
-When something is slow to appear, find out whether you are waiting on a file or on your own code
-before you optimize the wrong one.
+When something is slow to appear, read the breakdown before you touch anything. The wait is often not
+where you would guess, and mine was hiding in a single stylesheet request the whole time.
