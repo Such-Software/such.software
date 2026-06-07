@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SPLASH_LOGO_SRC } from "./splash-logo-data";
@@ -19,7 +18,6 @@ const navButtons = [
 // tagline text is hidden, leaving the logo as the only large element).
 
 export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => void; sectionRef?: any; leaving?: boolean }) {
-  const prefersReduced = useReducedMotion();
   const [entering, setEntering] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const dispRef = useRef<SVGFEDisplacementMapElement>(null);
@@ -35,7 +33,7 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
 
   const handleEnter = () => {
     if (entering) return;
-    if (prefersReduced) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       onEnter();
       return;
     }
@@ -75,13 +73,10 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
       {/* Click-to-enter: soft Cherenkov wash. The ripple itself is the SVG water
           filter refracting the logo (driven by handleEnter's rAF loop). */}
       {entering && (
-        <motion.div
+        <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-20 backdrop-blur-sm"
+          className="splash-wash pointer-events-none fixed inset-0 z-20 backdrop-blur-sm"
           style={{ background: "radial-gradient(circle at center, rgba(34,211,238,0.28), transparent 65%)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.9, 0] }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
         />
       )}
 

@@ -1,7 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { createElement, type ReactNode } from 'react';
+import { createElement, useEffect, useRef, useState, type ReactNode } from 'react';
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none';
 type Tag = 'div' | 'section' | 'article' | 'li';
@@ -17,16 +16,21 @@ interface ScrollRevealProps {
   as?: Tag;
 }
 
-const axisFor = (direction: Direction, distance: number) => {
+const hiddenTransform = (direction: Direction, distance: number) => {
   switch (direction) {
-    case 'up':    return { x: 0, y: distance };
-    case 'down':  return { x: 0, y: -distance };
-    case 'left':  return { x: distance, y: 0 };
-    case 'right': return { x: -distance, y: 0 };
-    case 'none':  return { x: 0, y: 0 };
+    case 'up':    return `translateY(${distance}px)`;
+    case 'down':  return `translateY(${-distance}px)`;
+    case 'left':  return `translateX(${distance}px)`;
+    case 'right': return `translateX(${-distance}px)`;
+    case 'none':  return 'translate(0, 0)';
   }
 };
 
+/**
+ * Reveal-on-scroll wrapper. Uses an IntersectionObserver + a CSS transition instead of
+ * framer-motion, so it adds no JS animation library to the bundle (transform/opacity
+ * run on the compositor). Respects prefers-reduced-motion.
+ */
 export function ScrollReveal({
   children,
   direction = 'up',
@@ -37,41 +41,38 @@ export function ScrollReveal({
   className,
   as = 'div',
 }: ScrollRevealProps) {
-  const prefersReducedMotion = useReducedMotion();
+  const ref = useRef<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
+  const [reduced, setReduced] = useState(false);
 
-  if (prefersReducedMotion) {
-    return createElement(as, { className }, children);
-  }
-
-  const offset = axisFor(direction, distance);
-  const variants: Variants = {
-    hidden: { opacity: 0, ...offset },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: {
-        duration,
-        delay,
-        ease: [0.16, 1, 0.3, 1],
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setReduced(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
       },
-    },
-  };
+      { threshold: amount },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [amount]);
 
-  const common = {
-    className,
-    initial: 'hidden',
-    whileInView: 'visible',
-    viewport: { once: true, amount },
-    variants,
-    children,
-  };
+  const style = reduced
+    ? undefined
+    : {
+        opacity: shown ? 1 : 0,
+        transform: shown ? 'translate(0, 0)' : hiddenTransform(direction, distance),
+        transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
+        willChange: 'opacity, transform',
+      };
 
-  const Component =
-    as === 'section' ? motion.section :
-    as === 'article' ? motion.article :
-    as === 'li'      ? motion.li :
-                       motion.div;
-
-  return createElement(Component as never, common);
+  return createElement(as, { ref, className, style }, children);
 }

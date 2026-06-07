@@ -234,6 +234,11 @@
 @keyframes splash-zoom { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1.14); } }
 .splash-zoom { animation: splash-zoom 0.8s ease-in-out forwards; }
 
+/* Click-to-enter Cherenkov wash (was framer-motion; now CSS so the splash ships no
+   JS animation library). */
+@keyframes splash-wash { 0% { opacity: 0; } 50% { opacity: 0.9; } 100% { opacity: 0; } }
+.splash-wash { animation: splash-wash 0.8s ease-in-out forwards; }
+
 /* Tiny terminal inside the nebula monitor: type "such" once, backspace, then a blinking
    caret on the left. width via steps() is the typewriter; border-right is the caret. */
 .nebula-term {
@@ -247,10 +252,12 @@
   border-right: 1.5px solid currentColor;
   /* type "such", hold, backspace (nebula-type, once); blink a finite number of times
      (nebula-caret); then fade the whole thing out so it stops being distracting. */
+  /* blink ~7 times first (so you catch it even when the splash is skipped on refresh),
+     then type "such", hold, backspace, blink a few more, and fade away. */
   animation:
-    nebula-type 3s steps(4, end) forwards,
-    nebula-caret 0.8s steps(1, end) 10,
-    nebula-term-out 0.6s ease-in 7.4s forwards;
+    nebula-type 3s steps(4, end) 5.6s forwards,
+    nebula-caret 0.8s steps(1, end) 17,
+    nebula-term-out 0.6s ease-in 13s forwards;
 }
 @keyframes nebula-type {
   0% { width: 0; }
