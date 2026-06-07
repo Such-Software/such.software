@@ -16,7 +16,7 @@ export default function Home() {
     <HomeShell>
       <div
         id="main-content"
-        className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-32 pb-10 px-4 text-center scroll-mt-28"
+        className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-44 sm:pt-32 pb-10 px-4 text-center scroll-mt-28"
       >
         <h1
           id="hero-title"

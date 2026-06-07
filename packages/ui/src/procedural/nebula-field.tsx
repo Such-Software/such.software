@@ -88,11 +88,20 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches,
   );
 
-  // Parallax Scroll hooks (called unconditionally)
+  // Scroll-driven motion (hooks called unconditionally).
   const { scrollY } = useScroll();
+  // Desktop: gentle downward parallax. The monitor lives in the empty left gutter, so
+  // drifting down stays clear of text.
   const yRange = useTransform(scrollY, [0, 1000], [0, 250]);
+  // Mobile: there is no gutter, so instead of pinning the field to the screen we let it
+  // glide up and out with the hero (slower than scroll, which gives the same depth) and
+  // fade, so it never crosses the content below. PARALLAX/FADE ranges are easy dials.
+  const yRangeMobile = useTransform(scrollY, [0, 1000], [0, -650]);
+  const parallaxY = isMobile ? yRangeMobile : yRange;
+  const heroOpacity = useTransform(scrollY, [0, 450], [1, 0]);
 
-  // Position calculations
+  // Monitor position: just to the left of the hero title, on every screen. The extra
+  // top room the hero gets on mobile (see page.tsx) keeps this clear of the header.
   const computerX = position?.x ?? 18;
   const computerY = position?.y ?? 18;
   // Aim the streamers at the monitor's screen. +2.5 hit low-and-right; -1/-1.5 hit
@@ -111,9 +120,8 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  // On small screens the monitor and streamers have nowhere to sit without crossing
-  // the hero text, and the scroll parallax drags them over it. Use the static glow
-  // there instead.
+  // Track the mobile breakpoint so the monitor can be re-anchored and the parallax
+  // swapped for a fade.
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
     setIsMobile(mq.matches);
@@ -176,9 +184,8 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
     background: `radial-gradient(circle at center, ${glowColor} 0%, transparent 70%)`,
   } as const;
 
-  // Static background for reduced-motion users and small screens (still Cherenkov-tinted,
-  // with no monitor or streamers to overlap the hero text).
-  if (prefersReducedMotion || isMobile) {
+  // Return static background for reduced motion users (still tinted Cherenkov blue, no motion).
+  if (prefersReducedMotion) {
     return (
       <div className={cn(
         "absolute inset-0 overflow-hidden pointer-events-none z-0",
@@ -198,7 +205,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none z-0", className)}>
 
-      {/* Base Cherenkov gradient wash */}
+      {/* Base Cherenkov gradient wash (always on; only the active layer below fades) */}
       <div className={cn(
         "absolute inset-0",
         themeMode === 'light'
@@ -206,10 +213,14 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
           : "bg-gradient-to-br from-slate-950 via-slate-900/80 to-[#0a1622]"
       )} />
 
+      {/* Monitor + streamers + glow. On mobile this layer glides up and fades as the
+          hero scrolls away, so it never crosses the content below. */}
+      <motion.div className="absolute inset-0" style={{ opacity: isMobile ? heroOpacity : undefined }}>
+
       {/* Slowly-pulsing Cherenkov "reactor pool" bloom */}
       <motion.div
         className="absolute h-[70vmax] w-[70vmax] -translate-x-1/2 -translate-y-1/2"
-        style={{ ...glowStyle, left: `${computerX}%`, top: `${computerY}%`, y: yRange }}
+        style={{ ...glowStyle, left: `${computerX}%`, top: `${computerY}%`, y: parallaxY }}
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: [0.55, 0.9, 0.55], scale: [0.95, 1.05, 0.95] }}
         transition={{ duration: 11, ease: "easeInOut", repeat: Infinity }}
@@ -226,7 +237,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
         style={{ 
           left: `${computerX}%`, 
           top: `${computerY}%`,
-          y: yRange
+          y: parallaxY
         }}
       >
         <motion.div animate={monitorControls}>
@@ -244,7 +255,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         className="w-full h-full opacity-50 dark:opacity-70 absolute inset-0"
-        style={{ y: yRange }} 
+        style={{ y: parallaxY }} 
       >
         {paths.map((d: string, i: number) => (
           <StreamLine
@@ -257,6 +268,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
           />
         ))}
       </motion.svg>
+      </motion.div>
     </div>
   );
 };
