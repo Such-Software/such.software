@@ -105,8 +105,8 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   // mousemove, so there is no mobile cost.
   const pointerXRaw = useMotionValue(0);
   const pointerYRaw = useMotionValue(0);
-  const pointerX = useSpring(pointerXRaw, { stiffness: 60, damping: 18, mass: 0.4 });
-  const pointerY = useSpring(pointerYRaw, { stiffness: 60, damping: 18, mass: 0.4 });
+  const pointerX = useSpring(pointerXRaw, { stiffness: 40, damping: 22, mass: 0.6 });
+  const pointerY = useSpring(pointerYRaw, { stiffness: 40, damping: 22, mass: 0.6 });
 
   // Monitor position: just to the left of the hero title, on every screen. The extra
   // top room the hero gets on mobile (see page.tsx) keeps this clear of the header.
@@ -118,8 +118,9 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   const targetX = computerX + 1.5;
   const targetY = computerY + 1.5;
 
-  // Fewer, slightly thinner streamers on mobile for a cleaner read on a small screen.
-  const effectiveDensity = isMobile ? 5 : density;
+  // Same streamer count on every screen. Reducing it on mobile made them too sparse
+  // to read (they looked like there were none).
+  const effectiveDensity = density;
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -144,7 +145,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
   // Pointer parallax driver (desktop only). Spring-smoothed via pointerX/Y above.
   useEffect(() => {
     if (isMobile) return;
-    const MAX = 12; // px of nudge at the screen edges
+    const MAX = 6; // px of nudge at the screen edges (subtle, spring-eased)
     const onMove = (e: MouseEvent) => {
       pointerXRaw.set(((e.clientX / window.innerWidth) - 0.5) * 2 * MAX);
       pointerYRaw.set(((e.clientY / window.innerHeight) - 0.5) * 2 * MAX);
@@ -189,13 +190,13 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
      setMonitorColor(colors[Math.floor(Math.random() * colors.length)]);
 
      monitorControls.start({
-        scale: [1, 1.1, 1],
+        scale: [1, 1.14, 1],
         filter: [
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))",
-          "brightness(1.3) drop-shadow(0 0 12px currentColor)",
+          "brightness(1.7) drop-shadow(0 0 18px currentColor)",
           "brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0))"
         ],
-        transition: { duration: 1.5, ease: "easeOut" }
+        transition: { duration: 0.9, ease: "easeOut" }
      });
   }, [monitorControls, themeMode]);
 
@@ -265,13 +266,9 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
       >
         <motion.div animate={monitorControls} className={cn("relative transition-colors duration-1000", monitorColor)}>
           <Monitor size={56} />
-          {/* Live-terminal blink inside the screen. CSS opacity only, so it runs on the
-              compositor for essentially no main-thread cost. */}
-          <span
-            aria-hidden="true"
-            className="nebula-cursor pointer-events-none absolute left-1/2 top-[38%] h-[3px] w-[9px] -translate-x-1/2 rounded-[1px]"
-            style={{ backgroundColor: "currentColor" }}
-          />
+          {/* Tiny terminal in the screen: types "such" once, backspaces, then the caret
+              blinks on the left. Pure CSS (steps + width), so it costs ~nothing. */}
+          <span aria-hidden="true" className="nebula-term pointer-events-none absolute left-[26%] top-[30%]">such</span>
         </motion.div>
       </motion.div>
 
@@ -287,7 +284,7 @@ export const NebulaField = ({ className, density = 8, themeMode = 'dark', positi
             d={d}
             themeMode={themeMode}
             onHit={handleHit}
-            width={(themeMode === 'light' ? 0.08 : 0.12) * (isMobile ? 0.85 : 1)}
+            width={themeMode === 'light' ? 0.08 : 0.12}
             index={i}
           />
         ))}
