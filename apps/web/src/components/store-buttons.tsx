@@ -72,12 +72,11 @@ export function SuchoiceStoreButtons() {
 }
 
 export function SuchMoonLaunchStoreButtons() {
-  // Google Play is live; Apple still in review (flip null → real URL once approved).
   return (
     <StoreButtons
       links={[
         { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },
-        { platform: "apple", href: null },
+        { platform: "apple", href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
       ]}
       extraLinks={[
         { href: "https://moonlaunch.such.software", label: "Play on Web" },

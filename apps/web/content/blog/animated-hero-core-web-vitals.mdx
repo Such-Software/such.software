@@ -1,56 +1,128 @@
 ---
-title: "An Animated Hero Without the Core Web Vitals Hit"
+title: "My Animated Splash Was Tanking Our Mobile PageSpeed Score. It Wasn't the Image."
 date: "2026-06-06"
-excerpt: "How we keep a custom animated splash and still score in the 90s on Lighthouse: animate on the right thread, and give the browser a real LCP element."
-draft: true
+excerpt: "An animated hero, a mobile score stuck in the 60s, and a day spent learning the fix had nothing to do with the image."
+draft: false
 ---
 
-Our homepage opens with an animated splash: the SUCH mark over a Cherenkov-blue field, a water-ripple when you click through, and a cross-fade into the page. We like it. It is also exactly the kind of thing that quietly wrecks a Lighthouse score, because a rich animated hero pushes on two of the metrics Google cares about most. Here is how we kept the effect and the score, and the handful of rules that made the difference.
+# My Animated Splash Was Tanking Our Mobile PageSpeed Score. It Wasn't the Image.
 
-This matters beyond a vanity number. Performance is part of accessibility. A hero that is smooth on our laptops can be unusable on a budget Android phone over a weak connection, and "works for everyone" is the whole pitch. Core Web Vitals is a rough proxy for that experience, so we treat it as a real constraint, not a scoreboard.
+Our homepage opens with a splash: the SUCH mark glowing over a Cherenkov-blue field, a water ripple
+when you click through, a cross-fade into the page. I like it. On Google's Lighthouse test it scored
+98 out of 100 on desktop. On mobile it sat in the 60s, sometimes failing outright, and the number
+dragging it down was Largest Contentful Paint (LCP).
 
-## Two budgets: paint and main thread
+A "paint" is the browser drawing pixels to the screen. First paint is when anything shows up. The
+largest contentful paint is when the biggest piece of real content, usually a headline or an image,
+finishes drawing. Google weighs LCP heavily because it stands in for "the page looks ready."
 
-It helps to think of an animated hero as spending from two separate budgets.
+I chased that number, got it wrong the obvious way first, and one change fixed it. The short version:
+the fix was sending most of the page as plain HTML instead of as code the browser has to run. The
+image tricks I tried first barely moved it.
 
-- **Paint timing** (First and Largest Contentful Paint): how quickly the big stuff shows up.
-- **Main-thread time** (Total Blocking Time, and Interaction to Next Paint): how much JavaScript the page has to chew through before it can respond to you.
+## The obvious suspect
 
-A fancy hero can blow either one. The trick is knowing which technique spends from which budget, and not spending where you do not have to.
+On mobile the tagline is hidden, so the biggest thing on screen is the logo. So you would naively
+optimize the logo. Seems reasonable.
 
-## Animate on the compositor, not the main thread
+First gotcha worth knowing: Chrome will not let a drawing written straight into the page (an inline
+SVG, for scalable vector graphics) count as the largest paint. Plain text counts. An `<img>` tag
+counts, even pointing at an SVG file. An `<svg>...</svg>` written into the HTML does not. Our logo was
+the inline kind, and on mobile it was the only big thing on screen, so the test had nothing valid to
+measure and reported an error. Swapping it for an `<img>` tag made the error go away, which felt like
+progress.
 
-The single biggest win: an always-on JavaScript animation runs a callback on the main thread every single frame. Drive a few looping effects that way and you can rack up *seconds* of blocking time on a mid-range phone, which tanks TBT and makes the page feel stuck.
+The score barely moved. LCP was still four or five seconds, and it jumped between runs. That jumping
+is a clue: a number that swings by whole seconds is not held back by one slow thing you can point at.
 
-CSS animations on `transform` and `opacity` are different. The browser hands them to the compositor and they cost the main thread almost nothing. So the rule we follow now:
+## The test that ruled out the image
 
-- **Idle, always-on motion** (a logo float, a pulsing glow, a breathing outline): plain CSS `@keyframes`.
-- **One-shot, interaction-driven motion** (the click-to-enter water ripple): JavaScript is fine, because it runs once and then stops.
+If the logo is slow, the usual suspect is the network: it is a separate file the browser has to fetch,
+and on a slow connection that fetch waits behind the CSS and JavaScript. Easy to test. Inline the
+image into the HTML as text (a data URI), so there is no separate file and no request. If the download
+was the problem, the logo should now paint about when the rest of the page first does, near a second.
 
-Moving our splash's idle animations off the JS animation library and into CSS took the homepage's blocking time from "the page is janky for several seconds" to a rounding error, with no visible change to the effect. One caveat: not every CSS property is cheap. Animating something like `stroke-dashoffset` still forces a repaint every frame, so it is "CSS" but not free. Stick to `transform` and `opacity` for the things that loop forever.
+It did not. With the image inlined, LCP was still about five seconds. The download was never the
+bottleneck. Whatever held the logo back happened after the bytes were already in hand.
 
-## Your LCP element cannot be an inline SVG
+<figure>
+  <img src="/images/blog/animated-hero-core-web-vitals/lcp-timeline.svg" alt="Two timelines. Before: first paint at 1.1s, a four-second gap, LCP at 5.2s. After: first paint 1.1s, LCP 1.4s, gap gone." />
+  <figcaption>The logo's pixels were ready early, but the browser did not draw them as the largest paint until
+  seconds later. That gap is the thing to fix.</figcaption>
+</figure>
 
-This one cost us a day, so learn it for free: **Chrome does not count an inline `<svg>` as a Largest Contentful Paint candidate.** Text, `<img>`, `<video>`, and CSS background images all qualify. An inline SVG drawing does not.
+## Where the time actually went
 
-Our logo is an SVG. On desktop that was fine, because the large gradient tagline next to it is text, and text is a valid candidate. On mobile, where we hide the tagline and lean on the logo, the *only* large element in view was an inline SVG. The result was not a slow LCP. It was *no* LCP at all, which Lighthouse reports as an error and scores as a zero.
+The clue was in front of me, but I initially misread it. Total Blocking Time (TBT) was green: about 30
+milliseconds, which I took to mean the main thread was idle. It does not mean that. TBT only counts
+the part of a task that runs past 50 milliseconds, so a task that runs for 40 counts as zero. The page
+ran a lot of those, each just under the bar, and they added up.
 
-The fix is small: serve the mark as a file and render it with `<img src="logo.svg">`. An `<img>` is a valid LCP candidate even when the source is an SVG. The visual is identical; the metric now has something to measure.
+Here is where they came from, and it is the part that is easy to get wrong. The page was already
+server-rendered: the framework sends real HTML, logo included, which is why it looked fine and ranked
+fine. But the whole page was also a client component, so the browser downloaded all of its JavaScript
+and re-ran it to wire up clicks and state. That second pass has a name, hydration, and it was a swarm
+of small tasks holding the main thread while the logo, already sitting in the HTML, waited to be
+drawn.
 
-## Do not gate the hero behind JavaScript
+Lighthouse splits LCP into loading the element and then drawing it. My logo loaded instantly, since it
+was inline, so almost all of the five seconds was drawing: the pixels were ready and the browser was
+too busy hydrating to put them on screen. The filmstrip agreed, the logo showed up about halfway
+through the load, not at the start.
 
-Two related traps, both about making the browser paint your most important element as early and as plainly as possible.
+In the end I did not hunt down the exact line holding the paint back. I did not need to. The image was
+not slow. The page was.
 
-First, do not fade your LCP element in. An element animated from `opacity: 0` is not "contentful" until it becomes visible, so its LCP timestamp is whenever the fade runs. If that fade is driven by JavaScript that only starts after hydration, on a throttled phone you are reporting an LCP several seconds in. Paint the hero at full opacity from the server-rendered HTML, and animate the *decoration* around it instead.
+## The fix
 
-Second, keep the LCP element clean. A continuously animating wrapper, or a CSS filter on the image, can stop the metric from ever settling. We render the logo as a static, high-priority `<img>` with no filter and no animation of its own. The motion lives in the glow behind it and the elements staggering in around it.
+So this was never "turn on server-side rendering." That was already on. The trap is subtler, and easy
+to spring by accident: one `"use client"` at the top of the page, added for a single interactive piece
+(the splash), pulls the entire page under it into the client bundle. Everything below the mark becomes
+code that ships and re-runs in the browser, and it still emits correct HTML the whole time, so nothing
+looks broken until you test on a slow phone.
 
-## No CDN required
+The fix is to shrink that boundary. Most of a homepage is not interactive: a headline, some
+paragraphs, a few cards. That can stay server-only, plain HTML with nothing to ship and nothing to
+wake up. So I split it: the hero, the copy, and the sections are server-rendered now and hydrate to
+nothing, only the genuinely interactive parts (splash, header, bottom nav, animated background) ship
+as one small island of JavaScript.
 
-Worth saying plainly, because the advice you will get for a slow page is often "put a CDN in front of it." None of the above needed one. These were render-timing and which-thread-does-the-work problems, fixed in the markup and the styles. Images and static assets already get format conversion, resizing, and long cache lifetimes from the framework and the edge host. A CDN solves a different problem than the one most animated heroes have.
+<figure>
+  <img src="/images/blog/animated-hero-core-web-vitals/server-vs-client.svg" alt="Before: one client component holding everything, all shipping as JavaScript, paints late. After: a small client island plus server-HTML content, paints early." />
+  <figcaption>Before, the entire page was interactive JavaScript. After, only a small island is; the rest is plain
+  HTML the browser can show immediately.</figcaption>
+</figure>
 
-## Performance is accessibility
+Mobile went from the 60s to 95. Desktop held at 98. It stopped jumping between runs, because the
+largest paint no longer waits on a pile of JavaScript to settle.
 
-The last piece is the one most on-brand for us. We respect `prefers-reduced-motion` by skipping the splash entirely for visitors who ask for less motion: they land straight on the content, no shimmer, no ripple. And the whole exercise of getting the hero to paint fast on a cheap phone is an accessibility exercise, because that phone is somebody's only device.
+## What I would actually tell you
 
-The effect survived all of it: the splash still shimmers and dissolves into the page. It just does so without making a slower visitor wait on our aesthetics. That is the bar we hold our own site to, and the bar we build to for clients.
+- If a page is slow to appear, look at how much of it is interactive JavaScript. In the Next.js App
+  Router, one `"use client"` at the top makes the whole page client code; push that mark down to the
+  smallest piece that actually needs it.
+- To tell whether you are waiting on a file or on JavaScript, inline the slow image in the HTML and
+  measure again. If nothing improves, stop optimizing the file.
+- A "responds quickly" score is not a "draws quickly" score. A green Total Blocking Time can still
+  hide seconds of small tasks. Read the breakdown of the slow number, not the one next to it.
+- An image drawn straight into the HTML (inline SVG) will not count as the largest paint. Use an
+  `<img>` tag.
+- Animate looping effects with CSS, not JavaScript. The browser moves and fades things on a separate
+  track without interrupting your code; a JavaScript animation does work on every frame. (The desktop
+  half of this story: different number, same lesson.)
+- None of it needed a content delivery network (CDN). The standard advice for a slow page is "put a
+  CDN in front of it." This was about when things draw and what has to run as code. A CDN solves a
+  different problem.
+
+## Why I care about the boring version
+
+Performance is part of accessibility, which is a core tenet of this studio. A hero that feels
+instant on my laptop can be unusable on a cheap phone over a weak connection, and that phone is
+somebody's only device. Getting it to appear fast there is part of the same work as getting it to run with a
+screen reader or at 400% zoom.
+
+The splash survived. It still shimmers and dissolves into the page, and it skips the intro entirely
+for anyone whose device asks for less motion.
+
+When something is slow to appear, find out whether you are waiting on a file or on your own code
+before you optimize the wrong one.

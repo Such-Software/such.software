@@ -63,8 +63,7 @@ const apps = [
     borderColor: "border-amber-500/20",
     href: "/products/such-moon-launch",
     links: [
-      { platform: "apple" as const, href: null },
-      // Google Play live; Apple in review (null renders a disabled "Coming Soon").
+      { platform: "apple" as const, href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },
     ],
   },
