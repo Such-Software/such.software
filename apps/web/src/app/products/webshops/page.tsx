@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Custom Online Stores & E-Commerce | Such Software",
-  description: "Custom online stores with no upfront cost and revenue-share pricing. Own your data, escape template limits, and hit 100/100 Lighthouse. Built on Medusa.",
+  description: "Custom online stores with no upfront cost and revenue-share pricing. Own your data, escape template limits, engineered for top Core Web Vitals. Built on Medusa.",
   alternates: { canonical: "/products/webshops" },
   openGraph: {
     title: "Custom Online Stores & E-Commerce | Such Software",
@@ -83,8 +83,8 @@ export default function WebshopsPage() {
           <Card className="glass-card border-emerald-500/20">
             <h3 className="text-xl font-bold mb-3">Performance First</h3>
             <p className="text-muted-foreground">
-              Next.js storefronts optimized for Core Web Vitals. 100/100 Lighthouse scores, 
-              fast load times, high conversion rates.
+              Next.js storefronts engineered for Core Web Vitals, with fast load
+              times and high conversion in mind.
             </p>
           </Card>
         </div>

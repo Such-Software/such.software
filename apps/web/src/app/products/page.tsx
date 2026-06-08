@@ -34,7 +34,7 @@ const products: Product[] = [
   {
     slug: "smirk-wallet",
     title: "Smirk Wallet",
-    description: "Non-custodial browser wallet for social tipping. BTC, LTC, XMR, WOW, GRIN.",
+    description: "Non-custodial multi-asset browser wallet. Send, receive, and tip by username on Telegram and Discord. BTC, LTC, XMR, WOW, GRIN.",
     color: "amber",
     icon: "/images/products/smirk-wallet.png",
     releaseDate: "2026-03-01",
@@ -74,7 +74,7 @@ const products: Product[] = [
   {
     slug: "wownerogue",
     title: "Wownerogue",
-    description: "A provably-fair multiplayer roguelike synced to Monero and Wownero block times. Play free in the browser, escape the dungeon, earn on-chain payouts.",
+    description: "A provably-fair multiplayer roguelike synced to Monero and Wownero block times. Free in the browser; escape the dungeon before the next block lands. The Monero stagenet instance pays out on-chain.",
     color: "orange",
     icon: "/images/products/privacy-labs.png",
     releaseDate: "2026-06-01",
@@ -126,8 +126,7 @@ export default function ProductsPage() {
             Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Tools we have built, from commerce infrastructure to consumer apps—plus a trio of
-            nuclear games in development.
+            The tools and apps we have shipped, from commerce backends to consumer games, plus three nuclear-physics games in development.
           </p>
         </div>
 

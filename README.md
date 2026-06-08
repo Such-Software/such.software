@@ -53,11 +53,11 @@ pnpm test:a11y  # Run Playwright accessibility tests
 pnpm test:ui    # Run tests with interactive UI
 ```
 
-42 accessibility tests across Chromium, Firefox, and WebKit covering WCAG 2.2 AA compliance, heading hierarchy, color contrast, and keyboard navigation.
+42 accessibility tests across Chromium, Firefox, and WebKit covering WCAG 2.2 AA criteria, heading hierarchy, color contrast, and keyboard navigation.
 
 ## Accessibility
 
-- **WCAG 2.2 AA** compliant (100% Lighthouse)
+- **WCAG 2.2 AA** — engineered to meet, audited against (Lighthouse measured 100%)
 - Skip-to-main link, semantic HTML5, ARIA labels
 - Proper heading hierarchy, color contrast (4.5:1+)
 - `prefers-reduced-motion` support

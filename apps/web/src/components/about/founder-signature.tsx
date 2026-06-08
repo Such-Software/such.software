@@ -38,7 +38,7 @@ export const FounderSignature = () => {
             "Accessibility isn't bolted on. It's there from the first line of code."
           </p>
           <p className="text-muted-foreground leading-relaxed mt-6">
-            John Winter Murphy holds a <span className="text-foreground font-semibold">PhD in Materials Engineering from UT-Dallas (2014)</span>, focused on semiconductor devices for radiation detection. From <span className="text-foreground font-semibold">2015 to 2021 he was a scientist at Lawrence Livermore National Laboratory</span>, developing radiation detector systems and the lab's radioisotope battery program. He brings that same lab-bench rigor to software, and an insistence that it stay <span className="text-foreground font-semibold">accessible to everyone</span>, audited to WCAG 2.2.
+            John Winter Murphy holds a <span className="text-foreground font-semibold">PhD in Materials Engineering from UT-Dallas (2014)</span>, focused on semiconductor devices for radiation detection. From <span className="text-foreground font-semibold">2015 to 2021 he was a scientist at Lawrence Livermore National Laboratory</span>, developing radiation detector systems and the lab's radioisotope battery program. He brings that same lab-bench rigor to software, and an insistence that it stay <span className="text-foreground font-semibold">accessible to everyone</span>, with front-ends engineered and audited against WCAG 2.2 AA.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-4">
             He previously co-founded <span className="text-foreground font-semibold">Patrn LLC</span> (<a href="https://art101.io" target="_blank" rel="noopener noreferrer" className="text-foreground font-semibold underline decoration-primary/50 hover:text-primary transition-colors">art101.io</a>), a series of art-history NFT drops, and <span className="text-foreground font-semibold">Tabby Labs</span>, which was developing a cryptocurrency wallet with an interactive world inside.
@@ -78,10 +78,10 @@ export const FounderSignature = () => {
           </h4>
           <ul className="grid grid-cols-1 gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
             <li className="flex items-center gap-2">
-              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> WCAG 2.2 AA Compliance
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Built to WCAG 2.2 AA
             </li>
             <li className="flex items-center gap-2">
-              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Section 508 & ADA
+              <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Audited vs Section 508 & ADA
             </li>
             <li className="flex items-center gap-2">
               <span className="text-emerald-600 dark:text-emerald-400" aria-hidden="true">✓</span> Semantic HTML5 Architecture

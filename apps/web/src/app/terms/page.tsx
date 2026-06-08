@@ -51,8 +51,11 @@ export default function TermsPage() {
                 a Merchant Client's store relate to these Terms.
               </li>
               <li>
-                <strong>Custom development & consulting</strong> — software development, integration, and consulting
-                services delivered under separate signed agreements.
+                <strong>Custom development & consulting</strong> — software development, integration, and technical
+                consulting services delivered under separate signed agreements. Consulting is limited to software,
+                integration, and educational/technical advisory work; we do not take custody of, hold, or transmit
+                client or customer funds, and we do not provide export-controlled technical assistance. Any
+                engagement may be subject to a scope review.
               </li>
             </ul>
           </section>
@@ -150,6 +153,8 @@ export default function TermsPage() {
             </p>
             <p>
               We do not warrant that the Services will be uninterrupted, error-free, or free of viruses or other harmful components.
+              Any references to accessibility standards (such as WCAG) in our marketing materials describe engineering targets
+              and audit goals, not a warranty or guarantee of compliance.
             </p>
           </section>
 

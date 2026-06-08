@@ -60,7 +60,7 @@ export default function SupportPage() {
             </a>
           </p>
           <p>
-            <Link href="/products/bauhaus-echo/privacy" className="hover:text-foreground transition-colors">
+            <Link href="/privacy" className="hover:text-foreground transition-colors">
               Privacy Policy
             </Link>
           </p>

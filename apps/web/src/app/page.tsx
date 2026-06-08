@@ -55,8 +55,8 @@ export default function Home() {
           <div className="text-left mb-12 section-container border-l-4 border-l-purple-500">
             <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Inclusive by Design</h2>
             <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-              We believe the web is for everyone. Every line of code we write is
-              audited for WCAG 2.2 compliance and high-performance across all devices.
+              The web should work for everyone. We engineer to meet WCAG 2.2 AA and audit
+              against it, and we build for performance on older hardware and slow connections.
             </p>
           </div>
           <FounderSignature />

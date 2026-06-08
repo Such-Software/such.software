@@ -9,13 +9,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About: A Kennett Square, PA Software Studio | Such Software",
-  description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto tools, and games with WCAG 2.2 compliance.",
+  description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto and payment integrations, and games, with front-ends engineered to meet WCAG 2.2 AA.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "About: A Kennett Square, PA Software Studio | Such Software",
-    description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto tools, and games with WCAG 2.2 compliance.",
+    description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto and payment integrations, and games, with front-ends engineered to meet WCAG 2.2 AA.",
     type: "website",
   },
 };
@@ -34,8 +34,7 @@ export default function AboutPage() {
             <p className="text-xl leading-relaxed">
               Such Software is a software studio in Kennett Square, PA, founded by <a href="https://jwinterm.com">John Winter Murphy</a>, 
               whose background is in semiconductor and nuclear engineering: a Materials Engineering PhD from UT-Dallas and six years at Lawrence Livermore National Laboratory. 
-              We build accessible e-commerce websites, crypto infrastructure, and original mobile apps and games, 
-              and offer consulting on payments, cryptocurrency, and radiation transport and interactions.
+              We build accessible e-commerce websites, crypto and payment integrations, and original mobile apps and games. We also consult on cryptocurrency and payment software and integration — the client or a licensed third party holds funds; we never take custody — and teach nuclear, radiation, and semiconductor modeling through open-source labs, training, and talks.
             </p>
           </div>
 
