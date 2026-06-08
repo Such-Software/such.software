@@ -22,7 +22,7 @@ export default function TermsPage() {
         <h1 className="text-4xl font-bold mb-8">Terms of Service</h1>
 
         <div className="prose dark:prose-invert max-w-none space-y-6">
-          <p className="text-muted-foreground">Last updated: April 9, 2026</p>
+          <p className="text-muted-foreground">Last updated: June 8, 2026</p>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">1. Acceptance of Terms</h2>
@@ -37,13 +37,23 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold mt-8 mb-4">2. Description of Services</h2>
             <p>
               Such Software LLC develops and operates software products including mobile applications, web applications,
-              and browser-based games. Our Services include but are not limited to:
+              browser-based games, and a multi-tenant commerce platform. Our Services include but are not limited to:
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li><strong>Vegan IQ</strong> — a plant-based trivia application for iOS and Android</li>
               <li><strong>Bauhaus Echo</strong> — a visual memory puzzle game for iOS, Android, web, and desktop</li>
               <li><strong>Suchoice</strong> — an AI-powered decision-making application for iOS and Android</li>
               <li><strong>such.software</strong> — our company website and portfolio</li>
+              <li>
+                <strong>Multi-Tenant Commerce Platform</strong> — a hosted e-commerce platform on which independent
+                merchants ("Merchant Clients") operate their own online stores. Merchant Clients enter into a separate
+                Platform Services Agreement governing that relationship; see Section 6 below for how purchases made on
+                a Merchant Client's store relate to these Terms.
+              </li>
+              <li>
+                <strong>Custom development & consulting</strong> — software development, integration, and consulting
+                services delivered under separate signed agreements.
+              </li>
             </ul>
           </section>
 
@@ -84,7 +94,37 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">6. Advertising</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">6. Multi-Tenant Commerce Platform</h2>
+            <p>
+              Such Software LLC operates a multi-tenant commerce platform on which independent merchants ("Merchant
+              Clients") offer goods and services for sale through their own branded online stores. The relationship
+              between Such Software and each Merchant Client is governed by a separate signed Platform Services
+              Agreement.
+            </p>
+            <p>
+              <strong>Such Software is NOT the merchant of record</strong> for purchases made on a Merchant Client's
+              store. The Merchant Client is the merchant of record: they sell the goods or services, they have the
+              direct contractual relationship with the purchaser, they are responsible for fulfillment, customer
+              service, returns, and refunds, and they publish their own refund and shipping policies on their
+              storefront. Such Software provides the technology platform and payment-facilitation services only.
+            </p>
+            <p>
+              Card payments on Merchant Client stores are processed through Stripe Connect, with the Merchant
+              Client holding their own Stripe account under Stripe's standard Services Agreement. Cryptocurrency
+              payments are processed through self-hosted payment infrastructure operated either by Such Software
+              or by the Merchant Client; in all cases, customer funds are paid directly to the Merchant Client
+              and Such Software does not take custody of customer funds at any point.
+            </p>
+            <p>
+              For questions about a specific purchase, refund, dispute, or shipment on a Merchant Client store,
+              contact that Merchant Client directly using the contact information published on their storefront.
+              Such Software cannot process refunds, issue store credit, or resolve disputes on a Merchant Client's
+              behalf.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">7. Advertising</h2>
             <p>
               Some of our mobile applications display advertisements provided by Google AdMob. By using these applications,
               you acknowledge that advertisements may be displayed and that ad-related data collection is governed by
@@ -93,7 +133,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">7. Data and Content Accuracy</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">8. Data and Content Accuracy</h2>
             <p>
               Our applications, including Vegan IQ, present information sourced from publicly available datasets (USDA, NIH,
               FAOSTAT, peer-reviewed research). While we make reasonable efforts to ensure accuracy, we do not guarantee that
@@ -103,7 +143,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">8. Disclaimer of Warranties</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">9. Disclaimer of Warranties</h2>
             <p>
               The Services are provided &quot;as is&quot; and &quot;as available&quot; without warranties of any kind, either express or implied,
               including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
@@ -114,7 +154,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">9. Limitation of Liability</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">10. Limitation of Liability</h2>
             <p>
               To the fullest extent permitted by law, Such Software LLC shall not be liable for any indirect, incidental, special,
               consequential, or punitive damages, including but not limited to loss of profits, data, or use, arising out of or
@@ -127,7 +167,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">10. Governing Law</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">11. Governing Law</h2>
             <p>
               These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania,
               United States, without regard to its conflict of law provisions. Any legal action arising from these Terms shall
@@ -136,7 +176,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">11. Changes to These Terms</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">12. Changes to These Terms</h2>
             <p>
               We reserve the right to modify these Terms at any time. Changes will be posted on this page with an updated
               &quot;Last updated&quot; date. Your continued use of the Services after any changes constitutes acceptance of the updated Terms.
@@ -144,7 +184,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">12. Contact Us</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">13. Contact Us</h2>
             <p>
               If you have questions about these Terms, contact us at:
             </p>
