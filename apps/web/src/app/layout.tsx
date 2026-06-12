@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DynamicFavicon } from "@/components/dynamic-favicon";
 import { Footer } from "@/components/layout/footer";
+import { UmamiAnalytics } from "@/components/UmamiAnalytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -119,6 +120,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <DynamicFavicon />
+            <UmamiAnalytics />
             <div className="relative z-10 flex flex-col min-h-screen">
                {children}
                <Footer />

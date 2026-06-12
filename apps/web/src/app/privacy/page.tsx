@@ -22,7 +22,7 @@ export default function PrivacyPage() {
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
 
         <div className="prose dark:prose-invert max-w-none space-y-6">
-          <p className="text-muted-foreground">Last updated: April 9, 2026</p>
+          <p className="text-muted-foreground">Last updated: June 12, 2026</p>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">1. Who We Are</h2>
@@ -51,17 +51,25 @@ export default function PrivacyPage() {
               information with third parties.
             </p>
 
-            <h3 className="text-xl font-medium mt-4 mb-2">Automatically Collected Information</h3>
+            <h3 className="text-xl font-medium mt-4 mb-2">Analytics</h3>
             <p>
-              Our Site does not use analytics services, tracking pixels, or advertising cookies.
-              We do not use Google Analytics, Facebook Pixel, or similar tracking tools on this website.
+              We use <strong>Umami</strong>, a privacy-respecting, self-hosted web analytics tool, to understand
+              aggregate traffic to our Site (such as which pages are visited and where visitors arrive from).
+              Umami is <strong>cookieless</strong> and runs entirely on our own infrastructure &mdash; your data is
+              never sent to a third-party analytics provider or data broker. It does <strong>not</strong> store your
+              IP address, set tracking cookies, build cross-site profiles, or collect personally identifiable
+              information. We honor the <strong>Do Not Track</strong> and <strong>Global Privacy Control</strong>
+              browser signals: if either is enabled, no analytics are collected from your visit.
             </p>
             <p>
-              Our hosting infrastructure (Vercel) may collect standard server logs including IP addresses, browser type,
-              and pages visited. This data is used for security and performance purposes and is subject to{" "}
-              <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
-                Vercel&apos;s Privacy Policy
-              </a>.
+              We do not use Google Analytics, Facebook Pixel, advertising cookies, or similar third-party tracking tools.
+            </p>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">Server Logs</h3>
+            <p>
+              Our self-hosted infrastructure may record standard server logs (including IP addresses, browser type,
+              and pages visited) for security and performance purposes. These logs are not used to identify or
+              profile individual visitors and are retained only as long as needed for operational security.
             </p>
 
             <h3 className="text-xl font-medium mt-4 mb-2">Cookies and Local Storage</h3>
@@ -93,14 +101,14 @@ export default function PrivacyPage() {
             <p>The Site uses the following third-party services:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <strong>Vercel</strong> — hosting and deployment.{" "}
-                <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>
-              </li>
-              <li>
                 <strong>Cloudflare Turnstile</strong> — bot protection on the contact form.{" "}
                 <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>
               </li>
             </ul>
+            <p className="mt-4">
+              Our website analytics (Umami) and hosting are self-hosted on our own infrastructure and are therefore
+              not third-party services.
+            </p>
           </section>
 
           <section>
