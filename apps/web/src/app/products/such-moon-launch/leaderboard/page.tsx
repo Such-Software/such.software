@@ -35,6 +35,7 @@ type Score = {
   completion_time: number;
   fuel_remaining: number;
   crypto_collected: number;
+  score?: number; // present once the unified-score backend is deployed
   stars: number;
   wave: number;
   platform: string | null;
@@ -86,7 +87,7 @@ export default async function LeaderboardPage({
 
   const scores = await fetchBoard(level, board);
   const levelName = level === 12 ? "Endless Mode" : LEVELS[level - 1];
-  const metricLabel = board === "time" ? "Time" : board === "score" ? "Moonrocks" : "Wave";
+  const metricLabel = board === "time" ? "Time" : board === "score" ? "Score" : "Wave";
   const base = "/products/such-moon-launch/leaderboard";
 
   return (
@@ -140,7 +141,7 @@ export default async function LeaderboardPage({
         {/* Board selector (story levels only) */}
         {!isEndless && (
           <div className="flex flex-wrap gap-2 mb-6">
-            {([["time", "⏱ Fastest"], ["score", "💰 Most Moonrocks"]] as const).map(([key, label]) => {
+            {([["time", "⏱ Fastest"], ["score", "🏆 High Score"]] as const).map(([key, label]) => {
               const active = key === board;
               return (
                 <Link
@@ -198,7 +199,7 @@ export default async function LeaderboardPage({
                         {board === "time"
                           ? fmtTime(s.completion_time)
                           : board === "score"
-                            ? s.crypto_collected.toLocaleString()
+                            ? (s.score ?? s.crypto_collected).toLocaleString()
                             : s.wave}
                       </td>
                       {board === "wave" ? (
@@ -226,7 +227,7 @@ export default async function LeaderboardPage({
           {board === "time"
             ? "Ranked by fastest completion time."
             : board === "score"
-              ? "Ranked by most Moonrocks collected."
+              ? "Ranked by total score — speed + fuel + Moonrocks."
               : "Ranked by highest wave survived."}
         </p>
 
