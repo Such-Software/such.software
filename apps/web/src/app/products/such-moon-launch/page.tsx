@@ -83,6 +83,12 @@ export default function SuchMoonLaunchPage() {
 
         <div className="mb-12">
           <SuchMoonLaunchStoreButtons />
+          <Link
+            href="/products/such-moon-launch/leaderboard"
+            className="inline-flex items-center gap-1 mt-4 font-medium text-amber-600 dark:text-amber-400 hover:underline"
+          >
+            🏆 View the global leaderboard →
+          </Link>
         </div>
 
         <h2 className="text-2xl font-bold mb-6">The Story</h2>
