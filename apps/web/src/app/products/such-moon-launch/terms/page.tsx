@@ -172,10 +172,41 @@ export default function SuchMoonLaunchTermsPage() {
 
             <hr />
 
-            <h2>11. Governing Law</h2>
+            <h2>11. Governing Law and Disputes</h2>
             <p>
-              These Terms shall be governed by and construed in accordance with the laws of the
-              State of Delaware, United States, without regard to its conflict of law provisions.
+              These Terms are governed by the laws of the Commonwealth of Pennsylvania, United
+              States, without regard to its conflict-of-laws rules.
+            </p>
+            <p>
+              <strong>Courts.</strong> Except as provided below, any dispute arising out of or
+              relating to these Terms or the App will be brought exclusively in the state or federal
+              courts located in or serving Chester County, Pennsylvania, and you consent to the
+              personal jurisdiction and venue of those courts. Either party may bring an individual
+              claim in small-claims court, and either party may seek injunctive or equitable relief
+              in any court of competent jurisdiction to protect its intellectual property or
+              security.
+            </p>
+            <p>
+              <strong>Jury-trial and class-action waiver.</strong> To the maximum extent permitted
+              by law, you and Such Software each waive any right to a jury trial and agree that
+              disputes will be brought only on an individual basis, and not as a plaintiff or class
+              member in any class, collective, or representative proceeding.
+            </p>
+            <p>
+              <strong>Optional arbitration.</strong> At our option, we may elect to resolve a given
+              dispute through final and binding individual arbitration administered by the American
+              Arbitration Association under its rules, applying Pennsylvania law.
+            </p>
+            <p>
+              <strong>30-day opt-out.</strong> You may opt out of the class-action waiver and the
+              optional-arbitration provision by emailing support@such.software with the subject line
+              &quot;Legal Opt-Out&quot; within 30 days of first accepting these Terms.
+            </p>
+            <p>
+              <strong>Time limit.</strong> Any claim relating to the App must be brought within one
+              (1) year after it arises, or it is permanently barred, except where a longer period is
+              required by law. Nothing in these Terms limits any mandatory consumer-protection rights
+              you have under the law of your country of residence that cannot be waived by agreement.
             </p>
 
             <hr />
