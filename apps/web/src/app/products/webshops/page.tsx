@@ -1,6 +1,8 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { DemosGallery } from "@/components/products/demos-gallery";
+import { ShowcaseVideo } from "@/components/showcase/showcase-video";
+import { BrowserFrame } from "@/components/showcase/browser-frame";
 import { Card } from "@repo/ui/components/card";
 import { Button } from "@repo/ui/components/button";
 import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
@@ -109,6 +111,22 @@ export default function WebshopsPage() {
           nobody else's on top. No large setup fee, no monthly retainer: we build, host, and
           maintain it on revenue share, so we only win when you make sales.
         </p>
+
+        {/* Theming morph: the same platform themed as five real demo brands. */}
+        <figure className="mb-16">
+          <BrowserFrame url="your-brand.com">
+            <ShowcaseVideo
+              webm="/showcase/theming-morph.webm"
+              mp4="/showcase/theming-morph.mp4"
+              poster="/showcase/theming-morph-poster.jpg"
+              label="The same commerce platform themed as five distinct brands, dissolving one into the next: an artisan shop, a merch store, a crypto shop, a yoga studio, and a coaching site."
+              className="block aspect-video w-full"
+            />
+          </BrowserFrame>
+          <figcaption className="mt-3 text-center text-sm text-muted-foreground">
+            One platform, five real storefronts. Every shop here runs the same engine.
+          </figcaption>
+        </figure>
 
         {/* Theming spotlight, the headline story */}
         <section aria-labelledby="theming-heading" className="section-container border-l-4 border-emerald-500 mb-16">
