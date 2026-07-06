@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { DemosGallery } from "@/components/products/demos-gallery";
+import { SurfacesGallery } from "@/components/products/surfaces-gallery";
 import { ShowcaseVideo } from "@/components/showcase/showcase-video";
 import { BrowserFrame } from "@/components/showcase/browser-frame";
 import { Card } from "@repo/ui/components/card";
@@ -33,6 +34,7 @@ const faqs = [
   { q: "Do I own my data?", a: "Yes. Unlike hosted platforms, you own your customer data, product catalog, and order history outright. There is no platform lock-in." },
   { q: "Which payment methods are supported?", a: "Stripe via Stripe Connect (you stay the merchant of record and settle directly) and non-custodial cryptocurrency, Bitcoin, Litecoin, Monero, Wownero, and Grin. Crypto payments land straight in your own wallet; we never take custody of funds." },
   { q: "Can you handle print-on-demand or dropshipping?", a: "Yes. We integrate Printful for print-on-demand and dropship fulfillment, so you can sell apparel and merch without holding inventory, orders route to production and ship automatically." },
+  { q: "Can I sell services or appointments, not just physical products?", a: "Yes. Appointment-based items get a themed booking calendar on the product page, with no shipping step and appointment details sent after checkout. It is the same engine behind the yoga studio's class booking and the coaching site's discovery calls in our live demos, so classes, sessions, consultations, and passes all work out of the box." },
   { q: "What about sales tax?", a: "Tax is automated. We support Stripe Tax for full multi-state calculation and filing, or a self-hosted single-state estimator for sub-nexus tenants, routed per tenant so you collect the right amount at checkout." },
   { q: "Can you migrate my existing store?", a: "Yes. We can migrate catalogs, customers, and order history from Shopify, WooCommerce, and other platforms." },
 ];
@@ -63,6 +65,10 @@ const features: Feature[] = [
   {
     title: "Wallet & Web3 Login",
     body: "Optional Sign-In-With-Ethereum and wallet-based login alongside email, backed by a three-tier auth model, the operator chooses which methods each tenant offers, and each tenant's customers sign in their way.",
+  },
+  {
+    title: "Booking & Scheduling",
+    body: "Sell services, not just products: appointment-based items get a themed scheduling calendar at checkout, with no shipping step and appointment details sent after purchase. Classes, sessions, consultations, and passes work out of the box.",
   },
   {
     title: "Order Notifications",
@@ -156,6 +162,22 @@ export default function WebshopsPage() {
             engine, five completely different looks.
           </p>
           <DemosGallery />
+        </section>
+
+        {/* Surfaces, it is not just the homepage that is themed */}
+        <section aria-labelledby="surfaces-heading" className="mb-16">
+          <h2 id="surfaces-heading" className="text-2xl md:text-3xl font-bold mb-2">
+            Every surface, not just the homepage
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-3xl">
+            Theming runs all the way down: product pages, catalog grids, cart, and checkout each
+            carry the shop's palette, type, and layout. And the platform is more than a catalog,
+            service shops get a real{" "}
+            <span className="font-medium text-foreground">booking calendar</span>: yoga classes
+            and coaching calls are scheduled right on the product page, themed to match. Here is a
+            spread of live surfaces across five different shops.
+          </p>
+          <SurfacesGallery />
         </section>
 
         {/* Feature grid, the real platform capabilities */}

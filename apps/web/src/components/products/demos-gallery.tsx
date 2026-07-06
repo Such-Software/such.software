@@ -76,10 +76,10 @@ function DemoCard({ demo }: { demo: Demo }) {
             cropped to the hero/nav (the most brand-distinctive region). */}
         <div className="h-40 w-full overflow-hidden">
           <Image
-            src={`/images/demos/${demo.slug}.png`}
+            src={`/images/demos/${demo.slug}.jpg`}
             alt={`${demo.name} demo storefront`}
             width={1280}
-            height={800}
+            height={720}
             className="h-40 w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
           />
         </div>
