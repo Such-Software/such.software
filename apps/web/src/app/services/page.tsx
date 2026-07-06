@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 
 const faqs = [
   { q: "What does Such Software build?", a: "Custom e-commerce on Medusa v2, real-time web apps and multiplayer experiences, cryptocurrency and Monero integrations, and PhD-led radiation-science education. We work across the stack, from backend infrastructure to accessible front-ends." },
-  { q: "Do you offer nuclear and radiation education?", a: "Yes. Our founder holds a PhD in radiation-detector materials and spent six years at Lawrence Livermore National Laboratory, plus shielding and spent-fuel work at Holtec. We teach radiation-science fundamentals and Monte Carlo methods, run GEANT4 training, and speak on these topics. Our GEANT4 radiation labs are published open-source (MIT / CC-BY). This is education and published methods, not for-hire controlled modeling." },
+  { q: "Do you offer nuclear and radiation education?", a: "Yes. Our founder holds a PhD in radiation-detector materials and spent six years at Lawrence Livermore National Laboratory, plus shielding and spent-fuel work at Holtec. We teach radiation-science fundamentals and Monte Carlo methods, run GEANT4 training, and speak on these topics. Our GEANT4 radiation labs are published open-source (MIT / CC-BY). This is education and published methods." },
   { q: "Where are you based?", a: "We are a software studio in Kennett Square, Pennsylvania, working with clients remotely across the US and beyond." },
   { q: "Do you build for accessibility?", a: "Yes. We engineer front-ends to meet WCAG 2.2 AA and audit against it, alongside Core Web Vitals, as part of every project." },
   { q: "How does a project start?", a: "Reach out through the contact form with what you need. We scope it, propose an approach, and from there it can run as a fixed project or a performance-based revenue-share partnership." },
@@ -171,8 +171,7 @@ export default function ServicesPage() {
                 <h2 className="text-3xl font-bold mb-2">Nuclear &amp; Radiation-Science Education</h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
                     PhD-led radiation-science teaching, training, and speaking, built on years at
-                    a national lab. We publish our methods open-source and teach them; we don't
-                    take on for-hire controlled modeling.
+                    a national lab. We publish our methods open-source and teach them.
                 </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -279,14 +278,16 @@ export default function ServicesPage() {
         </ScrollReveal>
 
         <ScrollReveal className="mt-20">
-            <h2 className="text-3xl font-bold mb-8 tracking-tight">Frequently Asked Questions</h2>
-            <div className="space-y-6">
-                {faqs.map((f) => (
-                    <div key={f.q}>
-                        <h3 className="text-xl font-bold mb-1">{f.q}</h3>
-                        <p className="text-muted-foreground leading-relaxed">{f.a}</p>
-                    </div>
-                ))}
+            <div className="section-container border-l-4 border-l-indigo-500">
+                <h2 className="text-3xl font-bold mb-8 tracking-tight">Frequently Asked Questions</h2>
+                <div className="space-y-6">
+                    {faqs.map((f) => (
+                        <div key={f.q}>
+                            <h3 className="text-xl font-bold mb-1">{f.q}</h3>
+                            <p className="text-muted-foreground leading-relaxed max-w-3xl">{f.a}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </ScrollReveal>
 
@@ -297,7 +298,7 @@ export default function ServicesPage() {
                 We take on a limited number of revenue-share build partners. Tell us what you're
                 building and we'll run a scope review.
             </p>
-            <Link href="/#contact" className="relative z-10">
+            <Link href="/contact" className="relative z-10">
                 <Button size="lg" variant="secondary" className="rounded-2xl px-12 py-8 text-xl font-bold hover:scale-105 transition-transform bg-white text-slate-900 hover:bg-slate-100">
                     Request a Consultation
                 </Button>

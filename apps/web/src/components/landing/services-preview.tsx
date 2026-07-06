@@ -40,7 +40,7 @@ export function ServicesPreview() {
                 <p className="text-base text-muted-foreground leading-relaxed">
                     Training, talks, and open-source GEANT4 labs on radiation transport and
                     semiconductor detectors, led by a PhD with a Lawrence Livermore background.
-                    Published methods and teaching, not controlled modeling for hire.
+                    Published methods and teaching.
                 </p>
             </Card>
         </div>
