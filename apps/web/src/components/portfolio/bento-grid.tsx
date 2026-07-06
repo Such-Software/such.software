@@ -67,7 +67,7 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
           alt={item.alt}
           fill
           className="object-contain p-2 opacity-60 transition-transform duration-1000 group-hover:scale-105"
-          sizes="(max-width: 768px) 90vw, 33vw"
+          sizes="(max-width: 768px) 65vw, 280px"
         />
       </div>
     </Card>

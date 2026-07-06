@@ -122,3 +122,20 @@ anyone whose device asks for less motion.
 
 When something is slow to appear, read the breakdown before you touch anything. The wait is often not
 where you would guess, and mine was hiding in a single stylesheet request the whole time.
+
+## Update, a month later: it wasn't the stylesheet this time either
+
+The mobile score slid back into the 70s. I took my own advice and read the breakdown first, and the
+render-blocking culprit from last time was gone. The new drag was download weight: the page was pulling
+about 940 kilobytes on mobile, nearly half of it a single 450-kilobyte bundle from Cloudflare Turnstile,
+the "are you a human" check on our contact form.
+
+The catch is where that form lives. On the homepage it sits far below the fold, but the widget loaded
+its scripts the instant the page did, so on a phone over a weak connection that 450 kilobytes competed
+with the content people actually came to see. It never hurt desktop, which is why the score split, high
+on a laptop and mediocre on a phone.
+
+The fix was to make the widget lazy: it now loads only when the form scrolls near the screen, and on the
+dedicated contact page, where the form is right there, it still loads at once. Page weight dropped from
+about 940 kilobytes to 490, and mobile went from the mid-70s to 93 (desktop, 99). Same lesson as before,
+in a new disguise: the cost was real, it was just parked somewhere nobody was looking.
