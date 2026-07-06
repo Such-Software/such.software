@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bw-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f2a1e"/>
+      <stop offset="1" stop-color="#123524"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="22" fill="url(#bw-bg)"/>
+  <!-- soil line -->
+  <rect x="22" y="92" width="84" height="6" rx="3" fill="#e8b23a" opacity="0.45"/>
+  <!-- stem -->
+  <path d="M64 94 L64 54" stroke="#7fd1c4" stroke-width="5" stroke-linecap="round"/>
+  <!-- sprouting letter-tiles -->
+  <rect x="46" y="40" width="17" height="17" rx="4" fill="#3fae7a" transform="rotate(-18 54.5 48.5)"/>
+  <rect x="64" y="34" width="17" height="17" rx="4" fill="#5ec98f" transform="rotate(14 72.5 42.5)"/>
+  <rect x="55" y="20" width="18" height="18" rx="4" fill="#e8b23a"/>
+</svg>

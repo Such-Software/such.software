@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <clipPath id="ms-clip"><rect width="128" height="128" rx="22"/></clipPath>
+  </defs>
+  <g clip-path="url(#ms-clip)">
+    <!-- meat / organic half -->
+    <rect width="128" height="128" fill="#3a1620"/>
+    <path d="M0 0 L128 128 L0 128 Z" fill="#7a2233"/>
+    <!-- cyber / lattice half -->
+    <path d="M0 0 L128 0 L128 128 Z" fill="#0e2530"/>
+    <g stroke="#28c2c2" stroke-width="2" opacity="0.6" fill="none">
+      <path d="M78 22 h22 v18"/>
+      <path d="M90 46 h16"/>
+      <path d="M100 58 v14 h-16"/>
+    </g>
+    <circle cx="100" cy="40" r="3" fill="#28c2c2"/>
+    <circle cx="84" cy="46" r="2.4" fill="#28c2c2"/>
+    <!-- the seam -->
+    <path d="M0 0 L128 128" stroke="#f2efe6" stroke-width="2.5" opacity="0.85"/>
+  </g>
+</svg>
