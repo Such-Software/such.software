@@ -10,7 +10,7 @@ import { JsonLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 const faqs = [
-  { q: "What does Such Software build?", a: "Custom e-commerce on Medusa v2, real-time web apps and multiplayer experiences, cryptocurrency and Monero integrations, and PhD-led radiation-science education. We work across the stack, from backend infrastructure to accessible front-ends." },
+  { q: "What does Such Software build?", a: "Four things, from one small team: custom e-commerce and web apps on revenue share, games and mobile apps we ship ourselves, cryptocurrency and payments software (integration only, never custody), and PhD-led radiation-science education. The pillars below break each down with the products behind them." },
   { q: "Do you offer nuclear and radiation education?", a: "Yes. Our founder holds a PhD in radiation-detector materials and spent six years at Lawrence Livermore National Laboratory, plus shielding and spent-fuel work at Holtec. We teach radiation-science fundamentals and Monte Carlo methods, run GEANT4 training, and speak on these topics. Our GEANT4 radiation labs are published open-source (MIT / CC-BY). This is education and published methods." },
   { q: "Where are you based?", a: "We are a software studio in Kennett Square, Pennsylvania, working with clients remotely across the US and beyond." },
   { q: "Do you build for accessibility?", a: "Yes. We engineer front-ends to meet WCAG 2.2 AA and audit against it, alongside Core Web Vitals, as part of every project." },
@@ -19,17 +19,187 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "Web, Crypto & Nuclear-Science Education | Such Software",
-  description: "Custom e-commerce on Medusa v2, real-time web apps, crypto and Monero integration, and PhD-led radiation-science education and GEANT4 training. A Kennett Square, PA studio.",
+  title: "Web, Games, Crypto & Nuclear-Science Education | Such Software",
+  description: "Four pillars from one studio: custom e-commerce and web apps on revenue share, games and mobile apps, crypto and payments software (non-custodial), and PhD-led radiation-science education and GEANT4 training. Kennett Square, PA.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Web, Crypto & Nuclear-Science Education | Such Software",
-    description: "Custom e-commerce on Medusa v2, real-time web apps, crypto and Monero integration, and PhD-led radiation-science education and GEANT4 training. A Kennett Square, PA studio.",
+    title: "Web, Games, Crypto & Nuclear-Science Education | Such Software",
+    description: "Four pillars from one studio: custom e-commerce and web apps on revenue share, games and mobile apps, crypto and payments software (non-custodial), and PhD-led radiation-science education and GEANT4 training.",
     type: "website",
   },
 };
+
+// ---- Pillar model -------------------------------------------------------
+
+type Pillar = {
+  id: string;
+  label: string;
+  accent: string; // tailwind colour stem, e.g. "blue"
+  title: string;
+  lead: string;
+};
+
+const pillars: Pillar[] = [
+  {
+    id: "commerce",
+    label: "Commerce & Web",
+    accent: "blue",
+    title: "Commerce & custom web",
+    lead: "Proprietary, headless commerce and web apps that you own, built to your business logic instead of a template's limits. Often on revenue share: we build, host, and run it, and earn a share once you are live.",
+  },
+  {
+    id: "games",
+    label: "Games & Apps",
+    accent: "purple",
+    title: "Games & apps",
+    lead: "We do not just consult on software, we ship it. A growing catalog of games and mobile apps built in-house across iOS, Android, web, and desktop, on Godot and Next.js.",
+  },
+  {
+    id: "crypto",
+    label: "Crypto & Payments",
+    accent: "cyan",
+    title: "Crypto & payments",
+    lead: "Software and integration for payments and cryptocurrency. The client, a licensed processor, or the user's own wallet holds the funds; we build the system around it and never take custody.",
+  },
+  {
+    id: "education",
+    label: "Education & Science",
+    accent: "amber",
+    title: "Education & science",
+    lead: "PhD-led radiation-science teaching, training, and speaking from years at a national lab, plus learning-through-play games that teach real science and math. We publish our methods open-source.",
+  },
+];
+
+// Border-left colour per accent (literal strings so Tailwind's JIT keeps them).
+const borderL: Record<string, string> = {
+  blue: "border-l-blue-500",
+  purple: "border-l-purple-500",
+  cyan: "border-l-cyan-500",
+  amber: "border-l-amber-500",
+};
+const chipAccent: Record<string, string> = {
+  blue: "bg-blue-500/15 text-blue-700 dark:text-blue-300",
+  purple: "bg-purple-500/15 text-purple-700 dark:text-purple-300",
+  cyan: "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300",
+  amber: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
+};
+const hoverBorder: Record<string, string> = {
+  blue: "hover:border-blue-500/30",
+  purple: "hover:border-purple-500/30",
+  cyan: "hover:border-cyan-500/30",
+  amber: "hover:border-amber-500/30",
+};
+
+// ---- Proof items (real products behind each pillar) ---------------------
+
+type Proof = {
+  title: string;
+  blurb: string;
+  img?: string; // /images/products/*
+  href?: string; // internal detail page or external
+  tag?: string; // status pill: "Live", "Open source", "Beta", "Early", "Flagship"
+};
+
+const commerceProof: Proof[] = [
+  { title: "Webshops", blurb: "Our multi-tenant commerce platform: fully-themed storefronts, print-on-demand, non-custodial crypto checkout, and automated tax, on revenue share.", img: "/images/products/occupy-wallets.png", href: "/products/webshops", tag: "Flagship" },
+  { title: "Custom builds", blurb: "Real-time web apps, multiplayer experiences, and live dashboards on Next.js, Socket.io, and WebRTC.", img: "/images/products/custom-websites.svg", href: "/products/custom-websites", tag: "Live" },
+  { title: "Grin BTCPay plugin", blurb: "An open-source BTCPay Server plugin we built to accept Grin (Mimblewimble) payments, including auto-Tor invoice exchange.", tag: "Open source" },
+  { title: "Evaluetron", blurb: "A self-hostable AI-compute platform: one core that runs a personal image bot or a paid multi-customer service, with an append-only credit ledger and pricing built in.", tag: "Building" },
+];
+
+const gamesProof: Proof[] = [
+  { title: "Suchoice", blurb: "Stop overthinking decisions: snap a photo, let AI read the options, spin the wheel. iOS and Android.", img: "/images/products/suchoice.png", href: "/products/suchoice", tag: "Live" },
+  { title: "Vegan IQ", blurb: "1,000+ plant-based trivia questions across 8 categories, with a daily challenge and weekly quiz. iOS and Android.", img: "/images/products/vegan-iq.png", href: "/products/vegan-iq", tag: "Live" },
+  { title: "Bloomword", blurb: "A daily word game where every word you find grows a living 3D typographic tree. Free at bloomword.earth, launching on mobile.", img: "/images/products/bloomword.svg", href: "/products/bloomword", tag: "Live" },
+  { title: "Bauhaus Echo", blurb: "A visual memory puzzle game inspired by Bauhaus design. Android, iOS, and web.", img: "/images/products/bauhaus-echo.png", href: "/products/bauhaus-echo", tag: "Live" },
+  { title: "Such Moon Launch", blurb: "Vry rocket, much landing, wow: a Wownero-themed pixel rocket arcade with 11 levels and tilt-to-steer. Everywhere.", img: "/images/products/such-moon-launch.png", href: "/products/such-moon-launch", tag: "Live" },
+];
+
+const cryptoProof: Proof[] = [
+  { title: "Payments consulting", blurb: "Stripe and multi-processor integrations, reconciliation tooling, Monero and on-chain integration. The processor or wallet moves the money; we wire it in.", tag: "Service" },
+  { title: "Smirk Wallet", blurb: "A non-custodial multi-asset browser wallet: send, receive, and tip by username on Telegram and Discord. BTC, LTC, XMR, WOW, GRIN.", img: "/images/products/smirk-wallet.png", href: "/products/smirk-wallet", tag: "Live" },
+  { title: "Hash Bags", blurb: "A mobile multi-chain wallet forked from Cake Wallet, tuned for the privacy-coin ecosystem.", tag: "Beta" },
+  { title: "Evaluetron", blurb: "Pay-for-compute done right: an append-only credit ledger, a job queue, and an evaluator that lets on-demand work preempt opportunistic work. Customers can never self-credit.", tag: "Building" },
+];
+
+const educationProof: Proof[] = [
+  { title: "Barns & Neutrons", blurb: "A cozy exploration-puzzle game across the real Table of Nuclides: capture neutrons, coax decays, and learn honest nuclear physics. Our premiere visual work.", img: "/images/products/barns-and-neutrons.svg", href: "/products/barns-and-neutrons", tag: "Coming soon" },
+  { title: "Nuclear consulting & training", blurb: "PhD-led radiation-science teaching: Monte Carlo methods with GEANT4, shielding and dose fundamentals, detector physics, and open-source labs.", href: "https://jwinterm.github.io/geant4-radiation-labs/", tag: "Service" },
+  { title: "Numchangers", blurb: "A kids math game (ages 5-8) where numbers morph into dots, shapes, and 3D characters, so arithmetic becomes a visible action instead of a quiz. Godot, mobile-first.", tag: "Early" },
+];
+
+const tagStyle: Record<string, string> = {
+  Flagship: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
+  Live: "bg-green-500/15 text-green-700 dark:text-green-300",
+  Service: "bg-sky-500/15 text-sky-700 dark:text-sky-300",
+  "Open source": "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300",
+  Beta: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
+  Building: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
+  Early: "bg-fuchsia-500/15 text-fuchsia-700 dark:text-fuchsia-300",
+  "Coming soon": "bg-fuchsia-500/15 text-fuchsia-700 dark:text-fuchsia-300",
+};
+
+function ProofCard({ p, accent }: { p: Proof; accent: string }) {
+  const inner = (
+    <Card className={`glass-card h-full !p-6 transition-colors ${hoverBorder[accent]}`}>
+      <div className="flex items-start gap-4">
+        {p.img ? (
+          <Image
+            src={p.img}
+            alt={p.title}
+            width={48}
+            height={48}
+            className="rounded-xl flex-shrink-0 h-12 w-12 object-cover bg-white/5"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className={`flex-shrink-0 h-12 w-12 rounded-xl flex items-center justify-center text-lg font-bold ${chipAccent[accent]}`}
+          >
+            {p.title.charAt(0)}
+          </div>
+        )}
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <h3 className="text-lg font-bold text-foreground">{p.title}</h3>
+            {p.tag && (
+              <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${tagStyle[p.tag] ?? chipAccent[accent]}`}>
+                {p.tag}
+              </span>
+            )}
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">{p.blurb}</p>
+          {p.href && (
+            <span className="mt-2 inline-block text-sm font-medium text-foreground group-hover:underline">
+              Learn more →
+            </span>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
+
+  if (!p.href) return <div>{inner}</div>;
+  const external = p.href.startsWith("http");
+  return external ? (
+    <a href={p.href} target="_blank" rel="noopener noreferrer" className="group block h-full">
+      {inner}
+    </a>
+  ) : (
+    <Link href={p.href} className="group block h-full">
+      {inner}
+    </Link>
+  );
+}
+
+function proofFor(id: string): Proof[] {
+  if (id === "commerce") return commerceProof;
+  if (id === "games") return gamesProof;
+  if (id === "crypto") return cryptoProof;
+  return educationProof;
+}
 
 export default function ServicesPage() {
   return (
@@ -40,269 +210,155 @@ export default function ServicesPage() {
 
       <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
         {/* Page Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
-            Specialized Solutions
+            Four things, done well
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Commerce and custom web apps, crypto and payment integration, and
-            PhD-led radiation-science education.
+            Commerce and custom web, games and apps, crypto and payments, and
+            PhD-led radiation-science education. Each pillar comes with the
+            products behind it.
           </p>
         </div>
 
-        {/* Philosophy Card */}
+        {/* Pillar sub-nav: jump links so the page reads as four clear areas */}
+        <nav aria-label="Service pillars" className="mb-16">
+          <ul className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            {pillars.map((p) => (
+              <li key={p.id}>
+                <a
+                  href={`#${p.id}`}
+                  className="inline-block px-4 py-2 rounded-full text-sm font-medium mask-backdrop border border-white/10 text-foreground hover:border-white/30 transition-colors"
+                >
+                  {p.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Philosophy */}
         <ScrollReveal className="mb-20">
-            <div className="text-left section-container border-l-4 border-l-emerald-500">
-                <h2 className="text-3xl font-bold mb-2">Partnership-First Development</h2>
-                <p className="text-muted-foreground text-lg max-w-3xl">
-                   We build the software and run it with you. Many projects start as a fixed
-                   build and continue as a revenue-share partnership.
-                </p>
-            </div>
+          <div className="text-left section-container border-l-4 border-l-emerald-500">
+            <h2 className="text-3xl font-bold mb-2">Partnership-first</h2>
+            <p className="text-muted-foreground text-lg max-w-3xl">
+              We build the software and run it with you. Many projects start as a fixed
+              build and continue as a revenue-share partnership, so we only win when you do.
+            </p>
+          </div>
         </ScrollReveal>
 
-        {/* E-Commerce Section */}
-        <ScrollReveal className="mb-24">
-            <div className="text-left mb-10 section-container border-l-4 border-l-blue-500">
-                <h2 className="text-3xl font-bold mb-2">Custom E-Commerce Engines</h2>
-                <p className="text-muted-foreground text-lg max-w-3xl">
-                    We build proprietary, headless commerce engines that scale with your business logic.
-                    Stop fighting with Shopify's limitations and own your infrastructure.
-                </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-                <Card className="glass-card hover:border-indigo-500/30">
-                    <h3 className="text-xl font-bold mb-3">Flexible Architecture</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Model your exact business logic (subscriptions, bundles, B2B pricing,
-                        multi-warehouse inventory) without platform constraints.
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-indigo-500/30">
-                    <h3 className="text-xl font-bold mb-3">Revenue-Share Model</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        No upfront fees. No monthly retainers. We earn a low percentage of sales after launch. Aligned incentives, no fixed-cost risk.
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-indigo-500/30">
-                    <h3 className="text-xl font-bold mb-3">Performance-First Frontend</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Custom Next.js storefronts, engineered against Core Web Vitals and
-                        WCAG 2.2 AA, not template bloat.
-                    </p>
-                </Card>
-            </div>
-        </ScrollReveal>
-
-        {/* Custom Apps Section */}
-        <ScrollReveal className="mb-24">
-            <div className="text-left mb-10 section-container border-l-4 border-l-purple-500">
-                <h2 className="text-3xl font-bold mb-2">Custom Apps & Interactive Websites</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-                    Whether it's a real-time collaborative tool or a high-end brand experience,
-                    we deliver fast, accessible web applications.
-                </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-                <Card className="glass-card hover:border-purple-500/30">
-                    <h3 className="text-xl font-bold mb-3">Real-time Platforms</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Socket.io and WebRTC integration for collaborative tools, dashboards,
-                        and live data visualization.
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-purple-500/30">
-                    <h3 className="text-xl font-bold mb-3">Brand Motion & Interactive UX</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Scroll-driven narratives, data-reactive visuals, and Three.js scenes, built to stay fast on real devices.
-                    </p>
-                </Card>
-            </div>
-        </ScrollReveal>
-
-        {/* Consulting umbrella */}
-        <ScrollReveal className="mb-12">
-            <div className="text-left section-container border-l-4 border-l-teal-500">
-                <h2 className="text-3xl font-bold mb-2">Consulting</h2>
+        {/* Pillars */}
+        {pillars.map((pillar) => (
+          <section
+            key={pillar.id}
+            id={pillar.id}
+            aria-labelledby={`${pillar.id}-heading`}
+            className="mb-24 scroll-mt-24"
+          >
+            <ScrollReveal>
+              <div className={`text-left mb-10 section-container border-l-4 ${borderL[pillar.accent]}`}>
+                <h2 id={`${pillar.id}-heading`} className="text-3xl font-bold mb-2">
+                  {pillar.title}
+                </h2>
                 <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                    Beyond build work, we consult on cryptocurrency and Monero integration:
-                    software and integration only. We don't take custody of funds or move them
-                    on anyone's behalf.
+                  {pillar.lead}
                 </p>
-                <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed mt-3">
-                    We also teach radiation science. Our founder holds a PhD and spent six years
-                    at Lawrence Livermore National Laboratory; that background now goes into
-                    training, talks, and open-source GEANT4 labs. Details below.
-                </p>
-            </div>
-        </ScrollReveal>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal>
+              <div className="grid md:grid-cols-2 gap-6">
+                {proofFor(pillar.id).map((p) => (
+                  <ProofCard key={p.title} p={p} accent={pillar.accent} />
+                ))}
+              </div>
+            </ScrollReveal>
 
-        {/* Crypto Section */}
-        <ScrollReveal className="mb-24">
-            <div className="text-left mb-10 section-container border-l-4 border-l-cyan-500">
-                <h2 className="text-3xl font-bold mb-2">Cryptocurrency &amp; Payments</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-                    Software and integration for accepting payments and crypto. The client or a
-                    licensed processor holds the funds; we build the system around it.
-                </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-                <Card className="glass-card hover:border-cyan-500/30">
-                    <h3 className="text-xl font-bold mb-3">Payment Integration</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Stripe and multi-processor integrations, reconciliation tooling, and
-                        webhook plumbing. The processor moves the money; we wire it in.
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-cyan-500/30">
-                    <h3 className="text-xl font-bold mb-3">Web3 Integration</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Non-custodial wallet auth, Monero and on-chain integrations, and smart
-                        contract interactions. We integrate; we never custody funds.
-                    </p>
-                </Card>
-            </div>
-        </ScrollReveal>
-
-        {/* Nuclear & Radiation-Science Education Section */}
-        <ScrollReveal className="mb-24">
-            <div className="text-left mb-10 section-container border-l-4 border-l-cyan-400">
-                <h2 className="text-3xl font-bold mb-2">Nuclear &amp; Radiation-Science Education</h2>
-                <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-                    PhD-led radiation-science teaching, training, and speaking, built on years at
-                    a national lab. We publish our methods open-source and teach them.
-                </p>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <Card className="glass-card hover:border-cyan-400/30">
-                    <h3 className="text-xl font-bold mb-3">Monte Carlo Methods</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        We teach radiation-transport Monte Carlo with <span className="font-semibold text-foreground">GEANT4</span>, grounded in
-                        a published <span className="font-semibold text-foreground">MCNP</span> track record
-                        (<a href="https://scholar.google.com/citations?user=xTyYIKkAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground underline decoration-cyan-400/50 hover:text-primary transition-colors">peer-reviewed papers</a>).
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-cyan-400/30">
-                    <h3 className="text-xl font-bold mb-3">Shielding &amp; Dose Concepts</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Coursework on shielding and dose fundamentals, drawn from real spent-fuel
-                        and dry-cask experience at Holtec.
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-cyan-400/30">
-                    <h3 className="text-xl font-bold mb-3">Detectors &amp; Isotopes</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Teaching on radiation-detector physics and radioisotope power
-                        (RTG / betavoltaic), from PhD and national-lab work.
-                    </p>
-                </Card>
-                <Card className="glass-card hover:border-cyan-400/30">
-                    <h3 className="text-xl font-bold mb-3">Training &amp; Curriculum</h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Radiation-science training and coursework for teams and classrooms. See our open-source{" "}
-                        <a
-                            href="https://jwinterm.github.io/geant4-radiation-labs/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-semibold text-foreground underline decoration-cyan-400/50 hover:text-primary transition-colors"
-                        >
-                            GEANT4 radiation labs
-                        </a>.
-                    </p>
-                </Card>
-            </div>
-            <Card className="glass-card border-cyan-400/20">
-                <h3 className="text-lg font-bold mb-4">Why us</h3>
-                <ul className="space-y-2 text-base text-muted-foreground leading-relaxed">
-                    <li>
-                        <span className="font-semibold text-foreground">PhD in radiation-detector materials</span>, UT-Dallas (2014)
-                    </li>
-                    <li>
-                        <span className="font-semibold text-foreground">Lawrence Livermore National Laboratory</span> (2015–2021): detector systems, radioisotope battery program, MCNP5 publications
-                    </li>
-                    <li>
-                        <span className="font-semibold text-foreground">Holtec International</span>: radiation shielding and spent-fuel-to-dry-cask optimization
-                    </li>
-                    <li>
-                        <span className="font-semibold text-foreground">College-level instructor</span>: author of open-source GEANT4 radiation labs
-                    </li>
-                </ul>
-                <p className="text-sm text-muted-foreground mt-5">
-                    For training, speaking, or curriculum, PhD-led.{" "}
-                    <Link href="/#contact" className="font-semibold text-foreground underline decoration-cyan-400/50 hover:text-primary transition-colors">
-                        Start with a scope review
-                    </Link>.
-                </p>
-                <p className="text-xs text-muted-foreground/70 mt-3">
+            {/* Education pillar carries the founder credentials inline */}
+            {pillar.id === "education" && (
+              <ScrollReveal>
+                <Card className="glass-card border-amber-400/20 mt-6 !p-8">
+                  <h3 className="text-lg font-bold mb-4">Why us, on the science</h3>
+                  <ul className="space-y-2 text-base text-muted-foreground leading-relaxed">
+                    <li><span className="font-semibold text-foreground">PhD in radiation-detector materials</span>, UT-Dallas (2014)</li>
+                    <li><span className="font-semibold text-foreground">Lawrence Livermore National Laboratory</span> (2015-2021): detector systems, radioisotope battery program, MCNP5 publications</li>
+                    <li><span className="font-semibold text-foreground">Holtec International</span>: radiation shielding and spent-fuel-to-dry-cask optimization</li>
+                    <li><span className="font-semibold text-foreground">College-level instructor</span>: author of open-source GEANT4 radiation labs</li>
+                  </ul>
+                  <p className="text-xs text-muted-foreground/70 mt-5">
                     This is education and published open-source methods, not for-hire controlled
                     modeling. We are not a licensed professional-engineering (PE) firm and provide no
                     stamped engineering deliverables.
-                </p>
-            </Card>
-        </ScrollReveal>
+                  </p>
+                </Card>
+              </ScrollReveal>
+            )}
+          </section>
+        ))}
 
         {/* Recent Work */}
         <ScrollReveal className="mb-24">
-            <div className="text-left mb-10 section-container border-l-4 border-l-amber-500">
-                <h2 className="text-3xl font-bold mb-2">Recent Work</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
-                    Long-term partnerships over one-off projects.
-                </p>
-            </div>
-            <Card className="glass-card hover:border-amber-500/30">
-                <div className="flex items-start gap-4 mb-4">
-                    <Image
-                        src="/images/products/occupy-wallets.png"
-                        alt="Occupy Wallets"
-                        width={72}
-                        height={72}
-                        className="rounded-xl flex-shrink-0"
-                    />
-                    <div>
-                        <h3 className="text-xl font-bold mb-1">Occupy Wallets</h3>
-                        <a
-                            href="https://occupywallets.art"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                        >
-                            occupywallets.art
-                        </a>
-                    </div>
-                </div>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                    With us since day one. Five years on WordPress, migrating to a custom Medusa v2 storefront this spring.
-                </p>
-            </Card>
-        </ScrollReveal>
-
-        <ScrollReveal className="mt-20">
-            <div className="section-container border-l-4 border-l-indigo-500">
-                <h2 className="text-3xl font-bold mb-8 tracking-tight">Frequently Asked Questions</h2>
-                <div className="space-y-6">
-                    {faqs.map((f) => (
-                        <div key={f.q}>
-                            <h3 className="text-xl font-bold mb-1">{f.q}</h3>
-                            <p className="text-muted-foreground leading-relaxed max-w-3xl">{f.a}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </ScrollReveal>
-
-        <ScrollReveal className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
-            <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <h2 className="text-4xl font-bold mb-6 relative z-10 tracking-tight">Let's build together</h2>
-            <p className="mb-10 text-slate-300 text-lg max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
-                We take on a limited number of revenue-share build partners. Tell us what you're
-                building and we'll run a scope review.
+          <div className="text-left mb-10 section-container border-l-4 border-l-amber-500">
+            <h2 className="text-3xl font-bold mb-2">Recent work</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+              Long-term partnerships over one-off projects.
             </p>
-            <Link href="/contact" className="relative z-10">
-                <Button size="lg" variant="secondary" className="rounded-2xl px-12 py-8 text-xl font-bold hover:scale-105 transition-transform bg-white text-slate-900 hover:bg-slate-100">
-                    Request a Consultation
-                </Button>
-            </Link>
+          </div>
+          <Card className="glass-card hover:border-amber-500/30">
+            <div className="flex items-start gap-4 mb-4">
+              <Image
+                src="/images/products/occupy-wallets.png"
+                alt="Occupy Wallets"
+                width={72}
+                height={72}
+                className="rounded-xl flex-shrink-0"
+              />
+              <div>
+                <h3 className="text-xl font-bold mb-1">Occupy Wallets</h3>
+                <a
+                  href="https://occupywallets.art"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  occupywallets.art
+                </a>
+              </div>
+            </div>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              With us since day one. Five years on WordPress, migrating to a custom Medusa v2 storefront this spring.
+            </p>
+          </Card>
+        </ScrollReveal>
+
+        {/* FAQ */}
+        <ScrollReveal className="mt-20">
+          <div className="section-container border-l-4 border-l-indigo-500">
+            <h2 className="text-3xl font-bold mb-8 tracking-tight">Frequently asked questions</h2>
+            <div className="space-y-6">
+              {faqs.map((f) => (
+                <div key={f.q}>
+                  <h3 className="text-xl font-bold mb-1">{f.q}</h3>
+                  <p className="text-muted-foreground leading-relaxed max-w-3xl">{f.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* CTA */}
+        <ScrollReveal className="mt-20 p-16 rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white text-center shadow-2xl relative overflow-hidden group border-2 border-white/5">
+          <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h2 className="text-4xl font-bold mb-6 relative z-10 tracking-tight">Let&apos;s build together</h2>
+          <p className="mb-10 text-slate-300 text-lg max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
+            We take on a limited number of revenue-share build partners. Tell us what you&apos;re
+            building and we&apos;ll run a scope review.
+          </p>
+          <Link href="/contact" className="relative z-10">
+            <Button size="lg" variant="secondary" className="rounded-2xl px-12 py-8 text-xl font-bold hover:scale-105 transition-transform bg-white text-slate-900 hover:bg-slate-100">
+              Request a Consultation
+            </Button>
+          </Link>
         </ScrollReveal>
       </div>
       <MobileNav />
