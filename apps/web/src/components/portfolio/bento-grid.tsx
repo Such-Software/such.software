@@ -1,6 +1,7 @@
 import { Card } from "@repo/ui/components/card";
 import Image from "next/image";
 import Link from "next/link";
+import { HoverVignette } from "@/components/showcase/hover-vignette";
 
 // Literal class strings per color so Tailwind's JIT keeps them (no dynamic interpolation).
 const cardBg: Record<string, string> = {
@@ -41,20 +42,32 @@ type Item = {
   alt: string;
   href: string;
   external?: boolean;
+  /**
+   * Optional hover/focus "vignette" — a transparent alpha-WebM 3D render from the
+   * game/app that plays OVER this tile's static art on hover or keyboard focus.
+   * Purely additive: with no assets present (or on Safari / reduced-motion) the tile
+   * renders exactly as its static `image`. Asset convention:
+   *   webm:   /showcase/vignettes/<slug>.webm  (VP9 + alpha)
+   *   poster: /showcase/vignettes/<slug>.png   (transparent RGBA PNG)
+   */
+  vignette?: { webm: string; poster: string };
 };
 
-// Order matters: spans 2,1,1,2,2,1 tile a 3-column grid with no gaps while alternating the
-// wide side row to row for a balanced bento look.
+// Six tiles, spans tiling the 3-column grid gap-free: (2,1) / (1,2) / (1,2) = three full rows.
+// Barns & Neutrons is the feature tile — a live transparent 3D vignette that grows on hover.
 const items: Item[] = [
   { name: "Occupy Wallets", tagline: "Custom e-commerce storefront we build and host for an artist.", color: "emerald", span: 2, image: "/images/products/occupy-wallets.png", alt: "Occupy Wallets online store and gallery", href: "https://occupywallets.art", external: true },
   { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true },
-  { name: "Neroswap", tagline: "DEX & CEX orderbook aggregator.", color: "yellow", span: 1, image: "/images/products/neroswap.png", alt: "Screenshot of the Neroswap orderbook aggregator", href: "https://neroswap.com", external: true },
-  { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 2, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
+  { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 1, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
   { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
   { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/images/products/vegan-iq.png", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq" },
+  { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns.webm", poster: "/showcase/vignettes/barns.png" } },
 ];
 
 function BentoCard({ item, delay }: { item: Item; delay: number }) {
+  // Feature tiles (a live vignette) drop the static screenshot — the transparent poster is the
+  // rest state — and grow + lift above their neighbours on hover so the animation is the focus.
+  const feature = !!item.vignette;
   const inner = (
     <Card className={`h-full glass-card group min-h-[300px] rounded-[2.5rem] ${cardBg[item.color]} cursor-pointer`}>
       <div className="absolute inset-x-0 top-0 z-20 p-6 bg-gradient-to-b from-background/95 to-transparent pointer-events-none">
@@ -62,18 +75,26 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
         <p className="text-sm mt-1 text-foreground font-semibold">{item.tagline}</p>
       </div>
       <div className={`absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border ${imgBorder[item.color]} shadow-inner`}>
-        <Image
-          src={item.image}
-          alt={item.alt}
-          fill
-          className="object-contain p-2 opacity-60 transition-transform duration-1000 group-hover:scale-105"
-          sizes="(max-width: 768px) 65vw, 280px"
-        />
+        {feature ? (
+          <HoverVignette webm={item.vignette!.webm} poster={item.vignette!.poster} />
+        ) : (
+          <Image
+            src={item.image}
+            alt={item.alt}
+            fill
+            className="object-contain p-2 opacity-60 transition-transform duration-1000 group-hover:scale-105"
+            sizes="(max-width: 768px) 65vw, 280px"
+          />
+        )}
       </div>
     </Card>
   );
 
-  const className = `bento-item ${spanClass[item.span]}`;
+  const className = `bento-item ${spanClass[item.span]}${
+    feature
+      ? " relative z-0 transition-transform duration-500 ease-out will-change-transform motion-safe:hover:scale-[1.05] motion-safe:hover:z-30 focus-visible:z-30"
+      : ""
+  }`;
   const style = { animationDelay: `${delay}ms` };
 
   return item.external ? (
