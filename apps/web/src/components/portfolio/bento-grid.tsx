@@ -4,13 +4,15 @@ import Link from "next/link";
 import { HoverVignette } from "@/components/showcase/hover-vignette";
 
 // Literal class strings per color so Tailwind's JIT keeps them (no dynamic interpolation).
+// The colour tint + border only paint on hover/focus (via the `group/tile` link) — at rest
+// the .bento-item CSS keeps the card chrome transparent so tiles read as title + render only.
 const cardBg: Record<string, string> = {
-  orange: "!bg-orange-50/95 dark:!bg-orange-950/95 !border-orange-500/20",
-  yellow: "!bg-yellow-50/95 dark:!bg-yellow-950/95 !border-yellow-500/20",
-  amber: "!bg-amber-50/95 dark:!bg-amber-950/95 !border-amber-500/20",
-  emerald: "!bg-emerald-50/95 dark:!bg-emerald-950/95 !border-emerald-500/20",
-  blue: "!bg-blue-50/95 dark:!bg-blue-950/95 !border-blue-500/20",
-  green: "!bg-green-50/95 dark:!bg-green-950/95 !border-green-500/20",
+  orange: "group-hover/tile:!bg-orange-50/95 dark:group-hover/tile:!bg-orange-950/95 group-focus-within/tile:!bg-orange-50/95 dark:group-focus-within/tile:!bg-orange-950/95 group-hover/tile:!border-orange-500/20 group-focus-within/tile:!border-orange-500/20",
+  yellow: "group-hover/tile:!bg-yellow-50/95 dark:group-hover/tile:!bg-yellow-950/95 group-focus-within/tile:!bg-yellow-50/95 dark:group-focus-within/tile:!bg-yellow-950/95 group-hover/tile:!border-yellow-500/20 group-focus-within/tile:!border-yellow-500/20",
+  amber: "group-hover/tile:!bg-amber-50/95 dark:group-hover/tile:!bg-amber-950/95 group-focus-within/tile:!bg-amber-50/95 dark:group-focus-within/tile:!bg-amber-950/95 group-hover/tile:!border-amber-500/20 group-focus-within/tile:!border-amber-500/20",
+  emerald: "group-hover/tile:!bg-emerald-50/95 dark:group-hover/tile:!bg-emerald-950/95 group-focus-within/tile:!bg-emerald-50/95 dark:group-focus-within/tile:!bg-emerald-950/95 group-hover/tile:!border-emerald-500/20 group-focus-within/tile:!border-emerald-500/20",
+  blue: "group-hover/tile:!bg-blue-50/95 dark:group-hover/tile:!bg-blue-950/95 group-focus-within/tile:!bg-blue-50/95 dark:group-focus-within/tile:!bg-blue-950/95 group-hover/tile:!border-blue-500/20 group-focus-within/tile:!border-blue-500/20",
+  green: "group-hover/tile:!bg-green-50/95 dark:group-hover/tile:!bg-green-950/95 group-focus-within/tile:!bg-green-50/95 dark:group-focus-within/tile:!bg-green-950/95 group-hover/tile:!border-green-500/20 group-focus-within/tile:!border-green-500/20",
 };
 const titleColor: Record<string, string> = {
   orange: "text-orange-700 dark:text-orange-400",
@@ -90,7 +92,7 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
     </Card>
   );
 
-  const className = `bento-item ${spanClass[item.span]}${
+  const className = `bento-item group/tile ${spanClass[item.span]}${
     feature
       ? " relative z-0 transition-transform duration-500 ease-out will-change-transform motion-safe:hover:scale-[1.05] motion-safe:hover:z-30 focus-visible:z-30"
       : ""
