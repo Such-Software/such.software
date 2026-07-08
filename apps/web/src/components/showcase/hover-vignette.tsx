@@ -1,12 +1,17 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 
 type HoverVignetteProps = {
-  /** Alpha (VP9-with-alpha) WebM that plays on hover/focus, layered over the tile art. */
+  /** Alpha (VP9-with-alpha) WebM that plays on hover/focus, layered over the tile art (the LIGHT-mode asset). */
   webm: string;
-  /** Transparent RGBA PNG shown by default and whenever the video can't/shouldn't play. */
+  /** Transparent RGBA PNG shown by default and whenever the video can't/shouldn't play (LIGHT-mode). */
   poster: string;
+  /** Optional DARK-mode asset pair. Alpha vignettes are baked, so the ink/colour that reads on a light tile
+   *  (dark outline) vanishes on a dark tile and vice-versa. When provided, these are used in dark mode. */
+  webmDark?: string;
+  posterDark?: string;
   className?: string;
 };
 
@@ -32,14 +37,22 @@ type HoverVignetteProps = {
  *    the tile's link/click/tap or steals focus. It also adds no layout (absolutely
  *    positioned, inset-0), so it can't shift the tile.
  */
-export function HoverVignette({ webm, poster, className }: HoverVignetteProps) {
+export function HoverVignette({ webm, poster, webmDark, posterDark, className }: HoverVignetteProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [allowMotion, setAllowMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setAllowMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    setMounted(true);
   }, []);
+
+  // Pick the theme-matched asset (falls back to the light pair until mounted / when no dark asset is given).
+  const isDark = mounted && resolvedTheme === 'dark';
+  const activeWebm = isDark && webmDark ? webmDark : webm;
+  const activePoster = isDark && posterDark ? posterDark : poster;
 
   useEffect(() => {
     if (!allowMotion) return;
@@ -82,7 +95,7 @@ export function HoverVignette({ webm, poster, className }: HoverVignetteProps) {
       trigger.removeEventListener('focusout', stop);
       video.pause();
     };
-  }, [allowMotion]);
+  }, [allowMotion, activeWebm]);
 
   return (
     <div
@@ -91,16 +104,17 @@ export function HoverVignette({ webm, poster, className }: HoverVignetteProps) {
       className={`pointer-events-none absolute inset-0 z-[15] ${className ?? ''}`}
     >
       <video
+        key={activeWebm}
         ref={videoRef}
         className="h-full w-full object-contain p-2"
-        poster={poster}
+        poster={activePoster}
         muted
         loop
         playsInline
         preload="none"
         tabIndex={-1}
       >
-        <source src={webm} type='video/webm; codecs="vp9"' />
+        <source src={activeWebm} type='video/webm; codecs="vp9"' />
       </video>
     </div>
   );

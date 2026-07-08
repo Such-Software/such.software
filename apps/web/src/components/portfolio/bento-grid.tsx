@@ -52,7 +52,7 @@ type Item = {
    *   webm:   /showcase/vignettes/<slug>.webm  (VP9 + alpha)
    *   poster: /showcase/vignettes/<slug>.png   (transparent RGBA PNG)
    */
-  vignette?: { webm: string; poster: string };
+  vignette?: { webm: string; poster: string; webmDark?: string; posterDark?: string };
 };
 
 // Six tiles, spans tiling the 3-column grid gap-free: (2,1) / (1,2) / (1,2) = three full rows.
@@ -63,7 +63,7 @@ const items: Item[] = [
   { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 1, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
   { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
   { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/images/products/vegan-iq.png", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq" },
-  { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns.webm", poster: "/showcase/vignettes/barns.png" } },
+  { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns-light.webm", poster: "/showcase/vignettes/barns-light.png", webmDark: "/showcase/vignettes/barns-dark.webm", posterDark: "/showcase/vignettes/barns-dark.png" } },
 ];
 
 function BentoCard({ item, delay }: { item: Item; delay: number }) {
@@ -78,7 +78,12 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
       </div>
       <div className={`absolute inset-x-4 bottom-4 top-24 rounded-lg overflow-hidden z-10 bg-black/5 dark:bg-white/5 border ${imgBorder[item.color]} shadow-inner`}>
         {feature ? (
-          <HoverVignette webm={item.vignette!.webm} poster={item.vignette!.poster} />
+          <HoverVignette
+            webm={item.vignette!.webm}
+            poster={item.vignette!.poster}
+            webmDark={item.vignette!.webmDark}
+            posterDark={item.vignette!.posterDark}
+          />
         ) : (
           <Image
             src={item.image}
