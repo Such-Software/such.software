@@ -20,8 +20,16 @@ const navButtons = [
 export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => void; sectionRef?: any; leaving?: boolean }) {
   const [entering, setEntering] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  // warmed: set on idle, well after LCP. It (a) paints a 1px element through the water
+  // filter so the browser compiles the filter graph BEFORE the first real use (the
+  // first-click stutter was the graph compiling mid-transition), and (b) turns on
+  // will-change for the logo so its layer is promoted ahead of the zoom. Doing this
+  // on requestIdleCallback keeps it invisible to Lighthouse.
+  const [warmed, setWarmed] = useState(false);
   const dispRef = useRef<SVGFEDisplacementMapElement>(null);
   const turbRef = useRef<SVGFETurbulenceElement>(null);
+  // Latest-handler ref so the window listeners below never hold a stale closure.
+  const enterRef = useRef<() => void>(() => {});
 
   // When the page asks the splash to leave, it first becomes a fixed overlay; one
   // frame later we drop opacity so it cross-fades into the revealed content.
@@ -59,6 +67,55 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
     };
     requestAnimationFrame(tick);
   };
+  enterRef.current = handleEnter;
+
+  // Scroll intent = enter. Scrolling PAST the splash already dismissed it (the shell's
+  // IntersectionObserver), but only after a full screen of scrolling and with a hard
+  // cut. First wheel tick / touch drag / scroll key now plays the SAME water-ripple
+  // enter as a tap. Listeners are passive (never block the scroll) and the `entering`
+  // guard inside handleEnter dedupes against the button path.
+  useEffect(() => {
+    if (leaving) return;
+    let touchY: number | null = null;
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY > 8) enterRef.current();
+    };
+    const onTouchStart = (e: TouchEvent) => {
+      touchY = e.touches[0]?.clientY ?? null;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchY == null) return;
+      const y = e.touches[0]?.clientY ?? touchY;
+      if (touchY - y > 24) {   // a deliberate upward drag (scroll down), not a resting thumb
+        touchY = null;
+        enterRef.current();
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") enterRef.current();
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [leaving]);
+
+  // Pre-warm on idle (post-LCP): compile the filter graph + promote the logo layer.
+  useEffect(() => {
+    const ric: typeof requestIdleCallback | undefined = (window as any).requestIdleCallback;
+    const id = ric ? ric(() => setWarmed(true)) : window.setTimeout(() => setWarmed(true), 1500);
+    return () => {
+      const cic: typeof cancelIdleCallback | undefined = (window as any).cancelIdleCallback;
+      if (ric && cic) cic(id as number);
+      else window.clearTimeout(id as number);
+    };
+  }, []);
 
   return (
     <section
@@ -88,6 +145,16 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
         </filter>
       </svg>
 
+      {/* Filter pre-warm: a near-invisible 1px paint through the filter (opacity must be
+          non-zero or the paint is skipped and nothing compiles). Idle-gated via `warmed`. */}
+      {warmed && !entering && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-0 h-px w-px opacity-[0.01]"
+          style={{ filter: "url(#splash-water)" }}
+        />
+      )}
+
       {/* Logo (click to enter) + pulsing Cherenkov glow */}
       <button
         type="button"
@@ -104,7 +171,10 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
             statically-painted image. The water filter + zoom only apply on enter. */}
         <div
           className={entering ? "splash-zoom" : undefined}
-          style={{ filter: entering ? "url(#splash-water)" : undefined }}
+          style={{
+            filter: entering ? "url(#splash-water)" : undefined,
+            willChange: warmed && !entering ? "transform, filter, opacity" : undefined,
+          }}
         >
           {/* Data URI (no network request) so the logo paints with FCP; it is the
               mobile LCP element. */}

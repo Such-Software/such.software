@@ -39,8 +39,8 @@ export default function Home() {
           </Link>
         </div>
 
-        <ServicesPreview />
-
+        {/* Show before tell: the visual work leads, the services copy supports it below.
+            (The old order opened with two screens of text before the first image.) */}
         <ScrollReveal className="w-full max-w-6xl mx-auto mb-16 px-4">
           <div className="text-left mb-8 section-container border-l-4 border-l-blue-500">
             <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h2>
@@ -49,6 +49,10 @@ export default function Home() {
             </p>
           </div>
           <PortfolioGrid />
+        </ScrollReveal>
+
+        <ScrollReveal className="w-full">
+          <ServicesPreview />
         </ScrollReveal>
 
         <ScrollReveal className="w-full max-w-6xl mx-auto mb-20 px-4">
