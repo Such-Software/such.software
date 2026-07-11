@@ -63,7 +63,9 @@ const items: Item[] = [
   { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 1, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
   { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
   { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/images/products/vegan-iq.png", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq" },
-  { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns-light.webm", poster: "/showcase/vignettes/barns-light.png", webmDark: "/showcase/vignettes/barns-dark.webm", posterDark: "/showcase/vignettes/barns-dark.png" } },
+  // Single theme-independent asset: the INSET black silhouette stroke (sg_outline) sits ON the yellow letters, so one
+  // baked alpha render reads on both light and dark tiles — no per-theme pair needed (a 3D->web pipeline win).
+  { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns.webm", poster: "/showcase/vignettes/barns.png" } },
 ];
 
 function BentoCard({ item, delay }: { item: Item; delay: number }) {
