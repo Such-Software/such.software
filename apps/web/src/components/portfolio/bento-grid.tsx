@@ -52,20 +52,26 @@ type Item = {
    *   webm:   /showcase/vignettes/<slug>.webm  (VP9 + alpha)
    *   poster: /showcase/vignettes/<slug>.png   (transparent RGBA PNG)
    */
-  vignette?: { webm: string; poster: string; webmDark?: string; posterDark?: string };
+  vignette?: { webm: string; poster: string; webmDark?: string; posterDark?: string; mp4?: string; fit?: "contain" | "cover" };
 };
 
-// Six tiles, spans tiling the 3-column grid gap-free: (2,1) / (1,2) / (1,2) = three full rows.
-// Barns & Neutrons is the feature tile — a live transparent 3D vignette that grows on hover.
+// Six tiles, spans tiling the 3-column grid gap-free: (2,1) / (1,2) / (2,1) = three full rows.
+// Two live tiles: Webshops (the theming-morph reel, an opaque cover video: five completely
+// different storefronts from one platform) and Barns & Neutrons (transparent 3D vignette).
+// Videos play on hover/focus on desktop and while on screen on no-hover (touch) devices.
 const items: Item[] = [
-  { name: "Occupy Wallets", tagline: "Custom e-commerce storefront we build and host for an artist.", color: "emerald", span: 2, image: "/images/products/occupy-wallets.png", alt: "Occupy Wallets online store and gallery", href: "https://occupywallets.art", external: true },
+  { name: "Webshops", tagline: "Custom storefronts we build and host. One platform, five completely different shops.", color: "emerald", span: 2, image: "/showcase/reels/webshops.jpg", alt: "Five differently themed demo storefronts built on the same platform", href: "/products/webshops", vignette: { webm: "/showcase/reels/webshops.webm", poster: "/showcase/reels/webshops.jpg", mp4: "/showcase/reels/webshops.mp4", fit: "cover" } },
   { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true },
-  { name: "Wownerogue", tagline: "Provably-fair roguelike, synced to crypto block times.", color: "orange", span: 1, image: "/images/products/privacy-labs.png", alt: "Screenshot of the Wownerogue roguelike dungeon-crawler", href: "/products/wownerogue" },
-  { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
-  { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/images/products/vegan-iq.png", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq" },
+  // Transparent chroma-keyed vignette (the engine can't emit real alpha — BW_FLAT magenta key):
+  // full-bloom tree at rest, hover retracts and regrows it. Palindrome loop, seam 0.0.
+  { name: "Bloomword", tagline: "A word game where every answer grows the tree.", color: "green", span: 1, image: "/images/products/bloomword.svg", alt: "Bloomword, a word game about growing a tree", href: "/products/bloomword", vignette: { webm: "/showcase/vignettes/bloomword.webm", poster: "/showcase/vignettes/bloomword.png" } },
   // Single theme-independent asset: the INSET black silhouette stroke (sg_outline) sits ON the yellow letters, so one
   // baked alpha render reads on both light and dark tiles — no per-theme pair needed (a 3D->web pipeline win).
   { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns.webm", poster: "/showcase/vignettes/barns.png" } },
+  { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
+  // Cover reel from the vegan-IQ social pipeline: logo panel at rest, card-flips to a real
+  // quiz question (unanswered -> answered) on hover, flips back for a perfect loop seam.
+  { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/showcase/reels/vegan-iq.jpg", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq", vignette: { webm: "/showcase/reels/vegan-iq.webm", poster: "/showcase/reels/vegan-iq.jpg", mp4: "/showcase/reels/vegan-iq.mp4", fit: "cover" } },
 ];
 
 function BentoCard({ item, delay }: { item: Item; delay: number }) {
@@ -85,6 +91,8 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
             poster={item.vignette!.poster}
             webmDark={item.vignette!.webmDark}
             posterDark={item.vignette!.posterDark}
+            mp4={item.vignette!.mp4}
+            fit={item.vignette!.fit}
           />
         ) : (
           <Image
