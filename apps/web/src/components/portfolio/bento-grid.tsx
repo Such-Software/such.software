@@ -67,7 +67,7 @@ type Item = {
 // (r2,c3) / (r3,c1-2) / (r3,c3).
 // Videos play on hover/focus on desktop and while on screen on no-hover (touch) devices.
 const items: Item[] = [
-  { name: "Webshops", tagline: "Custom storefronts we build and host. One platform, five completely different shops.", color: "emerald", span: 2, rows: 2, image: "/showcase/reels/webshops.jpg", alt: "Five differently themed demo storefronts built on the same platform", href: "/products/webshops", vignette: { webm: "/showcase/reels/webshops.webm", poster: "/showcase/reels/webshops.jpg", mp4: "/showcase/reels/webshops.mp4", fit: "cover" } },
+  { name: "Webshops", tagline: "Custom storefronts we build and host. One platform, unlimited possibilities.", color: "emerald", span: 2, rows: 2, image: "/showcase/reels/webshops.jpg", alt: "Differently themed demo storefronts built on the same platform", href: "/products/webshops", vignette: { webm: "/showcase/reels/webshops.webm", poster: "/showcase/reels/webshops.jpg", mp4: "/showcase/reels/webshops.mp4", fit: "cover" } },
   { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true },
   // Transparent chroma-keyed vignette (the engine can't emit real alpha — BW_FLAT magenta key):
   // full-bloom tree at rest, hover retracts and regrows it. Palindrome loop, seam 0.0.

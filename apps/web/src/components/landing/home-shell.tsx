@@ -107,9 +107,46 @@ export function HomeShell({ children }: { children: ReactNode }) {
     sessionStorage.setItem("such:entered", "1");
     setEntered(true);
     setLeaving(true);
+    // Scroll-intent entries arrive with wheel/touch MOMENTUM still flowing; without a
+    // lock those trailing events scroll the freshly-revealed page down during the wave,
+    // so you land below the hero instead of at the very top (same as a click would).
+    // Freeze scrolling for the transition, then release exactly at the top.
+    const html = document.documentElement;
+    const prevOverflow = html.style.overflow;
+    html.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+    // Any scroll that sneaks past the overflow lock gets yanked back to 0.
+    const pin = () => window.scrollTo(0, 0);
+    window.addEventListener("scroll", pin, { passive: true });
+    // The gesture that triggered the enter keeps emitting MOMENTUM (a trackpad flick
+    // can trail for ~1.5s — longer than the 800ms wave). Releasing the lock on a fixed
+    // timer let those trailing ticks scroll the revealed page, so you landed below the
+    // hero instead of at the very top. Hold the lock until the input goes QUIET
+    // (250ms with no wheel/touch), capped at 3s so a deliberate scroller is never trapped.
+    let lastInput = performance.now();
+    const note = () => { lastInput = performance.now(); };
+    window.addEventListener("wheel", note, { passive: true });
+    window.addEventListener("touchmove", note, { passive: true });
+    const release = () => {
+      window.removeEventListener("scroll", pin);
+      window.removeEventListener("wheel", note);
+      window.removeEventListener("touchmove", note);
+      html.style.overflow = prevOverflow;
+      window.scrollTo(0, 0);
+    };
+    const started = performance.now();
+    const tryRelease = () => {
+      const now = performance.now();
+      if (now - lastInput > 250 || now - started > 3000) release();
+      else setTimeout(tryRelease, 100);
+    };
     // Keep the splash mounted briefly as a fixed, fading overlay so it cross-fades
-    // into the revealed content instead of hard-cutting.
-    setTimeout(() => setSplashUp(false), 800);
+    // into the revealed content instead of hard-cutting; release the scroll lock only
+    // once the wave is done AND the triggering gesture's momentum has died down.
+    setTimeout(() => {
+      setSplashUp(false);
+      tryRelease();
+    }, 800);
   };
 
   return (
