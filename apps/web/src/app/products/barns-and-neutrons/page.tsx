@@ -7,8 +7,8 @@ import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Barns & Neutrons: Table of Nuclides Game | Such Software",
-  description: "Barns & Neutrons is a cozy exploration-puzzle game across the real Table of Nuclides. Capture neutrons, coax decays, and learn honest, cited nuclear physics. In development.",
+  title: "Barns & Neutrons: Chart of Nuclides Game | Such Software",
+  description: "Barns & Neutrons is a cozy exploration-puzzle game across the real Chart of Nuclides. Capture neutrons, coax decays, and learn honest, cited nuclear physics. In development.",
   alternates: { canonical: "/products/barns-and-neutrons" },
   keywords: [
     "table of nuclides game",
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
     "barns and neutrons",
   ],
   openGraph: {
-    title: "Barns & Neutrons: A Game About the Table of Nuclides",
-    description: "A cozy, honest expedition across the real Table of Nuclides — the anti-spreadsheet. In development by Such Software.",
+    title: "Barns & Neutrons: A Game About the Chart of Nuclides",
+    description: "A cozy, honest expedition across the real Chart of Nuclides — the anti-spreadsheet. In development by Such Software.",
     type: "website",
     url: "/products/barns-and-neutrons",
   },
 };
 
 const faqs = [
-  { q: "What is Barns & Neutrons?", a: "A cozy exploration-puzzle game set on the real Table of Nuclides — the grid of every known isotope. You start on a small island of known nuclides and each step into the dark is a small physics puzzle: capture a neutron, coax a decay. The reward is discovery, as a new nuclide lights up and its Compendium entry unfolds." },
+  { q: "What is Barns & Neutrons?", a: "A cozy exploration-puzzle game set on the real Chart of Nuclides — the grid of every known isotope. You start on a small island of known nuclides and each step into the dark is a small physics puzzle: capture a neutron, coax a decay. The reward is discovery, as a new nuclide lights up and its Compendium entry unfolds." },
   { q: "Is it educational?", a: "Yes, but through play, not lectures. Every animation reflects real physics, and discoveries unlock real-world context (Tc-99m in medical imaging, Am-241 in smoke detectors, C-14 in dating) along with half-lives, Q-values, and cornerstone papers. The data is grounded in open sources like ENDF, IAEA, and NIST." },
   { q: "What does “Barns” mean?", a: "A barn is the real unit of nuclear cross-section (10⁻²⁴ cm²) — a measure of how likely a nucleus is to interact with a neutron. The neutron-capture puzzles are literally about tuning energy to hit that cross-section." },
   { q: "What platforms will it be on?", a: "It is built in Godot for desktop (Windows, macOS, Linux) and mobile (iOS, Android)." },
@@ -41,7 +41,7 @@ const jsonLd = {
   name: "Barns & Neutrons",
   url: "https://such.software/products/barns-and-neutrons",
   description:
-    "A cozy exploration-puzzle game across the real Table of Nuclides. Capture neutrons, coax decays, and learn honest, cited nuclear physics.",
+    "A cozy exploration-puzzle game across the real Chart of Nuclides. Capture neutrons, coax decays, and learn honest, cited nuclear physics.",
   applicationCategory: "Game",
   genre: ["Puzzle", "Educational", "Simulation"],
   gamePlatform: ["PC", "iOS", "Android"],
@@ -85,11 +85,11 @@ export default function BarnsAndNeutronsPage() {
             </h1>
           </div>
         </div>
-        <p className="text-base text-muted-foreground mb-6">A cozy, honest expedition across the real Table of Nuclides — the anti-spreadsheet.</p>
+        <p className="text-base text-muted-foreground mb-6">A cozy, honest expedition across the real Chart of Nuclides — the anti-spreadsheet.</p>
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Barns &amp; Neutrons is a calm puzzle game about the real Table of Nuclides. You begin on a
+            Barns &amp; Neutrons is a calm puzzle game about the real Chart of Nuclides. You begin on a
             tiny lit island of known isotopes, and each step into the dark is a small, elegant physics
             puzzle — capture a neutron, coax a decay. The reward is discovery: a new nuclide lights up
             and its Compendium entry unfolds. It is our flagship edutainment title, and it shares its

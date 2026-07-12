@@ -99,7 +99,7 @@ const cryptoProof: Proof[] = [
 ];
 
 const educationProof: Proof[] = [
-  { title: "Barns & Neutrons", blurb: "A cozy exploration-puzzle game across the real Table of Nuclides: capture neutrons, coax decays, and learn honest nuclear physics. Our premiere visual work.", img: "/images/products/barns-and-neutrons.svg", href: "/products/barns-and-neutrons", tag: "Coming soon" },
+  { title: "Barns & Neutrons", blurb: "A cozy exploration-puzzle game across the real Chart of Nuclides: capture neutrons, coax decays, and learn honest nuclear physics. Our premiere visual work.", img: "/images/products/barns-and-neutrons.svg", href: "/products/barns-and-neutrons", tag: "Coming soon" },
   { title: "Nuclear consulting & training", blurb: "PhD-led radiation-science teaching: Monte Carlo methods with GEANT4, shielding and dose fundamentals, detector physics, and open-source labs.", href: "https://jwinterm.github.io/geant4-radiation-labs/", tag: "Service" },
   { title: "Numchangers", blurb: "A kids math game (ages 5-8) where numbers morph into dots, shapes, and 3D characters, so arithmetic becomes a visible action instead of a quiz. Godot, mobile-first.", tag: "Early" },
 ];

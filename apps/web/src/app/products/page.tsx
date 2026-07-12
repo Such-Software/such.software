@@ -90,7 +90,7 @@ const products: Product[] = [
   {
     slug: "barns-and-neutrons",
     title: "Barns & Neutrons",
-    description: "A cozy exploration-puzzle game across the real Table of Nuclides: the anti-spreadsheet. Capture neutrons, coax decays, and light up the chart while learning honest nuclear physics. Desktop and mobile.",
+    description: "A cozy exploration-puzzle game across the real Chart of Nuclides: the anti-spreadsheet. Capture neutrons, coax decays, and light up the chart while learning honest nuclear physics. Desktop and mobile.",
     color: "yellow",
     icon: "/images/products/barns-and-neutrons.svg",
     releaseDate: null,
