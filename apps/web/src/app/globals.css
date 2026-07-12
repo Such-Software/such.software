@@ -282,3 +282,22 @@
 }
 @keyframes nebula-caret { 0%, 50% { border-color: currentColor; } 50.01%, 100% { border-color: transparent; } }
 @keyframes nebula-term-out { to { opacity: 0; } }
+
+/* Hero title: an animated gradient sheen. LCP-safe — the text paints immediately with the
+   gradient; only the gradient POSITION animates, which never delays the largest paint. The
+   global reduced-motion rule freezes it to the base gradient. */
+.hero-title {
+  background-image: linear-gradient(110deg, #22d3ee 0%, #3b82f6 30%, #7dd3fc 50%, #3b82f6 70%, #22d3ee 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hero-sheen 9s ease-in-out infinite;
+}
+@keyframes hero-sheen {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+/* Soft aura behind the hero title (decorative). Gentle breathing scale/opacity. */
+@keyframes hero-aura { 0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); } 50% { opacity: 0.8; transform: translateX(-50%) scale(1.08); } }
+.hero-aura { animation: hero-aura 7s ease-in-out infinite; }

@@ -16,11 +16,16 @@ export default function Home() {
     <HomeShell>
       <div
         id="main-content"
-        className="z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-44 sm:pt-32 pb-10 px-4 text-center scroll-mt-28"
+        className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center pt-40 sm:pt-28 pb-10 px-4 text-center scroll-mt-28"
       >
+        {/* Decorative aura behind the title (aria-hidden, LCP-safe, motion-safe). */}
+        <div
+          aria-hidden="true"
+          className="hero-aura pointer-events-none absolute left-1/2 top-24 sm:top-16 -z-10 h-64 w-[46rem] max-w-[92vw] rounded-full bg-cyan-400/25 blur-3xl"
+        />
         <h1
           id="hero-title"
-          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 pb-2"
+          className="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-6 pb-2"
           style={{ maxWidth: "min(calc(90vw - 120px), 100%)" }}
         >
           <span className="block">Precision Engineering</span>
@@ -30,24 +35,19 @@ export default function Home() {
           Custom e-commerce, websites, apps, and consulting. Plus our own mobile apps and games. A software studio in Kennett Square, PA.
         </p>
 
-        <div className="flex gap-4 mb-10">
+        <div className="flex flex-wrap justify-center gap-4 mb-14">
           <Link href="/products">
-            <Button size="lg" className="rounded-full">View Portfolio</Button>
+            <Button size="lg" className="rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:scale-[1.03] transition-all">View Portfolio</Button>
           </Link>
           <Link href="#contact">
-            <Button variant="outline" size="lg" className="rounded-full">Start a Project</Button>
+            <Button variant="outline" size="lg" className="rounded-full hover:scale-[1.03] transition-all">Start a Project</Button>
           </Link>
         </div>
 
-        {/* Show before tell: the visual work leads, the services copy supports it below.
-            (The old order opened with two screens of text before the first image.) */}
+        {/* Show, don't tell: the bento leads directly under the hero (the Selected Works
+            header card was dropped to pull the work up higher). */}
         <ScrollReveal className="w-full max-w-6xl mx-auto mb-16 px-4">
-          <div className="text-left mb-8 section-container border-l-4 border-l-blue-500">
-            <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Selected Works</h2>
-            <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-              Recent projects spanning e-commerce, games, payment infrastructure, and interactive web applications.
-            </p>
-          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-6">Selected Works</h2>
           <PortfolioGrid />
         </ScrollReveal>
 

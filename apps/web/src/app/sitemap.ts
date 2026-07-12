@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // every page as "modified now" on every build, which is noise that dilutes the freshness
   // signal. Bump this when the site's static content meaningfully changes. (Blog posts carry
   // their own per-post dates below.)
-  const updated = new Date("2026-06-01");
+  const updated = new Date("2026-07-12");
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: base, lastModified: updated, changeFrequency: "weekly", priority: 1.0 },
