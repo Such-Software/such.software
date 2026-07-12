@@ -68,7 +68,9 @@ type Item = {
 // Videos play on hover/focus on desktop and while on screen on no-hover (touch) devices.
 const items: Item[] = [
   { name: "Webshops", tagline: "Custom storefronts we build and host. One platform, unlimited possibilities.", color: "emerald", span: 2, rows: 2, image: "/showcase/reels/webshops.jpg", alt: "Differently themed demo storefronts built on the same platform", href: "/products/webshops", vignette: { webm: "/showcase/reels/webshops.webm", poster: "/showcase/reels/webshops.jpg", mp4: "/showcase/reels/webshops.mp4", fit: "cover" } },
-  { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true },
+  // 3D smirk coin (our engine + sg_outline inset ink): rests smirk-up, hover tosses it with a
+  // decelerating end-over-end tumble (the suchoice coin-flip feel), lands $-up, half-flips home.
+  { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true, vignette: { webm: "/showcase/vignettes/smirk.webm", poster: "/showcase/vignettes/smirk.png" } },
   // Transparent chroma-keyed vignette (the engine can't emit real alpha — BW_FLAT magenta key):
   // full-bloom tree at rest, hover retracts and regrows it. Palindrome loop, seam 0.0.
   { name: "Bloomword", tagline: "A word game where every answer grows the tree.", color: "green", span: 1, image: "/images/products/bloomword.svg", alt: "Bloomword, a word game about growing a tree", href: "/products/bloomword", vignette: { webm: "/showcase/vignettes/bloomword.webm", poster: "/showcase/vignettes/bloomword.png" } },
