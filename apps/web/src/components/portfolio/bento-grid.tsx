@@ -34,12 +34,18 @@ const spanClass: Record<number, string> = {
   1: "md:col-span-1",
   2: "md:col-span-2",
 };
+const rowClass: Record<number, string> = {
+  1: "",
+  2: "md:row-span-2",
+};
 
 type Item = {
   name: string;
   tagline: string;
   color: keyof typeof titleColor;
   span: 1 | 2;
+  /** Grid row span (md+). 2 = a tall tile (e.g. the 2x2 Webshops feature). Default 1. */
+  rows?: 1 | 2;
   image: string;
   alt: string;
   href: string;
@@ -55,12 +61,13 @@ type Item = {
   vignette?: { webm: string; poster: string; webmDark?: string; posterDark?: string; mp4?: string; fit?: "contain" | "cover" };
 };
 
-// Six tiles, spans tiling the 3-column grid gap-free: (2,1) / (1,2) / (2,1) = three full rows.
-// Two live tiles: Webshops (the theming-morph reel, an opaque cover video: five completely
-// different storefronts from one platform) and Barns & Neutrons (transparent 3D vignette).
+// Five tiles over a 3x3 grid: Webshops is the 2x2 feature (the SQUARE 720x720 morph reel,
+// so the shops show real vertical), Smirk + Bloomword stack to its right, Barns (2x1) and
+// Vegan IQ close the bottom row. Auto-placement fills exactly: (r1-2,c1-2) / (r1,c3) /
+// (r2,c3) / (r3,c1-2) / (r3,c3).
 // Videos play on hover/focus on desktop and while on screen on no-hover (touch) devices.
 const items: Item[] = [
-  { name: "Webshops", tagline: "Custom storefronts we build and host. One platform, five completely different shops.", color: "emerald", span: 2, image: "/showcase/reels/webshops.jpg", alt: "Five differently themed demo storefronts built on the same platform", href: "/products/webshops", vignette: { webm: "/showcase/reels/webshops.webm", poster: "/showcase/reels/webshops.jpg", mp4: "/showcase/reels/webshops.mp4", fit: "cover" } },
+  { name: "Webshops", tagline: "Custom storefronts we build and host. One platform, five completely different shops.", color: "emerald", span: 2, rows: 2, image: "/showcase/reels/webshops.jpg", alt: "Five differently themed demo storefronts built on the same platform", href: "/products/webshops", vignette: { webm: "/showcase/reels/webshops.webm", poster: "/showcase/reels/webshops.jpg", mp4: "/showcase/reels/webshops.mp4", fit: "cover" } },
   { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true },
   // Transparent chroma-keyed vignette (the engine can't emit real alpha — BW_FLAT magenta key):
   // full-bloom tree at rest, hover retracts and regrows it. Palindrome loop, seam 0.0.
@@ -68,7 +75,6 @@ const items: Item[] = [
   // Single theme-independent asset: the INSET black silhouette stroke (sg_outline) sits ON the yellow letters, so one
   // baked alpha render reads on both light and dark tiles — no per-theme pair needed (a 3D->web pipeline win).
   { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Table of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Table of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns.webm", poster: "/showcase/vignettes/barns.png" } },
-  { name: "Bauhaus Echo", tagline: "Visual memory puzzle game.", color: "blue", span: 2, image: "/images/products/bauhaus-echo.png", alt: "Bauhaus Echo visual memory puzzle game", href: "/products/bauhaus-echo" },
   // Cover reel from the vegan-IQ social pipeline: logo panel at rest, card-flips to a real
   // quiz question (unanswered -> answered) on hover, flips back for a perfect loop seam.
   { name: "Vegan IQ", tagline: "Plant-based trivia game.", color: "green", span: 1, image: "/showcase/reels/vegan-iq.jpg", alt: "Vegan IQ plant-based trivia game", href: "/products/vegan-iq", vignette: { webm: "/showcase/reels/vegan-iq.webm", poster: "/showcase/reels/vegan-iq.jpg", mp4: "/showcase/reels/vegan-iq.mp4", fit: "cover" } },
@@ -107,7 +113,7 @@ function BentoCard({ item, delay }: { item: Item; delay: number }) {
     </Card>
   );
 
-  const className = `bento-item group/tile ${spanClass[item.span]}${
+  const className = `bento-item group/tile ${spanClass[item.span]} ${rowClass[item.rows ?? 1]}${
     feature
       ? " relative z-0 transition-transform duration-500 ease-out will-change-transform motion-safe:hover:scale-[1.05] motion-safe:hover:z-30 focus-visible:z-30"
       : ""
