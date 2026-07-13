@@ -89,10 +89,15 @@ const gamesProof: Proof[] = [
   { title: "Bloomword", blurb: "A daily word game where every word you find grows a living 3D typographic tree. Free at bloomword.earth and on iOS and Android.", img: "/images/products/bloomword.svg", href: "/products/bloomword", tag: "Live" },
   { title: "Bauhaus Echo", blurb: "A visual memory puzzle game inspired by Bauhaus design. Android, iOS, and web.", img: "/images/products/bauhaus-echo.png", href: "/products/bauhaus-echo", tag: "Live" },
   { title: "Such Moon Launch", blurb: "Vry rocket, much landing, wow: a Wownero-themed pixel rocket arcade with 11 levels and tilt-to-steer. Everywhere.", img: "/images/products/such-moon-launch.png", href: "/products/such-moon-launch", tag: "Live" },
+  // Cross-listed from Education & Science: they're science/math games we build + ship in-house.
+  { title: "Barns & Neutrons", blurb: "Our premiere game: a cozy exploration-puzzle across the real Chart of Nuclides, built in Godot. Capture neutrons, coax decays, and light up the chart.", img: "/images/products/barns-and-neutrons.svg", href: "/products/barns-and-neutrons", tag: "Coming soon" },
+  { title: "Numchangers", blurb: "A kids math game (ages 5-8) where numbers morph into dots, shapes, and 3D characters, so arithmetic becomes a visible action instead of a quiz. Godot, mobile-first.", tag: "Early" },
 ];
 
 const cryptoProof: Proof[] = [
   { title: "Payments consulting", blurb: "Stripe and multi-processor integrations, reconciliation tooling, Monero and on-chain integration. The processor or wallet moves the money; we wire it in.", tag: "Service" },
+  // Cross-listed from Commerce & Web: it's fundamentally a crypto payment integration.
+  { title: "Grin BTCPay plugin", blurb: "An open-source BTCPay Server plugin we built to accept Grin (Mimblewimble) payments, private and scalable, including auto-Tor invoice exchange.", tag: "Open source" },
   { title: "Smirk Wallet", blurb: "A non-custodial multi-asset browser wallet: send, receive, and tip by username on Telegram and Discord. BTC, LTC, XMR, WOW, GRIN.", img: "/images/products/smirk-wallet.png", href: "/products/smirk-wallet", tag: "Live" },
   { title: "Hash Bags", blurb: "A mobile multi-chain wallet forked from Cake Wallet, tuned for the privacy-coin ecosystem.", tag: "Beta" },
   { title: "Evaluetron", blurb: "Pay-for-compute done right: an append-only credit ledger, a job queue, and an evaluator that lets on-demand work preempt opportunistic work. Customers can never self-credit.", tag: "Building" },
