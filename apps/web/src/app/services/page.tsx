@@ -33,13 +33,13 @@ export default function ServicesPage() {
       <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
         {/* Page header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
-            Four things, done well
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 pb-3 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
+            What we build
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Commerce and custom web, games and apps, crypto and payments, and
-            PhD-led radiation-science education. Pick a pillar to see the products
-            behind it.
+            education from radiation science to word games. Pick a pillar to see
+            the products behind it.
           </p>
         </div>
 
@@ -50,20 +50,33 @@ export default function ServicesPage() {
 
         {/* Philosophy */}
         <ScrollReveal className="mb-20">
-          <div className="text-left section-container border-l-4 border-l-emerald-500">
+          <div className="text-left mb-8">
             <h2 className="text-3xl font-bold mb-2">Partnership-first</h2>
-            <p className="text-muted-foreground text-lg max-w-3xl">
+            <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
               We build the software and run it with you. Many projects start as a fixed
               build and continue as a revenue-share partnership, so we only win when you do.
             </p>
           </div>
+          <div className="grid sm:grid-cols-3 gap-6">
+            {[
+              { n: "01", t: "Scope", b: "Tell us what you're building. We scope it and propose an approach, as a fixed project or a revenue-share partnership." },
+              { n: "02", t: "Build", b: "We build it to your business logic on our own stack, and host it on our infrastructure. You own the result." },
+              { n: "03", t: "Run it together", b: "Most projects continue as a partnership: we operate and improve it, and earn a share once you're live." },
+            ].map((s) => (
+              <Card key={s.n} className="glass-card h-full !p-7 hover:border-emerald-500/30 transition-colors">
+                <div className="text-2xl font-bold text-emerald-500/80 mb-3 font-mono">{s.n}</div>
+                <h3 className="text-lg font-bold mb-2">{s.t}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.b}</p>
+              </Card>
+            ))}
+          </div>
         </ScrollReveal>
 
         {/* Recent work */}
-        <ScrollReveal className="mb-24">
-          <div className="text-left mb-10 section-container border-l-4 border-l-amber-500">
+        <ScrollReveal className="mb-20">
+          <div className="text-left mb-6">
             <h2 className="text-3xl font-bold mb-2">Recent work</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               Long-term partnerships over one-off projects.
             </p>
           </div>
