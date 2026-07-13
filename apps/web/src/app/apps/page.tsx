@@ -8,17 +8,29 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Apps: Games & Tools for iOS, Android & Web | Such Software",
-  description: "Download Such Software's apps and games: Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
+  description: "Download Such Software's apps and games: Bloomword, Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
   alternates: { canonical: "/apps" },
   openGraph: {
     title: "Apps: Games & Tools for iOS, Android & Web | Such Software",
-    description: "Download Such Software's apps and games: Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
+    description: "Download Such Software's apps and games: Bloomword, Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
     type: "website",
     images: [{ url: "/images/branding/OG_banner_v2_light.png", width: 1200, height: 630, alt: "Such Software" }],
   },
 };
 
 const apps = [
+  {
+    name: "Bloomword",
+    tagline: "Grow your vocab: a daily word game with a living 3D tree",
+    icon: "/images/products/bloomword.svg",
+    color: "text-green-600 dark:text-green-400",
+    borderColor: "border-green-500/20",
+    href: "/products/bloomword",
+    links: [
+      { platform: "apple" as const, href: "https://apps.apple.com/us/app/bloomword-grow-your-vocab/id6781658542" },
+      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.bloomword" },
+    ],
+  },
   {
     name: "Vegan IQ",
     tagline: "Plant-based trivia backed by real data",

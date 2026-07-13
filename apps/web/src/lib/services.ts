@@ -54,11 +54,11 @@ export const pillars: Pillar[] = [
     label: "Education & Science",
     accent: "amber",
     title: "Education & science",
-    lead: "PhD-led radiation-science teaching, training, and speaking from years at a national lab, plus learning-through-play games that teach real science and math. We publish our methods open-source.",
-    card: "PhD-led radiation-science teaching and games that teach real science.",
+    lead: "PhD-led radiation-science teaching, training, and speaking from years at a national lab, plus a growing shelf of edutainment: learning-through-play games that make real subjects stick, from nuclear physics and math to vocabulary, nutrition, and cyber-safety. We publish our methods open-source.",
+    card: "PhD-led radiation-science teaching and edutainment games that teach through play.",
     metaTitle: "Nuclear & Radiation-Science Education, GEANT4 Training | Such Software",
     metaDescription:
-      "PhD-led radiation-science education: Monte Carlo methods with GEANT4, shielding and detector physics, open-source labs, plus learning-through-play science and math games. Lawrence Livermore background.",
+      "PhD-led radiation-science education: Monte Carlo methods with GEANT4, shielding and detector physics, open-source labs, plus edutainment games that teach science, math, vocabulary, and cyber-safety through play. Lawrence Livermore background.",
   },
 ];
 
@@ -86,7 +86,7 @@ const commerceProof: Proof[] = [
 const gamesProof: Proof[] = [
   { title: "Suchoice", blurb: "Stop overthinking decisions: snap a photo, let AI read the options, spin the wheel. iOS and Android.", img: "/images/products/suchoice.png", href: "/products/suchoice", tag: "Live" },
   { title: "Vegan IQ", blurb: "1,000+ plant-based trivia questions across 8 categories, with a daily challenge and weekly quiz. iOS and Android.", img: "/images/products/vegan-iq.png", href: "/products/vegan-iq", tag: "Live" },
-  { title: "Bloomword", blurb: "A daily word game where every word you find grows a living 3D typographic tree. Free at bloomword.earth, launching on mobile.", img: "/images/products/bloomword.svg", href: "/products/bloomword", tag: "Live" },
+  { title: "Bloomword", blurb: "A daily word game where every word you find grows a living 3D typographic tree. Free at bloomword.earth and on iOS and Android.", img: "/images/products/bloomword.svg", href: "/products/bloomword", tag: "Live" },
   { title: "Bauhaus Echo", blurb: "A visual memory puzzle game inspired by Bauhaus design. Android, iOS, and web.", img: "/images/products/bauhaus-echo.png", href: "/products/bauhaus-echo", tag: "Live" },
   { title: "Such Moon Launch", blurb: "Vry rocket, much landing, wow: a Wownero-themed pixel rocket arcade with 11 levels and tilt-to-steer. Everywhere.", img: "/images/products/such-moon-launch.png", href: "/products/such-moon-launch", tag: "Live" },
 ];
@@ -98,10 +98,16 @@ const cryptoProof: Proof[] = [
   { title: "Evaluetron", blurb: "Pay-for-compute done right: an append-only credit ledger, a job queue, and an evaluator that lets on-demand work preempt opportunistic work. Customers can never self-credit.", tag: "Building" },
 ];
 
+// Barns/nuclear/Numchangers are the science + math anchors; Zero-Day Defender, Bloomword, and
+// Vegan IQ are the edutainment titles (Bloomword + Vegan IQ are cross-listed from Games & Apps —
+// they are genuinely both a game we ship AND a game that teaches).
 const educationProof: Proof[] = [
   { title: "Barns & Neutrons", blurb: "A cozy exploration-puzzle game across the real Chart of Nuclides: capture neutrons, coax decays, and learn honest nuclear physics. Our premiere visual work.", img: "/images/products/barns-and-neutrons.svg", href: "/products/barns-and-neutrons", tag: "Coming soon" },
   { title: "Nuclear consulting & training", blurb: "PhD-led radiation-science teaching: Monte Carlo methods with GEANT4, shielding and dose fundamentals, detector physics, and open-source labs.", href: "https://jwinterm.github.io/geant4-radiation-labs/", tag: "Service" },
   { title: "Numchangers", blurb: "A kids math game (ages 5-8) where numbers morph into dots, shapes, and 3D characters, so arithmetic becomes a visible action instead of a quiz. Godot, mobile-first.", tag: "Early" },
+  { title: "Zero-Day Defender", blurb: "A cybersecurity edutainment game: learn how real attacks and defenses work by playing through them, from phishing and passwords to zero-days.", tag: "Coming soon" },
+  { title: "Bloomword", blurb: "Vocabulary as play: a daily word game where every word you find grows a living 3D typographic tree. Free on iOS and Android and at bloomword.earth.", img: "/images/products/bloomword.svg", href: "/products/bloomword", tag: "Live" },
+  { title: "Vegan IQ", blurb: "Nutrition and food knowledge as a daily habit: 1,000+ plant-based trivia questions across 8 categories, with a daily challenge and weekly quiz. iOS and Android.", img: "/images/products/vegan-iq.png", href: "/products/vegan-iq", tag: "Live" },
 ];
 
 export function proofFor(slug: string): Proof[] {

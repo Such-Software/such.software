@@ -4,12 +4,13 @@ import { Card } from "@repo/ui/components/card";
 import Link from "next/link";
 import Image from "next/image";
 import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
+import { StoreButtons } from "@/components/store-buttons";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Bloomword: Daily Word Game with a Living Tree | Such Software",
   description:
-    "Bloomword is a daily word game where everyone gets the same letters and every word you find grows a living 3D typographic tree. Five biomes, streaks, and a bloom to share. Coming to iOS and Android.",
+    "Bloomword is a daily word game where everyone gets the same letters and every word you find grows a living 3D typographic tree. Five biomes, streaks, and a bloom to share. Free on iOS and Android.",
   alternates: { canonical: "/products/bloomword" },
   keywords: [
     "daily word game",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bloomword: Find the Day's Words, Grow a Living Tree",
     description:
-      "A daily word game where every word you find grows a biome-specific, living 3D typographic tree. Coming to iOS and Android from Such Software.",
+      "A daily word game where every word you find grows a biome-specific, living 3D typographic tree. Free on iOS and Android from Such Software.",
     type: "website",
     url: "/products/bloomword",
   },
@@ -34,7 +35,7 @@ const faqs = [
   { q: "How does the tree work?", a: "Each word you find sprouts new growth on a 3D typographic tree rendered by our in-house typograph-engine. The tree's look changes with the day's biome, so your finished board is both a score and a little piece of generative art you can share." },
   { q: "Is it the same puzzle for everyone?", a: "Yes. Like the best daily games, the letters are shared worldwide each day, so leaderboards and streaks are apples-to-apples. Results are server-replayed for fairness." },
   { q: "Is it free?", a: "Yes, free to play, supported by light ads and optional in-app purchases. A privacy-conscious build is a priority." },
-  { q: "What platforms will it be on?", a: "Built in Godot for iOS and Android. It is in final pre-launch polish (store review); follow Such Software for the release date." },
+  { q: "What platforms is it on?", a: "Built in Godot for iOS and Android, and playable free in the browser at bloomword.earth. Download it on the App Store or Google Play." },
 ];
 
 const jsonLd = {
@@ -96,8 +97,15 @@ export default function BloomwordPage() {
             growth on a living 3D typographic tree. Keep your streak, collect the biomes, and share the
             bloom you grew today. It is live at{" "}
             <a href="https://bloomword.earth" target="_blank" rel="noopener noreferrer" className="text-green-600 dark:text-green-400 hover:underline">bloomword.earth</a>{" "}
-            and coming to iOS and Android.
+            and free on iOS and Android.
           </p>
+        </div>
+
+        <div className="mb-12">
+          <StoreButtons links={[
+            { platform: "apple", href: "https://apps.apple.com/us/app/bloomword-grow-your-vocab/id6781658542" },
+            { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.bloomword" },
+          ]} />
         </div>
 
         <h2 className="text-2xl font-bold mb-6">What makes it different</h2>
