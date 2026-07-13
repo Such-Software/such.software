@@ -16,7 +16,7 @@ export function ServicesCta({
       <p className="mb-10 text-slate-300 text-lg max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
         {blurb}
       </p>
-      <Link href="/contact" className="relative z-10">
+      <Link href="/#contact" className="relative z-10">
         <Button size="lg" variant="secondary" className="rounded-2xl px-12 py-8 text-xl font-bold hover:scale-105 transition-transform bg-white text-slate-900 hover:bg-slate-100">
           Request a Consultation
         </Button>
