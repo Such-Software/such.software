@@ -21,95 +21,99 @@ export default function VeganIqPrivacyPage() {
         <h1 className="text-4xl font-bold mb-8">Privacy Policy for Vegan IQ</h1>
 
         <div className="prose dark:prose-invert max-w-none space-y-6">
-          <p className="text-muted-foreground">Last updated: March 26, 2026</p>
+          <p className="text-muted-foreground">Last updated: July 26, 2026</p>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
             <p>
-              Such Software ("we", "our", or "us") operates the Vegan IQ mobile application (the "App").
-              This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our App.
+              Such Software LLC ("we", "our", or "us") operates the Vegan IQ mobile application (the "App").
+              This Privacy Policy explains what information the App collects, how we use it, and the choices you have.
+              We collect as little as possible and we never sell your data.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">2. Information We Collect</h2>
-            <h3 className="text-xl font-medium mt-4 mb-2">Local Data</h3>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">Stored on your device</h3>
             <p>
-              Vegan IQ stores your score history, preferences, and game progress locally on your device using shared_preferences.
-              <strong> This data never leaves your device.</strong> There are no user accounts, no server-side storage, and no leaderboards.
-              We do not collect your name, email address, photos, location, or any other personal information.
+              Your score history, streaks, preferences, and quiz progress are stored locally on your device.
+              Most of your activity stays on the device and is never sent anywhere.
+            </p>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">Usage analytics and crash diagnostics</h3>
+            <p>
+              We use Google Firebase Analytics to understand which features are used and how players progress, and Google Firebase
+              Crashlytics to receive crash and error reports (device model, OS version, and a stack trace) so we can fix bugs.
+              This information is pseudonymous and is not linked to your real-world identity.
+            </p>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">Progress sync and the optional leaderboard</h3>
+            <p>
+              The App generates a random device identifier &mdash; not your Apple or Google account, name, or email &mdash; that it uses
+              to sync your progress and to power the optional leaderboard. If you choose to join the leaderboard, the display name you
+              pick is shown publicly on it; please do not use a name you would rather keep private. Leaving the leaderboard removes your
+              name. This data is sent over an encrypted, cryptographically-signed connection to our backend.
+            </p>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">Notifications</h3>
+            <p>
+              If you enable notifications, we use Google Firebase Cloud Messaging and store a push token so we can send you streak and
+              daily-challenge reminders. You can turn notifications off at any time in your device settings.
+            </p>
+
+            <h3 className="text-xl font-medium mt-4 mb-2">In-app purchases</h3>
+            <p>
+              Vegan IQ offers optional tips and support purchases. These are processed entirely by Apple (via StoreKit) or Google (via
+              Google Play Billing); we do not receive or store your payment details, only a confirmation that a purchase completed.
             </p>
 
             <h3 className="text-xl font-medium mt-4 mb-2">Advertising</h3>
             <p>
-              We use Google AdMob to display advertisements in the App. AdMob may collect and use data, including device identifiers (such as the Android Advertising ID or iOS IDFA), IP addresses, and usage data, to provide personalized advertising.
-            </p>
-            <p>
-              You can learn more about how Google uses information from sites or apps that use their services by visiting: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google's Privacy & Terms</a>.
-            </p>
-
-            <h3 className="text-xl font-medium mt-4 mb-2">In-App Purchases</h3>
-            <p>
-              Vegan IQ offers in-app purchases to remove ads. Purchases are processed entirely by Apple (via StoreKit) or Google (via Google Play Billing) depending on your platform.
-              We do not process or store your payment information (such as credit card numbers) directly; this is handled securely by Apple or Google.
+              <strong>The App does not currently display advertisements</strong> and does not use advertising identifiers such as the
+              Android Advertising ID or iOS IDFA. If we introduce ads in the future, we will update this policy and, in regions that
+              require it, ask for your consent through Google's User Messaging Platform before any ads are shown.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">3. How We Use Your Information</h2>
-            <p>We use the information described above to:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Serve advertisements to support the free version of the App.</li>
-              <li>Process in-app purchases to remove ads.</li>
-              <li>Store your game progress and preferences locally on your device.</li>
+              <li>Save and sync your game progress, streaks, and preferences.</li>
+              <li>Operate the optional public leaderboard (only if you opt in).</li>
+              <li>Understand and improve how the App is used, and diagnose crashes.</li>
+              <li>Send the reminders you have opted into.</li>
+              <li>Process optional in-app tips and support purchases.</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">4. Third-Party Services</h2>
-            <p>
-              The App uses third-party services that may collect information used to identify you.
-              Link to privacy policy of third party service providers used by the app:
-            </p>
+            <p>We rely on a small number of service providers to run the App:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Play Services</a></li>
-              <li><a href="https://support.google.com/admob/answer/6128543?hl=en" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">AdMob</a></li>
-              <li><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Apple App Store</a></li>
+              <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Firebase</a> &mdash; analytics, crash reporting, and push notifications.</li>
+              <li><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Apple App Store</a> and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google Play</a> &mdash; in-app purchases.</li>
             </ul>
+            <p className="mt-4">We do not sell your personal data.</p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">5. Ad Consent & Opt-Out</h2>
-            <p>
-              When you first launch Vegan IQ, the app will display a consent dialog (powered by Google's User Messaging Platform) if you are located in a region that requires consent for personalized advertising (such as the European Economic Area under GDPR, or California under CCPA/CPRA).
-            </p>
-            <h3 className="text-xl font-medium mt-4 mb-2">For EU/EEA Users (GDPR)</h3>
-            <p>
-              You will be presented with a consent form before any ads are shown. You may choose to accept or decline personalized advertising. If you decline, you will still see ads, but they will not be personalized based on your activity. You can change your consent at any time by reinstalling the app or contacting us.
-            </p>
-            <h3 className="text-xl font-medium mt-4 mb-2">For California Users (CCPA/CPRA)</h3>
-            <p>
-              Under the California Consumer Privacy Act, you have the right to opt out of the "sale" or "sharing" of your personal information. Google AdMob's use of device identifiers for personalized advertising may constitute a "sale" or "sharing" under CCPA. You can opt out via the consent dialog shown on first launch, or by adjusting your device's ad tracking settings:
-            </p>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">5. Your Choices</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>iOS:</strong> Settings → Privacy & Security → Tracking → disable "Allow Apps to Request to Track"</li>
-              <li><strong>Android:</strong> Settings → Privacy → Ads → enable "Opt out of Ads Personalization" (or "Delete advertising ID")</li>
+              <li>Turn notifications on or off at any time in your device settings.</li>
+              <li>Leave the leaderboard to remove your public display name.</li>
+              <li>Reset the App's data from within the App, or delete the App to remove local data.</li>
             </ul>
-            <h3 className="text-xl font-medium mt-4 mb-2">Remove Ads Entirely</h3>
-            <p>
-              You can purchase "Remove Ads" within the app to permanently disable all advertising. This eliminates all ad-related data collection.
-            </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">6. Your Rights</h2>
-            <p>Depending on your location, you may have the following rights regarding your data:</p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Right to know</strong> what personal data is collected and how it is used.</li>
-              <li><strong>Right to delete</strong> your personal data. Since we store data only locally on your device, you can delete all app data by uninstalling the app or clearing app data in your device settings.</li>
-              <li><strong>Right to opt out</strong> of personalized advertising (see Section 5 above).</li>
-              <li><strong>Right to non-discrimination</strong> for exercising your privacy rights.</li>
-            </ul>
+            <p>
+              Depending on where you live, you may have the right to know what data we hold, to request its deletion, and to
+              non-discrimination for exercising these rights. Because progress and leaderboard data are tied to a random device
+              identifier rather than your identity, you can remove the local copy by resetting or uninstalling the App; to delete
+              leaderboard or sync data associated with your device from our backend, contact us and we will remove it.
+            </p>
             <p className="mt-4">
               To exercise any of these rights, contact us at <a href="mailto:privacy@such.software" className="text-blue-600 hover:underline">privacy@such.software</a>.
             </p>
