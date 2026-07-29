@@ -22,7 +22,7 @@ const apps = [
   {
     name: "Bloomword",
     tagline: "Grow your vocab: a daily word game with a living 3D tree",
-    icon: "/images/products/bloomword.svg",
+    icon: "/images/products/bloomword.png",
     color: "text-green-600 dark:text-green-400",
     borderColor: "border-green-500/20",
     href: "/products/bloomword",
