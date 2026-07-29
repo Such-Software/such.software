@@ -78,7 +78,7 @@ export default function BloomwordPage() {
         </Link>
 
         <div className="flex items-center gap-4 mb-2">
-          <Image src="/images/products/bloomword.svg" alt="Bloomword icon" width={64} height={64} className="rounded-2xl" />
+          <Image src="/images/products/bloomword.png" alt="Bloomword icon" width={64} height={64} className="rounded-2xl" />
           <div>
             <span className="inline-flex items-center rounded-full bg-green-400/15 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-green-600 dark:text-green-400 mb-1">
               Now Live
