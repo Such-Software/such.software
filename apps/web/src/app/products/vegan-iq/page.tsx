@@ -9,11 +9,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
-  description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
+  description:
+    "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
   alternates: { canonical: "/products/vegan-iq" },
   openGraph: {
     title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
-    description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
+    description:
+      "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
     type: "website",
     images: ["/images/og/vegan-iq.png"],
   },
@@ -24,35 +26,77 @@ export const metadata: Metadata = {
 };
 
 const features = [
-  { name: "1,000+ Questions", description: "Curated trivia questions backed by verified data from USDA, Poore & Nemecek, NIH, and FAOSTAT. No AI-generated content." },
-  { name: "8 Categories", description: "Nutrition, environment, ingredients, food history, animal welfare, health, cooking, and culture." },
-  { name: "Daily Challenge", description: "A fresh set of questions every day. Build a streak and keep your knowledge sharp." },
-  { name: "Weekly Quiz", description: "New themed quiz each week with fresh content to test how far you've come." },
-  { name: "Swipe & Tap", description: "Swipe right for true, left for false. Tap your answer for multiple choice. Fast, intuitive gameplay." },
-  { name: "Dark & Light Mode", description: "Play in whichever theme you prefer. Automatic or manual switching." },
-  { name: "SFX & Haptics", description: "Satisfying sound effects and haptic feedback on correct and incorrect answers." },
-  { name: "Share Facts", description: "Found an interesting fact? Share it with friends directly from the app." },
+  {
+    name: "1,000+ Questions",
+    description:
+      "Source-linked trivia developed with an automated drafting and review pipeline, release checks, and human review.",
+  },
+  {
+    name: "8 Categories",
+    description:
+      "Nutrition, environment, ingredients, food history, animal welfare, health, cooking, and culture.",
+  },
+  {
+    name: "Daily Challenge",
+    description:
+      "One shared challenge question every day. Build a streak and keep your knowledge sharp.",
+  },
+  {
+    name: "Weekly Quiz",
+    description: "A new quiz set each week to test how far you've come.",
+  },
+  {
+    name: "Swipe & Tap",
+    description:
+      "Swipe right for true, left for false. Tap your answer for multiple choice. Fast, intuitive gameplay.",
+  },
+  {
+    name: "Dark & Light Mode",
+    description:
+      "Play in whichever theme you prefer. Automatic or manual switching.",
+  },
+  {
+    name: "SFX & Haptics",
+    description:
+      "Satisfying sound effects and haptic feedback on correct and incorrect answers.",
+  },
+  {
+    name: "Share Facts",
+    description:
+      "Found an interesting fact? Share it with friends directly from the app.",
+  },
 ];
 
 export default function VeganIqPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
-      <JsonLd data={breadcrumbLd([
-        { name: "Home", path: "/" },
-        { name: "Products", path: "/products" },
-        { name: "Vegan IQ", path: "/products/vegan-iq" },
-      ])} />
-      <JsonLd data={softwareAppLd({
-        name: "Vegan IQ",
-        path: "/products/vegan-iq",
-        description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
-        category: "GameApplication",
-        operatingSystem: "Android, iOS",
-        price: "0",
-      })} />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" },
+          { name: "Vegan IQ", path: "/products/vegan-iq" },
+        ])}
+      />
+      <JsonLd
+        data={softwareAppLd({
+          name: "Vegan IQ",
+          path: "/products/vegan-iq",
+          description:
+            "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
+          category: "GameApplication",
+          operatingSystem: "Android, iOS",
+          price: "0",
+        })}
+      />
       <Header />
-      <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
-        <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block">
+      <div
+        id="main-content"
+        className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20"
+      >
+        <Link
+          href="/products"
+          className="text-sm text-muted-foreground hover:text-foreground mb-8 inline-block"
+        >
           ← Back to Products
         </Link>
 
@@ -71,16 +115,26 @@ export default function VeganIqPage() {
 
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Think you know your vegan facts? Vegan IQ puts your plant-based knowledge to the test with over 1,000 trivia questions across 8 categories.
-            Every question is backed by verified data from sources like the USDA, Poore & Nemecek (2018), NIH, and FAOSTAT.
+            Think you know your vegan facts? Vegan IQ puts your plant-based
+            knowledge to the test with over 1,000 trivia questions across 8
+            categories. Questions are linked to a growing source catalog that
+            includes the USDA, Poore & Nemecek (2018), NIH, and FAOSTAT.
           </p>
         </div>
 
         <div className="mb-12">
-          <StoreButtons links={[
-            { platform: "google", href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq" },
-            { platform: "apple", href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580" },
-          ]} />
+          <StoreButtons
+            links={[
+              {
+                platform: "google",
+                href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq",
+              },
+              {
+                platform: "apple",
+                href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580",
+              },
+            ]}
+          />
         </div>
 
         <h2 className="text-2xl font-bold mb-6">Features</h2>
@@ -97,13 +151,28 @@ export default function VeganIqPage() {
           <h2 className="text-2xl font-bold mb-4">Data Sources</h2>
           <div className="prose dark:prose-invert max-w-none">
             <p className="text-muted-foreground leading-relaxed">
-              Every question in Vegan IQ is grounded in real data. We do not use LLMs to generate question content. Our sources include:
+              Question candidates can use automated and LLM-assisted drafting
+              and review. Before publication, release candidates pass schema and
+              source-mapping checks and are reviewed for quality. Core sources
+              include:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
-              <li><strong>USDA FoodData Central</strong> — nutritional composition of plant-based foods</li>
-              <li><strong>Poore & Nemecek, Science (2018)</strong> — environmental impact data for food production</li>
-              <li><strong>National Institutes of Health (NIH)</strong> — health and dietary reference data</li>
-              <li><strong>FAOSTAT</strong> — global food production and agricultural statistics from the UN FAO</li>
+              <li>
+                <strong>USDA FoodData Central</strong> — nutritional composition
+                of plant-based foods
+              </li>
+              <li>
+                <strong>Poore & Nemecek, Science (2018)</strong> — environmental
+                impact data for food production
+              </li>
+              <li>
+                <strong>National Institutes of Health (NIH)</strong> — health
+                and dietary reference data
+              </li>
+              <li>
+                <strong>FAOSTAT</strong> — global food production and
+                agricultural statistics from the UN FAO
+              </li>
             </ul>
           </div>
         </div>
@@ -112,7 +181,10 @@ export default function VeganIqPage() {
           <h2 className="text-2xl font-bold mb-4">Legal</h2>
           <ul className="space-y-2">
             <li>
-              <Link href="/products/vegan-iq/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">
+              <Link
+                href="/products/vegan-iq/privacy"
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
                 Privacy Policy
               </Link>
             </li>

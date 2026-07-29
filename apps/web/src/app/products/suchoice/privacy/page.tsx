@@ -26,7 +26,7 @@ export default function SuchoicePrivacyPage() {
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
             <p>
-              Such Software ("we", "our", or "us") operates the Suchoice mobile and web application (the "App"). 
+              Such Software (“we”, “our”, or “us”) operates the Suchoice mobile and web application (the “App”).
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our App.
             </p>
           </section>
@@ -35,7 +35,7 @@ export default function SuchoicePrivacyPage() {
             <h2 className="text-2xl font-semibold mt-8 mb-4">2. Information We Collect</h2>
             <h3 className="text-xl font-medium mt-4 mb-2">Camera and Photos</h3>
             <p>
-              Our App requires access to your device's camera and photo library to function. 
+              Our App requires access to your device’s camera and photo library to function.
               When you take a picture of a menu or select one from your gallery, the image is sent to our secure backend servers for processing by AI to extract menu items. 
               <strong>We do not store these images.</strong> They are processed in memory and immediately discarded after the text is extracted.
             </p>
@@ -45,7 +45,7 @@ export default function SuchoicePrivacyPage() {
               We use Google AdMob to display advertisements in the App. AdMob may collect and use data, including device identifiers (such as the Android Advertising ID or iOS IDFA), IP addresses, and usage data, to provide personalized advertising.
             </p>
             <p>
-              You can learn more about how Google uses information from sites or apps that use their services by visiting: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google's Privacy & Terms</a>.
+              You can learn more about how Google uses information from sites or apps that use their services by visiting: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Google’s Privacy & Terms</a>.
             </p>
 
             <h3 className="text-xl font-medium mt-4 mb-2">In-App Purchases and Subscriptions</h3>
@@ -79,7 +79,7 @@ export default function SuchoicePrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">5. Children's Privacy</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">5. Children’s Privacy</h2>
             <p>
               These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.
             </p>

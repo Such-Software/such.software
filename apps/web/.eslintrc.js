@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["@repo/config/eslint-preset.js"],
+  extends: [require.resolve("@repo/config/eslint-preset.js")],
 };

@@ -114,7 +114,7 @@ export default function WebshopsPage() {
           We run a single Medusa v2 commerce platform that spins up a completely distinct,
           fully-branded storefront for every tenant, your colors, your typography, your layout,
           your dark mode. One battle-tested engine underneath; a store that looks and feels like
-          nobody else's on top. No large setup fee, no monthly retainer: we build, host, and
+          nobody else’s on top. No large setup fee, no monthly retainer: we build, host, and
           maintain it on revenue share, so we only win when you make sales.
         </p>
 
@@ -140,7 +140,7 @@ export default function WebshopsPage() {
             Per-tenant theming is the whole point
           </h2>
           <p className="text-muted-foreground leading-relaxed max-w-3xl mb-4">
-            Most "multi-store" platforms give every shop the same skeleton with a swapped logo.
+            Most “multi-store” platforms give every shop the same skeleton with a swapped logo.
             Ours derives an entire visual system per tenant from your theme configuration:
             palette, fonts, spacing, component styling, and a matched dark mode across both the
             storefront and checkout. Two shops on the same backend can look nothing alike.
@@ -171,7 +171,7 @@ export default function WebshopsPage() {
           </h2>
           <p className="text-muted-foreground mb-8 max-w-3xl">
             Theming runs all the way down: product pages, catalog grids, cart, and checkout each
-            carry the shop's palette, type, and layout. And the platform is more than a catalog,
+            carry the shop’s palette, type, and layout. And the platform is more than a catalog,
             service shops get a real{" "}
             <span className="font-medium text-foreground">booking calendar</span>: yoga classes
             and coaching calls are scheduled right on the product page, themed to match. Here is a
@@ -183,7 +183,7 @@ export default function WebshopsPage() {
         {/* Feature grid, the real platform capabilities */}
         <section aria-labelledby="features-heading" className="mb-16">
           <h2 id="features-heading" className="text-2xl md:text-3xl font-bold mb-8">
-            What's built in
+            What’s built in
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((f) => (
