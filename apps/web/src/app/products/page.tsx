@@ -117,7 +117,7 @@ const products: Product[] = [
   {
     slug: "bloomword",
     title: "Bloomword",
-    description: "A daily word game where everyone gets the same letters and races the sunset; every word you find grows a biome-specific, living 3D typographic tree. Build streaks, collect biomes, and share your bloom. Play free at bloomword.earth, or download free on iOS and Android.",
+    description: "A daily word game where everyone gets the same letters and races the sunset; every word you find grows a biome-specific, living 3D typographic tree. Build streaks, collect biomes, and share your bloom. Free on iOS and Android; learn more at bloomword.earth.",
     color: "green",
     icon: "/images/products/bloomword.png",
     releaseDate: "2026-07-06",

@@ -35,7 +35,7 @@ const faqs = [
   { q: "How does the tree work?", a: "Each word you find sprouts new growth on a 3D typographic tree rendered by our in-house typograph-engine. The tree's look changes with the day's biome, so your finished board is both a score and a little piece of generative art you can share." },
   { q: "Is it the same puzzle for everyone?", a: "Yes. Like the best daily games, the letters are shared worldwide each day, so leaderboards and streaks are apples-to-apples. Results are server-replayed for fairness." },
   { q: "Is it free?", a: "Yes, free to play, supported by light ads and optional in-app purchases. A privacy-conscious build is a priority." },
-  { q: "What platforms is it on?", a: "Built in Godot for iOS and Android, and playable free in the browser at bloomword.earth. Download it on the App Store or Google Play." },
+  { q: "What platforms is it on?", a: "Built in Godot for iOS and Android, and those are the only places you can play it. Download it free on the App Store or Google Play; learn more at bloomword.earth." },
 ];
 
 const jsonLd = {
@@ -95,9 +95,8 @@ export default function BloomwordPage() {
             Bloomword is a daily word game with a twist you can watch grow. Everyone gets the same
             letters each day and races the sunset to find words, and every word you find sprouts new
             growth on a living 3D typographic tree. Keep your streak, collect the biomes, and share the
-            bloom you grew today. It is live at{" "}
-            <a href="https://bloomword.earth" target="_blank" rel="noopener noreferrer" className="text-green-600 dark:text-green-400 hover:underline">bloomword.earth</a>{" "}
-            and free on iOS and Android.
+            bloom you grew today. It is free on iOS and Android — learn more at{" "}
+            <a href="https://bloomword.earth" target="_blank" rel="noopener noreferrer" className="text-green-600 dark:text-green-400 hover:underline">bloomword.earth</a>.
           </p>
         </div>
 

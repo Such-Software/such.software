@@ -86,7 +86,7 @@ const commerceProof: Proof[] = [
 const gamesProof: Proof[] = [
   { title: "Suchoice", blurb: "Stop overthinking decisions: snap a photo, let AI read the options, spin the wheel. iOS and Android.", img: "/images/products/suchoice.png", href: "/products/suchoice", tag: "Live" },
   { title: "Vegan IQ", blurb: "1,000+ plant-based trivia questions across 8 categories, with a daily challenge and weekly quiz. iOS and Android.", img: "/images/products/vegan-iq.png", href: "/products/vegan-iq", tag: "Live" },
-  { title: "Bloomword", blurb: "A daily word game where every word you find grows a living 3D typographic tree. Free at bloomword.earth and on iOS and Android.", img: "/images/products/bloomword.png", href: "/products/bloomword", tag: "Live" },
+  { title: "Bloomword", blurb: "A daily word game where every word you find grows a living 3D typographic tree. Free on iOS and Android; learn more at bloomword.earth.", img: "/images/products/bloomword.png", href: "/products/bloomword", tag: "Live" },
   { title: "Bauhaus Echo", blurb: "A visual memory puzzle game inspired by Bauhaus design. Android, iOS, and web.", img: "/images/products/bauhaus-echo.png", href: "/products/bauhaus-echo", tag: "Live" },
   { title: "Such Moon Launch", blurb: "Vry rocket, much landing, wow: a Wownero-themed pixel rocket arcade with 11 levels and tilt-to-steer. Everywhere.", img: "/images/products/such-moon-launch.png", href: "/products/such-moon-launch", tag: "Live" },
   // Cross-listed from Education & Science: they're science/math games we build + ship in-house.
@@ -111,7 +111,7 @@ const educationProof: Proof[] = [
   { title: "Nuclear consulting & training", blurb: "PhD-led radiation-science teaching: Monte Carlo methods with GEANT4, shielding and dose fundamentals, detector physics, and open-source labs.", href: "https://jwinterm.github.io/geant4-radiation-labs/", tag: "Service" },
   { title: "Numchangers", blurb: "A kids math game (ages 5-8) where numbers morph into dots, shapes, and 3D characters, so arithmetic becomes a visible action instead of a quiz. Godot, mobile-first.", tag: "Early" },
   { title: "Zero-Day Defender", blurb: "A cybersecurity edutainment game: learn how real attacks and defenses work by playing through them, from phishing and passwords to zero-days.", tag: "Coming soon" },
-  { title: "Bloomword", blurb: "Vocabulary as play: a daily word game where every word you find grows a living 3D typographic tree. Free on iOS and Android and at bloomword.earth.", img: "/images/products/bloomword.png", href: "/products/bloomword", tag: "Live" },
+  { title: "Bloomword", blurb: "Vocabulary as play: a daily word game where every word you find grows a living 3D typographic tree. Free on iOS and Android; learn more at bloomword.earth.", img: "/images/products/bloomword.png", href: "/products/bloomword", tag: "Live" },
   { title: "Vegan IQ", blurb: "Nutrition and food knowledge as a daily habit: 1,000+ plant-based trivia questions across 8 categories, with a daily challenge and weekly quiz. iOS and Android.", img: "/images/products/vegan-iq.png", href: "/products/vegan-iq", tag: "Live" },
 ];
 
