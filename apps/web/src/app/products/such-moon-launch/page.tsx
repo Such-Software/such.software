@@ -8,11 +8,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
-  description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
+  description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, and browser.",
   alternates: { canonical: "/products/such-moon-launch" },
   openGraph: {
     title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
-    description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
+    description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, and browser.",
     type: "website",
     images: ["/images/og/such-moon-launch.png"],
   },
@@ -55,9 +55,9 @@ export default function SuchMoonLaunchPage() {
       <JsonLd data={softwareAppLd({
         name: "Such Moon Launch",
         path: "/products/such-moon-launch",
-        description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, web, desktop.",
+        description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, and browser.",
         category: "GameApplication",
-        operatingSystem: "Android, iOS, Web, Windows, macOS, Linux",
+        operatingSystem: "Android, iOS, Web",
         price: "0",
         offerUrl: "https://moonlaunch.such.software",
       })} />
