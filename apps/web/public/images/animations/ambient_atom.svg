@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <style>
+    .e0 { offset-path: path("M 14,100 C 14,82 52,68 100,68 C 148,68 186,82 186,100 C 186,118 148,132 100,132 C 52,132 14,118 14,100 Z"); animation: sg-orbit 26s linear infinite; animation-delay: -0s; }
+    .e1 { offset-path: path("M 14,100 C 14,82 52,68 100,68 C 148,68 186,82 186,100 C 186,118 148,132 100,132 C 52,132 14,118 14,100 Z"); animation: sg-orbit 34s linear infinite; animation-delay: -14.28s; }
+    .e2 { offset-path: path("M 14,100 C 14,82 52,68 100,68 C 148,68 186,82 186,100 C 186,118 148,132 100,132 C 52,132 14,118 14,100 Z"); animation: sg-orbit 44s linear infinite; animation-delay: -33.88s; }
+    @keyframes sg-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .el { animation: none; } }
+  </style>
+  <rect width="200" height="200" rx="26" fill="#0a0a0a"/>
+  <g opacity="0.18">
+    <ellipse cx="100" cy="100" rx="86" ry="32" fill="none" stroke="#45c99e" stroke-width="1.4" transform="rotate(0 100 100)"/>
+    <ellipse cx="100" cy="100" rx="86" ry="32" fill="none" stroke="#45c99e" stroke-width="1.4" transform="rotate(60 100 100)"/>
+    <ellipse cx="100" cy="100" rx="86" ry="32" fill="none" stroke="#45c99e" stroke-width="1.4" transform="rotate(120 100 100)"/>
+    <circle cx="100" cy="100" r="4.5" fill="#45c99e"/>
+    <g transform="rotate(0 100 100)"><circle class="el e0" r="3.2" fill="#35925c"/></g>
+    <g transform="rotate(60 100 100)"><circle class="el e1" r="3.2" fill="#e8689e"/></g>
+    <g transform="rotate(120 100 100)"><circle class="el e2" r="3.2" fill="#4aade0"/></g>
+  </g>
+  <rect class="frame" x="14" y="14" width="172" height="172" rx="12" fill="none" stroke="#45c99e" stroke-width="3.5" opacity="0.7"/>
+  <path class="g g-s" d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#35925c" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(3,0)"/>
+  <path class="g g-u" d="m 118,36 v 34 c 0,12.15 9.85,13 22,13 12.15,0 22,-3.1 22,-13 V 36" fill="none" stroke="#e8689e" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(-3,0)"/>
+  <path class="g g-c" d="M 78,118 H 36 V 164 H 78" fill="none" stroke="#4aade0" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(3,0)"/>
+  <path class="g g-h" d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162" fill="none" stroke="#3ad4c6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(-3,0)"/>
+</svg>

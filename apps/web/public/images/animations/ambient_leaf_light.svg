@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <style>
+    .blade { stroke-dasharray: 333.6; stroke-dashoffset: 333.6; animation: sg-leaf 3.71s ease-out forwards; animation-delay: 0s; }
+    .rib { stroke-dasharray: 128.9; stroke-dashoffset: 128.9; animation: sg-leaf 1.43s ease-out forwards; animation-delay: 2.67s; }
+    .vein1 { stroke-dasharray: 43.44; stroke-dashoffset: 43.44; animation: sg-leaf 0.483s ease-out forwards; animation-delay: 3.7s; }
+    .vein2 { stroke-dasharray: 39.18; stroke-dashoffset: 39.18; animation: sg-leaf 0.435s ease-out forwards; animation-delay: 4.05s; }
+    @keyframes sg-leaf { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) { .lf { animation: none; stroke-dashoffset: 0; } }
+  </style>
+  <rect width="200" height="200" rx="26" fill="#f7f8fa"/>
+  <g opacity="0.15" transform="rotate(-14 100 100)">
+    <path class="lf blade" d="M 100,166 C 64,148 52,108 64,68 C 72,46 88,32 112,26 C 134,58 138,104 122,136 C 114,152 108,160 100,166 Z" fill="none" stroke="#1a5c38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="lf rib" d="M 100,162 C 96,128 96,92 108,34" fill="none" stroke="#1a5c38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="lf vein1" d="M 98,120 C 84,112 74,100 70,88" fill="none" stroke="#1a5c38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="lf vein2" d="M 100,90 C 112,84 122,74 126,62" fill="none" stroke="#1a5c38" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <rect class="frame" x="14" y="14" width="172" height="172" rx="12" fill="none" stroke="#1a5c38" stroke-width="3.5" opacity="0.45"/>
+  <path class="g g-s" d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#1a5c38" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(3,0)"/>
+  <path class="g g-u" d="m 118,36 v 34 c 0,12.15 9.85,13 22,13 12.15,0 22,-3.1 22,-13 V 36" fill="none" stroke="#b83670" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(-3,0)"/>
+  <path class="g g-c" d="M 78,118 H 36 V 164 H 78" fill="none" stroke="#176a92" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(3,0)"/>
+  <path class="g g-h" d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162" fill="none" stroke="#12857e" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(-3,0)"/>
+</svg>

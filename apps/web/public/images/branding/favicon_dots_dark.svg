@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="26" fill="#0a0a0a"/>
+  <g transform="translate(100,100) scale(1.24) translate(-100,-100)">
+    <g transform="translate(60,59.25)"><g class="d d-s"><circle r="24" fill="#35925c"/></g></g>
+    <g transform="translate(137,59.25)"><g class="d d-u"><circle r="24" fill="#e8689e"/></g></g>
+    <g transform="translate(60,141)"><g class="d d-c"><circle r="24" fill="#4aade0"/></g></g>
+    <g transform="translate(137,141)"><g class="d d-h"><circle r="24" fill="#3ad4c6"/></g></g>
+  </g>
+</svg>

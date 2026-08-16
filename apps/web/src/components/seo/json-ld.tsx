@@ -99,7 +99,7 @@ export function articleLd(opts: { title: string; description: string; slug: stri
     publisher: {
       "@type": "Organization",
       name: "Such Software",
-      logo: { "@type": "ImageObject", url: `${SITE}/images/branding/clean_dark_w_text.svg` },
+      logo: { "@type": "ImageObject", url: `${SITE}/images/branding/icon-512.png` },
     },
   };
 }

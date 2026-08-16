@@ -4,11 +4,11 @@ import { ProductsGrid, type Product } from "@/components/portfolio/products-grid
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Products: Crypto Tools, Games & Commerce | Such Software",
+  title: "Portfolio: Products & Projects | Such Software",
   description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
   alternates: { canonical: "/products" },
   openGraph: {
-    title: "Products: Crypto Tools, Games & Commerce | Such Software",
+    title: "Portfolio: Products & Projects | Such Software",
     description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
     type: "website",
   },
@@ -146,31 +146,21 @@ export default function ProductsPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
       <Header />
-      <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4 pb-24 md:pb-20">
+      <div id="main-content" className="z-10 w-full max-w-6xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-purple-500">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 brand-gradient-text">
             Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The tools and apps we have shipped, from commerce backends to consumer games, plus three nuclear-physics games in development.
+            Products &amp; projects — from commerce backends to consumer games, plus three nuclear-physics games in development.
           </p>
         </div>
 
         <ProductsGrid products={products} />
 
         <div className="flex justify-center mt-16 motion-reduce:hidden">
-          <img
-            src="/images/animations/anim3_matrix_light.svg"
-            alt=""
-            aria-hidden="true"
-            className="w-20 h-20 opacity-40 block dark:hidden"
-          />
-          <img
-            src="/images/animations/anim3_matrix.svg"
-            alt=""
-            aria-hidden="true"
-            className="w-20 h-20 opacity-50 hidden dark:block"
-          />
+          <object data="/images/animations/anim3_matrix_light.svg" type="image/svg+xml" aria-hidden="true" className="w-20 h-20 opacity-40 block dark:hidden pointer-events-none"></object>
+          <object data="/images/animations/anim3_matrix.svg" type="image/svg+xml" aria-hidden="true" className="w-20 h-20 opacity-50 hidden dark:block pointer-events-none"></object>
         </div>
       </div>
       <MobileNav />

@@ -49,16 +49,18 @@ export function HomeShell({ children }: { children: ReactNode }) {
     if (entered) return;
     const el = splashRef.current;
     if (!el) return;
+    // Enter once 40% of the splash has scrolled by: requiring the whole screen to
+    // leave the viewport made the reveal feel like a toll booth.
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
+        if (entry.intersectionRatio < 0.6) {
           restoreScroll.current = Math.max(0, window.scrollY - el.offsetHeight);
           sessionStorage.setItem("such:entered", "1");
           setEntered(true);
           setSplashUp(false); // scrolled past: just unmount, no overlay fade needed
         }
       },
-      { threshold: 0 },
+      { threshold: [0, 0.6] },
     );
     io.observe(el);
     return () => io.disconnect();

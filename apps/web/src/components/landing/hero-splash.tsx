@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { SPLASH_LOGO_SRC } from "./splash-logo-data";
+import { SPLASH_LOGO_SRC_DARK, SPLASH_LOGO_SRC_LIGHT } from "./splash-logo-data";
 
 const navButtons = [
   { label: "Portfolio", href: "/products", Icon: LayoutGrid, corner: "left-4 top-6 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
@@ -179,17 +179,24 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
           {/* Data URI (no network request) so the logo paints with FCP; it is the
               mobile LCP element. */}
           <img
-            src={SPLASH_LOGO_SRC}
+            src={SPLASH_LOGO_SRC_LIGHT}
             alt="Such Software"
             fetchPriority="high"
-            className="h-auto w-[min(72vw,42vh)]"
+            className="h-auto w-[min(72vw,42vh)] dark:hidden"
+          />
+          <img
+            src={SPLASH_LOGO_SRC_DARK}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            className="hidden h-auto w-[min(72vw,42vh)] dark:block"
           />
         </div>
       </button>
 
       {/* Cover text hidden on mobile (logo + corner icons carry it there); fades out on enter */}
       <p
-        className={`mt-10 hidden sm:block bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 motion-safe:animate-in motion-safe:fade-in ${entering ? "opacity-0" : "opacity-100"}`}
+        className={`mt-10 hidden sm:block brand-gradient-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 motion-safe:animate-in motion-safe:fade-in ${entering ? "opacity-0" : "opacity-100"}`}
         style={{ animationDuration: "700ms", animationDelay: "120ms", animationFillMode: "backwards" }}
       >
         Precision Engineering for Everyone
