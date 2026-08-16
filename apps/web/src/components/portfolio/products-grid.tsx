@@ -133,16 +133,16 @@ export function ProductsGrid({ products }: { products: Product[] }) {
           id="product-sort"
           value={sort}
           onChange={(e) => setSort(e.target.value as SortKey)}
-          className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+          className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#3ad4c6]/50"
         >
           <option value="release">Release date (newest)</option>
           <option value="name">Name (A–Z)</option>
         </select>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
         {sorted.map((product, i) => (
-          <ScrollReveal key={product.slug} delay={(i % 2) * 0.08}>
+          <ScrollReveal key={product.slug} delay={(i % 3) * 0.08}>
             <Link href={`/products/${product.slug}`} className="block h-full">
               <div className="h-full cursor-pointer">
                 <ProductCardInner product={product} />

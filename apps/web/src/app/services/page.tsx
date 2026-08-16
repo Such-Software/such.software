@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <div id="main-content" className="z-10 w-full max-w-5xl mx-auto py-20 px-4">
         {/* Page header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 pb-3 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 pb-3 brand-gradient-text">
             What we build
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

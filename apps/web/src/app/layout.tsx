@@ -59,7 +59,7 @@ const structuredData = {
   name: "Such Software LLC",
   url: "https://such.software",
   logo: "https://such.software/images/branding/icon-512.png",
-  description: "E-commerce infrastructure, custom app development, and accessible web applications. Engineered for scale, compliance, and performance.",
+  description: "A Kennett Square, PA software studio building custom online stores, web apps, mobile games, and Monero & crypto tools.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "110 E State St, Suite 300",

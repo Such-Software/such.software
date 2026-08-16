@@ -196,7 +196,7 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
 
       {/* Cover text hidden on mobile (logo + corner icons carry it there); fades out on enter */}
       <p
-        className={`mt-10 hidden sm:block bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 motion-safe:animate-in motion-safe:fade-in ${entering ? "opacity-0" : "opacity-100"}`}
+        className={`mt-10 hidden sm:block brand-gradient-text pb-1 text-3xl font-bold text-transparent sm:text-4xl md:text-5xl transition-opacity duration-700 motion-safe:animate-in motion-safe:fade-in ${entering ? "opacity-0" : "opacity-100"}`}
         style={{ animationDuration: "700ms", animationDelay: "120ms", animationFillMode: "backwards" }}
       >
         Precision Engineering for Everyone

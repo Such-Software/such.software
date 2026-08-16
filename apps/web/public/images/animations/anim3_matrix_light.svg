@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <defs><filter id="sg-mglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><clipPath id="sg-clip"><rect width="200" height="200" rx="26"/></clipPath><radialGradient id="sg-shock-s"><stop offset="0" stop-color="#1a5c38" stop-opacity="0.6"/><stop offset="1" stop-color="#1a5c38" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-u"><stop offset="0" stop-color="#b83670" stop-opacity="0.6"/><stop offset="1" stop-color="#b83670" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-c"><stop offset="0" stop-color="#176a92" stop-opacity="0.6"/><stop offset="1" stop-color="#176a92" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-h"><stop offset="0" stop-color="#12857e" stop-opacity="0.6"/><stop offset="1" stop-color="#12857e" stop-opacity="0"/></radialGradient></defs>
+  <defs><filter id="sg-mglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><clipPath id="sg-clip"><rect width="200" height="200" rx="26"/></clipPath><radialGradient id="sg-shock-s"><stop offset="0" stop-color="#1a5c38" stop-opacity="0.6"/><stop offset="1" stop-color="#1a5c38" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-u"><stop offset="0" stop-color="#b83670" stop-opacity="0.6"/><stop offset="1" stop-color="#b83670" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-c"><stop offset="0" stop-color="#176a92" stop-opacity="0.6"/><stop offset="1" stop-color="#176a92" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-h"><stop offset="0" stop-color="#12857e" stop-opacity="0.6"/><stop offset="1" stop-color="#12857e" stop-opacity="0"/></radialGradient></defs>
   <style>
     .rn { animation: sg-rain linear infinite; }
     @keyframes sg-rain { from { transform: translateY(-100px); } to { transform: translateY(320px); } }
@@ -26,8 +26,8 @@
     @keyframes sg-slam { 0%, 2% { transform: scale(0); } 5% { transform: scale(1.15); } 8% { transform: scale(1); } 85% { transform: scale(1); } 95% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
     .orb { transform-box: fill-box; transform-origin: center; animation: sg-orb 1.5s ease-in-out infinite; }
     @keyframes sg-orb { 0%,100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(2); opacity: 1; } }
-    .bdr { animation: sg-hue 4s linear infinite, sg-breathe-o 2s ease-in-out infinite; }
-    @keyframes sg-hue { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
+    .bdr { animation: sg-bcycle 4s linear infinite, sg-breathe-o 2s ease-in-out infinite; }
+    @keyframes sg-bcycle { 0%,100% { stroke: #2f8f5e; } 25% { stroke: #b83670; } 50% { stroke: #176a92; } 75% { stroke: #1a5c38; } }
     @keyframes sg-breathe-o { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
     .slam-s { animation-delay: 0s; }
     .shock-s { animation-delay: 0s; }
@@ -66,8 +66,8 @@
   <path d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#1a5c38" stroke-width="2" opacity="0.25" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   <path class="zap" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#2f8f5e" stroke-width="3" opacity="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#sg-mglow)" stroke-dasharray="15 588.9"/>
   <path class="ctr" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#0a0a14" stroke-width="1.5" opacity="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="5 598.9"/>
-  <path class="crk" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#1a5c38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#sg-mglow)" stroke-dasharray="3 40 8 60 2 80 5 400"/>
-  <g filter="url(#sg-mglow)">
+  <path class="crk" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#1a5c38" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="3 40 8 60 2 80 5 400"/>
+  <g>
     <g transform="translate(20,28)"><g class="orb" style="animation-delay:0s"><circle r="2.5" fill="#1a5c38"/></g></g>
     <g transform="translate(104,100)"><g class="orb" style="animation-delay:0.5s"><circle r="2.5" fill="#1a5c38"/></g></g>
     <g transform="translate(172,172)"><g class="orb" style="animation-delay:1s"><circle r="2.5" fill="#1a5c38"/></g></g>

@@ -21,23 +21,23 @@ export default function Home() {
         {/* Decorative aura behind the title (aria-hidden, LCP-safe, motion-safe). */}
         <div
           aria-hidden="true"
-          className="hero-aura pointer-events-none absolute left-1/2 top-24 sm:top-16 -z-10 h-64 w-[46rem] max-w-[92vw] rounded-full bg-cyan-400/25 blur-3xl"
+          className="hero-aura pointer-events-none absolute left-1/2 top-24 sm:top-16 -z-10 h-64 w-[46rem] max-w-[92vw] rounded-full bg-[#12857e]/25 blur-3xl"
         />
         <h1
           id="hero-title"
           className="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-6 pb-2"
           style={{ maxWidth: "min(calc(90vw - 120px), 100%)" }}
         >
-          <span className="block">Precision Engineering</span>
-          <span className="block">for Everyone</span>
+          <span className="block">Custom E-commerce,</span>
+          <span className="block">Apps &amp; Crypto Tools</span>
         </h1>
         <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-          Custom e-commerce, websites, apps, and consulting. Plus our own mobile apps and games. A software studio in Kennett Square, PA.
+          Websites, games, payments, and consulting too — plus our own mobile apps. A software studio in Kennett Square, PA. Precision engineering for everyone.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mb-14">
           <Link href="/products">
-            <Button size="lg" className="rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:scale-[1.03] transition-all">View Portfolio</Button>
+            <Button size="lg" className="rounded-full shadow-lg shadow-[#12857e]/25 hover:shadow-[#3ad4c6]/40 hover:scale-[1.03] transition-all">View Portfolio</Button>
           </Link>
           <Link href="#contact">
             <Button variant="outline" size="lg" className="rounded-full hover:scale-[1.03] transition-all">Start a Project</Button>
