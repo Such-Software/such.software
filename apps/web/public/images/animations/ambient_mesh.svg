@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <style>
+    .k0 { offset-path: path("M 26,30 L 84,20"); animation: sg-pkt 3.4s ease-in-out infinite; animation-delay: 0s; }
+    .k1 { offset-path: path("M 84,20 L 176,34"); animation: sg-pkt 4.3s ease-in-out infinite; animation-delay: 2.6s; }
+    .k2 { offset-path: path("M 26,30 L 20,92"); animation: sg-pkt 5.2s ease-in-out infinite; animation-delay: 1.8s; }
+    .k3 { offset-path: path("M 176,34 L 180,88"); animation: sg-pkt 6.1s ease-in-out infinite; animation-delay: 1s; }
+    .k4 { offset-path: path("M 20,92 L 106,106"); animation: sg-pkt 7s ease-in-out infinite; animation-delay: 0.2s; }
+    .k5 { offset-path: path("M 106,106 L 180,88"); animation: sg-pkt 4.1s ease-in-out infinite; animation-delay: 3.8s; }
+    .k6 { offset-path: path("M 20,92 L 32,176"); animation: sg-pkt 5s ease-in-out infinite; animation-delay: 4.8s; }
+    .k7 { offset-path: path("M 180,88 L 172,180"); animation: sg-pkt 5.9s ease-in-out infinite; animation-delay: 5.8s; }
+    .k8 { offset-path: path("M 32,176 L 110,170"); animation: sg-pkt 6.8s ease-in-out infinite; animation-delay: 1.78e-15s; }
+    .k9 { offset-path: path("M 110,170 L 172,180"); animation: sg-pkt 3.9s ease-in-out infinite; animation-delay: 0.3s; }
+    .k10 { offset-path: path("M 84,20 L 106,106"); animation: sg-pkt 4.8s ease-in-out infinite; animation-delay: 2.2s; }
+    .k11 { offset-path: path("M 106,106 L 110,170"); animation: sg-pkt 5.7s ease-in-out infinite; animation-delay: 4.1s; }
+    .k12 { offset-path: path("M 26,30 L 106,106"); animation: sg-pkt 6.6s ease-in-out infinite; animation-delay: 6s; }
+    .k13 { offset-path: path("M 106,106 L 172,180"); animation: sg-pkt 3.7s ease-in-out infinite; animation-delay: 0.1s; }
+    @keyframes sg-pkt { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .pk { display: none; } }
+  </style>
+  <rect width="200" height="200" rx="26" fill="#0a0a0a"/>
+  <g opacity="0.26">
+    <line x1="26" y1="30" x2="84" y2="20" stroke="#45c99e" stroke-width="1"/>
+    <line x1="84" y1="20" x2="176" y2="34" stroke="#45c99e" stroke-width="1"/>
+    <line x1="26" y1="30" x2="20" y2="92" stroke="#45c99e" stroke-width="1"/>
+    <line x1="176" y1="34" x2="180" y2="88" stroke="#45c99e" stroke-width="1"/>
+    <line x1="20" y1="92" x2="106" y2="106" stroke="#45c99e" stroke-width="1"/>
+    <line x1="106" y1="106" x2="180" y2="88" stroke="#45c99e" stroke-width="1"/>
+    <line x1="20" y1="92" x2="32" y2="176" stroke="#45c99e" stroke-width="1"/>
+    <line x1="180" y1="88" x2="172" y2="180" stroke="#45c99e" stroke-width="1"/>
+    <line x1="32" y1="176" x2="110" y2="170" stroke="#45c99e" stroke-width="1"/>
+    <line x1="110" y1="170" x2="172" y2="180" stroke="#45c99e" stroke-width="1"/>
+    <line x1="84" y1="20" x2="106" y2="106" stroke="#45c99e" stroke-width="1"/>
+    <line x1="106" y1="106" x2="110" y2="170" stroke="#45c99e" stroke-width="1"/>
+    <line x1="26" y1="30" x2="106" y2="106" stroke="#45c99e" stroke-width="1"/>
+    <line x1="106" y1="106" x2="172" y2="180" stroke="#45c99e" stroke-width="1"/>
+    <circle cx="26" cy="30" r="2.4" fill="#45c99e"/>
+    <circle cx="84" cy="20" r="2.4" fill="#45c99e"/>
+    <circle cx="176" cy="34" r="2.4" fill="#45c99e"/>
+    <circle cx="20" cy="92" r="2.4" fill="#45c99e"/>
+    <circle cx="106" cy="106" r="2.4" fill="#45c99e"/>
+    <circle cx="180" cy="88" r="2.4" fill="#45c99e"/>
+    <circle cx="32" cy="176" r="2.4" fill="#45c99e"/>
+    <circle cx="110" cy="170" r="2.4" fill="#45c99e"/>
+    <circle cx="172" cy="180" r="2.4" fill="#45c99e"/>
+    <circle class="pk k0" r="1.8" fill="#e8689e"/>
+    <circle class="pk k1" r="1.8" fill="#e8689e"/>
+    <circle class="pk k2" r="1.8" fill="#e8689e"/>
+    <circle class="pk k3" r="1.8" fill="#e8689e"/>
+    <circle class="pk k4" r="1.8" fill="#e8689e"/>
+    <circle class="pk k5" r="1.8" fill="#e8689e"/>
+    <circle class="pk k6" r="1.8" fill="#e8689e"/>
+    <circle class="pk k7" r="1.8" fill="#e8689e"/>
+    <circle class="pk k8" r="1.8" fill="#e8689e"/>
+    <circle class="pk k9" r="1.8" fill="#e8689e"/>
+    <circle class="pk k10" r="1.8" fill="#e8689e"/>
+    <circle class="pk k11" r="1.8" fill="#e8689e"/>
+    <circle class="pk k12" r="1.8" fill="#e8689e"/>
+    <circle class="pk k13" r="1.8" fill="#e8689e"/>
+  </g>
+  <rect class="frame" x="14" y="14" width="172" height="172" rx="12" fill="none" stroke="#45c99e" stroke-width="3.5" opacity="0.7"/>
+  <path class="g g-s" d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#35925c" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(3,0)"/>
+  <path class="g g-u" d="m 118,36 v 34 c 0,12.15 9.85,13 22,13 12.15,0 22,-3.1 22,-13 V 36" fill="none" stroke="#e8689e" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(-3,0)"/>
+  <path class="g g-c" d="M 78,118 H 36 V 164 H 78" fill="none" stroke="#4aade0" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(3,0)"/>
+  <path class="g g-h" d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162" fill="none" stroke="#3ad4c6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(-3,0)"/>
+</svg>

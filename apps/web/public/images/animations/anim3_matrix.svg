@@ -1,205 +1,80 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <defs>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="1.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="megaGlow">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="warpGlow">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
-    <path id="trace" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 52"/>
-
-    <!-- Animated gradient for border -->
-    <linearGradient id="shiftGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%">
-        <animate attributeName="stop-color" values="#35925c;#e8689e;#4aade0;#45c99e;#35925c" dur="4s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="50%">
-        <animate attributeName="stop-color" values="#4aade0;#45c99e;#e8689e;#35925c;#4aade0" dur="4s" repeatCount="indefinite"/>
-      </stop>
-      <stop offset="100%">
-        <animate attributeName="stop-color" values="#e8689e;#4aade0;#35925c;#e8689e;#e8689e" dur="4s" repeatCount="indefinite"/>
-      </stop>
-    </linearGradient>
-
-    <!-- Radial pulse for shockwaves -->
-    <radialGradient id="shockS" cx="57" cy="59" r="50" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#35925c" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#35925c" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="shockU" cx="140" cy="55" r="50" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#e8689e" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#e8689e" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="shockC" cx="57" cy="141" r="50" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#4aade0" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#4aade0" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="shockH" cx="140" cy="141" r="50" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#45c99e" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#45c99e" stop-opacity="0"/>
-    </radialGradient>
-
-    <clipPath id="roundClip">
-      <rect width="200" height="200" rx="26"/>
-    </clipPath>
-  </defs>
-
-  <!-- Background -->
+  <defs><filter id="sg-mglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><clipPath id="sg-clip"><rect width="200" height="200" rx="26"/></clipPath><radialGradient id="sg-shock-s"><stop offset="0" stop-color="#35925c" stop-opacity="0.6"/><stop offset="1" stop-color="#35925c" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-u"><stop offset="0" stop-color="#e8689e" stop-opacity="0.6"/><stop offset="1" stop-color="#e8689e" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-c"><stop offset="0" stop-color="#4aade0" stop-opacity="0.6"/><stop offset="1" stop-color="#4aade0" stop-opacity="0"/></radialGradient><radialGradient id="sg-shock-h"><stop offset="0" stop-color="#3ad4c6" stop-opacity="0.6"/><stop offset="1" stop-color="#3ad4c6" stop-opacity="0"/></radialGradient></defs>
+  <style>
+    .rn { animation: sg-rain linear infinite; }
+    @keyframes sg-rain { from { transform: translateY(-100px); } to { transform: translateY(320px); } }
+    .rn0 { animation-duration: 2.1s; animation-delay: 0.73s; }
+    .rn1 { animation-duration: 1.8s; animation-delay: 0.175s; }
+    .rn2 { animation-duration: 2.5s; animation-delay: 1.75s; }
+    .rn3 { animation-duration: 1.6s; animation-delay: 0.054s; }
+    .rn4 { animation-duration: 2.8s; animation-delay: 1.06s; }
+    .rn5 { animation-duration: 2.0s; animation-delay: 1.67s; }
+    .rn6 { animation-duration: 1.7s; animation-delay: 0.778s; }
+    .rn7 { animation-duration: 2.3s; animation-delay: 1.69s; }
+    .rn8 { animation-duration: 1.9s; animation-delay: 0.094s; }
+    .rn9 { animation-duration: 2.6s; animation-delay: 2.3s; }
+    .rn10 { animation-duration: 2.2s; animation-delay: 0.91s; }
+    .rn11 { animation-duration: 1.5s; animation-delay: 0.155s; }
+    .zap { animation: sg-zap 1.5s linear infinite; }
+    @keyframes sg-zap { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -603.9; } }
+    .ctr { animation: sg-zap 1.5s linear infinite; animation-delay: -0.5s; }
+    .crk { animation: sg-zap 2.3s linear infinite, sg-flick 0.7s linear infinite; }
+    @keyframes sg-flick { 0%,100% { opacity: 0.3; } 20% { opacity: 0.6; } 40% { opacity: 0.1; } 60% { opacity: 0.5; } 80% { opacity: 0.2; } }
+    .shock { transform-box: fill-box; transform-origin: center; transform: scale(0); animation: sg-shock 6.0s linear infinite; }
+    @keyframes sg-shock { 0%, 14% { transform: scale(0); opacity: 0; } 15% { transform: scale(0); opacity: 0.5; } 25% { transform: scale(1); opacity: 0; } 100% { transform: scale(0); opacity: 0; } }
+    .slam { transform-box: fill-box; transform-origin: center; transform: scale(0); animation: sg-slam 6.0s linear infinite; }
+    @keyframes sg-slam { 0%, 2% { transform: scale(0); } 5% { transform: scale(1.15); } 8% { transform: scale(1); } 85% { transform: scale(1); } 95% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+    .orb { transform-box: fill-box; transform-origin: center; animation: sg-orb 1.5s ease-in-out infinite; }
+    @keyframes sg-orb { 0%,100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(2); opacity: 1; } }
+    .bdr { animation: sg-hue 4s linear infinite, sg-breathe-o 2s ease-in-out infinite; }
+    @keyframes sg-hue { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
+    @keyframes sg-breathe-o { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .slam-s { animation-delay: 0s; }
+    .shock-s { animation-delay: 0s; }
+    .slam-u { animation-delay: 0.9s; }
+    .shock-u { animation-delay: 0.9s; }
+    .slam-c { animation-delay: 1.8s; }
+    .shock-c { animation-delay: 1.8s; }
+    .slam-h { animation-delay: 2.7s; }
+    .shock-h { animation-delay: 2.7s; }
+    @media (prefers-reduced-motion: reduce) {
+      .rn, .zap, .ctr, .crk, .shock { display: none; }
+      .slam { animation: none; transform: scale(1); }
+      .orb { animation: none; }
+      .bdr { animation: none; }
+    }
+  </style>
   <rect width="200" height="200" rx="26" fill="#050508"/>
-
-  <!-- Matrix rain columns (clipped to rounded rect) -->
-  <g clip-path="url(#roundClip)" opacity="0.12" font-family="'SF Mono','Fira Code',monospace" font-size="10" fill="#45c99e">
-    <text x="10" y="0"><animate attributeName="y" from="-20" to="220" dur="2.1s" repeatCount="indefinite"/>01</text>
-    <text x="25" y="0"><animate attributeName="y" from="-60" to="220" dur="1.8s" repeatCount="indefinite"/>{ }</text>
-    <text x="42" y="0"><animate attributeName="y" from="-40" to="220" dur="2.5s" repeatCount="indefinite"/>S</text>
-    <text x="58" y="0"><animate attributeName="y" from="-80" to="220" dur="1.6s" repeatCount="indefinite"/>10</text>
-    <text x="74" y="0"><animate attributeName="y" from="-10" to="220" dur="2.8s" repeatCount="indefinite"/>U</text>
-    <text x="90" y="0"><animate attributeName="y" from="-50" to="220" dur="2.0s" repeatCount="indefinite"/>0x</text>
-    <text x="106" y="0"><animate attributeName="y" from="-90" to="220" dur="1.7s" repeatCount="indefinite"/>C</text>
-    <text x="122" y="0"><animate attributeName="y" from="-30" to="220" dur="2.3s" repeatCount="indefinite"/>fn</text>
-    <text x="138" y="0"><animate attributeName="y" from="-70" to="220" dur="1.9s" repeatCount="indefinite"/>H</text>
-    <text x="154" y="0"><animate attributeName="y" from="-15" to="220" dur="2.6s" repeatCount="indefinite"/>;</text>
-    <text x="170" y="0"><animate attributeName="y" from="-55" to="220" dur="2.2s" repeatCount="indefinite"/>=></text>
-    <text x="185" y="0"><animate attributeName="y" from="-35" to="220" dur="1.5s" repeatCount="indefinite"/>[]</text>
+  <g clip-path="url(#sg-clip)" opacity="0.12" font-family="ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace" font-size="10" fill="#45c99e">
+    <text class="rn rn0" x="10" y="0">01</text>
+    <text class="rn rn1" x="25" y="0">{ }</text>
+    <text class="rn rn2" x="42" y="0">S</text>
+    <text class="rn rn3" x="58" y="0">10</text>
+    <text class="rn rn4" x="74" y="0">U</text>
+    <text class="rn rn5" x="90" y="0">0x</text>
+    <text class="rn rn6" x="106" y="0">C</text>
+    <text class="rn rn7" x="122" y="0">fn</text>
+    <text class="rn rn8" x="138" y="0">H</text>
+    <text class="rn rn9" x="154" y="0">;</text>
+    <text class="rn rn10" x="170" y="0">=&gt;</text>
+    <text class="rn rn11" x="185" y="0">[]</text>
   </g>
-
-  <!-- Shockwave rings when letters appear -->
-  <circle cx="57" cy="59" r="0" fill="url(#shockS)" opacity="0">
-    <animate attributeName="r" values="0;0;0;60;0;0" keyTimes="0;0.14;0.15;0.25;0.26;1" dur="6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0.5;0;0;0" keyTimes="0;0.14;0.15;0.25;0.26;1" dur="6s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="140" cy="55" r="0" fill="url(#shockU)" opacity="0">
-    <animate attributeName="r" values="0;0;0;60;0;0" keyTimes="0;0.29;0.3;0.4;0.41;1" dur="6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0.5;0;0;0" keyTimes="0;0.29;0.3;0.4;0.41;1" dur="6s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="57" cy="141" r="0" fill="url(#shockC)" opacity="0">
-    <animate attributeName="r" values="0;0;0;60;0;0" keyTimes="0;0.44;0.45;0.55;0.56;1" dur="6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0.5;0;0;0" keyTimes="0;0.44;0.45;0.55;0.56;1" dur="6s" repeatCount="indefinite"/>
-  </circle>
-  <circle cx="140" cy="141" r="0" fill="url(#shockH)" opacity="0">
-    <animate attributeName="r" values="0;0;0;60;0;0" keyTimes="0;0.59;0.6;0.7;0.71;1" dur="6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0.5;0;0;0" keyTimes="0;0.59;0.6;0.7;0.71;1" dur="6s" repeatCount="indefinite"/>
-  </circle>
-
-  <!-- Electrified circuit trace: multiple overlapping animated strokes -->
-  <use href="#trace" fill="none" stroke="#45c99e" stroke-width="2" opacity="0.25"
-       stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Fast pulse 1 -->
-  <use href="#trace" fill="none" stroke="#7ddfbe" stroke-width="3" opacity="0.8"
-       stroke-linecap="round" filter="url(#megaGlow)"
-       stroke-dasharray="15 583">
-    <animate attributeName="stroke-dashoffset" from="0" to="-598" dur="1.5s" repeatCount="indefinite"/>
-  </use>
-  <!-- Fast pulse 2 (opposite direction feel - offset) -->
-  <use href="#trace" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.5"
-       stroke-linecap="round"
-       stroke-dasharray="5 593">
-    <animate attributeName="stroke-dashoffset" from="-200" to="-798" dur="1.5s" repeatCount="indefinite"/>
-  </use>
-  <!-- Crackle: erratic short dashes -->
-  <use href="#trace" fill="none" stroke="#45c99e" stroke-width="4" opacity="0.3"
-       stroke-linecap="round" filter="url(#glow)"
-       stroke-dasharray="3 40 8 60 2 80 5 400">
-    <animate attributeName="stroke-dashoffset" from="0" to="-598" dur="2.3s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.3;0.6;0.1;0.5;0.2;0.3" dur="0.7s" repeatCount="indefinite"/>
-  </use>
-
-  <!-- Nodes: pulsing orbs with halos -->
-  <g filter="url(#megaGlow)">
-    <circle cx="20" cy="28" r="2.5" fill="#45c99e">
-      <animate attributeName="r" values="2;5;2" dur="1.5s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="100" cy="100" r="3" fill="#ffffff">
-      <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="fill" values="#45c99e;#e8689e;#4aade0;#45c99e" dur="4s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="166" cy="172" r="2.5" fill="#45c99e">
-      <animate attributeName="r" values="2;5;2" dur="1.5s" begin="0.75s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" begin="0.75s" repeatCount="indefinite"/>
-    </circle>
-    <!-- Corner nodes -->
-    <circle cx="178" cy="34" r="2" fill="#e8689e">
-      <animate attributeName="r" values="2;4;2" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="172" cy="100" r="2" fill="#4aade0">
-      <animate attributeName="r" values="2;4;2" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="28" cy="100" r="2" fill="#e8689e">
-      <animate attributeName="r" values="2;4;2" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="22" cy="166" r="2" fill="#4aade0">
-      <animate attributeName="r" values="2;4;2" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
-    </circle>
+  <circle class="shock shock-s" cx="60" cy="59.25" r="60" fill="url(#sg-shock-s)"/>
+  <circle class="shock shock-u" cx="137" cy="59.25" r="60" fill="url(#sg-shock-u)"/>
+  <circle class="shock shock-c" cx="60" cy="141" r="60" fill="url(#sg-shock-c)"/>
+  <circle class="shock shock-h" cx="137" cy="141" r="60" fill="url(#sg-shock-h)"/>
+  <path d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#45c99e" stroke-width="2" opacity="0.25" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path class="zap" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#7ddfbe" stroke-width="3" opacity="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#sg-mglow)" stroke-dasharray="15 588.9"/>
+  <path class="ctr" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#ffffff" stroke-width="1.5" opacity="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="5 598.9"/>
+  <path class="crk" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" stroke="#45c99e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#sg-mglow)" stroke-dasharray="3 40 8 60 2 80 5 400"/>
+  <g filter="url(#sg-mglow)">
+    <g transform="translate(20,28)"><g class="orb" style="animation-delay:0s"><circle r="2.5" fill="#45c99e"/></g></g>
+    <g transform="translate(104,100)"><g class="orb" style="animation-delay:0.5s"><circle r="2.5" fill="#45c99e"/></g></g>
+    <g transform="translate(172,172)"><g class="orb" style="animation-delay:1s"><circle r="2.5" fill="#45c99e"/></g></g>
   </g>
-
-  <!-- Color-shifting animated border -->
-  <rect x="14" y="14" width="172" height="172" rx="16" fill="none"
-        stroke="url(#shiftGrad)" stroke-width="3.5" filter="url(#glow)">
-    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- S slams in with scale -->
-  <g transform-origin="57 59">
-    <animateTransform attributeName="transform" type="scale"
-                      values="0;0;1.15;1;1;1;0" keyTimes="0;0.14;0.17;0.2;0.85;0.95;1"
-                      dur="6s" repeatCount="indefinite"/>
-    <path d="M 78,36 H 36 V 58 H 78 V 82 H 36"
-          fill="none" stroke="#35925c" stroke-width="14"
-          stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-  </g>
-
-  <!-- U slams in -->
-  <g transform-origin="140 55">
-    <animateTransform attributeName="transform" type="scale"
-                      values="0;0;1.15;1;1;1;0" keyTimes="0;0.29;0.32;0.35;0.85;0.95;1"
-                      dur="6s" repeatCount="indefinite"/>
-    <path d="m 118,36 v 34 c 0,12.15 9.85,14 22,14 12.15,0 22,-1.85 22,-14 V 36"
-          fill="none" stroke="#e8689e" stroke-width="14"
-          stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-  </g>
-
-  <!-- C slams in -->
-  <g transform-origin="57 141">
-    <animateTransform attributeName="transform" type="scale"
-                      values="0;0;1.15;1;1;1;0" keyTimes="0;0.44;0.47;0.5;0.85;0.95;1"
-                      dur="6s" repeatCount="indefinite"/>
-    <path d="M 78,118 H 36 V 164 H 78"
-          fill="none" stroke="#4aade0" stroke-width="14"
-          stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-  </g>
-
-  <!-- H slams in -->
-  <g transform-origin="140 141">
-    <animateTransform attributeName="transform" type="scale"
-                      values="0;0;1.15;1;1;1;0" keyTimes="0;0.59;0.62;0.65;0.85;0.95;1"
-                      dur="6s" repeatCount="indefinite"/>
-    <path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162"
-          fill="none" stroke="#45c99e" stroke-width="14"
-          stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-  </g>
-
-  <!-- Final flash on complete -->
-  <rect width="200" height="200" rx="26" fill="#ffffff" opacity="0">
-    <animate attributeName="opacity" values="0;0;0.15;0;0;0" keyTimes="0;0.64;0.66;0.72;0.95;1" dur="6s" repeatCount="indefinite"/>
-  </rect>
+  <rect class="bdr" x="14" y="14" width="172" height="172" rx="12" fill="none" stroke="#7ddfbe" stroke-width="3.5"/>
+  <g transform="translate(3,0)"><g class="slam slam-s"><path d="M 78,36 H 36 V 58 H 78 V 82 H 36" fill="none" stroke="#35925c" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+  <g transform="translate(-3,0)"><g class="slam slam-u"><path d="m 118,36 v 34 c 0,12.15 9.85,13 22,13 12.15,0 22,-3.1 22,-13 V 36" fill="none" stroke="#e8689e" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+  <g transform="translate(3,0)"><g class="slam slam-c"><path d="M 78,118 H 36 V 164 H 78" fill="none" stroke="#4aade0" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+  <g transform="translate(-3,0)"><g class="slam slam-h"><path d="M 118,118 V 164 M 162,118 V 164 M 118,141 H 162" fill="none" stroke="#3ad4c6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/></g></g>
 </svg>

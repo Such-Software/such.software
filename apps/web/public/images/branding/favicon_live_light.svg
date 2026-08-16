@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <style>
+    .d { transform-box: fill-box; transform-origin: center;
+         animation: sg-breathe 3.6s ease-in-out infinite; }
+    @keyframes sg-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .d-s { animation-delay: 0s; }
+    .d-u { animation-delay: 0.45s; }
+    .d-c { animation-delay: 0.9s; }
+    .d-h { animation-delay: 1.35s; }
+    @media (prefers-reduced-motion: reduce) { .d { animation: none; } }
+  </style>
+  <rect width="200" height="200" rx="26" fill="#f7f8fa"/>
+  <g transform="translate(100,100) scale(1.24) translate(-100,-100)">
+    <g transform="translate(60,59.25)"><g class="d d-s"><circle r="24" fill="#1a5c38"/></g></g>
+    <g transform="translate(137,59.25)"><g class="d d-u"><circle r="24" fill="#b83670"/></g></g>
+    <g transform="translate(60,141)"><g class="d d-c"><circle r="24" fill="#176a92"/></g></g>
+    <g transform="translate(137,141)"><g class="d d-h"><circle r="24" fill="#12857e"/></g></g>
+  </g>
+</svg>

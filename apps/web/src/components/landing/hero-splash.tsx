@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ChevronDown, LayoutGrid, Smartphone, Wrench, Info } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { SPLASH_LOGO_SRC } from "./splash-logo-data";
+import { SPLASH_LOGO_SRC_DARK, SPLASH_LOGO_SRC_LIGHT } from "./splash-logo-data";
 
 const navButtons = [
   { label: "Portfolio", href: "/products", Icon: LayoutGrid, corner: "left-4 top-6 sm:left-6 sm:top-24 lg:left-8 lg:top-32" },
@@ -179,10 +179,17 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
           {/* Data URI (no network request) so the logo paints with FCP; it is the
               mobile LCP element. */}
           <img
-            src={SPLASH_LOGO_SRC}
+            src={SPLASH_LOGO_SRC_LIGHT}
             alt="Such Software"
             fetchPriority="high"
-            className="h-auto w-[min(72vw,42vh)]"
+            className="h-auto w-[min(72vw,42vh)] dark:hidden"
+          />
+          <img
+            src={SPLASH_LOGO_SRC_DARK}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            className="hidden h-auto w-[min(72vw,42vh)] dark:block"
           />
         </div>
       </button>
