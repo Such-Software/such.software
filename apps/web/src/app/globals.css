@@ -327,3 +327,40 @@
 html[data-splash="skip"] #splash-overlay {
   display: none !important;
 }
+
+/* Splash handover burst: the four pillar cells disperse as the mark hands over to the page.
+   The blobs sit where the monogram's four cells were (a 2x2 grid about the centre), so this
+   reads as the logo coming apart rather than as a generic flash.
+
+   ONLY transform and opacity animate, both compositor properties. This deliberately avoids
+   animating filter/background: the matrix animation pegged a core doing exactly that, because
+   a filter change re-renders the whole filter graph every frame. Soft edges come from a static
+   radial-gradient that is painted once and then only transformed. */
+@keyframes splash-burst {
+  from { transform: translate(-50%, -50%) scale(0.35); opacity: var(--burst-peak); }
+  to   { transform: translate(-50%, -50%) scale(3.1); opacity: 0; }
+}
+.splash-burst-blob {
+  position: absolute;
+  width: 34vmin;
+  height: 34vmin;
+  border-radius: 9999px;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: splash-burst 420ms cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+  /* Half-transparent by construction: the gradient's own alpha never reaches 1, and
+     --burst-peak holds the whole layer under half opacity. */
+  --burst-peak: 0.42;
+}
+.dark .splash-burst-blob { --burst-peak: 0.5; }
+.splash-burst-s { background: radial-gradient(circle, rgb(26 92 56 / 0.55), transparent 70%); }
+.splash-burst-u { background: radial-gradient(circle, rgb(184 54 112 / 0.55), transparent 70%); }
+.splash-burst-c { background: radial-gradient(circle, rgb(23 106 146 / 0.55), transparent 70%); }
+.splash-burst-h { background: radial-gradient(circle, rgb(18 133 126 / 0.55), transparent 70%); }
+.dark .splash-burst-s { background: radial-gradient(circle, rgb(53 146 92 / 0.55), transparent 70%); }
+.dark .splash-burst-u { background: radial-gradient(circle, rgb(232 104 158 / 0.55), transparent 70%); }
+.dark .splash-burst-c { background: radial-gradient(circle, rgb(74 173 224 / 0.55), transparent 70%); }
+.dark .splash-burst-h { background: radial-gradient(circle, rgb(58 212 198 / 0.55), transparent 70%); }
+@media (prefers-reduced-motion: reduce) {
+  .splash-burst-blob { display: none; }
+}

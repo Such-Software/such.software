@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/products/neroswap`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/products/webshops`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/products/custom-websites`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/products/hash-bags`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/products/smirk-wallet`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/products/bauhaus-echo`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/products/vegan-iq`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
