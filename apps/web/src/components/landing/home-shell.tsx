@@ -26,7 +26,6 @@ export function HomeShell({ children }: { children: ReactNode }) {
   // cross-fade overlay (button path only).
   const [splashUp, setSplashUp] = useState(true);
   const [leaving, setLeaving] = useState(false);
-  const splashRef = useRef<HTMLElement>(null);
   const restoreScroll = useRef(0);
   const [nebulaPosition, setNebulaPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -141,7 +140,7 @@ export function HomeShell({ children }: { children: ReactNode }) {
     setTimeout(() => {
       setSplashUp(false);
       tryRelease();
-    }, 800);
+    }, 300);   // the overlay's 260ms cross-fade, plus a frame
   };
 
   return (
@@ -149,7 +148,7 @@ export function HomeShell({ children }: { children: ReactNode }) {
       <DynamicBackground nebulaPosition={nebulaPosition} visible={entered} />
       <Header floating visible={entered} />
 
-      {splashUp && <HeroSplash sectionRef={splashRef} onEnter={enterFromButton} leaving={leaving} />}
+      {splashUp && <HeroSplash onEnter={enterFromButton} leaving={leaving} />}
 
       {children}
 
