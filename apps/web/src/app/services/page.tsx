@@ -87,7 +87,7 @@ export default function ServicesPage() {
                 alt="Occupy Wallets"
                 width={72}
                 height={72}
-                className="rounded-xl flex-shrink-0"
+                className="rounded-[22%] flex-shrink-0"
               />
               <div>
                 <h3 className="text-xl font-bold mb-1">Occupy Wallets</h3>

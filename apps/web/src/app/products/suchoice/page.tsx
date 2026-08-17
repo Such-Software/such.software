@@ -60,7 +60,7 @@ export default function SuchoicePage() {
             alt="Suchoice icon"
             width={80}
             height={80}
-            className="rounded-2xl"
+            className="rounded-[22%]"
           />
           <h1 className="text-4xl md:text-5xl font-bold text-pink-600 dark:text-pink-400">
             Suchoice

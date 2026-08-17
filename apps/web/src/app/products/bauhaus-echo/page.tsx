@@ -59,7 +59,7 @@ export default function BauhausEchoPage() {
             alt="Bauhaus Echo icon"
             width={80}
             height={80}
-            className="rounded-2xl"
+            className="rounded-[22%]"
           />
           <h1 className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400">
             Bauhaus Echo
