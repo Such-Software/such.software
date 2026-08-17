@@ -44,27 +44,20 @@ export function HomeShell({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Dismiss the splash once it has fully scrolled out of view.
+  // The splash is a fixed overlay now, so the hero is already in flow beneath it and
+  // would otherwise scroll around behind the cover. Freeze the page while it is up.
+  // (The previous scroll-past-to-dismiss IntersectionObserver is gone with it: an
+  // overlay never leaves the viewport, so it could never have fired. Scroll intent
+  // still enters the site, via the wheel/touch/key handlers inside the splash.)
   useEffect(() => {
-    if (entered) return;
-    const el = splashRef.current;
-    if (!el) return;
-    // Enter once 40% of the splash has scrolled by: requiring the whole screen to
-    // leave the viewport made the reveal feel like a toll booth.
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.intersectionRatio < 0.6) {
-          restoreScroll.current = Math.max(0, window.scrollY - el.offsetHeight);
-          sessionStorage.setItem("such:entered", "1");
-          setEntered(true);
-          setSplashUp(false); // scrolled past: just unmount, no overlay fade needed
-        }
-      },
-      { threshold: [0, 0.6] },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [entered]);
+    if (entered || !splashUp) return;
+    const html = document.documentElement;
+    const prev = html.style.overflow;
+    html.style.overflow = "hidden";
+    return () => {
+      html.style.overflow = prev;
+    };
+  }, [entered, splashUp]);
 
   // After the splash unmounts, keep the visitor's position in the content stable
   // (no jump). Runs before paint.

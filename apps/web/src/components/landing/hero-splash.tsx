@@ -12,6 +12,9 @@ const navButtons = [
   { label: "About", href: "/about", Icon: Info, corner: "right-4 bottom-6 sm:right-6 sm:bottom-24 lg:right-8 lg:bottom-32" },
 ];
 
+// How long the splash holds before it enters the site on its own.
+const SPLASH_AUTO_ENTER_MS = 1500;
+
 // The "SUCH" mark is served as /images/branding/splash-such.svg and rendered as an
 // <img> below: an <img> is a valid Largest-Contentful-Paint candidate, whereas an
 // inline <svg> is not, which is what was producing NO_LCP on mobile (where the
@@ -106,6 +109,17 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
     };
   }, [leaving]);
 
+  // Auto-advance: the splash is an intro, not a gate. After a beat it runs the same
+  // water-ripple enter the visitor would have triggered themselves; a click, scroll,
+  // or arrow key still fast-forwards it, and handleEnter's `entering` guard dedupes
+  // the two paths. Reduced-motion visitors never get here (the shell skips the splash
+  // outright), and the once-per-session flag is unchanged.
+  useEffect(() => {
+    if (leaving) return;
+    const id = window.setTimeout(() => enterRef.current(), SPLASH_AUTO_ENTER_MS);
+    return () => window.clearTimeout(id);
+  }, [leaving]);
+
   // Pre-warm on idle (post-LCP): compile the filter graph + promote the logo layer.
   useEffect(() => {
     const ric: typeof requestIdleCallback | undefined = (window as any).requestIdleCallback;
@@ -117,15 +131,23 @@ export function HeroSplash({ onEnter, sectionRef, leaving }: { onEnter: () => vo
     };
   }, []);
 
+  // The splash is a FIXED overlay from its very first paint, never a block in document
+  // flow. It used to be `relative min-h-[100svh]` and only became fixed on the way out,
+  // which meant removing it pulled a whole viewport of height out of the flow and shoved
+  // the hero up: a layout shift of almost exactly 1.0. A click hid that from CLS (shifts
+  // within 500ms of input are excused), but reduced-motion and returning-session
+  // visitors, who never click, ate it in full and scored 74. As an overlay it is out of
+  // flow already, so dismissing it cannot reflow anything, and the auto-advance costs no
+  // CLS either.
   return (
     <section
       ref={sectionRef}
       aria-label="Such Software"
-      className={
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-background px-4 py-12 text-center ${
         leaving
-          ? `fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden px-4 py-12 text-center pointer-events-none transition-opacity duration-700 ${fadeOut ? "opacity-0" : "opacity-100"}`
-          : "relative z-10 flex min-h-[100svh] w-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 py-12 text-center"
-      }
+          ? `pointer-events-none transition-opacity duration-700 ${fadeOut ? "opacity-0" : "opacity-100"}`
+          : ""
+      }`}
     >
       {/* Click-to-enter: soft Cherenkov wash. The ripple itself is the SVG water
           filter refracting the logo (driven by handleEnter's rAF loop). */}
