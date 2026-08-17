@@ -2,13 +2,13 @@
   <defs><filter id="sg-pulse-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
   <style>
     .pl0 { animation: sg-pl0 3s linear infinite; }
-    @keyframes sg-pl0 { from { stroke-dashoffset: -0; } to { stroke-dashoffset: -380.5; } }
+    @keyframes sg-pl0 { from { stroke-dashoffset: -0; } to { stroke-dashoffset: -353.8; } }
     .pl1 { animation: sg-pl1 3s linear infinite; }
-    @keyframes sg-pl1 { from { stroke-dashoffset: -190.2; } to { stroke-dashoffset: -570.7; } }
+    @keyframes sg-pl1 { from { stroke-dashoffset: -176.9; } to { stroke-dashoffset: -530.7; } }
     .pl2 { animation: sg-pl2 3s linear infinite; }
-    @keyframes sg-pl2 { from { stroke-dashoffset: -63.54; } to { stroke-dashoffset: -444; } }
-    .pt { offset-path: path("M 178,178 C 178,92 142,20 100,20 C 58,20 22,92 22,178"); offset-rotate: auto;
-          animation: sg-pt 3s linear infinite; animation-delay: -0.2365s; }
+    @keyframes sg-pl2 { from { stroke-dashoffset: -59.09; } to { stroke-dashoffset: -412.9; } }
+    .pt { offset-path: path("M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164"); offset-rotate: auto;
+          animation: sg-pt 3s linear infinite; animation-delay: -0.2544s; }
     @keyframes sg-pt { from { offset-distance: 0%; } to { offset-distance: 100%; } }
     .nd { transform-box: fill-box; transform-origin: center; opacity: 0.24;
           animation: sg-node 3s linear infinite; }
@@ -25,20 +25,20 @@
   </style>
   <rect width="200" height="200" rx="26" fill="#0a0a0a"/>
   <g class="field">
-    <path d="M 178,178 C 178,92 142,20 100,20 C 58,20 22,92 22,178" fill="none" stroke="#45c99e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.24"/>
-    <path class="pl pl0" d="M 178,178 C 178,92 142,20 100,20 C 58,20 22,92 22,178" fill="none" stroke="#45c99e" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 350.5"/>
-    <path class="pl pl1" d="M 178,178 C 178,92 142,20 100,20 C 58,20 22,92 22,178" fill="none" stroke="#7ddfbe" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="20 360.5"/>
-    <path class="pl pl2" d="M 178,178 C 178,92 142,20 100,20 C 58,20 22,92 22,178" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 372.5"/>
+    <path d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#45c99e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.24"/>
+    <path class="pl pl0" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#45c99e" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 323.8"/>
+    <path class="pl pl1" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#7ddfbe" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="20 333.8"/>
+    <path class="pl pl2" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 345.8"/>
     <g class="nodes" filter="url(#sg-pulse-glow)">
-      <g transform="translate(178,178)"><g class="nd" style="animation-delay:0s"><circle r="2" fill="#45c99e"/></g></g>
-      <g transform="translate(174.2,130.6)"><g class="nd" style="animation-delay:0.375s"><circle r="1.5" fill="#45c99e"/></g></g>
-      <g transform="translate(162.4,84.7)"><g class="nd" style="animation-delay:0.75s"><circle r="1.5" fill="#45c99e"/></g></g>
-      <g transform="translate(139.8,43)"><g class="nd" style="animation-delay:1.13s"><circle r="2" fill="#45c99e"/></g></g>
+      <g transform="translate(178,164)"><g class="nd" style="animation-delay:0s"><circle r="2" fill="#45c99e"/></g></g>
+      <g transform="translate(173.7,120.1)"><g class="nd" style="animation-delay:0.375s"><circle r="1.5" fill="#45c99e"/></g></g>
+      <g transform="translate(160.8,77.8)"><g class="nd" style="animation-delay:0.75s"><circle r="1.5" fill="#45c99e"/></g></g>
+      <g transform="translate(137.9,40.2)"><g class="nd" style="animation-delay:1.12s"><circle r="2" fill="#45c99e"/></g></g>
       <g transform="translate(100,20)"><g class="nd" style="animation-delay:1.5s"><circle r="3.5" fill="#45c99e"/></g></g>
-      <g transform="translate(60.2,43)"><g class="nd" style="animation-delay:1.87s"><circle r="2" fill="#45c99e"/></g></g>
-      <g transform="translate(37.6,84.7)"><g class="nd" style="animation-delay:2.25s"><circle r="1.5" fill="#45c99e"/></g></g>
-      <g transform="translate(25.8,130.6)"><g class="nd" style="animation-delay:2.62s"><circle r="1.5" fill="#45c99e"/></g></g>
-      <g transform="translate(22,178)"><g class="nd" style="animation-delay:3s"><circle r="2" fill="#45c99e"/></g></g>
+      <g transform="translate(62.1,40.2)"><g class="nd" style="animation-delay:1.88s"><circle r="2" fill="#45c99e"/></g></g>
+      <g transform="translate(39.2,77.8)"><g class="nd" style="animation-delay:2.25s"><circle r="1.5" fill="#45c99e"/></g></g>
+      <g transform="translate(26.3,120.1)"><g class="nd" style="animation-delay:2.63s"><circle r="1.5" fill="#45c99e"/></g></g>
+      <g transform="translate(22,164)"><g class="nd" style="animation-delay:3s"><circle r="2" fill="#45c99e"/></g></g>
     </g>
   </g>
   <g class="pt" filter="url(#sg-pulse-glow)"><path d="M 8,0 L 2.5,2.8 L -2.5,2.2 L -4.6,4.6 L -4.2,1.3 L -5.6,0 L -4.2,-1.3 L -4.6,-4.6 L -2.5,-2.2 L 2.5,-2.8 Z" fill="#ffffff" opacity="0.9"/></g>
