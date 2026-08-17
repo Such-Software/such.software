@@ -20,22 +20,22 @@ Hosted at [xmrcheckout.such.software](https://xmrcheckout.such.software).
 
 [wowcheckout](https://github.com/Such-Software/wowcheckout) is a fork of xmrcheckout for [Wownero](https://wownero.org). File and folder structure is identical to upstream so merging fixes stays easy. The content-only differences:
 
-- **Network bytes** — Wownero address prefixes (53, 63, 54), patched at runtime
-- **Pricing** — WOW-BTC from [Nonlogs](https://api.nonlogs.io/api/markets) multiplied by BTC/USD from Kraken (no direct WOW/USD pair exists)
-- **Daemon** — Wownero node, [binaries from Codeberg](https://codeberg.org/wownero/wownero/releases)
+- **Network bytes**: Wownero address prefixes (53, 63, 54), patched at runtime
+- **Pricing**: WOW-BTC from [Nonlogs](https://api.nonlogs.io/api/markets) multiplied by BTC/USD from Kraken (no direct WOW/USD pair exists)
+- **Daemon**: Wownero node, [binaries from Codeberg](https://codeberg.org/wownero/wownero/releases)
 
 Hosted at [wowcheckout.such.software](https://wowcheckout.such.software).
 
 ## Grin via BTCPayServer
 
-Grin's transaction protocol is interactive — sender and receiver exchange slates to build a transaction. The checkout system must hold a wallet with spend authority, making it semi-custodial by nature.
+Grin's transaction protocol is interactive: sender and receiver exchange slates to build a transaction. The checkout system must hold a wallet with spend authority, making it semi-custodial by nature.
 
 We contributed a [Grin plugin for BTCPayServer](https://github.com/ArcticMining/btcpayserver-plugin-grin) that talks to grin-wallet's Owner API to issue invoices, finalize transactions, and track confirmations. It slots in alongside Bitcoin and Lightning with no extra Medusa integration work.
 
 ## Trust Model
 
-- **XMR and WOW** — Fully non-custodial. View-only access. Funds go directly to the merchant wallet.
-- **Grin** — Semi-custodial. The server holds a Grin wallet with spend authority because the protocol requires it. Merchants trust the operator to forward funds. This is inherent to Grin, not a design choice.
+- **XMR and WOW**: Fully non-custodial. View-only access. Funds go directly to the merchant wallet.
+- **Grin**: Semi-custodial. The server holds a Grin wallet with spend authority because the protocol requires it. Merchants trust the operator to forward funds. This is inherent to Grin, not a design choice.
 
 ## Medusa Integration
 
@@ -49,4 +49,4 @@ MedusaJS already has a BTCPay payment plugin that handles invoices and webhook c
 
 ## Work With Us
 
-If you want a managed webshop that accepts cryptocurrency — BTC, Lightning, XMR, WOW, GRIN, or a combination — we can set that up for you. [Get in touch](/#contact).
+If you want a managed webshop that accepts cryptocurrency, whether BTC, Lightning, XMR, WOW, GRIN, or a combination, we can set that up for you. [Get in touch](/#contact).

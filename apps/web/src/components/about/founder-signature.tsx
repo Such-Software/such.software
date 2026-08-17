@@ -35,10 +35,10 @@ export const FounderSignature = () => {
 
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-muted-foreground leading-relaxed italic border-l-4 border-primary/20 pl-6 text-lg">
-            "Accessibility isn't bolted on. It's there from the first line of code."
+            &quot;Accessibility isn&apos;t bolted on. It&apos;s there from the first line of code.&quot;
           </p>
           <p className="text-muted-foreground leading-relaxed mt-6">
-            John Winter Murphy holds a <span className="text-foreground font-semibold">PhD in Materials Engineering from UT-Dallas (2014)</span>, focused on semiconductor devices for radiation detection. From <span className="text-foreground font-semibold">2015 to 2021 he was a scientist at Lawrence Livermore National Laboratory</span>, developing radiation detector systems and the lab's radioisotope battery program. He brings that same lab-bench rigor to software, and an insistence that it stay <span className="text-foreground font-semibold">accessible to everyone</span>, with front-ends engineered and audited against WCAG 2.2 AA.
+            John Winter Murphy holds a <span className="text-foreground font-semibold">PhD in Materials Engineering from UT-Dallas (2014)</span>, focused on semiconductor devices for radiation detection. From <span className="text-foreground font-semibold">2015 to 2021 he was a scientist at Lawrence Livermore National Laboratory</span>, developing radiation detector systems and the lab&apos;s radioisotope battery program. He brings that same lab-bench rigor to software, and an insistence that it stay <span className="text-foreground font-semibold">accessible to everyone</span>, with front-ends engineered and audited against WCAG 2.2 AA.
           </p>
           <p className="text-muted-foreground leading-relaxed mt-4">
             He previously co-founded <span className="text-foreground font-semibold">Patrn LLC</span> (<a href="https://art101.io" target="_blank" rel="noopener noreferrer" className="text-foreground font-semibold underline decoration-primary/50 hover:text-primary transition-colors">art101.io</a>), a series of art-history NFT drops, and <span className="text-foreground font-semibold">Tabby Labs</span>, which was developing a cryptocurrency wallet with an interactive world inside.

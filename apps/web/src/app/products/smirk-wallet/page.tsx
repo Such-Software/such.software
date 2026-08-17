@@ -92,7 +92,7 @@ export default function SmirkWalletPage() {
           <Card className="glass-card border-amber-500/20">
             <h3 className="text-xl font-bold mb-3">Encrypted Tips</h3>
             <p className="text-muted-foreground">
-              Tips are encrypted with the recipient's public key. Only they can claim. 
+              Tips are encrypted with the recipient&apos;s public key. Only they can claim. 
               Senders can reclaim unclaimed tips (no lost funds).
             </p>
           </Card>

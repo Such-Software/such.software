@@ -26,7 +26,7 @@ export default function VeganIqPrivacyPage() {
           <section>
             <h2 className="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
             <p>
-              Such Software LLC ("we", "our", or "us") operates the Vegan IQ mobile application (the "App").
+              Such Software LLC (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) operates the Vegan IQ mobile application (the &quot;App&quot;).
               This Privacy Policy explains what information the App collects, how we use it, and the choices you have.
               We collect as little as possible and we never sell your data.
             </p>
@@ -72,7 +72,7 @@ export default function VeganIqPrivacyPage() {
             <p>
               <strong>The App does not currently display advertisements</strong> and does not use advertising identifiers such as the
               Android Advertising ID or iOS IDFA. If we introduce ads in the future, we will update this policy and, in regions that
-              require it, ask for your consent through Google's User Messaging Platform before any ads are shown.
+              require it, ask for your consent through Google&apos;s User Messaging Platform before any ads are shown.
             </p>
           </section>
 
@@ -102,7 +102,7 @@ export default function VeganIqPrivacyPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li>Turn notifications on or off at any time in your device settings.</li>
               <li>Leave the leaderboard to remove your public display name.</li>
-              <li>Reset the App's data from within the App, or delete the App to remove local data.</li>
+              <li>Reset the App&apos;s data from within the App, or delete the App to remove local data.</li>
             </ul>
           </section>
 
@@ -120,7 +120,7 @@ export default function VeganIqPrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mt-8 mb-4">7. Children's Privacy</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4">7. Children&apos;s Privacy</h2>
             <p>
               These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.
             </p>
