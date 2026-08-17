@@ -32,6 +32,14 @@ const products: Product[] = [
     releaseDate: "2025-01-01",
   },
   {
+    slug: "hash-bags",
+    title: "Hash Bags",
+    description: "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Android now; iOS and desktop coming.",
+    color: "emerald",
+    icon: "/images/products/hash-bags.png",
+    releaseDate: "2026-08-17",
+  },
+  {
     slug: "smirk-wallet",
     title: "Smirk Wallet",
     description: "Non-custodial multi-asset browser wallet. Send, receive, and tip by username on Telegram and Discord. BTC, LTC, XMR, WOW, GRIN.",

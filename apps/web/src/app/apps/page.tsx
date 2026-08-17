@@ -20,6 +20,18 @@ export const metadata: Metadata = {
 
 const apps = [
   {
+    name: "Hash Bags",
+    tagline: "Non-custodial multi-chain wallet. Wownero-first.",
+    icon: "/images/products/hash-bags.png",
+    color: "text-emerald-600 dark:text-emerald-400",
+    borderColor: "border-emerald-500/20",
+    href: "/products/hash-bags",
+    links: [
+      { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.hashwallet" },
+      { platform: "apple" as const, href: null },
+    ],
+  },
+  {
     name: "Bloomword",
     tagline: "Grow your vocab: a daily word game with a living 3D tree",
     icon: "/images/products/bloomword.png",
