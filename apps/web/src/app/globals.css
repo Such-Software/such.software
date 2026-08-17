@@ -319,3 +319,11 @@
 /* Soft aura behind the hero title (decorative). Gentle breathing scale/opacity. */
 @keyframes hero-aura { 0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); } 50% { opacity: 0.8; transform: translateX(-50%) scale(1.08); } }
 .hero-aura { animation: hero-aura 7s ease-in-out infinite; }
+/* Pre-paint splash suppression. The inline <head> script stamps this attribute when the
+   visitor has already entered this session (or asked for reduced motion), so the
+   server-rendered overlay is hidden in the very first painted frame instead of being
+   removed a frame later by hydration -- which is what the refresh flash was. The overlay
+   is `fixed`, so this removes nothing from the document flow and shifts no layout. */
+html[data-splash="skip"] #splash-overlay {
+  display: none !important;
+}

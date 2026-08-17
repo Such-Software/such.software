@@ -111,6 +111,28 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
         />
+        {/*
+          The splash is server-rendered, so on a refresh the browser painted it and only
+          THEN did hydration decide this visitor had already entered and remove it. That
+          one painted frame is the flash. React cannot prevent it: even useLayoutEffect
+          runs after the first paint of the server HTML.
+
+          So the decision moves before paint. This script is synchronous and in <head>,
+          which means it runs before the body is painted; it stamps the root element and
+          a plain CSS rule (globals.css, [data-splash="skip"]) hides the overlay in the
+          same frame it would otherwise have appeared in. The splash is `fixed`, so
+          hiding it moves nothing and costs no layout shift.
+
+          Kept deliberately tiny and dependency-free because it is render-blocking.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('such:entered')==='1'||" +
+              "matchMedia('(prefers-reduced-motion: reduce)').matches)" +
+              "{document.documentElement.dataset.splash='skip'}}catch(e){}",
+          }}
+        />
       </head>
       <body className={inter.className}>
           <ThemeProvider
