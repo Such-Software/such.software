@@ -7,12 +7,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Such Moon Launch — Global Leaderboard | Such Software",
+  title: "Such Moon Launch: Global Leaderboard | Such Software",
   description:
     "Live global rankings for Such Moon Launch: fastest landings, biggest Moonrock hauls, and Endless Mode wave records across all 12 levels.",
   alternates: { canonical: "/products/such-moon-launch/leaderboard" },
   openGraph: {
-    title: "Such Moon Launch — Global Leaderboard",
+    title: "Such Moon Launch: Global Leaderboard",
     description:
       "Live global rankings: fastest landings, biggest Moonrock hauls, and Endless Mode wave records.",
     type: "website",
@@ -113,7 +113,7 @@ export default async function LeaderboardPage({
           🏆 Leaderboard
         </h1>
         <p className="text-base text-muted-foreground mb-6">
-          Live global rankings — <span className="text-foreground font-medium">{levelName}</span>. Updates every minute.
+          Live global rankings: <span className="text-foreground font-medium">{levelName}</span>. Updates every minute.
         </p>
 
         {/* Level selector */}
@@ -167,7 +167,7 @@ export default async function LeaderboardPage({
           </Card>
         ) : scores.length === 0 ? (
           <Card className="glass-card border-amber-500/20 p-8 text-center text-muted-foreground">
-            No scores yet for {levelName}. Be the first —{" "}
+            No scores yet for {levelName}. Be the first:{" "}
             <a href="https://moonlaunch.such.software" className="text-amber-600 dark:text-amber-400 hover:underline">
               play on web
             </a>
@@ -227,7 +227,7 @@ export default async function LeaderboardPage({
           {board === "time"
             ? "Ranked by fastest completion time."
             : board === "score"
-              ? "Ranked by total score — speed + fuel + Moonrocks."
+              ? "Ranked by total score: speed + fuel + Moonrocks."
               : "Ranked by highest wave survived."}
         </p>
 

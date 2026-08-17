@@ -4,7 +4,7 @@ import Link from "next/link";
 import { HoverVignette } from "@/components/showcase/hover-vignette";
 
 // Literal class strings per color so Tailwind's JIT keeps them (no dynamic interpolation).
-// The colour tint + border only paint on hover/focus (via the `group/tile` link) — at rest
+// The colour tint + border only paint on hover/focus (via the `group/tile` link); at rest
 // the .bento-item CSS keeps the card chrome transparent so tiles read as title + render only.
 const cardBg: Record<string, string> = {
   orange: "group-hover/tile:!bg-orange-50/95 dark:group-hover/tile:!bg-orange-950/95 group-focus-within/tile:!bg-orange-50/95 dark:group-focus-within/tile:!bg-orange-950/95 group-hover/tile:!border-orange-500/20 group-focus-within/tile:!border-orange-500/20",
@@ -51,7 +51,7 @@ type Item = {
   href: string;
   external?: boolean;
   /**
-   * Optional hover/focus "vignette" — a transparent alpha-WebM 3D render from the
+   * Optional hover/focus "vignette", a transparent alpha-WebM 3D render from the
    * game/app that plays OVER this tile's static art on hover or keyboard focus.
    * Purely additive: with no assets present (or on Safari / reduced-motion) the tile
    * renders exactly as its static `image`. Asset convention:
@@ -71,11 +71,11 @@ const items: Item[] = [
   // 3D smirk coin (our engine + sg_outline inset ink): rests smirk-up, hover tosses it with a
   // decelerating end-over-end tumble (the suchoice coin-flip feel), lands $-up, half-flips home.
   { name: "Smirk Wallet", tagline: "Non-custodial browser wallet with social tipping.", color: "amber", span: 1, image: "/images/products/smirk-wallet.png", alt: "Smirk Wallet browser extension", href: "https://smirk.cash", external: true, vignette: { webm: "/showcase/vignettes/smirk.webm", poster: "/showcase/vignettes/smirk.png" } },
-  // Transparent chroma-keyed vignette (the engine can't emit real alpha — BW_FLAT magenta key):
+  // Transparent chroma-keyed vignette (the engine can't emit real alpha, hence the BW_FLAT magenta key):
   // full-bloom tree at rest, hover retracts and regrows it. Palindrome loop, seam 0.0.
   { name: "Bloomword", tagline: "A word game where every answer grows the tree.", color: "green", span: 1, image: "/images/products/bloomword.png", alt: "Bloomword, a word game about growing a tree", href: "/products/bloomword", vignette: { webm: "/showcase/vignettes/bloomword.webm", poster: "/showcase/vignettes/bloomword.png" } },
   // Single theme-independent asset: the INSET black silhouette stroke (sg_outline) sits ON the yellow letters, so one
-  // baked alpha render reads on both light and dark tiles — no per-theme pair needed (a 3D->web pipeline win).
+  // baked alpha render reads on both light and dark tiles; no per-theme pair needed (a 3D->web pipeline win).
   { name: "Barns & Neutrons", tagline: "Cozy puzzle expedition across the real Chart of Nuclides.", color: "amber", span: 2, image: "/images/products/barns-and-neutrons.svg", alt: "Barns & Neutrons, a game about the Chart of Nuclides", href: "/products/barns-and-neutrons", vignette: { webm: "/showcase/vignettes/barns.webm", poster: "/showcase/vignettes/barns.png" } },
   // Cover reel from the vegan-IQ social pipeline: logo panel at rest, card-flips to a real
   // quiz question (unanswered -> answered) on hover, flips back for a perfect loop seam.
@@ -83,8 +83,8 @@ const items: Item[] = [
 ];
 
 function BentoCard({ item, delay }: { item: Item; delay: number }) {
-  // Feature tiles (a live vignette) drop the static screenshot — the transparent poster is the
-  // rest state — and grow + lift above their neighbours on hover so the animation is the focus.
+  // Feature tiles (a live vignette) drop the static screenshot, since the transparent poster is the
+  // rest state, and grow + lift above their neighbours on hover so the animation is the focus.
   const feature = !!item.vignette;
   const inner = (
     <Card className={`h-full glass-card group min-h-[300px] rounded-[2.5rem] ${cardBg[item.color]} cursor-pointer`}>

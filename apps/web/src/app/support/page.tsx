@@ -33,7 +33,7 @@ export default function SupportPage() {
           <div className="section-container border-l-4 border-blue-500">
             <h3 className="font-bold mb-2">Bug Reports</h3>
             <p className="text-sm text-muted-foreground">
-              Something not working right? Let us know what happened, your device, and OS version — we&apos;ll investigate.
+              Something not working right? Let us know what happened, your device, and OS version. We&apos;ll investigate.
             </p>
           </div>
           <div className="section-container border-l-4 border-emerald-500">

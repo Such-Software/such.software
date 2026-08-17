@@ -27,11 +27,11 @@ export const metadata: Metadata = {
 };
 
 const faqs = [
-  { q: "What is Alpha Doc?", a: "A top-down roguelike set in a physics research facility warped by a containment breach. You play a doctoral candidate who caused the disaster the same night as their thesis defense — now irradiated, you descend through five department wings to face the Committee." },
-  { q: "What are the four radiation types?", a: "Alpha, Beta, Gamma, and Neutron, each a distinct playstyle. Neutron is the standout: it's not a weapon but an environmental transmutation tool — you reshape the map itself, destroying cover and creating hazards before a fight even starts." },
-  { q: "Is there a morality system?", a: "Yes, but it's never an explicit choice. The aggressive play that wins fights also destroys the evidence of your culpability. Your standing is inferred from the world and reflected in four different endings — you can't quite feel good about winning." },
+  { q: "What is Alpha Doc?", a: "A top-down roguelike set in a physics research facility warped by a containment breach. You play a doctoral candidate who caused the disaster the same night as their thesis defense. Now irradiated, you descend through five department wings to face the Committee." },
+  { q: "What are the four radiation types?", a: "Alpha, Beta, Gamma, and Neutron, each a distinct playstyle. Neutron is the standout: it's not a weapon but an environmental transmutation tool: you reshape the map itself, destroying cover and creating hazards before a fight even starts." },
+  { q: "Is there a morality system?", a: "Yes, but it's never an explicit choice. The aggressive play that wins fights also destroys the evidence of your culpability. Your standing is inferred from the world and reflected in four different endings; you can't quite feel good about winning." },
   { q: "How will it be sold?", a: "Modern shareware: a free, complete first sector (the Grant Office), then a single one-time purchase to unlock the rest. No ads, no microtransactions, no energy timers." },
-  { q: "When is it out?", a: "It's in active development — a playable vertical slice exists. Follow Such Software for release news on Steam, itch.io, iOS, and Android." },
+  { q: "When is it out?", a: "It's in active development: a playable vertical slice exists. Follow Such Software for release news on Steam, itch.io, iOS, and Android." },
 ];
 
 const jsonLd = {
@@ -50,10 +50,10 @@ const jsonLd = {
 
 const features = [
   { title: "Four-element combat", body: "Alpha, Beta, Gamma, and Neutron are four real playstyles, not reskins. Each rewards a different read of the room." },
-  { title: "Neutron reshapes the map", body: "The Neutron element transmutes the environment — destroy cover, open paths, arm dormant hazards. You change the battlefield before the battle." },
+  { title: "Neutron reshapes the map", body: "The Neutron element transmutes the environment: destroy cover, open paths, arm dormant hazards. You change the battlefield before the battle." },
   { title: "Instability as a dial", body: "Push instability for harder-hitting shots at a slower fire rate, or dial it back and let it decay. Tension, not a punishment cliff." },
   { title: "Emergent morality", body: "No morality meter. Burning evidence for power quietly shifts dialogue, companion reactions, and which of four endings you reach." },
-  { title: "Academic horror", body: "Your enemies are colleagues with real grievances — the reviewer you ignored, the safety inspector you overruled, the adjuncts caught in the blast." },
+  { title: "Academic horror", body: "Your enemies are colleagues with real grievances: the reviewer you ignored, the safety inspector you overruled, the adjuncts caught in the blast." },
   { title: "Respectful premium design", body: "Free first sector, one-time unlock, no ads or timers. The systems are built for a complete experience, not a monetization funnel." },
 ];
 
@@ -89,7 +89,7 @@ export default function AlphaDocPage() {
         <div className="prose dark:prose-invert max-w-none mb-12">
           <p className="text-xl text-muted-foreground leading-relaxed">
             It is 2:07 AM. A fifth-year PhD student has just caused a catastrophic accelerator overload,
-            irradiating the building and everyone in it — and the thesis defense is at 8:00 AM. Descend
+            irradiating the building and everyone in it, and the thesis defense is at 8:00 AM. Descend
             through five warped department wings, master four types of radiation, and decide whether to
             bury the evidence or face the Committee. Alpha Doc is a systems-driven roguelike with dark
             academic teeth.

@@ -16,7 +16,7 @@ type HoverVignetteProps = {
    *  decode VP9, still play the clip. Pointless for alpha overlays (H.264 carries no alpha). */
   mp4?: string;
   /** contain (default): transparent overlay letterboxed over the tile art. cover: an opaque reel that
-   *  FILLS the tile (no padding) — the poster is the tile art. */
+   *  FILLS the tile (no padding); the poster is the tile art. */
   fit?: 'contain' | 'cover';
   className?: string;
 };
@@ -38,12 +38,12 @@ type HoverVignetteProps = {
  *    tile plays while it is substantially on screen (IntersectionObserver ≥ 0.5) and
  *    resets when it scrolls away. Same deferred download: nothing loads until the tile
  *    is actually seen.
- *  - `prefers-reduced-motion`: no listeners, no observer — the video never downloads and
+ *  - `prefers-reduced-motion`: no listeners, no observer; the video never downloads and
  *    never plays. The poster is the whole experience.
  *  - Codec gate: play() is skipped unless the browser reports it can decode one of the
  *    provided sources (VP9 webm, or the optional H.264 mp4 for `cover` reels). Safari
- *    cannot decode VP9-alpha, so overlay tiles degrade to the transparent poster there
- *    — never a broken or opaque box.
+ *    cannot decode VP9-alpha, so overlay tiles degrade to the transparent poster there,
+ *    never a broken or opaque box.
  *  - `pointer-events-none` + `aria-hidden`: decorative; never blocks the tile's link or
  *    steals focus, and adds no layout (absolutely positioned, inset-0).
  */
@@ -94,7 +94,7 @@ export function HoverVignette({
       try {
         video.currentTime = 0;
       } catch {
-        /* not yet loaded — nothing to reset */
+        /* not yet loaded: nothing to reset */
       }
     };
 

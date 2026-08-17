@@ -100,10 +100,10 @@ export default function VeganIqPage() {
               Every question in Vegan IQ is grounded in real data. We do not use LLMs to generate question content. Our sources include:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
-              <li><strong>USDA FoodData Central</strong> — nutritional composition of plant-based foods</li>
-              <li><strong>Poore & Nemecek, Science (2018)</strong> — environmental impact data for food production</li>
-              <li><strong>National Institutes of Health (NIH)</strong> — health and dietary reference data</li>
-              <li><strong>FAOSTAT</strong> — global food production and agricultural statistics from the UN FAO</li>
+              <li><strong>USDA FoodData Central</strong>: nutritional composition of plant-based foods</li>
+              <li><strong>Poore & Nemecek, Science (2018)</strong>: environmental impact data for food production</li>
+              <li><strong>National Institutes of Health (NIH)</strong>: health and dietary reference data</li>
+              <li><strong>FAOSTAT</strong>: global food production and agricultural statistics from the UN FAO</li>
             </ul>
           </div>
         </div>

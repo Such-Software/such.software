@@ -121,7 +121,7 @@ export function HomeShell({ children }: { children: ReactNode }) {
     const pin = () => window.scrollTo(0, 0);
     window.addEventListener("scroll", pin, { passive: true });
     // The gesture that triggered the enter keeps emitting MOMENTUM (a trackpad flick
-    // can trail for ~1.5s — longer than the 800ms wave). Releasing the lock on a fixed
+    // can trail for ~1.5s, longer than the 800ms wave). Releasing the lock on a fixed
     // timer let those trailing ticks scroll the revealed page, so you landed below the
     // hero instead of at the very top. Hold the lock until the input goes QUIET
     // (250ms with no wheel/touch), capped at 3s so a deliberate scroller is never trapped.

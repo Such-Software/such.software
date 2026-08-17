@@ -152,7 +152,7 @@ export default function ProductsPage() {
             Portfolio
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Products &amp; projects — from commerce backends to consumer games, plus three nuclear-physics games in development.
+            Products &amp; projects: from commerce backends to consumer games, plus three nuclear-physics games in development.
           </p>
         </div>
 

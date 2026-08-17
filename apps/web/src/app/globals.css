@@ -283,19 +283,22 @@
 @keyframes nebula-caret { 0%, 50% { border-color: currentColor; } 50.01%, 100% { border-color: transparent; } }
 @keyframes nebula-term-out { to { opacity: 0; } }
 
-/* Hero title: an animated gradient sheen. LCP-safe — the text paints immediately with the
+/* Hero title: an animated gradient sheen. LCP-safe: the text paints immediately with the
    gradient; only the gradient POSITION animates, which never delays the largest paint. The
-   global reduced-motion rule freezes it to the base gradient. */
+   global reduced-motion rule freezes it to the base gradient.
+   The wider 300% ramp over an 18s cycle makes this a slow drift rather than a visible sweep,
+   and the symmetric cubic-bezier easing removes the hard turnaround the old ease-in-out had
+   at each end of the travel. */
 /* The brand's four-colour system (S green, U magenta, C blue, H teal), one per glyph.
    Light theme uses the light palette; .dark swaps in the dark palette, which is the
    same hues lifted for contrast on near-black -- from packs/such-software/pack.json. */
 .hero-title {
   background-image: linear-gradient(110deg, #1a5c38 0%, #b83670 30%, #176a92 55%, #12857e 80%, #1a5c38 100%);
-  background-size: 220% auto;
+  background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: hero-sheen 9s ease-in-out infinite;
+  animation: hero-sheen 18s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 .dark .hero-title {
   background-image: linear-gradient(110deg, #35925c 0%, #e8689e 30%, #4aade0 55%, #3ad4c6 80%, #35925c 100%);

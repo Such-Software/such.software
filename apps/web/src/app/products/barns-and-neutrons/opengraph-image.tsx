@@ -1,6 +1,6 @@
 import { gameOgImage, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og";
 
-export const alt = "Barns & Neutrons — a game about the Chart of Nuclides";
+export const alt = "Barns & Neutrons: a game about the Chart of Nuclides";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

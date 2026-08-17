@@ -28,7 +28,7 @@ export function StoreButtons({ links, extraLinks }: StoreButtonsProps) {
           return (
             <Button key={platform} variant="outline" size="lg" disabled>
               <Icon className="h-5 w-5 mr-2" aria-hidden="true" />
-              {label} — Coming Soon
+              {label}: Coming Soon
             </Button>
           );
         }
@@ -108,7 +108,7 @@ export function BauhausEchoStoreButtons() {
       ]}
       extraLinks={[
         { href: "https://bauhaus.such.software", label: "Play on Web" },
-        { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io — $2" },
+        { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io: $2" },
       ]}
     />
   );

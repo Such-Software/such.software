@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 
-// Self-hosted, cookieless Umami — config via env so nothing is hardcoded.
+// Self-hosted, cookieless Umami: config via env so nothing is hardcoded.
 // Honors Global Privacy Control + Do-Not-Track. No-op unless both env vars are set.
 const HOST = process.env.NEXT_PUBLIC_UMAMI_HOST;
 const WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;

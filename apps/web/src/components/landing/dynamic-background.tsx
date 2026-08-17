@@ -56,7 +56,7 @@ export function DynamicBackground({ nebulaPosition, visible = true }: DynamicBac
   const effectiveTheme = resolvedTheme || systemTheme || 'dark';
   const themeMode = effectiveTheme === 'dark' ? 'dark' : 'light';
 
-  // While the splash is active (visible === false) keep the nebula/monitor hidden —
+  // While the splash is active (visible === false) keep the nebula/monitor hidden;
   // the splash provides its own Cherenkov glow. Reveal it once the visitor enters.
   if (!showNebula || !visible) {
     return <div className="fixed inset-0 z-0 h-screen w-screen bg-background" />;

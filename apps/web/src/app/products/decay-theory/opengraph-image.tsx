@@ -1,6 +1,6 @@
 import { gameOgImage, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og";
 
-export const alt = "Decay Theory — Erwin's Atomic Adventure";
+export const alt = "Decay Theory: Erwin's Atomic Adventure";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
