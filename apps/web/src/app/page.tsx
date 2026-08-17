@@ -71,7 +71,7 @@ export default function Home() {
           <div id="contact" className="w-full max-w-6xl text-left mb-12 section-container border-l-4 border-l-cyan-500">
             <h2 className="text-3xl font-bold mb-3 tracking-tight text-foreground">Start a Project</h2>
             <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
-              Have a project in mind? Let's talk about what you need and how we can help.
+              Have a project in mind? Let&apos;s talk about what you need and how we can help.
             </p>
           </div>
           <ContactForm />

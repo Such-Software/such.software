@@ -131,7 +131,7 @@ export default function AboutPage() {
           <div id="contact">
             <h2 className="text-3xl font-bold mb-3 tracking-tight">Get in Touch</h2>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
-              Have a project in mind? We'd love to hear about it.
+              Have a project in mind? We&apos;d love to hear about it.
             </p>
             <ContactForm />
           </div>

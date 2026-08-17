@@ -57,7 +57,7 @@ pnpm test:ui    # Run tests with interactive UI
 
 ## Accessibility
 
-- **WCAG 2.2 AA** — engineered to meet, audited against (Lighthouse measured 100%)
+- **WCAG 2.2 AA**: engineered to meet, audited against (Lighthouse measured 100%)
 - Skip-to-main link, semantic HTML5, ARIA labels
 - Proper heading hierarchy, color contrast (4.5:1+)
 - `prefers-reduced-motion` support

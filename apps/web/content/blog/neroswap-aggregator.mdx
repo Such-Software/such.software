@@ -1,12 +1,12 @@
 ---
 title: "Neroswap: a Privacy-First DEX & CEX Aggregator"
 date: "2026-03-22"
-excerpt: "How we built a real-time orderbook aggregator across 6 decentralized and centralized exchanges — scraping atomic swap networks, gRPC observer nodes, and public APIs every 10 minutes. No KYC, no custody, no tracking."
+excerpt: "How we built a real-time orderbook aggregator across 6 decentralized and centralized exchanges: scraping atomic swap networks, gRPC observer nodes, and public APIs every 10 minutes. No KYC, no custody, no tracking."
 ---
 
 ## The Problem
 
-If you want to buy Monero on a decentralized exchange today, you need to check at least three different platforms — each with its own node, its own UI, and its own pair format. Want to compare XMR/BTC on an atomic swap DEX versus a P2P exchange versus a no-KYC centralized platform? That's six browser tabs and a spreadsheet.
+If you want to buy Monero on a decentralized exchange today, you need to check at least three different platforms: each with its own node, its own UI, and its own pair format. Want to compare XMR/BTC on an atomic swap DEX versus a P2P exchange versus a no-KYC centralized platform? That's six browser tabs and a spreadsheet.
 
 Wownero is even worse. Liquidity is split across a handful of small exchanges with no way to compare prices without visiting each one individually.
 
@@ -18,17 +18,17 @@ Neroswap tracks three decentralized exchanges and three centralized (no-KYC) exc
 
 ### BasicSwap DEX
 
-[BasicSwap](https://basicswapdex.com/) is a decentralized exchange built on the Particl network's SMSG (SecureMessaging) protocol. Offers are broadcast across a peer-to-peer network and settled via cross-chain atomic swaps — no central server, no custody, no counterparty risk. It supports 14 coins including BTC, XMR, LTC, BCH, WOW, FIRO, DASH, PIVX, and Decred.
+[BasicSwap](https://basicswapdex.com/) is a decentralized exchange built on the Particl network's SMSG (SecureMessaging) protocol. Offers are broadcast across a peer-to-peer network and settled via cross-chain atomic swaps: no central server, no custody, no counterparty risk. It supports 14 coins including BTC, XMR, LTC, BCH, WOW, FIRO, DASH, PIVX, and Decred.
 
 **How we scrape it:** We run a local BasicSwap full node with a custom "God Mode" patch. Normally, BasicSwap only shows offers for coins you have wallets configured for. Our patch injects a synthetic interface that bypasses the native coin client check, letting us query offers for all 14 supported coins without actually syncing all those blockchains. The scraper hits the node's local REST API at `127.0.0.1:12700/json/offers` and maps internal coin IDs to human-readable names.
 
-BasicSwap currently has the widest pair coverage of any DEX we track — around 30 active trading pairs and 100+ offers at any given time.
+BasicSwap currently has the widest pair coverage of any DEX we track: around 30 active trading pairs and 100+ offers at any given time.
 
 ### Retoswap (Haveno)
 
-[Retoswap](https://retoswap.com/) is a Haveno fork — a P2P exchange where all trades settle over Tor. It supports XMR against fiat currencies (USD, EUR, GBP, CHF, AUD, CAD) and crypto (BTC, ETH, LTC, BCH, and others). Offers include detailed payment method info, fee structures, and maker deposit requirements.
+[Retoswap](https://retoswap.com/) is a Haveno fork, a P2P exchange where all trades settle over Tor. It supports XMR against fiat currencies (USD, EUR, GBP, CHF, AUD, CAD) and crypto (BTC, ETH, LTC, BCH, and others). Offers include detailed payment method info, fee structures, and maker deposit requirements.
 
-**How we scrape it:** We run a Haveno observer node locally and connect via gRPC on port 9998 with password authentication. The scraper auto-creates an observer account if needed, then pulls the full offer list including price, amount ranges, payment methods, and trade state. Haveno's gRPC interface gives us much richer data than a typical REST API — we get maker addresses, security deposits, and fee breakdowns for every offer.
+**How we scrape it:** We run a Haveno observer node locally and connect via gRPC on port 9998 with password authentication. The scraper auto-creates an observer account if needed, then pulls the full offer list including price, amount ranges, payment methods, and trade state. Haveno's gRPC interface gives us much richer data than a typical REST API: we get maker addresses, security deposits, and fee breakdowns for every offer.
 
 Retoswap typically has 40-300+ active offers and is the primary source for XMR/fiat pricing on Neroswap.
 
@@ -36,7 +36,7 @@ Retoswap typically has 40-300+ active offers and is the primary source for XMR/f
 
 [Eigenwallet](https://eigenwallet.org/) provides trustless BTC-to-XMR atomic swaps routed through Tor. Market makers run persistent onion services and publish quotes (price, min/max swap amounts, refund policy) to a set of rendezvous nodes.
 
-**How we scrape it:** This was the most challenging integration. Eigenwallet has no public API — their dev team confirmed their internal liquidity scripts are private. So we built a custom Rust binary that connects directly to the Eigenwallet libp2p network.
+**How we scrape it:** This was the most challenging integration. Eigenwallet has no public API; their dev team confirmed their internal liquidity scripts are private. So we built a custom Rust binary that connects directly to the Eigenwallet libp2p network.
 
 Our scraper spins up a libp2p node, bootstraps through Tor via an embedded Arti client, discovers market makers through 7 hardcoded rendezvous points, and negotiates the `/comit/xmr/btc/bid-quote/2.0.0` protocol to fetch `BidQuote` structs containing price (in satoshis), min/max quantities, and refund policy terms.
 
@@ -46,11 +46,11 @@ Eigenwallet typically has 3-6 active market makers with total XMR liquidity rang
 
 ### Nonlogs
 
-[Nonlogs](https://nonlogs.io/) is a no-KYC centralized exchange focused on Wownero. It offers WOW/BTC, WOW/USDT, and several other privacy coin pairs (GRIN, BEAM, RYO, MWC). **Scraped via public REST API** — straightforward ticker data with 24h volume, bid/ask spreads, and price change percentages.
+[Nonlogs](https://nonlogs.io/) is a no-KYC centralized exchange focused on Wownero. It offers WOW/BTC, WOW/USDT, and several other privacy coin pairs (GRIN, BEAM, RYO, MWC). **Scraped via public REST API**: straightforward ticker data with 24h volume, bid/ask spreads, and price change percentages.
 
 ### CexSwap
 
-[CexSwap](https://cexswap.cc/) is a Wownero-focused CEX with both spot markets and AMM liquidity pools. It supports 40+ assets across 100 spot pairs and 90+ AMM pools. **Scraped via two public API endpoints** — one for spot tickers (OHLCV data) and one for AMM pools (TVL, liquidity depth). CexSwap is the largest source of WOW trading pairs on Neroswap.
+[CexSwap](https://cexswap.cc/) is a Wownero-focused CEX with both spot markets and AMM liquidity pools. It supports 40+ assets across 100 spot pairs and 90+ AMM pools. **Scraped via two public API endpoints**: one for spot tickers (OHLCV data) and one for AMM pools (TVL, liquidity depth). CexSwap is the largest source of WOW trading pairs on Neroswap.
 
 ### AltQuick
 
@@ -62,7 +62,7 @@ The pipeline runs on a dedicated scraper server and pushes data to the web serve
 
 ### Scraping
 
-An orchestrator script runs seven scrapers in a staggered sequence — Kraken reference prices first, then each exchange with 90-second gaps to avoid overwhelming any single source. The full cycle takes about 6 minutes.
+An orchestrator script runs seven scrapers in a staggered sequence: Kraken reference prices first, then each exchange with 90-second gaps to avoid overwhelming any single source. The full cycle takes about 6 minutes.
 
 ```
 T+0s    Kraken (USD ref prices: BTC, XMR, LTC, BCH)
@@ -80,22 +80,22 @@ Eigenwallet runs independently as a persistent daemon, writing its own JSON file
 
 Every time the frontend revalidates (every 30 seconds), it records an aggregated snapshot to a SQLite database on the web server:
 
-- **Price snapshots** — best/worst/last price per source per trading pair, with USD-converted volume
-- **Liquidity snapshots** — total available USD liquidity per DEX per coin (XMR and WOW), with outlier filtering to exclude garbage offers
+- **Price snapshots**: best/worst/last price per source per trading pair, with USD-converted volume
+- **Liquidity snapshots**: total available USD liquidity per DEX per coin (XMR and WOW), with outlier filtering to exclude garbage offers
 
 This powers the sparkline charts on the dashboard and the DEX Liquidity overview. At roughly 80 price snapshots and 5 liquidity snapshots per cycle, the database grows at about 30-40 MB per month.
 
 ### Freshness Detection
 
-Each JSON file carries a `fetched_at` timestamp. The frontend checks data age against a 30-minute threshold — if a source hasn't been updated in over 30 minutes, it's marked as "Stale" (orange badge) instead of "Live" (green). Stale data is excluded from the Best Prices summary, the DEX Liquidity calculations, and the history database to prevent polluting charts with old numbers.
+Each JSON file carries a `fetched_at` timestamp. The frontend checks data age against a 30-minute threshold: if a source hasn't been updated in over 30 minutes, it's marked as "Stale" (orange badge) instead of "Live" (green). Stale data is excluded from the Best Prices summary, the DEX Liquidity calculations, and the history database to prevent polluting charts with old numbers.
 
 ### Serving
 
-The JSON files are synced via rsync over SSH to the production web server. The frontend is a Next.js app using ISR (Incremental Static Regeneration) with 30-second revalidation — so data is always at most 30 seconds behind the latest scrape.
+The JSON files are synced via rsync over SSH to the production web server. The frontend is a Next.js app using ISR (Incremental Static Regeneration) with 30-second revalidation, so data is always at most 30 seconds behind the latest scrape.
 
 ## Privacy by Design
 
-Neroswap has no user accounts, no cookies, no tracking pixels, and no analytics. The site is a read-only dashboard — it never touches your funds or your identity. There is nothing to log and nothing to sell.
+Neroswap has no user accounts, no cookies, no tracking pixels, and no analytics. The site is a read-only dashboard; it never touches your funds or your identity. There is nothing to log and nothing to sell.
 
 All three DEX sources (BasicSwap, Retoswap, Eigenwallet) are fully decentralized with on-chain or cross-chain atomic settlement. Retoswap trades happen entirely over Tor. Eigenwallet swaps are routed through Tor onion services. The three CEX sources (Nonlogs, CexSwap, AltQuick) are all no-KYC platforms.
 
@@ -109,7 +109,7 @@ All three DEX sources (BasicSwap, Retoswap, Eigenwallet) are fully decentralized
 
 ## WOW Price API
 
-Neroswap also provides a public API endpoint for Wownero's USD price at [`/api/price/wow`](https://neroswap.com/api/price/wow). It computes a volume-weighted average price (VWAP) across all WOW trading pairs on Nonlogs, CexSwap, and AltQuick — using Kraken BTC and direct USDT prices as the USD reference. Pairs with zero volume are included at equal weight as a fallback.
+Neroswap also provides a public API endpoint for Wownero's USD price at [`/api/price/wow`](https://neroswap.com/api/price/wow). It computes a volume-weighted average price (VWAP) across all WOW trading pairs on Nonlogs, CexSwap, and AltQuick, using Kraken BTC and direct USDT prices as the USD reference. Pairs with zero volume are included at equal weight as a fallback.
 
 ## Try It
 
