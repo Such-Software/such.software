@@ -140,7 +140,8 @@ export function HomeShell({ children }: { children: ReactNode }) {
     setTimeout(() => {
       setSplashUp(false);
       tryRelease();
-    }, 300);   // the overlay's 260ms cross-fade, plus a frame
+    }, 540);   // the 420ms burst plus its 75ms stagger, not just the 260ms cross-fade:
+               // unmounting on the fade alone cut the blobs off mid-flight
   };
 
   return (
