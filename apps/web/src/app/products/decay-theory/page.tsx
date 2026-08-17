@@ -27,10 +27,10 @@ export const metadata: Metadata = {
 };
 
 const faqs = [
-  { q: "What is Decay Theory?", a: "A 2D side-scrolling platformer where the entire world is made of individual atoms undergoing radioactive decay in real time. You don't see platforms vanish in bulk — you watch the ground dissolve atom by atom beneath your feet." },
-  { q: "Who is Erwin?", a: "Erwin is a quantum-coherent cat — a nod to Schrödinger — whose body is itself a particle system. Health is 'quantum coherence,' shown as particle density: a healthy Erwin is a tight cloud; near death, a ghostly shimmer." },
+  { q: "What is Decay Theory?", a: "A 2D side-scrolling platformer where the entire world is made of individual atoms undergoing radioactive decay in real time. You don't see platforms vanish in bulk; you watch the ground dissolve atom by atom beneath your feet." },
+  { q: "Who is Erwin?", a: "Erwin is a quantum-coherent cat, a nod to Schrödinger, whose body is itself a particle system. Health is 'quantum coherence,' shown as particle density: a healthy Erwin is a tight cloud; near death, a ghostly shimmer." },
   { q: "Does it actually teach physics?", a: "Yes, through mechanics rather than lectures. Decay modes, half-lives, decay chains, fission, and reactor control are things you feel. Isotopes use real half-lives and color coding." },
-  { q: "How is it released?", a: "Episode 1, 'Ground State,' is a free vertical slice — no ads, no IAP. The full game (more zones and powers) unlocks via a single one-time purchase." },
+  { q: "How is it released?", a: "Episode 1, 'Ground State,' is a free vertical slice: no ads, no IAP. The full game (more zones and powers) unlocks via a single one-time purchase." },
   { q: "When is it out?", a: "Episode 1 is the current milestone, targeting iOS and Android first, with a desktop (Steam) port later. Follow Such Software for the launch." },
 ];
 
@@ -50,8 +50,8 @@ const jsonLd = {
 };
 
 const features = [
-  { title: "The world decays as you watch", body: "Every tile is thousands of simulated atoms with a real decay probability. Platforms erode into swiss cheese and crumble under your feet — stochastic, beautiful, and deadly." },
-  { title: "Quantum powers", body: "Observation collapses a wave function to stabilize ground; Time Rewind undoes a fatal step. Later powers — superposition, entanglement, tunneling — each teach a real concept." },
+  { title: "The world decays as you watch", body: "Every tile is thousands of simulated atoms with a real decay probability. Platforms erode into swiss cheese and crumble under your feet: stochastic, beautiful, and deadly." },
+  { title: "Quantum powers", body: "Observation collapses a wave function to stabilize ground; Time Rewind undoes a fatal step. Later powers each teach a real concept: superposition, entanglement, tunneling." },
   { title: "Erwin, a living particle system", body: "Your cat is rendered as 2,000+ particles. Coherence is health: take damage and Erwin literally comes apart at the seams." },
   { title: "Real isotope data", body: "Isotopes carry authentic half-lives and decay chains, color-coded by family. The Geiger-counter audio tempo tracks the local decay rate." },
   { title: "Tight, skill-based platforming", body: "Precise tilt-and-touch controls, checkpoints, and speedrun-friendly level design. A real platformer, not a quiz with jumps." },
@@ -91,7 +91,7 @@ export default function DecayTheoryPage() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             Decay Theory is a hard-sci-fi platformer where the entire world is composed of individual
             simulated atoms decaying in real time. You play Erwin, a quantum cat navigating a world that
-            is literally evaporating at the subatomic level — and you learn real nuclear physics by
+            is literally evaporating at the subatomic level, and you learn real nuclear physics by
             feeling it, not by reading it.
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function DecayTheoryPage() {
           <ul className="space-y-2 text-muted-foreground">
             <li><strong>Architecture:</strong> Godot renders; a Rust core runs 100% of the atom simulation.</li>
             <li><strong>Performance:</strong> tens of thousands of active, decaying atoms at a smooth frame rate on mid-range phones.</li>
-            <li><strong>Powers:</strong> quantum mechanics turned into verbs — observation, time rewind, and more.</li>
+            <li><strong>Powers:</strong> quantum mechanics turned into verbs like observation, time rewind, and more.</li>
             <li><strong>Platforms:</strong> iOS and Android first, desktop (Steam) to follow.</li>
           </ul>
         </div>

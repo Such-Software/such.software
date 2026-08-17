@@ -72,7 +72,7 @@ function DemoCard({ demo }: { demo: Demo }) {
       aria-label={`Open the ${demo.name} demo storefront in a new tab`}
     >
       <Card className={`glass-card h-full !p-0 overflow-hidden cursor-pointer transition-colors ${cardBorder[demo.color]}`}>
-        {/* Real screenshot of the live themed storefront — captured at 1280×800,
+        {/* Real screenshot of the live themed storefront, captured at 1280×800,
             cropped to the hero/nav (the most brand-distinctive region). */}
         <div className="h-40 w-full overflow-hidden">
           <Image

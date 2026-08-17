@@ -49,7 +49,7 @@ const exchanges = [
   {
     name: "BasicSwap",
     type: "DEX",
-    desc: "SMSG atomic swaps — BTC, LTC, XMR, PART, WOW, FIRO, DASH & more. Fully decentralized, on-chain settlement.",
+    desc: "SMSG atomic swaps: BTC, LTC, XMR, PART, WOW, FIRO, DASH & more. Fully decentralized, on-chain settlement.",
   },
   {
     name: "Retoswap",
@@ -93,7 +93,7 @@ const features = [
   },
   {
     title: "Clickable Markets",
-    desc: "Every ticker row links directly to the market on the source exchange. Find the best price, click, and trade — no extra steps.",
+    desc: "Every ticker row links directly to the market on the source exchange. Find the best price, click, and trade. No extra steps.",
   },
   {
     title: "Kraken Reference Prices",
@@ -199,7 +199,7 @@ export default function NeroswapPage() {
           <p className="text-muted-foreground leading-relaxed mb-4">
             Neroswap runs a fleet of Python scrapers on a dedicated server. Every
             10 minutes, each scraper pulls the latest orderbook or ticker data
-            from its exchange — via API, gRPC, or HTML scraping over Tor. The
+            from its exchange, via API, gRPC, or HTML scraping over Tor. The
             results are merged into JSON files and synced to a CDN edge server.
           </p>
           <p className="text-muted-foreground leading-relaxed">

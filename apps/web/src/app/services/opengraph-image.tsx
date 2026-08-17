@@ -1,6 +1,6 @@
 import { gameOgImage, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og";
 
-export const alt = "Such Software — four things, done well";
+export const alt = "Such Software: four things, done well";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

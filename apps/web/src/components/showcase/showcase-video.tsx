@@ -22,7 +22,7 @@ type ShowcaseVideoProps = {
  *    experience for those visitors.
  *  - `muted` + `playsInline` so mobile autoplay-on-view is permitted (one
  *    video at a time; this component is for a single hero/section clip, not a
- *    grid — a grid would gate to one visible at a time).
+ *    grid: a grid would gate to one visible at a time).
  */
 export function ShowcaseVideo({ webm, mp4, poster, label, className }: ShowcaseVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);

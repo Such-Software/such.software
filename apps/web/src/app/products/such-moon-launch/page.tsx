@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const levels = [
-  { name: "Moon", description: "Tutorial — learn to fly and land" },
+  { name: "Moon", description: "Tutorial: learn to fly and land" },
   { name: "Mars", description: "Dodge your first Martians" },
   { name: "Venus", description: "Gamma rays and more enemies" },
   { name: "Io", description: "Asteroids join the chaos" },
@@ -33,7 +33,7 @@ const levels = [
   { name: "Pluto", description: "Tiny target, long journey" },
   { name: "Asteroid Belt", description: "Land on a drifting rock cluster" },
   { name: "Space Station", description: "Rotating target, black holes" },
-  { name: "Mothership", description: "Boss fight — land on the enemy ship" },
+  { name: "Mothership", description: "Boss fight: land on the enemy ship" },
   { name: "Endless Mode", description: "Procedural waves, infinite challenge" },
 ];
 
@@ -76,7 +76,7 @@ export default function SuchMoonLaunchPage() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             A Wownero-themed pixel-art rocket arcade. Fly across the solar system, dodge Martians,
             asteroids, gamma rays, and black holes. Collect crypto, upgrade your ship, and unlock
-            13 ship skins. 11 story levels plus a procedural endless mode — with tilt-to-steer
+            13 ship skins. 11 story levels plus a procedural endless mode, with tilt-to-steer
             controls on mobile.
           </p>
         </div>
@@ -95,7 +95,7 @@ export default function SuchMoonLaunchPage() {
         <div className="section-container border-l-4 border-amber-500 mb-12 text-muted-foreground space-y-4">
           <p>
             Such Moon Launch is the greatly expanded re-release of <strong>the very first game I ever wrote</strong>.
-            The original — <em>Meowlet Moon Launch</em> — was a single-level rocket-landing prototype
+            The original, <em>Meowlet Moon Launch</em>, was a single-level rocket-landing prototype
             published years ago as a test app under our old <strong>Tabby Labs</strong> developer account.
             One level, simple physics, no music, no juice. But it shipped, and people played it.
           </p>
@@ -104,7 +104,7 @@ export default function SuchMoonLaunchPage() {
             a procedural endless mode, 4 weapons, 8 ship upgrades, 13 skins, achievements on Google Play
             Games and Apple Game Center, cloud save, a global leaderboard backend, a 3D landing
             mini-game on final approach, and proper <strong>tilt-to-steer</strong> controls calibrated
-            for phones — no drift, no fight. All wrapped in a Wownero-themed pixel-art aesthetic.
+            for phones: no drift, no fight. All wrapped in a Wownero-themed pixel-art aesthetic.
           </p>
           <p>
             Same rocket, same Moon. Almost everything else is new.
@@ -114,10 +114,10 @@ export default function SuchMoonLaunchPage() {
         <h2 className="text-2xl font-bold mb-6">How It Works</h2>
         <div className="section-container border-l-4 border-amber-500 mb-12">
           <ol className="space-y-4 text-muted-foreground">
-            <li><strong>1. Launch</strong> — Blast off from Earth with limited fuel.</li>
-            <li><strong>2. Navigate</strong> — Fly through space, dodging hazards and collecting crypto.</li>
-            <li><strong>3. Land</strong> — Touch down gently on the target planet. Tilt and speed matter.</li>
-            <li><strong>4. Upgrade</strong> — Spend Moonrocks on thrust, fuel, weapons, shields, and skins.</li>
+            <li><strong>1. Launch</strong>: Blast off from Earth with limited fuel.</li>
+            <li><strong>2. Navigate</strong>: Fly through space, dodging hazards and collecting crypto.</li>
+            <li><strong>3. Land</strong>: Touch down gently on the target planet. Tilt and speed matter.</li>
+            <li><strong>4. Upgrade</strong>: Spend Moonrocks on thrust, fuel, weapons, shields, and skins.</li>
           </ol>
         </div>
 
@@ -184,12 +184,12 @@ export default function SuchMoonLaunchPage() {
         <h2 className="text-2xl font-bold mb-6">Space Hazards</h2>
         <div className="section-container border-l-4 border-amber-500 mb-12">
           <ul className="space-y-2 text-muted-foreground">
-            <li><strong>Martians</strong> — enemy ships that chase your rocket</li>
-            <li><strong>Gamma Rays</strong> — periodic lethal beams across the level</li>
-            <li><strong>Asteroids</strong> — orbiting and drifting rock hazards</li>
-            <li><strong>Black Holes</strong> — extreme gravity, instant death at the event horizon</li>
-            <li><strong>Nebula Zones</strong> — drain fuel and slow you down</li>
-            <li><strong>Solar Wind</strong> — constant force pushing you off course</li>
+            <li><strong>Martians</strong>: enemy ships that chase your rocket</li>
+            <li><strong>Gamma Rays</strong>: periodic lethal beams across the level</li>
+            <li><strong>Asteroids</strong>: orbiting and drifting rock hazards</li>
+            <li><strong>Black Holes</strong>: extreme gravity, instant death at the event horizon</li>
+            <li><strong>Nebula Zones</strong>: drain fuel and slow you down</li>
+            <li><strong>Solar Wind</strong>: constant force pushing you off course</li>
           </ul>
         </div>
 

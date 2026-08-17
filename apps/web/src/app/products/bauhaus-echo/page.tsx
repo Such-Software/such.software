@@ -70,7 +70,7 @@ export default function BauhausEchoPage() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             A visual memory puzzle game inspired by Bauhaus design aesthetics. 
             Memorize arrangements of geometric tiles, watch them shuffle, then reconstruct the pattern.
-            Or unwind in Zen mode — a pressure-free sandbox where you compose with tiles at your own pace.
+            Or unwind in Zen mode, a pressure-free sandbox where you compose with tiles at your own pace.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function BauhausEchoPage() {
             ]}
             extraLinks={[
               { href: "https://bauhaus.such.software", label: "Play on Web" },
-              { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io — $2" },
+              { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io: $2" },
             ]}
           />
         </div>
@@ -90,10 +90,10 @@ export default function BauhausEchoPage() {
         <h2 className="text-2xl font-bold mb-6">How It Works</h2>
         <div className="section-container border-l-4 border-blue-500 mb-12">
           <ol className="space-y-4 text-muted-foreground">
-            <li><strong>1. Memorization</strong> — Tiles appear in a grid. Study their positions.</li>
-            <li><strong>2. Shuffle</strong> — Tiles spin, shrink, and scatter to the bottom.</li>
-            <li><strong>3. Reconstruction</strong> — Drag tiles back to their original positions.</li>
-            <li><strong>4. Scoring</strong> — Earn points based on accuracy and speed.</li>
+            <li><strong>1. Memorization</strong>: Tiles appear in a grid. Study their positions.</li>
+            <li><strong>2. Shuffle</strong>: Tiles spin, shrink, and scatter to the bottom.</li>
+            <li><strong>3. Reconstruction</strong>: Drag tiles back to their original positions.</li>
+            <li><strong>4. Scoring</strong>: Earn points based on accuracy and speed.</li>
           </ol>
         </div>
 

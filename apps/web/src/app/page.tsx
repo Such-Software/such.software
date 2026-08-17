@@ -28,11 +28,12 @@ export default function Home() {
           className="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-6 pb-2"
           style={{ maxWidth: "min(calc(90vw - 120px), 100%)" }}
         >
-          <span className="block">Custom E-commerce,</span>
-          <span className="block">Apps &amp; Crypto Tools</span>
+          <span className="block">Precision Engineering</span>
+          <span className="block">for Everyone</span>
         </h1>
         <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-          Websites, games, payments, and consulting too — plus our own mobile apps. A software studio in Kennett Square, PA. Precision engineering for everyone.
+          Custom e-commerce, apps, games, and crypto payment tools, built to order in
+          Kennett Square, PA. Plus a shelf of mobile apps and games of our own.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mb-14">

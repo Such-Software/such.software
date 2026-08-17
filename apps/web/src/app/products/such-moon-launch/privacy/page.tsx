@@ -103,8 +103,8 @@ export default function SuchMoonLaunchPrivacyPage() {
             <h3>In-App Purchases</h3>
             <p>If you purchase the &quot;Remove Ads&quot; upgrade, your transaction is processed by:</p>
             <ul>
-              <li><strong>Google Play</strong> (Android) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Play Privacy Policy</a></li>
-              <li><strong>Apple App Store</strong> (iOS) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Privacy Policy</a></li>
+              <li><strong>Google Play</strong> (Android): <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Play Privacy Policy</a></li>
+              <li><strong>Apple App Store</strong> (iOS): <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Privacy Policy</a></li>
             </ul>
             <p>
               We do not have access to your payment information. We only receive confirmation of your purchase status.

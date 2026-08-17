@@ -104,7 +104,7 @@ const cryptoProof: Proof[] = [
 ];
 
 // Barns/nuclear/Numchangers are the science + math anchors; Zero-Day Defender, Bloomword, and
-// Vegan IQ are the edutainment titles (Bloomword + Vegan IQ are cross-listed from Games & Apps —
+// Vegan IQ are the edutainment titles (Bloomword + Vegan IQ are cross-listed from Games & Apps:
 // they are genuinely both a game we ship AND a game that teaches).
 const educationProof: Proof[] = [
   { title: "Barns & Neutrons", blurb: "A cozy exploration-puzzle game across the real Chart of Nuclides: capture neutrons, coax decays, and learn honest nuclear physics. Our premiere visual work.", img: "/images/products/barns-and-neutrons.svg", href: "/products/barns-and-neutrons", tag: "Coming soon" },

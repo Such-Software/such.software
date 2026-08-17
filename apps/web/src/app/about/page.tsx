@@ -34,7 +34,7 @@ export default function AboutPage() {
             <p className="text-xl leading-relaxed">
               Such Software is a software studio in Kennett Square, PA, founded by <a href="https://jwinterm.com">John Winter Murphy</a>, 
               whose background is in semiconductor and nuclear engineering: a Materials Engineering PhD from UT-Dallas and six years at Lawrence Livermore National Laboratory. 
-              We build accessible e-commerce websites, crypto and payment integrations, and original mobile apps and games. We also consult on cryptocurrency and payment software and integration — the client or a licensed third party holds funds; we never take custody — and teach nuclear, radiation, and semiconductor modeling through open-source labs, training, and talks.
+              We build accessible e-commerce websites, crypto and payment integrations, and original mobile apps and games. We also consult on cryptocurrency and payment software and integration; the client or a licensed third party holds funds, and we never take custody. We teach nuclear, radiation, and semiconductor modeling through open-source labs, training, and talks.
             </p>
           </div>
 

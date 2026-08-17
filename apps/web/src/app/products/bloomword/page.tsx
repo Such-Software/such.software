@@ -95,7 +95,7 @@ export default function BloomwordPage() {
             Bloomword is a daily word game with a twist you can watch grow. Everyone gets the same
             letters each day and races the sunset to find words, and every word you find sprouts new
             growth on a living 3D typographic tree. Keep your streak, collect the biomes, and share the
-            bloom you grew today. It is free on iOS and Android — learn more at{" "}
+            bloom you grew today. It is free on iOS and Android. Learn more at{" "}
             <a href="https://bloomword.earth" target="_blank" rel="noopener noreferrer" className="text-green-600 dark:text-green-400 hover:underline">bloomword.earth</a>.
           </p>
         </div>
