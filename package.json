@@ -33,6 +33,7 @@
       "ajv": "^8.17.1",
       "eslint>ajv": "^6.12.6",
       "@eslint/eslintrc>ajv": "^6.12.6",
+      "@eslint/eslintrc>minimatch": "^3.1.2",
       "brace-expansion": "^2.0.3",
       "postcss": "^8.5.14",
       "fast-uri": "^3.1.2"
