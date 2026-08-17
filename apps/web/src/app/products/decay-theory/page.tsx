@@ -75,7 +75,7 @@ export default function DecayTheoryPage() {
         </Link>
 
         <div className="flex items-center gap-4 mb-2">
-          <Image src="/images/products/decay-theory.svg" alt="Decay Theory icon" width={64} height={64} className="rounded-2xl" />
+          <Image src="/images/products/decay-theory.svg" alt="Decay Theory icon" width={64} height={64} className="rounded-[22%]" />
           <div>
             <span className="inline-flex items-center rounded-full bg-cyan-400/15 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 mb-1">
               In Development

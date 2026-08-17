@@ -62,7 +62,7 @@ export default function VeganIqPage() {
             alt="Vegan IQ icon"
             width={80}
             height={80}
-            className="rounded-2xl"
+            className="rounded-[22%]"
           />
           <h1 className="text-4xl md:text-5xl font-bold text-green-600 dark:text-green-400">
             Vegan IQ

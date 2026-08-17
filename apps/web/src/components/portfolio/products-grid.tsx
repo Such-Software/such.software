@@ -69,7 +69,7 @@ function ProductIcon({ product }: { product: Product }) {
         alt={`${product.title} icon`}
         width={56}
         height={56}
-        className="rounded-xl flex-shrink-0"
+        className="rounded-[22%] flex-shrink-0"
       />
     );
   }

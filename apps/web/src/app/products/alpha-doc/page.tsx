@@ -74,7 +74,7 @@ export default function AlphaDocPage() {
         </Link>
 
         <div className="flex items-center gap-4 mb-2">
-          <Image src="/images/products/alpha-doc.svg" alt="Alpha Doc icon" width={64} height={64} className="rounded-2xl" />
+          <Image src="/images/products/alpha-doc.svg" alt="Alpha Doc icon" width={64} height={64} className="rounded-[22%]" />
           <div>
             <span className="inline-flex items-center rounded-full bg-orange-400/15 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400 mb-1">
               In Development

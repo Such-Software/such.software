@@ -99,7 +99,7 @@ export default function LinksPage() {
                     alt={`${app.name} icon`}
                     width={56}
                     height={56}
-                    className="rounded-xl"
+                    className="rounded-[22%]"
                   />
                   <div>
                     <Link href={app.href}>
