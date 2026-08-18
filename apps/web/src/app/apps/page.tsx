@@ -23,6 +23,8 @@ const apps = [
     name: "Hash Bags",
     tagline: "Non-custodial multi-chain wallet. Wownero-first.",
     icon: "/images/products/hash-bags.png",
+    // Draws itself on once, then settles into exactly the static icon.
+    animatedIcon: "/images/products/hash-bags-animated.svg",
     color: "text-emerald-600 dark:text-emerald-400",
     borderColor: "border-emerald-500/20",
     href: "/products/hash-bags",
@@ -107,10 +109,11 @@ export default function LinksPage() {
               <div className={`h-full rounded-xl border ${app.borderColor} bg-card p-6`}>
                 <div className="flex items-center gap-4 mb-3">
                   <Image
-                    src={app.icon}
+                    src={app.animatedIcon ?? app.icon}
                     alt={`${app.name} icon`}
                     width={56}
                     height={56}
+                    unoptimized={!!app.animatedIcon}
                     className="rounded-[22%]"
                   />
                   <div>
