@@ -2,33 +2,38 @@
 <!--
   Hash Bags app icon, drawn on.
 
-  Geometry is copied verbatim from the app's own icon source
-  (src/hash-wallet/assets/images/hash_wallet_app_icon_source.svg): full-bleed #1a5c38,
-  four white lines at stroke-width 80 with square caps, horizontals at y=412/612 and
-  verticals at x=412/612, all spanning 212..812. Held identical on purpose, because an
-  animated icon that does not settle into the static icon reads as a different app.
+  The # LEANS. It is a typographic monospace hash, which is how the mark renders everywhere
+  on hash.boats (hero and every feature card) and how hash.boats/splash.svg draws it by hand:
+  "verticals lean right". Do not straighten it.
 
-  FULL-BLEED, not the inset rounded box that hash.boats/splash.svg uses. The site rounds
-  icons itself with a 22% CSS radius, and an asset with its own transparent margin would
-  let the card background show through at the corners.
+  The wallet repo disagrees with itself here and its upright version is the outlier. Its
+  hash_wallet_app_icon_source.svg rebuilt the glyph as paths to remove a font dependency and
+  flattened the lean while doing so, and store/play-icon-512.png is upright too (verticals
+  measured at x=206 and x=306 on every row). The brand's own site is the authority on the
+  mark, so this follows hash.boats.
 
-  CSS rather than SMIL, for the same reason the brand pack gives: prefers-reduced-motion is
-  a media query, and a media query cannot reach inside a SMIL <animate>. Under reduced
-  motion this is simply the finished icon.
+  Geometry is splash.svg's glyph mapped onto a full-bleed 1024 canvas, preserving its
+  glyph-to-tile proportion exactly: the glyph spans 57.5% of the tile and the stroke is 8.75%
+  of it. Full-bleed, NOT splash.svg's inset rounded box, because the site rounds icons with a
+  22% CSS radius and an asset carrying its own transparent margin would show card background
+  at the corners.
 
-  Draws once and holds. A perpetual loop on a page of five icons is a distraction, and this
-  has to end as a normal, still app icon.
+  CSS rather than SMIL, for the reason the brand pack documents: prefers-reduced-motion is a
+  media query and cannot reach inside a SMIL <animate>. Draws once and holds; a looping icon
+  on a directory page is a distraction and an app icon's resting state should be an app icon.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
   <title>Hash Bags</title>
   <style>
+    /* Every bar is the same length, so one dash length covers all four. The verticals run
+       585 units (102.4 across, 576 down) and the bars across run 588.8; 600 over-covers
+       both, which is what stroke-dashoffset needs to hide them fully. */
     .bar {
       stroke-dasharray: 600;
       stroke-dashoffset: 600;
       animation: hb-draw 520ms cubic-bezier(0.33, 0, 0.2, 1) forwards;
     }
     @keyframes hb-draw { to { stroke-dashoffset: 0; } }
-    /* Same order the brand's own mark uses: the uprights first, then the bars across. */
     .v1 { animation-delay: 0ms; }
     .v2 { animation-delay: 110ms; }
     .h1 { animation-delay: 220ms; }
@@ -38,10 +43,10 @@
     }
   </style>
   <rect width="1024" height="1024" fill="#1a5c38"/>
-  <g stroke="#ffffff" stroke-width="80" stroke-linecap="square" fill="none">
-    <line class="bar v1" x1="412" y1="212" x2="412" y2="812"/>
-    <line class="bar v2" x1="612" y1="212" x2="612" y2="812"/>
-    <line class="bar h1" x1="212" y1="412" x2="812" y2="412"/>
-    <line class="bar h2" x1="212" y1="612" x2="812" y2="612"/>
+  <g stroke="#ffffff" stroke-width="89.6" stroke-linecap="butt" fill="none">
+    <line class="bar v1" x1="460.8" y1="224" x2="358.4" y2="800"/>
+    <line class="bar v2" x1="665.6" y1="224" x2="563.2" y2="800"/>
+    <line class="bar h1" x1="217.6" y1="396.8" x2="806.4" y2="396.8"/>
+    <line class="bar h2" x1="217.6" y1="627.2" x2="806.4" y2="627.2"/>
   </g>
 </svg>
