@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Hash Bags app icon, drawn on.
+
+  Geometry is copied verbatim from the app's own icon source
+  (src/hash-wallet/assets/images/hash_wallet_app_icon_source.svg): full-bleed #1a5c38,
+  four white lines at stroke-width 80 with square caps, horizontals at y=412/612 and
+  verticals at x=412/612, all spanning 212..812. Held identical on purpose, because an
+  animated icon that does not settle into the static icon reads as a different app.
+
+  FULL-BLEED, not the inset rounded box that hash.boats/splash.svg uses. The site rounds
+  icons itself with a 22% CSS radius, and an asset with its own transparent margin would
+  let the card background show through at the corners.
+
+  CSS rather than SMIL, for the same reason the brand pack gives: prefers-reduced-motion is
+  a media query, and a media query cannot reach inside a SMIL <animate>. Under reduced
+  motion this is simply the finished icon.
+
+  Draws once and holds. A perpetual loop on a page of five icons is a distraction, and this
+  has to end as a normal, still app icon.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Hash Bags</title>
+  <style>
+    .bar {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: hb-draw 520ms cubic-bezier(0.33, 0, 0.2, 1) forwards;
+    }
+    @keyframes hb-draw { to { stroke-dashoffset: 0; } }
+    /* Same order the brand's own mark uses: the uprights first, then the bars across. */
+    .v1 { animation-delay: 0ms; }
+    .v2 { animation-delay: 110ms; }
+    .h1 { animation-delay: 220ms; }
+    .h2 { animation-delay: 330ms; }
+    @media (prefers-reduced-motion: reduce) {
+      .bar { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+  <rect width="1024" height="1024" fill="#1a5c38"/>
+  <g stroke="#ffffff" stroke-width="80" stroke-linecap="square" fill="none">
+    <line class="bar v1" x1="412" y1="212" x2="412" y2="812"/>
+    <line class="bar v2" x1="612" y1="212" x2="612" y2="812"/>
+    <line class="bar h1" x1="212" y1="412" x2="812" y2="412"/>
+    <line class="bar h2" x1="212" y1="612" x2="812" y2="612"/>
+  </g>
+</svg>
