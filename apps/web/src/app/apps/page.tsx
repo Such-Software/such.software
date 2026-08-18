@@ -71,7 +71,7 @@ const apps = [
   },
   {
     name: "Suchoice",
-    tagline: "AI-powered decision making",
+    tagline: "Six ways to decide, from a coin flip to 3D dice",
     icon: "/images/products/suchoice.png",
     color: "text-pink-600 dark:text-pink-400",
     borderColor: "border-pink-500/20",
@@ -95,6 +95,10 @@ const apps = [
   },
 ];
 
+// Reverse alphabetical for now. Derived rather than hand-ordered, so adding an app
+// cannot leave the page in an order someone has to remember to fix.
+const sortedApps = [...apps].sort((a, b) => b.name.localeCompare(a.name));
+
 export default function LinksPage() {
   return (
     <main className="relative min-h-screen flex flex-col items-center bg-background text-foreground">
@@ -104,7 +108,7 @@ export default function LinksPage() {
         <p className="text-muted-foreground text-center mb-10">Our apps</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {apps.map((app, i) => (
+          {sortedApps.map((app, i) => (
             <ScrollReveal key={app.name} delay={(i % 2) * 0.08}>
               <div className={`h-full rounded-xl border ${app.borderColor} bg-card p-6`}>
                 <div className="flex items-center gap-4 mb-3">
