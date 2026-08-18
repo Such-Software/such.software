@@ -106,7 +106,13 @@ export function HomeShell({ children }: { children: ReactNode }) {
     // so you land below the hero instead of at the very top (same as a click would).
     // Freeze scrolling for the transition, then release exactly at the top.
     const html = document.documentElement;
-    const prevOverflow = html.style.overflow;
+    // Do NOT capture-and-restore the previous value here. The splash's own lock is
+    // already holding overflow at "hidden" when this runs, so capturing it and putting
+    // it back at release re-applied the lock AFTER the splash had gone and left the page
+    // unscrollable for the rest of the visit. A hard refresh appeared to fix it only
+    // because the session flag then skips the splash and neither lock runs.
+    // By the time this releases the splash is gone and the page MUST scroll, so the
+    // release is unconditional rather than a restore.
     html.style.overflow = "hidden";
     window.scrollTo(0, 0);
     // Any scroll that sneaks past the overflow lock gets yanked back to 0.
@@ -125,7 +131,7 @@ export function HomeShell({ children }: { children: ReactNode }) {
       window.removeEventListener("scroll", pin);
       window.removeEventListener("wheel", note);
       window.removeEventListener("touchmove", note);
-      html.style.overflow = prevOverflow;
+      html.style.overflow = "";
       window.scrollTo(0, 0);
     };
     const started = performance.now();
