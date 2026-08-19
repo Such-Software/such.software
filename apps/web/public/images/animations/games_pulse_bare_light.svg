@@ -23,7 +23,6 @@
       .nd { animation: none; }
     }
   </style>
-  <rect width="200" height="200" rx="26" fill="#f7f8fa"/>
   <g class="field">
     <path d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#1a5c38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
     <path class="pl pl0" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#1a5c38" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 323.8"/>

@@ -30,8 +30,8 @@ export default function BlogPage() {
 
         {/* Animated accent */}
         <div className="flex justify-center mb-12 motion-reduce:hidden">
-          <object data="/images/animations/anim_type_v4_light.svg" type="image/svg+xml" aria-hidden="true" className="w-24 h-24 opacity-60 block dark:hidden pointer-events-none"></object>
-          <object data="/images/animations/anim_type_v4.svg" type="image/svg+xml" aria-hidden="true" className="w-24 h-24 opacity-60 hidden dark:block pointer-events-none"></object>
+          <img src="/images/animations/anim_type_v4_light.svg" alt="" aria-hidden="true" className="w-24 h-24 opacity-60 block dark:hidden pointer-events-none" />
+          <img src="/images/animations/anim_type_v4.svg" alt="" aria-hidden="true" className="w-24 h-24 opacity-60 hidden dark:block pointer-events-none" />
         </div>
 
         {posts.length === 0 ? (

@@ -32,8 +32,9 @@ export default function Home() {
           <span className="block">for Everyone</span>
         </h1>
         <p className="max-w-2xl text-xl text-muted-foreground mb-8">
-          Custom e-commerce, apps, games, and crypto payment tools, built to order in
-          Kennett Square, PA. Plus a shelf of mobile apps and games of our own.
+          Custom e-commerce, apps, games, and cryptocurrency tools, built in Kennett Square,
+          PA. End to end delivery or consulting engagements. Plus a shelf of mobile apps
+          &amp; games of our own.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mb-14">

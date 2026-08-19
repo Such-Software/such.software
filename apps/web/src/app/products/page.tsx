@@ -167,8 +167,8 @@ export default function ProductsPage() {
         <ProductsGrid products={products} />
 
         <div className="flex justify-center mt-16 motion-reduce:hidden">
-          <object data="/images/animations/anim3_matrix_light.svg" type="image/svg+xml" aria-hidden="true" className="w-20 h-20 opacity-40 block dark:hidden pointer-events-none"></object>
-          <object data="/images/animations/anim3_matrix.svg" type="image/svg+xml" aria-hidden="true" className="w-20 h-20 opacity-50 hidden dark:block pointer-events-none"></object>
+          <img src="/images/animations/anim3_matrix_light.svg" alt="" aria-hidden="true" className="w-20 h-20 opacity-40 block dark:hidden pointer-events-none" />
+          <img src="/images/animations/anim3_matrix.svg" alt="" aria-hidden="true" className="w-20 h-20 opacity-50 hidden dark:block pointer-events-none" />
         </div>
       </div>
       <MobileNav />

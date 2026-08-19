@@ -134,8 +134,8 @@ export default function LinksPage() {
         </div>
 
         <div className="flex justify-center mt-12 mb-6 motion-reduce:hidden">
-          <object data="/images/animations/games_pulse_light.svg" type="image/svg+xml" aria-hidden="true" className="w-20 h-20 opacity-50 block dark:hidden pointer-events-none"></object>
-          <object data="/images/animations/games_pulse.svg" type="image/svg+xml" aria-hidden="true" className="w-20 h-20 opacity-50 hidden dark:block pointer-events-none"></object>
+          <img src="/images/animations/games_pulse_bare_light.svg" alt="" aria-hidden="true" className="w-20 h-20 opacity-50 block dark:hidden pointer-events-none" />
+          <img src="/images/animations/games_pulse_bare.svg" alt="" aria-hidden="true" className="w-20 h-20 opacity-50 hidden dark:block pointer-events-none" />
         </div>
 
         <div className="text-center">
