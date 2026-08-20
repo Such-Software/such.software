@@ -57,7 +57,7 @@ const surfaces: Surface[] = [
   {
     img: "merch-store",
     title: "Dense catalog with overlay cards",
-    blurb: "A four-up grid with image-forward overlay cards, a different card style and density per tenant.",
+    blurb: "A four-up grid with image-forward overlay cards, a different card style and density per shop.",
     shop: "Aurora Print (merch)",
     color: "blue",
     href: "https://merch-demo.such.software/us/store",
