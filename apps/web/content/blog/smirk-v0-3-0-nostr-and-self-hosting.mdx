@@ -1,109 +1,204 @@
 ---
-title: "Build notes: Smirk v0.3.0, Nostr identity, and running your own backend"
+title: "Smirk Wallet v0.3.0: Nostr identity, three slate transports, and a backend you can run"
 date: "2026-08-20"
-excerpt: "Notes from the v0.3.0 release window: a NIP-07 provider in the wallet, why a Nostr signature had to be treated as a credential rather than a UX prompt, and the self-hostable backend that came out of it."
+excerpt: "v0.3.0 makes Smirk federated end to end: a NIP-07 provider with tiered signing, Grin slates that travel over Nostr instead of a shared server, and smirk-backend-core released so you can host the whole thing yourself."
 draft: false
 ---
 
-# Build notes: Smirk v0.3.0, Nostr identity, and running your own backend
+# Smirk Wallet v0.3.0
 
-Smirk v0.3.0 is cut and in store review, so it is not on anyone's machine yet. These are
-working notes from the release window rather than an announcement. Two things dominated it:
-putting Nostr identity into the wallet properly, and finishing the work that lets somebody
-else run the backend.
+v0.3.0 is out. It is the release that removes the last places Smirk assumed our
+infrastructure: the backend host is configurable, Grin is fully non-custodial, and the
+server that used to be ours is now a public repo you can run yourself.
 
-## A Nostr signature is a credential, not a prompt
+The wallet ships as a Chrome MV3 and Firefox extension, plus a Tauri 2.x desktop shell for
+Windows, macOS and Linux built from the same code path. Capacitor mobile is deferred to
+v0.4.
 
-The wallet now exposes a NIP-07 `window.nostr` provider, so Nostr-native sites can ask for
-your public key and have events signed without a second extension installed. That part is
-ordinary. The interesting part was deciding what a connected site may sign without asking
-again.
+## Federation
 
-The obvious design is a "remember this site" checkbox. We started there and it is wrong,
-because Nostr kinds are not equally dangerous and a signature is a bearer token. Signing a
-note is not the same act as signing a payment authorization, but both arrive through one
-function call.
+Nothing in the wallet points at `api.smirk.cash` any more. `homeDomain` is per-wallet
+configuration, and the backend it names is one instance of
+[smirk-backend-core](https://github.com/Such-Software/smirk-backend-core), which is now
+public under MIT.
 
-So event kinds are sorted into three tiers:
+<figure>
+<svg viewBox="0 0 720 250" role="img" aria-label="Two wallets pointing at two independent backends, each delegating to its own chain nodes, with a Nostr relay layer connecting the wallets directly." style={{width:"100%",height:"auto"}}>
+  <defs>
+    <marker id="fedArrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="currentColor" opacity="0.55" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.85">
+    <rect x="20" y="20" width="150" height="44" rx="8" />
+    <rect x="20" y="150" width="150" height="44" rx="8" />
+    <rect x="285" y="20" width="160" height="44" rx="8" stroke="#2f9e68" />
+    <rect x="285" y="150" width="160" height="44" rx="8" stroke="#2f9e68" />
+    <rect x="560" y="20" width="140" height="44" rx="8" opacity="0.6" />
+    <rect x="560" y="150" width="140" height="44" rx="8" opacity="0.6" />
+  </g>
+  <g fill="currentColor" fontSize="13" textAnchor="middle">
+    <text x="95" y="47">Wallet A</text>
+    <text x="95" y="177">Wallet B</text>
+    <text x="365" y="40" fill="#2f9e68">backend-core</text>
+    <text x="365" y="57" fill="#2f9e68" fontSize="11" opacity="0.85">homeDomain: a.example</text>
+    <text x="365" y="170" fill="#2f9e68">backend-core</text>
+    <text x="365" y="187" fill="#2f9e68" fontSize="11" opacity="0.85">homeDomain: b.example</text>
+    <text x="630" y="41" opacity="0.7">Electrum,</text>
+    <text x="630" y="56" opacity="0.7">LWS, grin-lws</text>
+    <text x="630" y="171" opacity="0.7">Electrum,</text>
+    <text x="630" y="186" opacity="0.7">LWS, grin-lws</text>
+  </g>
+  <g stroke="currentColor" strokeWidth="1.5" opacity="0.55" markerEnd="url(#fedArrow)">
+    <line x1="172" y1="42" x2="281" y2="42" />
+    <line x1="172" y1="172" x2="281" y2="172" />
+    <line x1="447" y1="42" x2="556" y2="42" />
+    <line x1="447" y1="172" x2="556" y2="172" />
+  </g>
+  <g fill="none" stroke="#3d93c4" strokeWidth="1.5" strokeDasharray="5 4">
+    <path d="M95 66 L95 148" opacity="0.9" />
+  </g>
+  <g fill="#3d93c4" fontSize="12">
+    <text x="112" y="103">Nostr relays: identity, DMs, slates.</text>
+    <text x="112" y="120">Wallet to wallet, across backends.</text>
+  </g>
+</svg>
+</figure>
 
-- **money** (17, 27235, 30402, 22242): never auto-signed, never session-grantable. Every one
-  gets an explicit per-event approval.
-- **session-grantable** (1, 7, 1059): notes, reactions, gift wraps. High volume, low
-  consequence. A user may grant a time-boxed window where these sign without re-prompting.
-- **default**: everything else. Prompt every time. Unknown kinds land here, so a kind we
-  have never seen is treated conservatively instead of permissively.
+The two backends share nothing. A wallet on `a.example` can pay a wallet on `b.example`
+because identity and message transport ride Nostr relays, not a shared database.
 
-Kind 27235 is the one worth dwelling on. It is NIP-98 HTTP auth, which reads like plumbing,
-and it was session-grantable in an early draft. But the backend mints a full session from a
-NIP-98 event via `POST /auth/nostr`. Leaving it grantable meant a connected site could
-quietly collect an auth token for the user's own wallet backend, using a permission the user
-thought they had granted for social posts. It is now money-tier, and there is an origin guard
-on the event's `u` tag as well.
+## Nostr identity, and why signing is tiered
 
-The enforcement lives in the wallet handler, not the approval dialog. The handler computes
-`sessionCovered=false` for anything not session-grantable and refuses to persist a money-tier
-kind into a session at all. The rule holds even if the approval UI is buggy, or hostile,
-which is the only version of that rule worth having.
+The wallet exposes a NIP-07 `window.nostr` provider, so Nostr-native sites request a public
+key and get events signed without a second extension. A multi-identity vault keeps separate
+keypairs apart, with an in-wallet switcher.
 
-## Paying a name instead of an address
+The part worth explaining is what a connected site may sign *without asking again*. A Nostr
+signature is a bearer credential, so that is a security decision rather than a convenience
+setting. Kinds are sorted into three tiers, and the wallet handler is the enforcement point:
+it computes `sessionCovered=false` for anything not session-grantable and refuses to persist
+a money-tier kind into a session at all, so the rule holds even if the approval UI is
+compromised.
 
-You can pay a NIP-05 address (`name@domain`) directly. The counterparty's key is pinned on
-first use, so a later key swap is surfaced rather than silently trusted. TOFU is not perfect,
-but the failure it prevents is the one that actually happens: a name resolving to a new key
-and the payment going somewhere else without comment.
+<figure>
+<svg viewBox="0 0 720 210" role="img" aria-label="A sign-event request routed by kind into three tiers: money kinds always prompt, session-grantable kinds may use a time-boxed grant, and everything else prompts by default." style={{width:"100%",height:"auto"}}>
+  <defs>
+    <marker id="tierArrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 9 3, 0 6" fill="currentColor" opacity="0.55" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="16" y="80" width="132" height="46" rx="8" />
+    <rect x="196" y="80" width="104" height="46" rx="8" />
+  </g>
+  <g fill="currentColor" fontSize="13" textAnchor="middle">
+    <text x="82" y="100">signEvent()</text>
+    <text x="82" y="117" fontSize="11" opacity="0.7">from a site</text>
+    <text x="248" y="100">kind tier</text>
+    <text x="248" y="117" fontSize="11" opacity="0.7">classifier</text>
+  </g>
+  <g stroke="currentColor" strokeWidth="1.5" opacity="0.55" markerEnd="url(#tierArrow)">
+    <line x1="150" y1="103" x2="192" y2="103" />
+    <path d="M302 96 L340 96 L340 32 L392 32" fill="none" />
+    <line x1="302" y1="103" x2="392" y2="103" />
+    <path d="M302 110 L340 110 L340 174 L392 174" fill="none" />
+  </g>
+  <g fill="none" strokeWidth="1.5">
+    <rect x="396" y="10" width="308" height="44" rx="8" stroke="#d1568c" />
+    <rect x="396" y="81" width="308" height="44" rx="8" stroke="#2f9e68" />
+    <rect x="396" y="152" width="308" height="44" rx="8" stroke="currentColor" opacity="0.6" />
+  </g>
+  <g fontSize="12.5">
+    <text x="412" y="29" fill="#d1568c" fontSize="13">money: 17, 27235, 30402, 22242</text>
+    <text x="412" y="46" fill="#d1568c" opacity="0.85">always prompt, never session-grantable</text>
+    <text x="412" y="100" fill="#2f9e68" fontSize="13">session-grantable: 1, 7, 1059</text>
+    <text x="412" y="117" fill="#2f9e68" opacity="0.85">time-boxed grant, no re-prompt in window</text>
+    <text x="412" y="171" fill="currentColor" fontSize="13" opacity="0.75">default: everything else</text>
+    <text x="412" y="188" fill="currentColor" opacity="0.6">prompt per event, unknown kinds land here</text>
+  </g>
+</svg>
+</figure>
 
-Grin got a specific benefit here. Grin is an interactive protocol, so a payment needs a round
-trip of slatepacks between sender and receiver, which historically meant a shared server or
-copy-pasting blobs by hand. Those can now travel as NIP-59 gift-wrapped direct messages. No
-shared server, no coordination step outside the wallet.
+Kind 27235 is the instructive one. NIP-98 HTTP auth reads like plumbing, and it was
+session-grantable in an early draft. But the backend mints a full session from a NIP-98 event
+via `POST /auth/nostr`, so a grant meant for social posting would have let a site collect an
+auth token for the user's own backend. It is money-tier now, with an origin guard on the
+event's `u` tag.
 
-## Federation, and the backend that came with it
+## Three transports for a Grin slate
 
-The wallet no longer assumes `api.smirk.cash`. The backend host is configurable per wallet,
-which is only a meaningful claim if there is something else to point it at. That is
-[smirk-backend-core](https://github.com/Such-Software/smirk-backend-core): Rust, Axum,
-PostgreSQL, MIT, and now public.
+Grin is interactive: a payment needs slatepack legs to travel between sender and receiver.
+A slate is one payload, and how it gets there is a separate choice with different trust
+properties.
 
-The design constraint was that the backend must never be able to spend your money, and the
-schema should make that structural rather than a promise. It stores public addresses, public
-keys, and for Monero and Wownero the incoming view keys. Never a spend key, never a seed.
-View credentials are forwarded per request to the chain backends that scan with them and are
-not persisted server-side. The wallet signs and broadcasts locally; the backend reads chains
-and relays bytes.
+<figure>
+<svg viewBox="0 0 720 200" role="img" aria-label="Three Grin slate transports: Nostr gift-wrap as the federated default, manual clipboard as the universal fallback, and the backend relay as a same-instance shortcut." style={{width:"100%",height:"auto"}}>
+  <g fill="none" strokeWidth="1.5">
+    <rect x="14" y="14" width="692" height="52" rx="8" stroke="#2f9e68" />
+    <rect x="14" y="76" width="692" height="52" rx="8" stroke="currentColor" opacity="0.75" />
+    <rect x="14" y="138" width="692" height="52" rx="8" stroke="currentColor" opacity="0.45" />
+  </g>
+  <g fontSize="13">
+    <text x="30" y="36" fill="#2f9e68" fontSize="14">Nostr gift-wrap (NIP-59 kind 1059)</text>
+    <text x="30" y="55" fill="#2f9e68" opacity="0.85" fontSize="12">federated default, crosses backends, relays learn neither sender, amount, nor slate</text>
+    <text x="560" y="36" fill="#2f9e68" fontSize="12">npub / NIP-05</text>
+    <text x="30" y="98" fill="currentColor" fontSize="14">Manual clipboard</text>
+    <text x="30" y="117" fill="currentColor" opacity="0.7" fontSize="12">universal fallback, no network at all, age-encrypted to the recipient address</text>
+    <text x="560" y="98" fill="currentColor" opacity="0.8" fontSize="12">grin1… address</text>
+    <text x="30" y="160" fill="currentColor" opacity="0.75" fontSize="14">Backend relay</text>
+    <text x="30" y="179" fill="currentColor" opacity="0.55" fontSize="12">same-instance shortcut only, both parties on one backend, never a requirement</text>
+    <text x="560" y="160" fill="currentColor" opacity="0.6" fontSize="12">backend user_id</text>
+  </g>
+</svg>
+</figure>
 
-Chain access is delegated rather than reimplemented:
+What you type in the send box picks the transport. An npub or NIP-05 handle routes over
+Nostr. A bare `grin1…` address falls back to clipboard, unless a same-instance lookup can
+bridge that address to its owner's npub, in which case it is upgraded to gift-wrap. The
+backend relay is a convenience for two users on one host and is never on the critical path,
+because there is no cross-backend relay federation and there deliberately isn't going to be.
+
+## The backend
+
+Rust, Axum, PostgreSQL. It gives a wallet chain reads, fee estimation and broadcast, Nostr
+identity, a price feed, a Grin slatepack mailbox and the public social-tips subsystem,
+without ever holding a spend key or a seed.
+
+It stores public addresses, public keys, and for Monero and Wownero the incoming view keys.
+View credentials are forwarded per request to whatever scans with them and are not persisted.
+Signing and broadcast happen in the wallet.
 
 | Chain | Source |
-|-------|--------|
+|---|---|
 | Bitcoin, Litecoin | Electrum / Fulcrum |
 | Monero, Wownero | light-wallet-server, stateless view-key forwarding |
-| Grin | grin-lws, or grin-wallet in view-only mode plus a node |
+| Grin | grin-lws, or grin-wallet view-only plus a node |
 
-Each chain is independently feature-flagged, and a chain whose source is not configured
-reports `enabled: false` from `/capabilities` rather than failing when someone calls it. That
-distinction matters more than it sounds: a self-hoster who only cares about Bitcoin should
-get a working backend, not a broken Monero path.
+Chains are independently feature-flagged. One that is not configured reports
+`enabled: false` from `/capabilities` instead of failing when something calls it, so a
+Bitcoin-only deployment is a supported outcome rather than a half-broken one.
 
 The HTTP contract is generated from the handlers into `openapi.json`, which is also what the
-wallet's client is generated from, with a CI gate that fails on drift. One artifact, two
-consumers, no hand-written client to fall out of date.
+wallet's client is generated from, with a CI gate that fails on drift.
 
-Grin ended up fully non-custodial as part of this. The backend used to hold Grin balances,
-outputs and transaction records; those endpoints and the server-side wallets table are gone.
-Grin outputs now use the standard deterministic rewind-nonce scheme, so a wallet restored
-from a seed phrase rediscovers its outputs from the chain, the way Bitcoin and Monero
-restores already worked. Outputs from earlier builds stay spendable.
+Grin became fully non-custodial in this release. The backend no longer holds Grin balances,
+outputs or transaction records; those endpoints and the server-side wallets table are gone.
+Grin outputs use the standard deterministic rewind-nonce scheme, so a wallet restored from a
+seed phrase rediscovers its outputs from the chain the way Bitcoin and Monero restores
+already did. Outputs from earlier builds stay spendable.
 
-Two smaller pieces are public for the same reason: a standalone
-[grin-lws](https://github.com/Such-Software/grin-lws) light wallet server, and a small
-non-custodial BTC/LTC payment processor that exposes a BTCPay-style invoice surface where
-funds go straight to operator-controlled addresses.
+Two supporting pieces are public for the same reason:
+[grin-lws](https://github.com/Such-Software/grin-lws), a standalone Grin light wallet server,
+and a small non-custodial BTC/LTC payment processor exposing a BTCPay-style invoice surface
+where funds go straight to operator-controlled addresses.
 
-## Status
+## Notes
 
-v0.3.0 is feature-complete and has been through a security review, but it is young. The
-schema and the API may still move. If you run it, run your own chain backends where you can,
-read the code first, and size your early deployments accordingly.
+v0.3.0 is feature-complete and has been through a security review, but the schema and API are
+young and may still move. If you self-host, run your own chain backends where you can and
+read the code first.
 
-The desktop shell (Tauri 2.x, Windows/macOS/Linux) ships alongside the extension from the
-same code path. Capacitor mobile is deferred to v0.4.
+Also in this release: taproot (`bc1p…`, `ltc1p…`) recipients, cross-chain sends blocked
+before they can destroy funds, encrypted public tip keys at rest, a fee you sign that matches
+the fee you were shown, and connected sites made visible and revocable in Settings.
