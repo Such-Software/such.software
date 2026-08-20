@@ -1,0 +1,109 @@
+---
+title: "Build notes: Smirk v0.3.0, Nostr identity, and running your own backend"
+date: "2026-08-20"
+excerpt: "Notes from the v0.3.0 release window: a NIP-07 provider in the wallet, why a Nostr signature had to be treated as a credential rather than a UX prompt, and the self-hostable backend that came out of it."
+draft: false
+---
+
+# Build notes: Smirk v0.3.0, Nostr identity, and running your own backend
+
+Smirk v0.3.0 is cut and in store review, so it is not on anyone's machine yet. These are
+working notes from the release window rather than an announcement. Two things dominated it:
+putting Nostr identity into the wallet properly, and finishing the work that lets somebody
+else run the backend.
+
+## A Nostr signature is a credential, not a prompt
+
+The wallet now exposes a NIP-07 `window.nostr` provider, so Nostr-native sites can ask for
+your public key and have events signed without a second extension installed. That part is
+ordinary. The interesting part was deciding what a connected site may sign without asking
+again.
+
+The obvious design is a "remember this site" checkbox. We started there and it is wrong,
+because Nostr kinds are not equally dangerous and a signature is a bearer token. Signing a
+note is not the same act as signing a payment authorization, but both arrive through one
+function call.
+
+So event kinds are sorted into three tiers:
+
+- **money** (17, 27235, 30402, 22242): never auto-signed, never session-grantable. Every one
+  gets an explicit per-event approval.
+- **session-grantable** (1, 7, 1059): notes, reactions, gift wraps. High volume, low
+  consequence. A user may grant a time-boxed window where these sign without re-prompting.
+- **default**: everything else. Prompt every time. Unknown kinds land here, so a kind we
+  have never seen is treated conservatively instead of permissively.
+
+Kind 27235 is the one worth dwelling on. It is NIP-98 HTTP auth, which reads like plumbing,
+and it was session-grantable in an early draft. But the backend mints a full session from a
+NIP-98 event via `POST /auth/nostr`. Leaving it grantable meant a connected site could
+quietly collect an auth token for the user's own wallet backend, using a permission the user
+thought they had granted for social posts. It is now money-tier, and there is an origin guard
+on the event's `u` tag as well.
+
+The enforcement lives in the wallet handler, not the approval dialog. The handler computes
+`sessionCovered=false` for anything not session-grantable and refuses to persist a money-tier
+kind into a session at all. The rule holds even if the approval UI is buggy, or hostile,
+which is the only version of that rule worth having.
+
+## Paying a name instead of an address
+
+You can pay a NIP-05 address (`name@domain`) directly. The counterparty's key is pinned on
+first use, so a later key swap is surfaced rather than silently trusted. TOFU is not perfect,
+but the failure it prevents is the one that actually happens: a name resolving to a new key
+and the payment going somewhere else without comment.
+
+Grin got a specific benefit here. Grin is an interactive protocol, so a payment needs a round
+trip of slatepacks between sender and receiver, which historically meant a shared server or
+copy-pasting blobs by hand. Those can now travel as NIP-59 gift-wrapped direct messages. No
+shared server, no coordination step outside the wallet.
+
+## Federation, and the backend that came with it
+
+The wallet no longer assumes `api.smirk.cash`. The backend host is configurable per wallet,
+which is only a meaningful claim if there is something else to point it at. That is
+[smirk-backend-core](https://github.com/Such-Software/smirk-backend-core): Rust, Axum,
+PostgreSQL, MIT, and now public.
+
+The design constraint was that the backend must never be able to spend your money, and the
+schema should make that structural rather than a promise. It stores public addresses, public
+keys, and for Monero and Wownero the incoming view keys. Never a spend key, never a seed.
+View credentials are forwarded per request to the chain backends that scan with them and are
+not persisted server-side. The wallet signs and broadcasts locally; the backend reads chains
+and relays bytes.
+
+Chain access is delegated rather than reimplemented:
+
+| Chain | Source |
+|-------|--------|
+| Bitcoin, Litecoin | Electrum / Fulcrum |
+| Monero, Wownero | light-wallet-server, stateless view-key forwarding |
+| Grin | grin-lws, or grin-wallet in view-only mode plus a node |
+
+Each chain is independently feature-flagged, and a chain whose source is not configured
+reports `enabled: false` from `/capabilities` rather than failing when someone calls it. That
+distinction matters more than it sounds: a self-hoster who only cares about Bitcoin should
+get a working backend, not a broken Monero path.
+
+The HTTP contract is generated from the handlers into `openapi.json`, which is also what the
+wallet's client is generated from, with a CI gate that fails on drift. One artifact, two
+consumers, no hand-written client to fall out of date.
+
+Grin ended up fully non-custodial as part of this. The backend used to hold Grin balances,
+outputs and transaction records; those endpoints and the server-side wallets table are gone.
+Grin outputs now use the standard deterministic rewind-nonce scheme, so a wallet restored
+from a seed phrase rediscovers its outputs from the chain, the way Bitcoin and Monero
+restores already worked. Outputs from earlier builds stay spendable.
+
+Two smaller pieces are public for the same reason: a standalone
+[grin-lws](https://github.com/Such-Software/grin-lws) light wallet server, and a small
+non-custodial BTC/LTC payment processor that exposes a BTCPay-style invoice surface where
+funds go straight to operator-controlled addresses.
+
+## Status
+
+v0.3.0 is feature-complete and has been through a security review, but it is young. The
+schema and the API may still move. If you run it, run your own chain backends where you can,
+read the code first, and size your early deployments accordingly.
+
+The desktop shell (Tauri 2.x, Windows/macOS/Linux) ships alongside the extension from the
+same code path. Capacitor mobile is deferred to v0.4.
