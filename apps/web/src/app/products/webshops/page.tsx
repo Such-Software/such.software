@@ -10,13 +10,16 @@ import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const DESCRIPTION =
+  "We build, host, and run your online store. Sell products, merch, or appointments; take cards and cryptocurrency; own your data. No upfront cost: we take a share of sales once you are live.";
+
 export const metadata: Metadata = {
   title: "Custom Online Stores & E-Commerce | Such Software",
-  description: "A multi-tenant commerce platform: your own fully-themed storefront, print-on-demand, non-custodial crypto checkout, Stripe Connect, and automated tax, no upfront cost, revenue-share pricing, fully managed hosting. Built on Medusa v2.",
+  description: DESCRIPTION,
   alternates: { canonical: "/products/webshops" },
   openGraph: {
     title: "Custom Online Stores & E-Commerce | Such Software",
-    description: "Your own fully-themed storefront from one engine: print-on-demand, non-custodial crypto checkout, Stripe Connect, automated tax. No upfront cost, revenue-share, fully managed hosting. Built on Medusa v2.",
+    description: DESCRIPTION,
     type: "website",
     images: ["/images/og/webshops.png"],
   },
@@ -27,64 +30,66 @@ export const metadata: Metadata = {
 };
 
 const faqs = [
-  { q: "What makes each store unique if they share one platform?", a: "Every tenant gets a fully-themed storefront, its own colors, typography, layout, dark mode, and content, driven from a shared Medusa engine. One backend, many distinct-looking shops. See the five live demos on this page: each is the same platform wearing a completely different skin." },
-  { q: "How does revenue-share pricing work?", a: "Instead of a large upfront build fee, we build and host your store at our own cost and take a small percentage of sales once you are live. We only make money when you do." },
-  { q: "Who hosts the store?", a: "We do. Hosting is fully managed and included, the platform runs on our own infrastructure (VPS, pm2, Caddy), with deploys, TLS, backups, and monitoring handled by us. You do not need a Vercel or Railway account, and there is nothing for you to operate." },
-  { q: "What is headless commerce, and why Medusa?", a: "Headless means the storefront is decoupled from the commerce backend. We use Medusa v2 (open-source, Node.js) for the backend and Next.js for a fast custom storefront, so you are not boxed in by a template or a hosted platform's limits." },
-  { q: "Do I own my data?", a: "Yes. Unlike hosted platforms, you own your customer data, product catalog, and order history outright. There is no platform lock-in." },
-  { q: "Which payment methods are supported?", a: "Stripe via Stripe Connect (you stay the merchant of record and settle directly) and non-custodial cryptocurrency, Bitcoin, Litecoin, Monero, Wownero, and Grin. Crypto payments land straight in your own wallet; we never take custody of funds." },
-  { q: "Can you handle print-on-demand or dropshipping?", a: "Yes. We integrate Printful for print-on-demand and dropship fulfillment, so you can sell apparel and merch without holding inventory, orders route to production and ship automatically." },
-  { q: "Can I sell services or appointments, not just physical products?", a: "Yes. Appointment-based items get a themed booking calendar on the product page, with no shipping step and appointment details sent after checkout. It is the same engine behind the yoga studio's class booking and the coaching site's discovery calls in our live demos, so classes, sessions, consultations, and passes all work out of the box." },
-  { q: "What about sales tax?", a: "Tax is automated. We support Stripe Tax for full multi-state calculation and filing, or a self-hosted single-state estimator for sub-nexus tenants, routed per tenant so you collect the right amount at checkout." },
-  { q: "Can you migrate my existing store?", a: "Yes. We can migrate catalogs, customers, and order history from Shopify, WooCommerce, and other platforms." },
+  {
+    q: "What does it cost?",
+    a: "Nothing upfront. We build and host the store at our own cost and take a small percentage of sales once you are live. There is no setup fee and no monthly retainer.",
+  },
+  {
+    q: "Who runs it once it is live?",
+    a: "We do. Hosting, TLS, backups, updates, and monitoring are included, and there is nothing for you to operate. You get an admin dashboard for products and orders.",
+  },
+  {
+    q: "How do I get paid?",
+    a: "Card payments run through Stripe Connect, so you are the merchant of record and money settles directly to you. Cryptocurrency payments land straight in your own wallet: we never take custody of your funds.",
+  },
+  {
+    q: "Can I sell services or appointments?",
+    a: "Yes. Appointment items get a booking calendar on the product page, themed to match the rest of the shop, with no shipping step. Classes, sessions, consultations, and passes all work.",
+  },
+  {
+    q: "Can I sell merch without holding inventory?",
+    a: "Yes. Printful handles print-on-demand and dropship fulfilment, so orders route to production and ship on their own.",
+  },
+  {
+    q: "What about sales tax?",
+    a: "Handled at checkout. Stripe Tax covers multi-state calculation and filing, and smaller shops can use a single-state estimator instead.",
+  },
+  {
+    q: "Do I own my data?",
+    a: "Yes. Your customer list, catalog, and order history are yours outright, and you can take them with you. There is no lock-in.",
+  },
+  {
+    q: "Can you move my existing store over?",
+    a: "Yes. We migrate catalogs, customers, and order history from Shopify, WooCommerce, and others.",
+  },
 ];
 
 type Feature = { title: string; body: string };
 
 const features: Feature[] = [
   {
-    title: "Zero Upfront Cost",
-    body: "We invest our development time and infrastructure. You focus on your brand and products. We take a small percentage of sales once you are live.",
+    title: "It looks like your brand",
+    body: "Your colours, type, layout, and dark mode, all the way through the catalog, cart, and checkout. Not a template with your logo dropped into the corner.",
   },
   {
-    title: "Own Your Data",
-    body: "Unlike Shopify, you own your customer data, product catalog, and order history. No platform lock-in, ever.",
+    title: "Nothing to pay upfront",
+    body: "We build and host at our own cost and take a percentage of sales once you are live. We only make money when you do.",
   },
   {
-    title: "Print-on-Demand & Dropship",
-    body: "Printful integration for apparel and merch: sell without holding inventory. Orders route to production and ship automatically, and the platform reconciles production cost for you.",
+    title: "Sell products, merch, or time",
+    body: "Physical stock, print-on-demand apparel with no inventory to hold, or appointments booked on a calendar right on the page.",
   },
   {
-    title: "Non-Custodial Crypto Checkout",
-    body: "Accept Bitcoin, Litecoin, Monero, Wownero, and Grin. Funds settle directly into your own wallet, we never take custody, so you stay in control of your money.",
+    title: "Get paid your way",
+    body: "Cards through Stripe, with you as the merchant of record. Or Bitcoin, Litecoin, Monero, Wownero, and Grin, straight into your own wallet.",
   },
   {
-    title: "Stripe Connect Payments",
-    body: "Card payments run through Stripe Connect: you stay the merchant of record on the statement, and the platform fee comes out as a transparent revenue-share on item margin only, tax and shipping pass through to you uncut.",
+    title: "You own your data",
+    body: "Your customers, catalog, and order history belong to you, and you can leave with all of it. No lock-in.",
   },
   {
-    title: "Wallet & Web3 Login",
-    body: "Optional Sign-In-With-Ethereum and wallet-based login alongside email, backed by a three-tier auth model, the operator chooses which methods each tenant offers, and each tenant's customers sign in their way.",
-  },
-  {
-    title: "Booking & Scheduling",
-    body: "Sell services, not just products: appointment-based items get a themed scheduling calendar at checkout, with no shipping step and appointment details sent after purchase. Classes, sessions, consultations, and passes work out of the box.",
-  },
-  {
-    title: "Order Notifications",
-    body: "Get pinged the moment a sale lands. Telegram and email notifications keep you and your team on top of new orders without babysitting a dashboard.",
-  },
-  {
-    title: "Automated Sales Tax",
-    body: "Tax is calculated at checkout via Stripe Tax, or a self-hosted single-state estimator for sub-nexus tenants, routed per tenant so you collect the right amount in the right jurisdictions.",
-  },
-  {
-    title: "Flexible Architecture",
-    body: "Subscriptions, bundles, B2B pricing, multi-warehouse inventory. Model your exact business logic without platform constraints.",
-  },
-  {
-    title: "Performance First",
-    body: "Next.js storefronts engineered for Core Web Vitals, with fast load times and high conversion in mind.",
+    title: "We keep it running",
+    body: "Hosting, TLS, backups, updates, and monitoring are ours to worry about. New orders ping you on Telegram or email.",
   },
 ];
 
@@ -103,87 +108,42 @@ export default function WebshopsPage() {
           ← Back to Products
         </Link>
 
-        {/* Hero, lead with the differentiator: per-tenant theming */}
+        {/* Lead with what the client gets, not with how we run it. The multi-tenant
+            architecture is our operational concern and belongs at the bottom. */}
         <p className="text-sm font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-3">
-          Multi-tenant commerce platform
+          Custom online stores
         </p>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-emerald-600 dark:text-emerald-400">
-          Your own fully-themed storefront, from one engine
+          An online store that looks like you built it yourself
         </h1>
+        <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mb-4">
+          We design it around your brand, build it, host it, and keep it running. You sell
+          products, merch, or appointments, take cards and cryptocurrency, and own your
+          customer list outright.
+        </p>
         <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mb-12">
-          We run a single Medusa v2 commerce platform that spins up a completely distinct,
-          fully-branded storefront for every tenant, your colors, your typography, your layout,
-          your dark mode. One battle-tested engine underneath; a store that looks and feels like
-          nobody else&apos;s on top. No large setup fee, no monthly retainer: we build, host, and
-          maintain it on revenue share, so we only win when you make sales.
+          There is nothing to pay upfront. We take a percentage of sales once you are live,
+          so the store has to work for us to get paid.
         </p>
 
-        {/* Theming morph: the same platform themed as five real demo brands. */}
         <figure className="mb-16">
           <BrowserFrame url="your-brand.com">
             <ShowcaseVideo
               webm="/showcase/theming-morph.webm"
               mp4="/showcase/theming-morph.mp4"
               poster="/showcase/theming-morph-poster.jpg"
-              label="The same commerce platform themed as five distinct brands, dissolving one into the next: an artisan shop, a merch store, a crypto shop, a yoga studio, and a coaching site."
+              label="Five demo storefronts dissolving one into the next: an artisan shop, a merch store, a crypto shop, a yoga studio, and a coaching site."
               className="block aspect-video w-full"
             />
           </BrowserFrame>
           <figcaption className="mt-3 text-center text-sm text-muted-foreground">
-            One platform, five real storefronts. Every shop here runs the same engine.
+            Five demo shops we built. Same platform underneath, and no two look alike.
           </figcaption>
         </figure>
 
-        {/* Theming spotlight, the headline story */}
-        <section aria-labelledby="theming-heading" className="section-container border-l-4 border-emerald-500 mb-16">
-          <h2 id="theming-heading" className="text-2xl md:text-3xl font-bold mb-4">
-            Per-tenant theming is the whole point
-          </h2>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl mb-4">
-            Most &quot;multi-store&quot; platforms give every shop the same skeleton with a swapped logo.
-            Ours derives an entire visual system per tenant from your theme configuration:
-            palette, fonts, spacing, component styling, and a matched dark mode across both the
-            storefront and checkout. Two shops on the same backend can look nothing alike.
-          </p>
-          <p className="text-muted-foreground leading-relaxed max-w-3xl">
-            That means you get the economics of a shared platform, managed hosting, security
-            updates, and new features shipped to everyone, without the cookie-cutter look that
-            usually comes with it. The five live demos below are all the exact same platform.
-          </p>
-        </section>
-
-        {/* Live demos, proof of the theming story */}
-        <section aria-labelledby="demos-heading" className="mb-16">
-          <h2 id="demos-heading" className="text-2xl md:text-3xl font-bold mb-2">
-            Live demos
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-3xl">
-            Five differently-themed storefronts, one platform. Open them side by side, same
-            engine, five completely different looks.
-          </p>
-          <DemosGallery />
-        </section>
-
-        {/* Surfaces, it is not just the homepage that is themed */}
-        <section aria-labelledby="surfaces-heading" className="mb-16">
-          <h2 id="surfaces-heading" className="text-2xl md:text-3xl font-bold mb-2">
-            Every surface, not just the homepage
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-3xl">
-            Theming runs all the way down: product pages, catalog grids, cart, and checkout each
-            carry the shop&apos;s palette, type, and layout. And the platform is more than a catalog,
-            service shops get a real{" "}
-            <span className="font-medium text-foreground">booking calendar</span>: yoga classes
-            and coaching calls are scheduled right on the product page, themed to match. Here is a
-            spread of live surfaces across five different shops.
-          </p>
-          <SurfacesGallery />
-        </section>
-
-        {/* Feature grid, the real platform capabilities */}
         <section aria-labelledby="features-heading" className="mb-16">
           <h2 id="features-heading" className="text-2xl md:text-3xl font-bold mb-8">
-            What&apos;s built in
+            What you get
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((f) => (
@@ -195,20 +155,49 @@ export default function WebshopsPage() {
           </div>
         </section>
 
-        {/* Tech stack, hosting line corrected to fully-managed self-hosting */}
+        <section aria-labelledby="demos-heading" className="mb-16">
+          <h2 id="demos-heading" className="text-2xl md:text-3xl font-bold mb-2">
+            See it working
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-3xl">
+            Five demo storefronts, live and clickable. Open a couple side by side: they run on
+            the same platform yours would, and they look nothing like each other.
+          </p>
+          <DemosGallery />
+        </section>
+
+        <section aria-labelledby="surfaces-heading" className="mb-16">
+          <h2 id="surfaces-heading" className="text-2xl md:text-3xl font-bold mb-2">
+            Every page, not just the front one
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-3xl">
+            Product pages, catalog, cart, and checkout all carry your look. Service shops get a
+            real booking calendar on the product page, which is how the yoga studio schedules
+            classes and the coaching site books calls.
+          </p>
+          <SurfacesGallery />
+        </section>
+
+        {/* The technical detail, kept to one block at the bottom for the readers who
+            want it. Everything above is written for someone deciding whether to hire us. */}
         <section aria-labelledby="stack-heading" className="section-container border-l-4 border-emerald-500 mb-16">
-          <h2 id="stack-heading" className="text-2xl font-bold mb-4">Tech Stack</h2>
+          <h2 id="stack-heading" className="text-2xl font-bold mb-2">Under the hood</h2>
+          <p className="text-muted-foreground mb-4 max-w-3xl">
+            For the technically inclined. None of this is anything you have to operate.
+          </p>
           <ul className="space-y-2 text-muted-foreground">
-            <li><strong>Backend:</strong> Medusa v2 (Node.js, PostgreSQL), multi-tenant with per-store sales-channel isolation</li>
-            <li><strong>Frontend:</strong> Next.js 15, React 18, Tailwind CSS, per-tenant themed storefront</li>
-            <li><strong>Payments:</strong> Stripe Connect and non-custodial crypto (BTC, LTC, XMR, WOW, Grin)</li>
-            <li><strong>Fulfillment:</strong> Printful print-on-demand / dropship, plus your own inventory</li>
-            <li><strong>Tax:</strong> Stripe Tax or self-hosted single-state estimator, routed per tenant</li>
-            <li><strong>Hosting:</strong> Fully managed and included, we self-host on our own infrastructure (VPS, pm2, Caddy) with TLS, backups, and monitoring handled for you</li>
+            <li><strong>Backend:</strong> Medusa v2 (Node.js, PostgreSQL). Headless, so the storefront is not boxed in by a template</li>
+            <li><strong>Storefront:</strong> Next.js 15 and Tailwind, built per shop and tuned for Core Web Vitals</li>
+            <li><strong>Theming:</strong> a whole visual system generated per shop from one theme config, covering storefront and checkout</li>
+            <li><strong>Payments:</strong> Stripe Connect, plus non-custodial BTC, LTC, XMR, WOW, and Grin</li>
+            <li><strong>Fulfilment:</strong> Printful print-on-demand and dropship, or your own inventory</li>
+            <li><strong>Tax:</strong> Stripe Tax, or a self-hosted single-state estimator for smaller shops</li>
+            <li><strong>Hosting:</strong> our own infrastructure (VPS, pm2, Caddy) with TLS, backups, and monitoring</li>
+            <li><strong>Also possible:</strong> subscriptions, bundles, B2B pricing, multi-warehouse stock, and wallet or Sign-In-With-Ethereum login</li>
           </ul>
         </section>
 
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">FAQ</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-6">Questions</h2>
         <div className="space-y-6 mb-12">
           {faqs.map((f) => (
             <div key={f.q}>
@@ -219,8 +208,9 @@ export default function WebshopsPage() {
         </div>
 
         <div className="text-center">
-          <Link href="/contact">
-            <Button size="lg">Get in Touch</Button>
+          {/* /#contact, not /contact: the latter is a 307 redirect hop. */}
+          <Link href="/#contact">
+            <Button size="lg">Start a Project</Button>
           </Link>
           <p className="text-sm text-muted-foreground mt-6">
             See also our{" "}
