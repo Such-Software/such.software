@@ -12,6 +12,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getAllSlugs, getPost } from "@/lib/blog";
 import { JsonLd, articleLd, breadcrumbLd } from "@/components/seo/json-ld";
 
@@ -73,7 +74,13 @@ export default async function BlogPost({ params }: Props) {
           </header>
 
           <div className="prose dark:prose-invert max-w-none">
-            <MDXRemote source={post.content} components={{
+            <MDXRemote
+              source={post.content}
+              // GFM, for tables. Without it a markdown table renders as literal
+              // pipe characters in a paragraph, which four published posts were
+              // doing.
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+              components={{
               StoreButtons,
               VeganIqStoreButtons,
               SuchoiceStoreButtons,

@@ -1,29 +1,27 @@
 ---
-title: "Smirk Wallet v0.3.0: Nostr identity, three slate transports, and a backend you can run"
+title: "Smirk Wallet v0.3.0: Nostr identity, federated backends, and Grin slate transports"
 date: "2026-08-20"
-excerpt: "v0.3.0 makes Smirk federated end to end: a NIP-07 provider with tiered signing, Grin slates that travel over Nostr instead of a shared server, and smirk-backend-core released so you can host the whole thing yourself."
+excerpt: "v0.3.0 makes Smirk federated end to end: a configurable backend host, a NIP-07 provider with tiered signing, Grin slates over NIP-59 gift-wraps, and smirk-backend-core released under MIT."
 draft: false
 ---
 
 # Smirk Wallet v0.3.0
 
-v0.3.0 is out. It is the release that removes the last places Smirk assumed our
-infrastructure: the backend host is configurable, Grin is fully non-custodial, and the
-server that used to be ours is now a public repo you can run yourself.
+v0.3.0 removes the remaining assumptions about our infrastructure. The backend host is
+per-wallet configuration, Grin is fully non-custodial, and the server is a public repo.
 
-The wallet ships as a Chrome MV3 and Firefox extension, plus a Tauri 2.x desktop shell for
-Windows, macOS and Linux built from the same code path. Capacitor mobile is deferred to
+The wallet ships as a Chrome MV3 and Firefox extension plus a Tauri 2.x desktop shell for
+Windows, macOS and Linux, built from the same code path. Capacitor mobile is deferred to
 v0.4.
 
 ## Federation
 
-Nothing in the wallet points at `api.smirk.cash` any more. `homeDomain` is per-wallet
-configuration, and the backend it names is one instance of
-[smirk-backend-core](https://github.com/Such-Software/smirk-backend-core), which is now
-public under MIT.
+No component points at `api.smirk.cash`. `homeDomain` is per-wallet configuration naming an
+instance of [smirk-backend-core](https://github.com/Such-Software/smirk-backend-core),
+released under MIT.
 
 <figure>
-<svg viewBox="0 0 720 250" role="img" aria-label="Two wallets pointing at two independent backends, each delegating to its own chain nodes, with a Nostr relay layer connecting the wallets directly." style={{width:"100%",height:"auto"}}>
+<svg viewBox="0 0 720 250" role="img" aria-label="Two wallets pointing at two independent backends, each delegating to its own chain nodes, with a Nostr relay layer connecting the two wallets directly." style={{width:"100%",height:"auto"}}>
   <defs>
     <marker id="fedArrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
       <polygon points="0 0, 9 3, 0 6" fill="currentColor" opacity="0.55" />
@@ -65,24 +63,43 @@ public under MIT.
 </svg>
 </figure>
 
-The two backends share nothing. A wallet on `a.example` can pay a wallet on `b.example`
-because identity and message transport ride Nostr relays, not a shared database.
+The two backends share no state. A wallet on `a.example` pays a wallet on `b.example`
+because identity and message transport ride Nostr relays rather than a shared database.
 
-## Nostr identity, and why signing is tiered
+## Backend origins: onion and LAN
+
+A backend URL must be `https`, with three exemptions where requiring TLS would make a
+legitimate instance unreachable:
+
+| Origin | Accepted over plain http | Reason |
+|---|---|---|
+| `.onion` (16 or 56 char) | yes | Onion services carry their own transport authentication and encryption, and no CA issues certificates for them |
+| Private ranges, `.local` | yes | A self-hoster running a box on their own LAN |
+| `localhost` | yes | Local development |
+
+Everything else is rejected. The onion pattern matches the label immediately before
+`.onion`, so `abcdefghijklmnop.onion.example.com` is a normal public host and is refused.
+
+The backend's admin plane binds to loopback by default. Exposing it requires an SSH tunnel
+or an onion: `TOR_ADMIN_ONION=<hash>.onion` adds that one host to the admin `Host`
+allowlist, which otherwise accepts only loopback names. A request arriving with any other
+`Host` gets a 403, which is the DNS-rebinding guard. A non-loopback bind additionally
+requires `ADMIN_ALLOW_PUBLIC_BIND=true`.
+
+There is no bundled Tor daemon and no I2P support. The wallet accepts onion origins; routing
+to them is the operator's Tor instance.
+
+## Nostr identity and tiered signing
 
 The wallet exposes a NIP-07 `window.nostr` provider, so Nostr-native sites request a public
-key and get events signed without a second extension. A multi-identity vault keeps separate
-keypairs apart, with an in-wallet switcher.
+key and have events signed without a second extension. A multi-identity vault holds separate
+keypairs with an in-wallet switcher.
 
-The part worth explaining is what a connected site may sign *without asking again*. A Nostr
-signature is a bearer credential, so that is a security decision rather than a convenience
-setting. Kinds are sorted into three tiers, and the wallet handler is the enforcement point:
-it computes `sessionCovered=false` for anything not session-grantable and refuses to persist
-a money-tier kind into a session at all, so the rule holds even if the approval UI is
-compromised.
+A Nostr signature is a bearer credential, so which events a connected origin may sign
+without a fresh prompt is a security decision. Kinds are classified into three tiers.
 
 <figure>
-<svg viewBox="0 0 720 210" role="img" aria-label="A sign-event request routed by kind into three tiers: money kinds always prompt, session-grantable kinds may use a time-boxed grant, and everything else prompts by default." style={{width:"100%",height:"auto"}}>
+<svg viewBox="0 0 720 210" role="img" aria-label="A sign-event request routed by kind into three tiers: money kinds always prompt, session-grantable kinds may use a time-boxed grant, and everything else prompts per event." style={{width:"100%",height:"auto"}}>
   <defs>
     <marker id="tierArrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
       <polygon points="0 0, 9 3, 0 6" fill="currentColor" opacity="0.55" />
@@ -120,17 +137,17 @@ compromised.
 </svg>
 </figure>
 
-Kind 27235 is the instructive one. NIP-98 HTTP auth reads like plumbing, and it was
-session-grantable in an early draft. But the backend mints a full session from a NIP-98 event
-via `POST /auth/nostr`, so a grant meant for social posting would have let a site collect an
-auth token for the user's own backend. It is money-tier now, with an origin guard on the
-event's `u` tag.
+The wallet handler is the enforcement point. It computes `sessionCovered=false` for any kind
+that is not session-grantable and refuses to persist a money-tier kind into a session, so the
+classification holds independently of the approval UI.
 
-## Three transports for a Grin slate
+Kind 27235 is NIP-98 HTTP auth. The backend mints a full session from a NIP-98 event via
+`POST /auth/nostr`, so it is money-tier, with an origin guard on the event's `u` tag.
 
-Grin is interactive: a payment needs slatepack legs to travel between sender and receiver.
-A slate is one payload, and how it gets there is a separate choice with different trust
-properties.
+## Grin slate transports
+
+Grin is interactive: a payment requires slatepack legs to travel between sender and receiver.
+The slate is one payload; the channel is a separate choice.
 
 <figure>
 <svg viewBox="0 0 720 200" role="img" aria-label="Three Grin slate transports: Nostr gift-wrap as the federated default, manual clipboard as the universal fallback, and the backend relay as a same-instance shortcut." style={{width:"100%",height:"auto"}}>
@@ -144,30 +161,32 @@ properties.
     <text x="30" y="55" fill="#2f9e68" opacity="0.85" fontSize="12">federated default, crosses backends, relays learn neither sender, amount, nor slate</text>
     <text x="560" y="36" fill="#2f9e68" fontSize="12">npub / NIP-05</text>
     <text x="30" y="98" fill="currentColor" fontSize="14">Manual clipboard</text>
-    <text x="30" y="117" fill="currentColor" opacity="0.7" fontSize="12">universal fallback, no network at all, age-encrypted to the recipient address</text>
+    <text x="30" y="117" fill="currentColor" opacity="0.7" fontSize="12">universal fallback, no network dependency, age-encrypted to the recipient address</text>
     <text x="560" y="98" fill="currentColor" opacity="0.8" fontSize="12">grin1… address</text>
     <text x="30" y="160" fill="currentColor" opacity="0.75" fontSize="14">Backend relay</text>
-    <text x="30" y="179" fill="currentColor" opacity="0.55" fontSize="12">same-instance shortcut only, both parties on one backend, never a requirement</text>
+    <text x="30" y="179" fill="currentColor" opacity="0.55" fontSize="12">same-instance only, both parties registered on one backend, never required</text>
     <text x="560" y="160" fill="currentColor" opacity="0.6" fontSize="12">backend user_id</text>
   </g>
 </svg>
 </figure>
 
-What you type in the send box picks the transport. An npub or NIP-05 handle routes over
-Nostr. A bare `grin1…` address falls back to clipboard, unless a same-instance lookup can
-bridge that address to its owner's npub, in which case it is upgraded to gift-wrap. The
-backend relay is a convenience for two users on one host and is never on the critical path,
-because there is no cross-backend relay federation and there deliberately isn't going to be.
+The address in the send box selects the transport. An npub or NIP-05 handle routes over
+Nostr. A bare `grin1…` address defaults to clipboard, and is upgraded to gift-wrap when a
+same-instance lookup resolves that address to its owner's npub. The backend relay serves two
+users on one host; there is no cross-backend relay federation.
 
-## The backend
+Counterparty keys are pinned on first use, so a later key change for the same NIP-05 handle
+is surfaced rather than trusted.
 
-Rust, Axum, PostgreSQL. It gives a wallet chain reads, fee estimation and broadcast, Nostr
-identity, a price feed, a Grin slatepack mailbox and the public social-tips subsystem,
-without ever holding a spend key or a seed.
+## smirk-backend-core
 
-It stores public addresses, public keys, and for Monero and Wownero the incoming view keys.
-View credentials are forwarded per request to whatever scans with them and are not persisted.
-Signing and broadcast happen in the wallet.
+Rust, Axum, PostgreSQL. It provides chain reads, fee estimation, broadcast, Nostr identity, a
+price feed, a Grin slatepack mailbox and the public social-tips subsystem, without holding a
+spend key or a seed.
+
+Stored: public addresses, public keys, and for Monero and Wownero the incoming view keys.
+View credentials are forwarded per request to the chain backends that scan with them and are
+not persisted. Signing and broadcast happen in the wallet.
 
 | Chain | Source |
 |---|---|
@@ -175,30 +194,29 @@ Signing and broadcast happen in the wallet.
 | Monero, Wownero | light-wallet-server, stateless view-key forwarding |
 | Grin | grin-lws, or grin-wallet view-only plus a node |
 
-Chains are independently feature-flagged. One that is not configured reports
-`enabled: false` from `/capabilities` instead of failing when something calls it, so a
-Bitcoin-only deployment is a supported outcome rather than a half-broken one.
+Chains are independently feature-flagged. An unconfigured chain reports `enabled: false` from
+`/capabilities` rather than failing at call time, so a Bitcoin-only deployment is a supported
+configuration.
 
-The HTTP contract is generated from the handlers into `openapi.json`, which is also what the
-wallet's client is generated from, with a CI gate that fails on drift.
+The HTTP contract is generated from the handlers into `openapi.json`, which is also the
+source for the wallet's generated client. A CI gate fails the build on drift.
 
-Grin became fully non-custodial in this release. The backend no longer holds Grin balances,
-outputs or transaction records; those endpoints and the server-side wallets table are gone.
-Grin outputs use the standard deterministic rewind-nonce scheme, so a wallet restored from a
-seed phrase rediscovers its outputs from the chain the way Bitcoin and Monero restores
-already did. Outputs from earlier builds stay spendable.
+Grin is non-custodial in this release. The backend no longer holds Grin balances, outputs or
+transaction records; those endpoints and the server-side wallets table are removed. Grin
+outputs use the standard deterministic rewind-nonce scheme, so a wallet restored from a seed
+phrase rediscovers its outputs from the chain, matching how Bitcoin and Monero already
+restored. Outputs created by earlier builds remain spendable.
 
-Two supporting pieces are public for the same reason:
-[grin-lws](https://github.com/Such-Software/grin-lws), a standalone Grin light wallet server,
-and a small non-custodial BTC/LTC payment processor exposing a BTCPay-style invoice surface
-where funds go straight to operator-controlled addresses.
+Two supporting components are public: [grin-lws](https://github.com/Such-Software/grin-lws),
+a standalone Grin light wallet server, and a non-custodial BTC/LTC payment processor exposing
+a BTCPay-style invoice surface where funds go to operator-controlled addresses.
 
-## Notes
+## Also in this release
 
-v0.3.0 is feature-complete and has been through a security review, but the schema and API are
-young and may still move. If you self-host, run your own chain backends where you can and
-read the code first.
+Taproot (`bc1p…`, `ltc1p…`) recipients in Send and Swap. Cross-chain sends blocked, where a
+Monero address could previously be used as a Wownero destination. Public tip keys encrypted
+at rest. A custom fee rate below the relay minimum now fails rather than being silently
+raised at broadcast. Connected sites visible and revocable in Settings.
 
-Also in this release: taproot (`bc1p…`, `ltc1p…`) recipients, cross-chain sends blocked
-before they can destroy funds, encrypted public tip keys at rest, a fee you sign that matches
-the fee you were shown, and connected sites made visible and revocable in Settings.
+v0.3.0 is feature-complete and security-reviewed. The schema and API may still change; run
+your own chain backends where possible.

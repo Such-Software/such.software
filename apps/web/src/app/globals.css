@@ -364,3 +364,12 @@ html[data-splash="skip"] #splash-overlay {
 @media (prefers-reduced-motion: reduce) {
   .splash-burst-blob { display: none; }
 }
+
+/* @tailwindcss/typography wraps every inline <code> in literal backtick characters via
+   code::before / code::after. The monospace treatment already marks code as code, so the
+   backticks are a second, redundant marker that reads as a typo in running prose:
+   `homeDomain` instead of homeDomain. Turn them off across the blog. */
+.prose :where(code):not(:where([class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
