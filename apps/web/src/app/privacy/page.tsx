@@ -60,6 +60,7 @@ export default function PrivacyPage() {
               <li><Link href="/products/bauhaus-echo/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Bauhaus Echo Privacy Policy</Link></li>
               <li><Link href="/products/suchoice/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Suchoice Privacy Policy</Link></li>
               <li><Link href="/products/such-moon-launch/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Such Moon Launch Privacy Policy</Link></li>
+              <li><Link href="/evaluetron/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Evaluetron Privacy Policy</Link></li>
             </ul>
           </section>
 

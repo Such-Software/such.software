@@ -74,6 +74,10 @@ export default function TermsPage() {
                 <strong>Such Moon Launch</strong> &mdash; governed by its own{" "}
                 <Link href="/products/such-moon-launch/terms" className="text-blue-600 dark:text-blue-400 hover:underline">Terms of Service</Link>.
               </li>
+              <li>
+                <strong>Evaluetron</strong> &mdash; governed by its own{" "}
+                <Link href="/evaluetron/terms" className="text-blue-600 dark:text-blue-400 hover:underline">Terms of Service</Link>.
+              </li>
             </ul>
             <p>
               Where a product has its own terms, those terms control for that product to the extent
