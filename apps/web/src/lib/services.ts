@@ -54,11 +54,11 @@ export const pillars: Pillar[] = [
     label: "Education & Science",
     accent: "amber",
     title: "Education & science",
-    lead: "PhD-led radiation-science teaching, training, and speaking from years at a national lab, plus a growing shelf of edutainment: learning-through-play games that make real subjects stick, from nuclear physics and math to vocabulary, nutrition, and cyber-safety. We publish our methods open-source.",
-    card: "PhD-led radiation-science teaching and edutainment games that teach through play.",
-    metaTitle: "Nuclear & Radiation-Science Education, GEANT4 Training | Such Software",
+    lead: "Education and edutainment: learning-through-play games that make real subjects stick, from math and vocabulary to nutrition and cyber-safety, plus teaching, training, and speaking for schools, teams, and conferences. Our deep specialty is radiation science, PhD-led from years at a national lab: Monte Carlo methods with GEANT4, shielding, and detector physics. We publish our methods open-source.",
+    card: "Edutainment games and teaching that make real subjects stick, with a PhD specialty in radiation science.",
+    metaTitle: "Education & Edutainment Games, Radiation-Science Training | Such Software",
     metaDescription:
-      "PhD-led radiation-science education: Monte Carlo methods with GEANT4, shielding and detector physics, open-source labs, plus edutainment games that teach science, math, vocabulary, and cyber-safety through play. Lawrence Livermore background.",
+      "Education and edutainment from a Kennett Square, PA studio: games that teach science, math, vocabulary, nutrition, and cyber-safety through play, plus teaching, training, and speaking. Deep specialty in radiation science, PhD-led with a Lawrence Livermore background: Monte Carlo methods with GEANT4, shielding and detector physics, open-source labs.",
   },
 ];
 
@@ -127,7 +127,7 @@ export function proofFor(slug: string): Proof[] {
 export type Faq = { q: string; a: string; pillars: Pillar["slug"][] };
 
 export const faqs: Faq[] = [
-  { q: "What does Such Software build?", a: "Four things, from one small team: custom e-commerce and web apps on revenue share, games and mobile apps we ship ourselves, cryptocurrency and payments software (integration only, never custody), and PhD-led radiation-science education. The pillars below break each down with the products behind them.", pillars: ["commerce", "games", "crypto", "education"] },
+  { q: "What does Such Software build?", a: "Four things, from one small team: custom e-commerce and web apps on revenue share, games and mobile apps we ship ourselves, cryptocurrency and payments software (integration only, never custody), and education, from edutainment games to PhD-led radiation-science training. The pillars below break each down with the products behind them.", pillars: ["commerce", "games", "crypto", "education"] },
   { q: "Do you take revenue-share work?", a: "Yes. For a limited number of partners we build and operate products (such as webshops) for a share of revenue instead of a large upfront fee, so our incentives line up with yours.", pillars: ["commerce"] },
   { q: "Do you build for accessibility?", a: "Yes. We engineer front-ends to meet WCAG 2.2 AA and audit against it, alongside Core Web Vitals, as part of every project.", pillars: ["commerce", "games"] },
   { q: "Do you offer nuclear and radiation education?", a: "Yes. Our founder holds a PhD in radiation-detector materials and spent six years at Lawrence Livermore National Laboratory, plus shielding and spent-fuel work at Holtec. We teach radiation-science fundamentals and Monte Carlo methods, run GEANT4 training, and speak on these topics. Our GEANT4 radiation labs are published open-source (MIT / CC-BY). This is education and published methods.", pillars: ["education"] },

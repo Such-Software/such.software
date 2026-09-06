@@ -13,12 +13,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Web, Games, Crypto & Nuclear-Science Education | Such Software",
   description:
-    "Four pillars from one studio: custom e-commerce and web apps on revenue share, games and mobile apps, crypto and payments software (non-custodial), and PhD-led radiation-science education and GEANT4 training. Kennett Square, PA.",
+    "Four pillars from one studio: custom e-commerce and web apps on revenue share, games and mobile apps, crypto and payments software (non-custodial), and education, from edutainment games to radiation-science and GEANT4 training. Kennett Square, PA.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Web, Games, Crypto & Nuclear-Science Education | Such Software",
     description:
-      "Four pillars from one studio: custom e-commerce and web apps on revenue share, games and mobile apps, crypto and payments software (non-custodial), and PhD-led radiation-science education and GEANT4 training.",
+      "Four pillars from one studio: custom e-commerce and web apps on revenue share, games and mobile apps, crypto and payments software (non-custodial), and education, from edutainment games to radiation-science and GEANT4 training.",
     type: "website",
   },
 };
