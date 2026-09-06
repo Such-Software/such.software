@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <defs><filter id="sg-pulse-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <defs><filter id="sg-pulse-glow" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
   <style>
     .pl0 { animation: sg-pl0 3s linear infinite; }
     @keyframes sg-pl0 { from { stroke-dashoffset: -0; } to { stroke-dashoffset: -353.8; } }
@@ -25,9 +25,9 @@
   </style>
   <g class="field">
     <path d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#1a5c38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
-    <path class="pl pl0" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#1a5c38" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 323.8"/>
-    <path class="pl pl1" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#2f8f5e" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="20 333.8"/>
-    <path class="pl pl2" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#0a0a14" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 345.8"/>
+    <path class="pl pl0 b0" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#1a5c38" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 323.8"/>
+    <path class="pl pl1 b0" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#2f8f5e" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="20 333.8"/>
+    <path class="pl pl2 b0" d="M 178,164 C 178,92 142,20 100,20 C 58,20 22,92 22,164" fill="none" stroke="#0a0a14" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 345.8"/>
     <g class="nodes" filter="url(#sg-pulse-glow)">
       <g transform="translate(178,164)"><g class="nd" style="animation-delay:0s"><circle r="2" fill="#1a5c38"/></g></g>
       <g transform="translate(173.7,120.1)"><g class="nd" style="animation-delay:0.375s"><circle r="1.5" fill="#1a5c38"/></g></g>
