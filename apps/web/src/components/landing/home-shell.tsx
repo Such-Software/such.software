@@ -27,6 +27,11 @@ export function HomeShell({ children }: { children: ReactNode }) {
   const [splashUp, setSplashUp] = useState(true);
   const [leaving, setLeaving] = useState(false);
   const restoreScroll = useRef(0);
+  // A visitor who arrived on a deep link (`/#contact`, which is exactly where `/contact`
+  // redirects) named the place they wanted to be. The splash is the front door's intro, and
+  // entering it pins scroll to 0, so without this every inbound contact link on a first visit
+  // played the intro and then dropped the visitor at the top of the homepage, hash discarded.
+  const deepLink = useRef(false);
   const [nebulaPosition, setNebulaPosition] = useState<{ x: number; y: number } | null>(null);
 
   // Respect prefers-reduced-motion: skip the splash entirely and land straight on
@@ -37,7 +42,11 @@ export function HomeShell({ children }: { children: ReactNode }) {
     // The splash is a one-time intro per session: once entered, a refresh (even
     // from mid-page) skips it so you can't scroll back up into it.
     const alreadyEntered = sessionStorage.getItem("such:entered") === "1";
-    if (reduced || alreadyEntered) {
+    // Only a hash that actually names something on this page counts. A stale or invented
+    // fragment should still get the intro rather than silently skipping it.
+    const target = window.location.hash.slice(1);
+    deepLink.current = target.length > 0 && document.getElementById(target) !== null;
+    if (reduced || alreadyEntered || deepLink.current) {
       setEntered(true);
       setSplashUp(false);
     }
@@ -61,7 +70,15 @@ export function HomeShell({ children }: { children: ReactNode }) {
   // After the splash unmounts, keep the visitor's position in the content stable
   // (no jump). Runs before paint.
   useIsoLayoutEffect(() => {
-    if (entered) window.scrollTo(0, restoreScroll.current);
+    if (!entered) return;
+    if (deepLink.current) {
+      // Honour the fragment once, on arrival. Native anchor scrolling already ran before we
+      // set `entered`, but the restore below would immediately undo it.
+      deepLink.current = false;
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
+      return;
+    }
+    window.scrollTo(0, restoreScroll.current);
   }, [entered]);
 
   // Place the nebula/monitor just to the left of the hero title, at any screen width.

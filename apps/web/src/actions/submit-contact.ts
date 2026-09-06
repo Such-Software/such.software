@@ -23,10 +23,18 @@ export async function submitContactForm(prevState: any, formData: FormData) {
     return { success: false, errors: validated.error.flatten().fieldErrors };
   }
 
-  // 2. Turnstile Verification
-  const isHuman = await verifyTurnstile(validated.data.token);
-  if (!isHuman) {
-    return { success: false, message: "Security check failed. Please refresh." };
+  // 2. Turnstile Verification. Distinguish "you failed the check" from "we cannot run the
+  // check": telling a real visitor to refresh, when the server is missing its key, sends them
+  // round a loop that cannot succeed.
+  const check = await verifyTurnstile(validated.data.token);
+  if (!check.ok) {
+    return {
+      success: false,
+      message:
+        check.reason === 'rejected'
+          ? "Security check failed. Please refresh."
+          : "We could not run the security check just now. Please email sales@such.software.",
+    };
   }
 
   // 3. Send email via Resend

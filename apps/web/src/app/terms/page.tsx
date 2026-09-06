@@ -2,16 +2,14 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Such Software",
-  description: "The default terms of service governing the such.software website and any Such Software LLC software, app, game, or wallet that does not have its own terms.",
-  alternates: { canonical: "/terms" },
-  openGraph: {
+  ...pageMetadata({
     title: "Terms of Service | Such Software",
     description: "The default terms of service governing the such.software website and any Such Software LLC software, app, game, or wallet that does not have its own terms.",
-    type: "website",
-  },
+    path: "/terms",
+  }),
 };
 
 export default function TermsPage() {

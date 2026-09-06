@@ -1,5 +1,43 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { pillars } from "@/lib/services";
+import { staticRoutes } from "@/lib/routes";
+
+/**
+ * Per-route ranking. Only the routes that differ from the default appear here, so this is a
+ * short table of opinions rather than a second copy of the site map. A route absent from it
+ * is still in the sitemap; it just ranks at the default.
+ */
+const RANK: Record<
+  string,
+  {
+    changeFrequency: MetadataRoute.Sitemap[0]["changeFrequency"];
+    priority: number;
+  }
+> = {
+  "/": { changeFrequency: "weekly", priority: 1.0 },
+  "/products": { changeFrequency: "weekly", priority: 0.9 },
+  "/services": { changeFrequency: "monthly", priority: 0.9 },
+  "/blog": { changeFrequency: "weekly", priority: 0.8 },
+  "/about": { changeFrequency: "monthly", priority: 0.7 },
+  "/apps": { changeFrequency: "monthly", priority: 0.5 },
+  "/support": { changeFrequency: "monthly", priority: 0.5 },
+  "/privacy": { changeFrequency: "yearly", priority: 0.3 },
+  "/terms": { changeFrequency: "yearly", priority: 0.3 },
+};
+
+/** Legal pages change rarely and rank low wherever they sit in the tree. */
+function rankFor(route: string) {
+  if (RANK[route]) return RANK[route];
+  if (/\/(privacy|terms)$/.test(route)) {
+    return { changeFrequency: "yearly" as const, priority: 0.3 };
+  }
+  if (route.startsWith("/services/"))
+    return { changeFrequency: "monthly" as const, priority: 0.8 };
+  if (route.startsWith("/products/"))
+    return { changeFrequency: "weekly" as const, priority: 0.8 };
+  return { changeFrequency: "monthly" as const, priority: 0.5 };
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://such.software";
@@ -8,39 +46,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // every page as "modified now" on every build, which is noise that dilutes the freshness
   // signal. Bump this when the site's static content meaningfully changes. (Blog posts carry
   // their own per-post dates below.)
-  const updated = new Date("2026-07-12");
+  const updated = new Date("2026-09-05");
 
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: base, lastModified: updated, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/products`, lastModified: updated, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${base}/products/wownerogue`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/neroswap`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/webshops`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/custom-websites`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/hash-bags`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/products/smirk-wallet`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/bauhaus-echo`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/vegan-iq`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/products/suchoice`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/products/such-moon-launch`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/products/barns-and-neutrons`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/products/alpha-doc`, lastModified: updated, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/products/decay-theory`, lastModified: updated, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/products/bloomword`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/products/meatspace`, lastModified: updated, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/products/mushroom-capital`, lastModified: updated, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/services`, lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${base}/services/commerce`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/services/games`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/services/crypto`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/services/education`, lastModified: updated, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/about`, lastModified: updated, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/support`, lastModified: updated, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/privacy`, lastModified: updated, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${base}/terms`, lastModified: updated, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${base}/apps`, lastModified: updated, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${base}/blog`, lastModified: updated, changeFrequency: "weekly", priority: 0.8 },
-  ];
+  const staticPages: MetadataRoute.Sitemap = staticRoutes().map((route) => ({
+    url: route === "/" ? base : `${base}${route}`,
+    lastModified: updated,
+    ...rankFor(route),
+  }));
+
+  // The service pillars are a dynamic segment, so the tree cannot see them: like blog posts,
+  // their URLs come from the data that generates them.
+  const pillarPages: MetadataRoute.Sitemap = pillars.map((pillar) => ({
+    url: `${base}/services/${pillar.slug}`,
+    lastModified: updated,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
 
   const blogPosts: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
     url: `${base}/blog/${post.slug}`,
@@ -49,5 +70,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogPosts];
+  return [...staticPages, ...pillarPages, ...blogPosts];
 }

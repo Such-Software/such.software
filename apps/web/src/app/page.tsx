@@ -33,13 +33,13 @@ export default function Home() {
         </h1>
         <p className="max-w-2xl text-xl text-muted-foreground mb-8">
           Custom e-commerce, apps, games, and cryptocurrency tools, built in Kennett Square,
-          PA. End to end delivery or consulting engagements. Plus a shelf of mobile apps
-          &amp; games of our own.
+          PA. Web services can be provided on revenue share: we build, host and run it, and
+          earn a share once you are live. Plus a shelf of mobile apps &amp; games of our own.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 mb-14">
-          <Link href="/products">
-            <Button size="lg" className="rounded-full shadow-lg shadow-[#12857e]/25 hover:shadow-[#3ad4c6]/40 hover:scale-[1.03] transition-all">View Portfolio</Button>
+          <Link href="/services">
+            <Button size="lg" className="rounded-full shadow-lg shadow-[#12857e]/25 hover:shadow-[#3ad4c6]/40 hover:scale-[1.03] transition-all">See What We Build</Button>
           </Link>
           <Link href="#contact">
             <Button variant="outline" size="lg" className="rounded-full hover:scale-[1.03] transition-all">Start a Project</Button>

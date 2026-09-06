@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getAllSlugs, getPost } from "@/lib/blog";
+import { pageMetadata } from "@/lib/page-metadata";
 import { JsonLd, articleLd, breadcrumbLd } from "@/components/seo/json-ld";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -26,23 +27,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return {
+  return pageMetadata({
     title: `${post.title} | Such Software Blog`,
     description: post.excerpt,
-    alternates: { canonical: `/blog/${slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      url: `/blog/${slug}`,
-      siteName: "Such Software",
-    },
-    twitter: {
-      card: "summary",
-      title: post.title,
-      description: post.excerpt,
-    },
-  };
+    path: `/blog/${slug}`,
+    type: "article",
+    // The tab wants the site name; a shared link already shows the domain, so the post's own
+    // title is the whole card.
+    socialTitle: post.title,
+    publishedTime: post.date || undefined,
+  });
 }
 
 export default async function BlogPost({ params }: Props) {

@@ -2,16 +2,14 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Such Software",
-  description: "The umbrella privacy policy for the such.software website and Such Software LLC. Individual apps and games may have their own privacy policies.",
-  alternates: { canonical: "/privacy" },
-  openGraph: {
+  ...pageMetadata({
     title: "Privacy Policy | Such Software",
     description: "The umbrella privacy policy for the such.software website and Such Software LLC. Individual apps and games may have their own privacy policies.",
-    type: "website",
-  },
+    path: "/privacy",
+  }),
 };
 
 export default function PrivacyPage() {
@@ -85,6 +83,13 @@ export default function PrivacyPage() {
               <strong>Global Privacy Control</strong> browser signals: if either is enabled, no analytics are
               collected from your visit. We do not use Google Analytics, advertising pixels, or similar
               third-party tracking tools on the Site.
+            </p>
+            <p className="mt-3">
+              Alongside page views, we count two things you do on purpose: that someone began filling in
+              the contact form, and that someone sent it. These are counters, not contents. They record
+              which of the two forms it was and nothing you typed, and like everything else here they are
+              not collected at all if Do Not Track or Global Privacy Control is on. We use them to tell
+              whether a change to the site helped or hurt, rather than guessing.
             </p>
 
             <h3 className="text-xl font-medium mt-4 mb-2">Server logs</h3>

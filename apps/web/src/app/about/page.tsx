@@ -6,18 +6,14 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { FaMapMarkerAlt, FaPhone, FaBuilding, FaExternalLinkAlt } from "react-icons/fa";
 import { FaXTwitter, FaTelegram, FaDiscord, FaBluesky, FaTiktok, FaYoutube, FaInstagram, FaLinkedinIn, FaFacebookF, FaPinterestP } from "react-icons/fa6";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "About: A Kennett Square, PA Software Studio | Such Software",
-  description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto and payment integrations, and games, with front-ends engineered to meet WCAG 2.2 AA.",
-  alternates: {
-    canonical: "/about",
-  },
-  openGraph: {
+  ...pageMetadata({
     title: "About: A Kennett Square, PA Software Studio | Such Software",
     description: "Such Software is a Kennett Square, PA studio founded by John Winter Murphy, building accessible web apps, crypto and payment integrations, and games, with front-ends engineered to meet WCAG 2.2 AA.",
-    type: "website",
-  },
+    path: "/about",
+  }),
 };
 
 export default function AboutPage() {

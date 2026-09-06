@@ -30,7 +30,7 @@ const apps = [
     href: "/products/hash-bags",
     links: [
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.hashwallet" },
-      { platform: "apple" as const, href: null },
+      { platform: "apple" as const, href: "https://apps.apple.com/us/app/hash-bags/id6770757859" },
     ],
   },
   {

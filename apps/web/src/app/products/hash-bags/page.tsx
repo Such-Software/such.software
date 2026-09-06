@@ -8,7 +8,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 const DESCRIPTION =
-  "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Free on Android; iOS and desktop coming soon.";
+  "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Free on Android and iOS; desktop coming soon.";
 
 export const metadata: Metadata = {
   title: "Hash Bags: Non-Custodial Multi-Chain Crypto Wallet | Such Software",
@@ -54,7 +54,7 @@ export default function HashBagsPage() {
         path: "/products/hash-bags",
         description: DESCRIPTION,
         category: "FinanceApplication",
-        operatingSystem: "Android",
+        operatingSystem: "Android, iOS",
         price: "0",
       })} />
       <Header />
@@ -80,7 +80,7 @@ export default function HashBagsPage() {
           <p className="text-xl text-muted-foreground leading-relaxed">
             A wallet for your coins. Hash Bags is an open-source, non-custodial, multi-chain
             crypto wallet: your keys and your funds stay on your device, and we never hold
-            either. Free on Android today, with iOS and desktop on the way.
+            either. Free on Android and iOS today, with desktop on the way.
           </p>
         </div>
 
@@ -88,13 +88,12 @@ export default function HashBagsPage() {
           <StoreButtons
             links={[
               { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.hashwallet" },
-              { platform: "apple", href: null },
+              { platform: "apple", href: "https://apps.apple.com/us/app/hash-bags/id6770757859" },
             ]}
             extraLinks={[{ href: "https://hash.boats", label: "hash.boats" }]}
           />
           <p className="mt-4 text-sm text-muted-foreground">
-            Live on Google Play. The iOS build is in review, and macOS, Linux, and Windows
-            follow after that.
+            Live on Google Play and the App Store. macOS, Linux and Windows follow.
           </p>
         </div>
 

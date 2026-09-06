@@ -5,8 +5,31 @@ import { useEffect, useRef, useState } from "react";
 // How long the splash holds before it hands over. This MUST match the pack's
 // motion.splash.ms: the morph asset is generated to end exactly on this number, so a gate
 // that closes early cuts the last letter mid-draw and one that closes late holds a still
-// frame. See such-graphics packs/such-software/pack.json.
-const SPLASH_MS = 1337;
+// frame.
+//
+// It used to say that, and then hardcode 1337 next to a comment asking the next person to
+// keep two repositories in agreement by hand. The pack has always been able to emit the
+// number: it reaches us as `--sg-dur-splash` in the generated brand.css, so now we read it.
+// The literal below is a fallback for the case where the stylesheet did not load, not a
+// second copy of the value.
+const SPLASH_FALLBACK_MS = 1337;
+
+function splashMs(): number {
+  if (typeof window === "undefined") return SPLASH_FALLBACK_MS;
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue("--sg-dur-splash")
+    .trim();
+  const value = Number.parseFloat(raw);
+  if (!Number.isFinite(value) || value <= 0) {
+    console.warn(
+      `hero-splash: --sg-dur-splash is ${raw || "unset"}, so the generated brand tokens are ` +
+        `not loaded; holding for ${SPLASH_FALLBACK_MS}ms instead.`,
+    );
+    return SPLASH_FALLBACK_MS;
+  }
+  // CSS times are "1337ms" or "1.337s"; only the latter needs scaling.
+  return raw.endsWith("ms") ? value : value * 1000;
+}
 
 // Long enough to read as a cross-fade, short enough that it does not feel like a second
 // gate stacked on the first.
@@ -27,7 +50,7 @@ const BURST_CELLS = [
  *
  * Four dots become the four pillar symbols become the word SUCH, then the page takes over.
  * The whole thing is one generated SVG (morph_splash*.svg) whose CSS timeline is scaled to
- * land on SPLASH_MS, so this component only has to hold it and then get out of the way.
+ * land on that duration, so this component only has to hold it and then get out of the way.
  *
  * It is a FIXED overlay from its first paint, never a block in document flow. That is not
  * cosmetic: in flow, removing it pulled a viewport of height out of the page and shifted
@@ -63,7 +86,7 @@ export function HeroSplash({ onEnter, leaving }: { onEnter: () => void; leaving?
   // The gate: hand over when the morph ends.
   useEffect(() => {
     if (leaving) return;
-    const id = window.setTimeout(() => enterRef.current(), SPLASH_MS);
+    const id = window.setTimeout(() => enterRef.current(), splashMs());
     return () => window.clearTimeout(id);
   }, [leaving]);
 

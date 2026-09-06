@@ -1,18 +1,14 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Evaluetron Terms of Service | Such Software",
-  description:
-    "The terms governing Evaluetron, the generation service reached on the web and through chat platforms including Discord and Telegram.",
-  alternates: { canonical: "/evaluetron/terms" },
-  openGraph: {
+  ...pageMetadata({
     title: "Evaluetron Terms of Service | Such Software",
-    description:
-      "The terms governing Evaluetron, the generation service reached on the web and through chat platforms including Discord and Telegram.",
-    type: "website",
-  },
+    description: "The terms governing Evaluetron, the generation service reached on the web and through chat platforms including Discord and Telegram.",
+    path: "/evaluetron/terms",
+  }),
 };
 
 export default function EvaluetronTermsPage() {

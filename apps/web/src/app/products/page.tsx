@@ -2,16 +2,14 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ProductsGrid, type Product } from "@/components/portfolio/products-grid";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Portfolio: Products & Projects | Such Software",
-  description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
-  alternates: { canonical: "/products" },
-  openGraph: {
+  ...pageMetadata({
     title: "Portfolio: Products & Projects | Such Software",
     description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
-    type: "website",
-  },
+    path: "/products",
+  }),
 };
 
 const products: Product[] = [
@@ -34,7 +32,7 @@ const products: Product[] = [
   {
     slug: "hash-bags",
     title: "Hash Bags",
-    description: "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Android now; iOS and desktop coming.",
+    description: "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Android and iOS now; desktop coming.",
     color: "emerald",
     icon: "/images/products/hash-bags.png",
     releaseDate: "2026-08-17",

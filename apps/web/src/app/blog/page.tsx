@@ -3,17 +3,15 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Blog: Build Notes on Crypto, Commerce & Apps | Such Software",
-  description: "Technical write-ups from Such Software on provably-fair games, Monero tooling, custom e-commerce, and the apps we ship.",
-  alternates: { canonical: "/blog" },
-  openGraph: {
+  ...pageMetadata({
     title: "Blog: Build Notes on Crypto, Commerce & Apps | Such Software",
     description: "Technical write-ups from Such Software on provably-fair games, Monero tooling, custom e-commerce, and the apps we ship.",
-    type: "website",
-  },
+    path: "/blog",
+  }),
 };
 
 export default function BlogPage() {

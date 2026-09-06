@@ -1,18 +1,14 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Evaluetron Privacy Policy | Such Software",
-  description:
-    "What Evaluetron stores, for how long, and who else sees it, including which prompts leave for upstream model providers.",
-  alternates: { canonical: "/evaluetron/privacy" },
-  openGraph: {
+  ...pageMetadata({
     title: "Evaluetron Privacy Policy | Such Software",
-    description:
-      "What Evaluetron stores, for how long, and who else sees it, including which prompts leave for upstream model providers.",
-    type: "website",
-  },
+    description: "What Evaluetron stores, for how long, and who else sees it, including which prompts leave for upstream model providers.",
+    path: "/evaluetron/privacy",
+  }),
 };
 
 export default function EvaluetronPrivacyPage() {
