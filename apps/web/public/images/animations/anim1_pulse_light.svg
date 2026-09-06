@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <defs><filter id="sg-pulse-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <defs><filter id="sg-pulse-glow" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
   <style>
     .pl0 { animation: sg-pl0 3s linear infinite; }
     @keyframes sg-pl0 { from { stroke-dashoffset: -0; } to { stroke-dashoffset: -603.9; } }
@@ -23,9 +23,9 @@
   <rect width="200" height="200" rx="26" fill="#f7f8fa"/>
   <g class="field">
     <path d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#1a5c38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
-    <path class="pl pl0" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#1a5c38" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 573.9"/>
-    <path class="pl pl1" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#2f8f5e" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="20 583.9"/>
-    <path class="pl pl2" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#0a0a14" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 595.9"/>
+    <path class="pl pl0 b0" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#1a5c38" stroke-width="3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="30 573.9"/>
+    <path class="pl pl1 b0" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#2f8f5e" stroke-width="2" opacity="0.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#sg-pulse-glow)" stroke-dasharray="20 583.9"/>
+    <path class="pl pl2 b0" d="m 20,28 h 66 l 6,6 h 16 l 6,-6 h 58 l 6,6 v 60 l -6,6 H 28 l -6,6 v 60 l 6,6 h 58 l 6,-6 h 16 l 6,6 h 58" fill="none" stroke="#0a0a14" stroke-width="1.5" opacity="0.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 595.9"/>
     <g class="nodes" filter="url(#sg-pulse-glow)">
       <g transform="translate(20,28)"><g class="nd" style="animation-delay:0s"><circle r="2.5" fill="#1a5c38"/></g></g>
       <g transform="translate(92,34)"><g class="nd" style="animation-delay:0.37s"><circle r="2" fill="#1a5c38"/></g></g>
