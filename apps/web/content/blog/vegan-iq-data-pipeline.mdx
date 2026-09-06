@@ -2,7 +2,7 @@
 title: "Building a Data-Driven Trivia Engine: No LLMs, Just Verified Facts"
 date: "2026-04-09"
 excerpt: "How we built Vegan IQ's question pipeline: deterministic generation from USDA, Oxford, and FAOSTAT data, quality filtering from 2,461 to 1,066 questions, and a greedy anti-repetition algorithm that makes every quiz feel fresh."
-draft: true
+draft: false
 ---
 
 Vegan IQ ships with 1,066 trivia questions. None of them were written by an LLM. Every question traces back to a specific data source: USDA FoodData Central, Poore & Nemecek (Science, 2018), NIH, or FAOSTAT. The pipeline that produces them is a deterministic Python script that generates questions from structured data, filters them for quality, and outputs a single JSON file that the Flutter app bundles as an asset.

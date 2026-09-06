@@ -3,16 +3,14 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Support & Feedback | Such Software",
-  description: "Get help with any Such Software app or game. Report a bug, request a feature, or send feedback. We read every message.",
-  alternates: { canonical: "/support" },
-  openGraph: {
+  ...pageMetadata({
     title: "Support & Feedback | Such Software",
     description: "Get help with any Such Software app or game. Report a bug, request a feature, or send feedback. We read every message.",
-    type: "website",
-  },
+    path: "/support",
+  }),
 };
 
 export default function SupportPage() {

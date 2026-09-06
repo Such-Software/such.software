@@ -2,16 +2,14 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ProductsGrid, type Product } from "@/components/portfolio/products-grid";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Portfolio: Products & Projects | Such Software",
-  description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
-  alternates: { canonical: "/products" },
-  openGraph: {
+  ...pageMetadata({
     title: "Portfolio: Products & Projects | Such Software",
     description: "Explore Such Software's products: Wownerogue Monero roguelike, Neroswap crypto aggregator, Smirk wallet, headless Webshops, our mobile games, and nuclear games in development.",
-    type: "website",
-  },
+    path: "/products",
+  }),
 };
 
 const products: Product[] = [

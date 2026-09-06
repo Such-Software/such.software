@@ -2,16 +2,14 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Such Software",
-  description: "The umbrella privacy policy for the such.software website and Such Software LLC. Individual apps and games may have their own privacy policies.",
-  alternates: { canonical: "/privacy" },
-  openGraph: {
+  ...pageMetadata({
     title: "Privacy Policy | Such Software",
     description: "The umbrella privacy policy for the such.software website and Such Software LLC. Individual apps and games may have their own privacy policies.",
-    type: "website",
-  },
+    path: "/privacy",
+  }),
 };
 
 export default function PrivacyPage() {
