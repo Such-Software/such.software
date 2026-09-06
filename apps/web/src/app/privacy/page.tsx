@@ -84,6 +84,13 @@ export default function PrivacyPage() {
               collected from your visit. We do not use Google Analytics, advertising pixels, or similar
               third-party tracking tools on the Site.
             </p>
+            <p className="mt-3">
+              Alongside page views, we count two things you do on purpose: that someone began filling in
+              the contact form, and that someone sent it. These are counters, not contents. They record
+              which of the two forms it was and nothing you typed, and like everything else here they are
+              not collected at all if Do Not Track or Global Privacy Control is on. We use them to tell
+              whether a change to the site helped or hurt, rather than guessing.
+            </p>
 
             <h3 className="text-xl font-medium mt-4 mb-2">Server logs</h3>
             <p>
