@@ -1,3 +1,8 @@
+/* The generated brand tokens. Source of truth is such-graphics
+   packs/such-software/pack.json; regenerate with `such-graphics project-brand` and copy
+   the result here. Never hand-edit styles/brand.css: the pack gate compares it. */
+@import "../styles/brand.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -290,10 +295,11 @@
    and the symmetric cubic-bezier easing removes the hard turnaround the old ease-in-out had
    at each end of the travel. */
 /* The brand's four-colour system (S green, U magenta, C blue, H teal), one per glyph.
-   Light theme uses the light palette; .dark swaps in the dark palette, which is the
-   same hues lifted for contrast on near-black -- from packs/such-software/pack.json. */
+   These were four hand-typed hexes per theme, copied out of the pack and free to drift
+   from it. They now come from the generated tokens above, so the pack is the only place
+   the values exist. */
 .hero-title {
-  background-image: linear-gradient(110deg, #1a5c38 0%, #b83670 30%, #176a92 55%, #12857e 80%, #1a5c38 100%);
+  background-image: linear-gradient(110deg, var(--sg-glyph-s) 0%, var(--sg-glyph-u) 30%, var(--sg-glyph-c) 55%, var(--sg-glyph-h) 80%, var(--sg-glyph-s) 100%);
   background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -301,16 +307,16 @@
   animation: hero-sheen 18s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 .dark .hero-title {
-  background-image: linear-gradient(110deg, #35925c 0%, #e8689e 30%, #4aade0 55%, #3ad4c6 80%, #35925c 100%);
+  background-image: linear-gradient(110deg, var(--sg-glyph-s-dark) 0%, var(--sg-glyph-u-dark) 30%, var(--sg-glyph-c-dark) 55%, var(--sg-glyph-h-dark) 80%, var(--sg-glyph-s-dark) 100%);
 }
 .brand-gradient-text {
-  background-image: linear-gradient(90deg, #1a5c38, #b83670, #176a92, #12857e);
+  background-image: linear-gradient(90deg, var(--sg-glyph-s), var(--sg-glyph-u), var(--sg-glyph-c), var(--sg-glyph-h));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 .dark .brand-gradient-text {
-  background-image: linear-gradient(90deg, #35925c, #e8689e, #4aade0, #3ad4c6);
+  background-image: linear-gradient(90deg, var(--sg-glyph-s-dark), var(--sg-glyph-u-dark), var(--sg-glyph-c-dark), var(--sg-glyph-h-dark));
 }
 @keyframes hero-sheen {
   0%, 100% { background-position: 0% center; }
