@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "test": "playwright test",
     "test:a11y": "playwright test tests/a11y.spec.ts",
-    "test:ui": "playwright test --ui"
+    "test:ui": "playwright test --ui",
+    "check:metadata": "node scripts/check-metadata.mjs",
+    "check": "pnpm run lint && pnpm run build && pnpm run check:metadata"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.4.1",
