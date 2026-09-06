@@ -32,7 +32,7 @@ const products: Product[] = [
   {
     slug: "hash-bags",
     title: "Hash Bags",
-    description: "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Android now; iOS and desktop coming.",
+    description: "Open-source, non-custodial wallet for Monero, Wownero, Bitcoin, and nine more chains. Wownero-first, with Ledger, Trezor, and BitBox support. Android and iOS now; desktop coming.",
     color: "emerald",
     icon: "/images/products/hash-bags.png",
     releaseDate: "2026-08-17",
