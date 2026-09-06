@@ -1,0 +1,500 @@
+{
+  "colour_vision": [
+    {
+      "glyphs": [
+        {
+          "contrast_on_ground": 7.51,
+          "hex": "#1a5c38",
+          "letter": "S"
+        },
+        {
+          "contrast_on_ground": 5.2,
+          "hex": "#b83670",
+          "letter": "U"
+        },
+        {
+          "contrast_on_ground": 5.63,
+          "hex": "#176a92",
+          "letter": "C"
+        },
+        {
+          "contrast_on_ground": 4.22,
+          "hex": "#12857e",
+          "letter": "H"
+        }
+      ],
+      "ground": "#f7f8fa",
+      "separation": [
+        {
+          "binding_pair": [
+            "H",
+            "S"
+          ],
+          "min_separation": 19.03,
+          "vision": "normal"
+        },
+        {
+          "binding_pair": [
+            "H",
+            "U"
+          ],
+          "min_separation": 9.76,
+          "vision": "deuteranopia"
+        },
+        {
+          "binding_pair": [
+            "C",
+            "U"
+          ],
+          "min_separation": 8.23,
+          "vision": "protanopia"
+        },
+        {
+          "binding_pair": [
+            "C",
+            "H"
+          ],
+          "min_separation": 7.33,
+          "vision": "tritanopia"
+        }
+      ],
+      "theme": "light"
+    },
+    {
+      "glyphs": [
+        {
+          "contrast_on_ground": 5.11,
+          "hex": "#35925c",
+          "letter": "S"
+        },
+        {
+          "contrast_on_ground": 6.51,
+          "hex": "#e8689e",
+          "letter": "U"
+        },
+        {
+          "contrast_on_ground": 7.87,
+          "hex": "#4aade0",
+          "letter": "C"
+        },
+        {
+          "contrast_on_ground": 10.76,
+          "hex": "#3ad4c6",
+          "letter": "H"
+        }
+      ],
+      "ground": "#0a0a0a",
+      "separation": [
+        {
+          "binding_pair": [
+            "H",
+            "S"
+          ],
+          "min_separation": 23.85,
+          "vision": "normal"
+        },
+        {
+          "binding_pair": [
+            "H",
+            "U"
+          ],
+          "min_separation": 11.91,
+          "vision": "deuteranopia"
+        },
+        {
+          "binding_pair": [
+            "C",
+            "U"
+          ],
+          "min_separation": 14.71,
+          "vision": "protanopia"
+        },
+        {
+          "binding_pair": [
+            "C",
+            "H"
+          ],
+          "min_separation": 7.45,
+          "vision": "tritanopia"
+        }
+      ],
+      "theme": "dark"
+    }
+  ],
+  "decisions": [
+    {
+      "heading": "Why four colours",
+      "path": "_palette_note",
+      "text": "Four glyph colours ARE the categorical palette: green/magenta/blue/teal, one per letter of S-U-C-H. They are never assigned by data; letter position owns the colour, so the mark reads identically everywhere. Dark variants are the light hues lifted for contrast on #0a0a0a, not separate brand colours. Every value here must be a bare hex string: style/tokens.py iterates this map and parses each entry as a colour, so a prose note among them is a crash, not a comment. Annotations live in the sibling _notes block."
+    },
+    {
+      "heading": "How the monogram is drawn",
+      "path": "glyphs._note",
+      "text": "The authored dark master had a divergent U (\u20269.85,14 22,14 \u2026 22,-1.85 22,-14) against the light master's (\u20269.85,16 22,16 \u2026 22,-3.85 22,-16). That is exactly the hand-maintenance drift this pack exists to end: the LIGHT master is canonical and both themes now render from these paths. The site's beloved anim1_pulse.svg still carries the divergent U, which is why it is now generated rather than kept by hand."
+    },
+    {
+      "heading": "The U's bowl",
+      "path": "glyphs._u_note",
+      "text": "Bowl depth 16 -> 13 (and the control -3.85 -> -3.1 to hold the curve's shape ratio). At 16 the U stood 50 tall against S and C at 46, roughly 7% oversized, and hung 4.1 units below its row so the top row did not read as a unit. This is the ONE change that edits path data, so brand_mark --verify now fails against the authored masters in Documents/suchsoftware/media/corp/logo/. That is intended: this pack is canonical and those files are the historical record."
+    },
+    {
+      "heading": "The tile and its grid",
+      "path": "geometry._note",
+      "text": "One 200x200 tile. The four glyphs sit on a 2x2 grid: S and C in the left column, U and H in the right. Stroke geometry is invariant across every tier (T0 flat to T3 extruded) per design/graphics-settings.md \u2014 only material and depth change."
+    },
+    {
+      "heading": "Why the frame radius is 12",
+      "path": "geometry._frame_note",
+      "text": "radius 12, not 16: at inset 14 inside an rx-26 tile, 16 is not concentric and the corners read loose. frameless_scale spends the margin the frame vacates, which is what makes 16px legible."
+    },
+    {
+      "heading": "The column offset",
+      "path": "geometry.grid._note",
+      "text": "Columns sat 26 units apart against 18 for the rows, so the mark bound vertically and read as four objects instead of the word SUCH. Moving each column 3 inward closes the gutter to 20. Applied as a transform; path data is the cross-tier invariant."
+    },
+    {
+      "heading": "The wordmark row",
+      "path": "lockup._note",
+      "text": "The horizontal lockup: the 200x200 tile untouched at the left, wordmark set to its right. The tile keeps its own viewBox origin so the monogram is byte-identical between the standalone mark and the lockup \u2014 the wordmark is added beside it, never a redraw of it."
+    },
+    {
+      "heading": "Why two facets became three, and why three were cut",
+      "path": "fields._note",
+      "text": "The FACET layer, and the only part of the mark that varies. Such Software is the circuit substrate that carries everything (`circuit`, the corporate default) and the one thing that gets to leave the grid (`games`). There were five: commerce, crypto and education were cut because they were the same idea drawn three more times -- crypto was circuit with square nodes, and a viewer cannot tell a 'checkout' route from a 'decay track' route without the label. Each facet is a route through geometry.channels plus the nodes along it. Nothing else changes: same tile, same frame, same monogram, same drawing grammar, same 2px stroke. Facets differ by ROUTE, not by new primitives. The field THREADS: it is drawn under the monogram, so wherever a route passes a letter it is occluded and reads as passing behind. The 2026-08-02 weave experiment (routes crossing IN FRONT of letters through declared zones) was retired by direction on 2026-08-15 -- crossing the letterforms read as damage on both facets, and the authored site animations everyone already loved never crossed anything. The weave machinery in _grammar stays as a tested, dormant capability."
+    },
+    {
+      "heading": "How a field is drawn",
+      "path": "fields._grammar._note",
+      "text": "The shared drawing grammar. opacity_light rose from 0.18 to 0.46 (dark 0.22 -> 0.52) with the weave: at 0.18 the field read as the faint grey construction guides it was mistaken for, and a line that is going to interlock with the monogram has to look like it is there. It still cannot compete -- it is a 2-unit stroke against the glyphs\u2019 14 at full saturation, so roughly a twentieth of the visual mass per unit of length -- and it sits in the same register as the frame at 0.45, which is the hierarchy: monogram, then frame and field together, then nothing."
+    },
+    {
+      "heading": "What a weave is",
+      "path": "fields._grammar.weave._note",
+      "text": "How a strand that rides in FRONT of a glyph is drawn. Two coincident strokes on the same `d`, masked to the letterform: a `casing` in the tile background colour, and the `core` in the field colour on top of it. The casing is the whole trick -- it is the cartographer\u2019s bridge casing, and it is what makes the crossing read as a strand passing over rather than as a scratch across the letter. Without it the core sits directly on glyph colour and the two interfere: over U (#b83670) a #1a5c38 line is legible but reads as damage, and over S it would be green on green and vanish. The widths are the result of rendering the range and looking: casing 6 cut 43% out of a 14-unit glyph stroke and the letter came apart at the crossing, casing 3.5 closed up to a scratch. 4.5 leaves 4.75 units of letter either side, which still reads as one stroke interrupted. core is wider than the base stroke (2.5 against 2) and near-solid against the base field\u2019s 0.46 because the near strand of a weave should carry more weight than the far one -- the eye reads contrast as depth."
+    },
+    {
+      "heading": "Where a field may cross a letter",
+      "path": "fields._grammar.weave._zones_note",
+      "text": "Where a field is ALLOWED to ride over a glyph, as [x0,x1,y0,y1] boxes in tile space. A letter absent from this map may never be ridden over -- which is why the depth rule comes out as \"behind the left column, in front of the right\": the S and the C have nowhere safe to be crossed. The test is whether the crossed span is anchored at BOTH ends. The U\u2019s bowl and the H\u2019s crossbar are, so interrupting one leaves both remaining pieces attached to something and the letter still reads. Every other span in the monogram ends in a free terminal: cut the U\u2019s right stem and the piece above the cut is holding on to nothing, and the letter reads as broken rather than as crossed. Both boxes are the middle of a span and sit on the letter\u2019s own axis of symmetry, which is also where a crossing looks deliberate rather than incidental. A route must additionally meet the span SQUARE-ON: a traversal much longer than the 14-unit glyph stroke means the trace is shearing along the stroke and shaving a wedge off its edge, which is the defect that ruled out the old games arc across the U\u2019s right stem (29 units for a 14-unit stroke)."
+    },
+    {
+      "heading": "The circuit route",
+      "path": "fields.circuit._trace_note",
+      "text": "RESTORED 2026-08-15 by direction: this is the authored anim1_pulse route back in charge, ending `h 58` per the static master (anim1 stopped 6 units short at `h 52`; the disagreement is recorded in docs/architecture/brand-mark.md). The 2026-08-02 weaving re-route (two vertical buses crossing seven strokes) is retired -- crossing the letters read as damage, and the beloved site animation never crossed anything. What the generator still improves over the authored file: the corrected U renders behind it, the node delays are measured off the trace instead of hand-estimated ~17% fast, it is CSS instead of SMIL so prefers-reduced-motion actually works, and both themes come from one source."
+    },
+    {
+      "heading": "The games arch",
+      "path": "fields.games._trace_note",
+      "text": "RESTORED 2026-08-15 by direction, and REVERSED: the arch is the original symmetric parabola, but the signal now departs from the bottom-RIGHT foot and lands at bottom-LEFT, because the pulse should finish bottom-left. Where the arch passes a letter it passes BEHIND it (the field threads; see fields._note) -- the descending legs are occluded by the letterforms they cross, never drawn over them. `particle: rocket` gives the pulse a vehicle: the travelling dash becomes the exhaust behind a small rocket riding the arc nose-first (see brand_mark._particle), which is what a launch arc was always asking for."
+    },
+    {
+      "heading": "The games nodes",
+      "path": "fields.games._nodes_note",
+      "text": "Placed BY the curve, not by eye: every coordinate is svgpath.point_at at a chosen phase, so each node sits exactly on the route. Near-even eighths; the apex node at (100,20) is the largest, because a launch arc has one moment that matters."
+    },
+    {
+      "heading": "The cascade",
+      "path": "fields.cascade._note",
+      "text": "An ion entering matter, scattering off nuclei, throwing recoils, and stopping. The other two facets are designed routes: circuit is a bus, games is an arch. This one is a TRAJECTORY, generated by tools/gen_cascade_field.py from seed 20260906 and pasted here as a literal like the others, so the geometry is reviewable in a diff. A node marks where a track stopped, not a via: in SRIM the range distribution is the result and the individual path is only how it got there. This is the facet that connects the corporate mark to the nuclear work, to Bloomword's branching trees, and to the creature body plans, which are all the same shape of idea."
+    },
+    {
+      "heading": "The travelling signal",
+      "path": "pulse._note",
+      "text": "Three dashes at staggered phases of the same loop, lifted from the authored anim1_pulse.svg (which hardcoded len/gap pairs against one trace's 598-unit length, and one begin= per node measured by hand). `phase` is a fraction of the loop; the gap is computed as total_length - len so a single dash is in flight per element regardless of which facet route it runs on. node_grow is the radius multiplier at the moment the signal arrives."
+    },
+    {
+      "heading": "The readability floor",
+      "path": "mark._note",
+      "text": "The mark's rendering contract. This block used to be called `grade`, which is a SCHEMA-DEFINED key meaning the colour grade (tonemap/exposure/contrast/saturation/glow/vignette/grain) \u2014 backends/svg.py reads grade.vignette and grade.grain from it, and style/tokens.py emits every entry as a GRADE_* Godot constant. The corporate pack was quietly answering a different question than the one being asked. At or below min_tile_px the frame and the field are dropped and only the four glyphs render: the readability floor from design/graphics-settings.md. The glyph is invariant; the frame and the field are decoration. draw_stagger_ms lives here rather than in motion.draw because the pack schema closes motion entries to ms/curve/note so renderers can treat them uniformly \u2014 stagger is a composition rule, not a curve."
+    },
+    {
+      "heading": "The four-circle reduction",
+      "path": "dots._note",
+      "text": "The four-circle reduction: one disc per glyph cell, each carrying its letter's colour. The centres are MEASURED, not authored -- x snaps to channels.axis_left/axis_right (the same axes the fields cross on) and y to the mean of each row's glyph-box centres, so the dots track the letterforms if the grid ever moves. Radius 24 gives a 48-unit disc against glyph cells 46-47 tall: the dot carries the same visual mass as the letter it stands for. This is the seed state of the morph (dot -> pillar symbol -> letter) and its own favicon: at 16px four discs survive where four letterforms are mush."
+    },
+    {
+      "heading": "The pillar symbols",
+      "path": "symbols._note",
+      "text": "Nerd Font glyph outlines extracted once to path data, so nothing depends on the font at render time and the fills inherit brand colour. Emoji could not do this: they are baked multicolour bitmaps and would fight the palette. Each symbol maps to the letter it becomes: cart->S commerce, btc->U crypto, dog->C the doge/Wownero line, atom->H the science and education work. Normalised into a 0..100 box; the renderer scales and centres each into its glyph cell. `pillar` names the company pillar the symbol stands for, and is the identity a standalone pillar tile is filed under. tile_scale is the symbol's span as a fraction of the tile when it IS the tile (the pillar logos): 1.16 fills the frame's interior with the same breathing room the monogram keeps."
+    },
+    {
+      "heading": "The effects",
+      "path": "fx._note",
+      "text": "Display treatments of the clean mark, emitted into brand/fx/. These replace the four hand-made one-offs that lived only in ~/Build (2026-08-02, no generator committed -- the exact drift this pack exists to end). Each is the clean tile plus an overlay; the monogram geometry is never redrawn. `shine` is the only animated one and parks as the clean mark under prefers-reduced-motion."
+    }
+  ],
+  "description": "The CORPORATE Such Software identity: the SUCH monogram, the wordmark, the four-colour system, and its facet fields. Every product pack (barns, bauhaus-echo, bloomword, suchoice, vegan-iq, smirk, wownero) is its own brand; this one is the parent.",
+  "facets": [
+    {
+      "branches": 1,
+      "depth": 603.88,
+      "length": 603.88,
+      "name": "circuit",
+      "nodes": 11,
+      "note": "RESTORED 2026-08-15 by direction: this is the authored anim1_pulse route back in charge, ending `h 58` per the static master (anim1 stopped 6 units short at `h 52`; the disagreement is recorded in docs/architecture/brand-mark.md). The 2026-08-02 weaving re-route (two vertical buses crossing seven strokes) is retired -- crossing the letters read as damage, and the beloved site animation never crossed anything. What the generator still improves over the authored file: the corrected U renders behind it, the node delays are measured off the trace instead of hand-estimated ~17% fast, it is CSS instead of SMIL so prefers-reduced-motion actually works, and both themes come from one source.",
+      "weaves_over": []
+    },
+    {
+      "branches": 1,
+      "depth": 353.83,
+      "length": 353.83,
+      "name": "games",
+      "nodes": 9,
+      "note": "RESTORED 2026-08-15 by direction, and REVERSED: the arch is the original symmetric parabola, but the signal now departs from the bottom-RIGHT foot and lands at bottom-LEFT, because the pulse should finish bottom-left. Where the arch passes a letter it passes BEHIND it (the field threads; see fields._note) -- the descending legs are occluded by the letterforms they cross, never drawn over them. `particle: rocket` gives the pulse a vehicle: the travelling dash becomes the exhaust behind a small rocket riding the arc nose-first (see brand_mark._particle), which is what a launch arc was always asking for.",
+      "weaves_over": []
+    },
+    {
+      "branches": 19,
+      "depth": 230.08,
+      "length": 1091.62,
+      "name": "cascade",
+      "nodes": 9,
+      "note": "An ion entering matter, scattering off nuclei, throwing recoils, and stopping. The other two facets are designed routes: circuit is a bus, games is an arch. This one is a TRAJECTORY, generated by tools/gen_cascade_field.py from seed 20260906 and pasted here as a literal like the others, so the geometry is reviewable in a diff. A node marks where a track stopped, not a via: in SRIM the range distribution is the result and the individual path is only how it got there. This is the facet that connects the corporate mark to the nuclear work, to Bloomword's branching trees, and to the creature body plans, which are all the same shape of idea.",
+      "weaves_over": []
+    }
+  ],
+  "geometry": {
+    "bevel3d_ratio": 0.012,
+    "channels": {
+      "_note": "The lines a field is routed on. The first six are CONNECTIVE: after the column_dx shift the glyphs occupy x 32..88 and 108..166, y 29..93 and 111..171, so the margin band and the central cross carry a route between letters. top/bottom are back at the authored 28/172 (they moved to 24/176 for the retired weave's casing clearance; a threading field is occluded by the letters, so it needs no such margin). axis_left and axis_right are the vertical centre axes of the two glyph columns (x 32..88 -> 60, x 108..166 -> 137): the dots and the morph centre their cells on them, and they remain where a crossing would be structurally safe if the dormant weave is ever revived -- the reasoning about anchored spans lives with _grammar.weave.zones.",
+      "axis_left": 60,
+      "axis_right": 137,
+      "bottom": 172,
+      "column_gutter": 98,
+      "left": 22,
+      "right": 178,
+      "row_gutter": 100,
+      "top": 28
+    },
+    "extrude_over_stroke": 0.65,
+    "frame": {
+      "inset": 14,
+      "opacity_dark": 0.7,
+      "opacity_light": 0.45,
+      "radius": 12,
+      "size": 172,
+      "stroke": 3.5
+    },
+    "frameless_scale": 1.24,
+    "glyph": {
+      "linecap": "round",
+      "linejoin": "round",
+      "stroke": 14
+    },
+    "grid": {
+      "_note": "Columns sat 26 units apart against 18 for the rows, so the mark bound vertically and read as four objects instead of the word SUCH. Moving each column 3 inward closes the gutter to 20. Applied as a transform; path data is the cross-tier invariant.",
+      "column_dx": 3
+    },
+    "tile_radius": 26,
+    "viewbox": 200
+  },
+  "motion": {
+    "draw": {
+      "curve": "ease-in-out",
+      "ms": 1600,
+      "note": "The signature: each glyph strokes on in reading order S,U,C,H via stroke-dashoffset, staggered by mark.draw_stagger_ms. Sub-3Hz, no flashing. The whole mark is a static, fully-drawn logo under prefers-reduced-motion."
+    },
+    "fade": {
+      "curve": "ease-out",
+      "ms": 400
+    },
+    "frame": {
+      "curve": "ease-out",
+      "ms": 900,
+      "note": "frame fades in under the glyphs"
+    },
+    "grow": {
+      "curve": "ease-out-back",
+      "ms": 520
+    },
+    "morph": {
+      "curve": "ease-in-out",
+      "ms": 900,
+      "note": "Symbol dissolves and scales down as its letter draws on; staggered per cell."
+    },
+    "pulse": {
+      "curve": "linear",
+      "ms": 3000,
+      "note": "The field signal: dashes travel the facet route while the nodes flash as the signal reaches them. Linear because a signal does not ease. Dash lengths and per-node delays are MEASURED off the trace at build time (svgpath.py), never authored, so a new facet costs no timing work. Under prefers-reduced-motion the field renders as its static self."
+    },
+    "settle": {
+      "curve": "ease-in-out",
+      "ms": 420
+    },
+    "splash": {
+      "curve": "ease-in-out",
+      "ms": 1337,
+      "note": "How long the site's first-load splash holds the morph before it hands over to the page. The morph is re-timed to land in exactly this, uniformly scaled from its authored 3780ms rather than trimmed, so the short cut keeps the choreography. Both numbers live here: change this and the asset and the gate move together."
+    },
+    "symbol_hold": {
+      "curve": "linear",
+      "ms": 1100,
+      "note": "How long the four symbols read as symbols before the morph begins."
+    }
+  },
+  "not_stated": [
+    {
+      "topic": "clearspace",
+      "why": "No pack key declares an exclusion zone. `geometry.frame.inset` is the frame's inset inside the tile, which is a different measurement, and promoting one to the other would invent a rule."
+    }
+  ],
+  "pack": "such-software",
+  "palette": {
+    "all": {
+      "accent": "#e8b23a",
+      "bg": "#f7f8fa",
+      "bg_dark": "#0a0a0a",
+      "crit": "#b83670",
+      "faint": "#aab2bf",
+      "field": "#1a5c38",
+      "field_dark": "#45c99e",
+      "field_hi": "#2f8f5e",
+      "field_hi_dark": "#7ddfbe",
+      "frame": "#1a5c38",
+      "frame_dark": "#45c99e",
+      "glyph_c": "#176a92",
+      "glyph_c_dark": "#4aade0",
+      "glyph_h": "#12857e",
+      "glyph_h_dark": "#3ad4c6",
+      "glyph_s": "#1a5c38",
+      "glyph_s_dark": "#35925c",
+      "glyph_u": "#b83670",
+      "glyph_u_dark": "#e8689e",
+      "ink": "#0a0a14",
+      "ink_dark": "#f7f8fa",
+      "muted": "#5b6472",
+      "ok": "#237456",
+      "spark": "#0a0a14",
+      "spark_dark": "#ffffff",
+      "warn": "#b8863a"
+    },
+    "roles": {
+      "accent": {
+        "role_colour_key": "glyph_u",
+        "themes": {
+          "dark": {
+            "colour": "#e8689e",
+            "contrast": 6.51,
+            "ground": "#0a0a0a",
+            "meets_aa": true
+          },
+          "light": {
+            "colour": "#b83670",
+            "contrast": 5.2,
+            "ground": "#f7f8fa",
+            "meets_aa": true
+          }
+        },
+        "wcag_aa_needs": 3.0
+      },
+      "body": {
+        "role_colour_key": "ink",
+        "themes": {
+          "dark": {
+            "colour": "#f7f8fa",
+            "contrast": 18.63,
+            "ground": "#0a0a0a",
+            "meets_aa": true
+          },
+          "light": {
+            "colour": "#0a0a14",
+            "contrast": 18.53,
+            "ground": "#f7f8fa",
+            "meets_aa": true
+          }
+        },
+        "wcag_aa_needs": 4.5
+      },
+      "subtitle": {
+        "role_colour_key": "muted",
+        "themes": {
+          "dark": {
+            "colour": "#5b6472",
+            "contrast": 3.31,
+            "ground": "#0a0a0a",
+            "meets_aa": true
+          },
+          "light": {
+            "colour": "#5b6472",
+            "contrast": 5.63,
+            "ground": "#f7f8fa",
+            "meets_aa": true
+          }
+        },
+        "wcag_aa_needs": 3.0
+      },
+      "title": {
+        "role_colour_key": "ink",
+        "themes": {
+          "dark": {
+            "colour": "#f7f8fa",
+            "contrast": 18.63,
+            "ground": "#0a0a0a",
+            "meets_aa": true
+          },
+          "light": {
+            "colour": "#0a0a14",
+            "contrast": 18.53,
+            "ground": "#f7f8fa",
+            "meets_aa": true
+          }
+        },
+        "wcag_aa_needs": 3.0
+      }
+    }
+  },
+  "type": {
+    "families": {
+      "body": "'Manrope', 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "display": "'Manrope', 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "mono": "ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace"
+    },
+    "roles": {
+      "accent": {
+        "color": "glyph_u",
+        "font": "display",
+        "size": "subhead"
+      },
+      "body": {
+        "color": "ink",
+        "font": "body",
+        "size": "body"
+      },
+      "caption": {
+        "color": "muted",
+        "font": "mono",
+        "size": "caption"
+      },
+      "subtitle": {
+        "color": "muted",
+        "font": "display",
+        "size": "subhead"
+      },
+      "title": {
+        "color": "ink",
+        "font": "display",
+        "size": "title"
+      },
+      "wordmark": {
+        "color": "ink",
+        "font": "display",
+        "size": "wordmark"
+      }
+    },
+    "scale": {
+      "body": 13,
+      "caption": 11,
+      "label": 12,
+      "subhead": 15,
+      "title": 34,
+      "wordmark": 78
+    },
+    "tracking": {
+      "wordmark": 1
+    },
+    "weights": {
+      "wordmark": 800
+    }
+  },
+  "version": "3.0.0"
+}
