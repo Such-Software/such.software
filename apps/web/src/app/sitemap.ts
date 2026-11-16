@@ -23,6 +23,7 @@ const RANK: Record<
   "/apps": { changeFrequency: "monthly", priority: 0.5 },
   "/support": { changeFrequency: "monthly", priority: 0.5 },
   "/privacy": { changeFrequency: "yearly", priority: 0.3 },
+  "/privacy/shops": { changeFrequency: "yearly", priority: 0.3 },
   "/terms": { changeFrequency: "yearly", priority: 0.3 },
 };
 

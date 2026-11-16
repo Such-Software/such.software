@@ -60,6 +60,13 @@ export default function PrivacyPage() {
               <li><Link href="/products/such-moon-launch/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Such Moon Launch Privacy Policy</Link></li>
               <li><Link href="/evaluetron/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Evaluetron Privacy Policy</Link></li>
             </ul>
+            <p>
+              Shopping at an independent store that runs on our commerce platform? The seller owns
+              that shop and your information. Our{" "}
+              <Link href="/privacy/shops" className="text-blue-600 dark:text-blue-400 hover:underline">Privacy for Shop Customers</Link>{" "}
+              page explains who the seller is, what we handle on the seller&apos;s behalf, and what
+              we never do with your information.
+            </p>
           </section>
 
           <section>
