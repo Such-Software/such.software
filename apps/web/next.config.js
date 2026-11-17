@@ -16,6 +16,17 @@ const nextConfig = {
         destination: "/apps",
         permanent: true,
       },
+      // Each game's privacy policy lives on its own site now.
+      {
+        source: "/products/such-moon-launch/privacy",
+        destination: "https://moonlaunch.space/privacy/",
+        permanent: true,
+      },
+      {
+        source: "/products/bauhaus-echo/privacy",
+        destination: "https://bauhausecho.com/privacy/",
+        permanent: true,
+      },
     ];
   },
 };

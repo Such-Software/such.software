@@ -100,7 +100,7 @@ export default function SuchMoonLaunchTermsPage() {
             <p>
               You may remove ads by purchasing the &quot;Remove Ads&quot; upgrade within the App.
               Ad display is subject to our{" "}
-              <Link href="/products/such-moon-launch/privacy">Privacy Policy</Link>.
+              <Link href="https://moonlaunch.space/privacy/">Privacy Policy</Link>.
             </p>
 
             <hr />

@@ -194,7 +194,7 @@ export default function SuchMoonLaunchPage() {
         </div>
 
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <Link href="/products/such-moon-launch/privacy" className="hover:text-foreground transition-colors">
+          <Link href="https://moonlaunch.space/privacy/" className="hover:text-foreground transition-colors">
             Privacy Policy
           </Link>
           <span>•</span>

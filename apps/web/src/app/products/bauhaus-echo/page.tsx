@@ -124,7 +124,7 @@ export default function BauhausEchoPage() {
         </div>
 
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <Link href="/products/bauhaus-echo/privacy" className="hover:text-foreground transition-colors">
+          <Link href="https://bauhausecho.com/privacy/" className="hover:text-foreground transition-colors">
             Privacy Policy
           </Link>
           <span>•</span>
