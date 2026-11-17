@@ -55,9 +55,9 @@ export default function PrivacyPage() {
                 <a href="https://smirk.cash" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">smirk.cash</a>
               </li>
               <li><Link href="/products/vegan-iq/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Vegan IQ Privacy Policy</Link></li>
-              <li><Link href="/products/bauhaus-echo/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Bauhaus Echo Privacy Policy</Link></li>
+              <li><Link href="https://bauhausecho.com/privacy/" className="text-blue-600 dark:text-blue-400 hover:underline">Bauhaus Echo Privacy Policy</Link></li>
               <li><Link href="/products/suchoice/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Suchoice Privacy Policy</Link></li>
-              <li><Link href="/products/such-moon-launch/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Such Moon Launch Privacy Policy</Link></li>
+              <li><Link href="https://moonlaunch.space/privacy/" className="text-blue-600 dark:text-blue-400 hover:underline">Such Moon Launch Privacy Policy</Link></li>
               <li><Link href="/evaluetron/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Evaluetron Privacy Policy</Link></li>
             </ul>
             <p>
