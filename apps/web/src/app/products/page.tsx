@@ -94,6 +94,14 @@ const products: Product[] = [
     releaseDate: "2026-03-01",
   },
   {
+    slug: "radiation-space",
+    title: "radiation.space",
+    description: "The space radiation environment in 3D: radiation belts, cosmic rays and solar storms, with spectra, shielding and dose at any point, every number traced to its source. Free in the browser at radiation.space.",
+    color: "cyan",
+    icon: "/images/products/radiation-space.svg",
+    releaseDate: "2026-11-16",
+  },
+  {
     slug: "barns-and-neutrons",
     title: "Barns & Neutrons",
     description: "A cozy exploration-puzzle game across the real Chart of Nuclides: the anti-spreadsheet. Capture neutrons, coax decays, and light up the chart while learning honest nuclear physics. Desktop and mobile.",

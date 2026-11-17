@@ -16,6 +16,12 @@ const nextConfig = {
         destination: "/apps",
         permanent: true,
       },
+      {
+        // the short address radiation.space's footer links to
+        source: "/radiationspace",
+        destination: "/products/radiation-space",
+        permanent: false,
+      },
     ];
   },
 };
