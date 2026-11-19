@@ -58,8 +58,6 @@ export function VeganIqStoreButtons() {
     <StoreButtons links={[
       { platform: "google", href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq" },
       { platform: "apple", href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580" },
-    ]} extraLinks={[
-      { href: "https://app.veganiq.site", label: "Play Online Free" },
     ]} />
   );
 }
@@ -81,7 +79,7 @@ export function SuchMoonLaunchStoreButtons() {
         { platform: "apple", href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
       ]}
       extraLinks={[
-        { href: "https://play.moonlaunch.space", label: "Play Online Free" },
+        { href: "https://moonlaunch.space/play/", label: "Play Online Free" },
       ]}
     />
   );

@@ -58,7 +58,7 @@ export default function SuchMoonLaunchPage() {
         description: "Play Such Moon Launch free in your browser: fly a pixel rocket across the solar system through 11 levels, 4 weapons, and an endless mode. Also on iOS and Android.",
         genre: ["Arcade", "Action", "Casual"],
         gamePlatform: ["Web browser", "iOS", "Android"],
-        playUrl: "https://play.moonlaunch.space",
+        playUrl: "https://moonlaunch.space/play/",
         sameAs: [
           "https://moonlaunch.space",
           "https://apps.apple.com/us/app/such-moon-launch/id6767909623",

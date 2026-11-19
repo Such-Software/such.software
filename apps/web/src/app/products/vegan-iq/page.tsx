@@ -8,12 +8,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vegan IQ: Free Plant-Based Trivia Quiz, Play Online | Such Software",
-  description: "Play Vegan IQ free in your browser or on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
+  title: "Vegan IQ: Free Plant-Based Trivia Quiz Game | Such Software",
+  description: "Play Vegan IQ free on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
   alternates: { canonical: "/products/vegan-iq" },
   openGraph: {
-    title: "Vegan IQ: Free Plant-Based Trivia Quiz, Play Online | Such Software",
-    description: "Play Vegan IQ free in your browser or on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
+    title: "Vegan IQ: Free Plant-Based Trivia Quiz Game | Such Software",
+    description: "Play Vegan IQ free on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
     type: "website",
     images: ["/images/og/vegan-iq.png"],
   },
@@ -45,10 +45,9 @@ export default function VeganIqPage() {
       <JsonLd data={videoGameLd({
         name: "Vegan IQ",
         path: "/products/vegan-iq",
-        description: "Play Vegan IQ free in your browser or on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
+        description: "Play Vegan IQ free on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
         genre: ["Trivia", "Quiz", "Educational"],
-        gamePlatform: ["Web browser", "iOS", "Android"],
-        playUrl: "https://app.veganiq.site",
+        gamePlatform: ["iOS", "Android"],
         sameAs: [
           "https://veganiq.site",
           "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580",
@@ -85,8 +84,6 @@ export default function VeganIqPage() {
           <StoreButtons links={[
             { platform: "google", href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq" },
             { platform: "apple", href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580" },
-          ]} extraLinks={[
-            { href: "https://app.veganiq.site", label: "Play Online Free" },
           ]} />
         </div>
 

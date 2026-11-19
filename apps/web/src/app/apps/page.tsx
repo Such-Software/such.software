@@ -52,7 +52,6 @@ const apps = [
     color: "text-green-600 dark:text-green-400",
     borderColor: "border-green-500/20",
     href: "/products/vegan-iq",
-    web: "https://app.veganiq.site",
     links: [
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580" },
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq" },
@@ -90,7 +89,7 @@ const apps = [
     color: "text-amber-600 dark:text-amber-400",
     borderColor: "border-amber-500/20",
     href: "/products/such-moon-launch",
-    web: "https://play.moonlaunch.space",
+    web: "https://moonlaunch.space/play/",
     links: [
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },

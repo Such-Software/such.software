@@ -7,9 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-const title = "Free Online Games: Puzzle, Trivia & Arcade | Such Software";
+const title = "Free Online Games: Puzzle, Word & Arcade | Such Software";
 const description =
-  "Play free puzzle, trivia, and arcade games online in your browser, with nothing to install: Bauhaus Echo, Vegan IQ, Such Moon Launch, and Wownerogue. Bloomword's daily word game is on iOS and Android.";
+  "Play free puzzle and arcade games online in your browser, with nothing to install: Bauhaus Echo, Such Moon Launch, and Wownerogue. Vegan IQ trivia and Bloomword's daily word game are on iOS and Android.";
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description,
     path: "/games",
     socialTitle: "Free online games from Such Software",
-    socialDescription: "Puzzle, trivia, and arcade games you can play right now in your browser.",
+    socialDescription: "Puzzle and arcade games you can play right now in your browser.",
   }),
 };
 
@@ -59,7 +59,7 @@ const games: Game[] = [
       "Over 1,000 sourced questions on food, nutrition, and the planet. Swipe true or false, keep a daily streak, and see how much you really know.",
     icon: "/images/products/vegan-iq.png",
     page: "/products/vegan-iq",
-    play: "https://app.veganiq.site",
+    play: null,
     site: "https://veganiq.site",
     stores: [
       { platform: "apple", href: "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580" },
@@ -75,7 +75,7 @@ const games: Game[] = [
       "Fly a pixel rocket across the solar system, dodge Martians and asteroids, and stick the landing. Eleven levels and an endless mode.",
     icon: "/images/products/such-moon-launch.png",
     page: "/products/such-moon-launch",
-    play: "https://play.moonlaunch.space",
+    play: "https://moonlaunch.space/play/",
     site: "https://moonlaunch.space",
     stores: [
       { platform: "apple", href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
@@ -120,7 +120,7 @@ const faqs = [
   },
   {
     q: "Do I need to download anything to play online?",
-    a: "No. Bauhaus Echo, Vegan IQ, Such Moon Launch and Wownerogue run in a modern web browser on a computer, tablet or phone, with no install and no account needed to start.",
+    a: "No. Bauhaus Echo, Such Moon Launch and Wownerogue run in a modern web browser on a computer, tablet or phone, with no install and no account needed to start.",
   },
   {
     q: "Which game is a puzzle game?",
@@ -171,9 +171,9 @@ export default function GamesPage() {
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Free Online Games</h1>
         <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-          Puzzle, trivia, and arcade games you can play online right now. They run in your
-          browser, cost nothing to play, and need no download. Prefer your phone? Most of them
-          are on iOS and Android too.
+          Puzzle and arcade games you can play online right now. They run in your browser,
+          cost nothing to play, and need no download. Prefer your phone? Most of them are on
+          iOS and Android too, along with our trivia and word games.
         </p>
 
         <div className="grid grid-cols-1 gap-6">
