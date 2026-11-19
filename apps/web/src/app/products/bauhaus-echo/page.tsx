@@ -2,18 +2,18 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { StoreButtons } from "@/components/store-buttons";
-import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbLd, videoGameLd } from "@/components/seo/json-ld";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Bauhaus Echo: Visual Memory Puzzle Game | Such Software",
-  description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
+  title: "Bauhaus Echo: Free Memory Puzzle Game, Play Online | Such Software",
+  description: "Play Bauhaus Echo free in your browser: a visual memory puzzle with 5 modes and a calm Zen sandbox. Also on iOS and Android.",
   alternates: { canonical: "/products/bauhaus-echo" },
   openGraph: {
-    title: "Bauhaus Echo: Visual Memory Puzzle Game | Such Software",
-    description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
+    title: "Bauhaus Echo: Free Memory Puzzle Game, Play Online | Such Software",
+    description: "Play Bauhaus Echo free in your browser: a visual memory puzzle with 5 modes and a calm Zen sandbox. Also on iOS and Android.",
     type: "website",
     images: ["/images/og/bauhaus-echo.png"],
   },
@@ -39,13 +39,18 @@ export default function BauhausEchoPage() {
         { name: "Products", path: "/products" },
         { name: "Bauhaus Echo", path: "/products/bauhaus-echo" },
       ])} />
-      <JsonLd data={softwareAppLd({
+      <JsonLd data={videoGameLd({
         name: "Bauhaus Echo",
         path: "/products/bauhaus-echo",
-        description: "A Bauhaus-inspired memory puzzle game with 5 modes and a pressure-free Zen sandbox. Play free on iOS, Android, web, and desktop.",
-        category: "GameApplication",
-        operatingSystem: "Android, iOS, Web, Windows, macOS, Linux",
-        price: "0",
+        description: "Play Bauhaus Echo free in your browser: a visual memory puzzle with 5 modes and a calm Zen sandbox. Also on iOS and Android.",
+        genre: ["Puzzle", "Memory", "Casual"],
+        gamePlatform: ["Web browser", "iOS", "Android"],
+        playUrl: "https://play.bauhausecho.com",
+        sameAs: [
+          "https://bauhausecho.com",
+          "https://apps.apple.com/us/app/bauhaus-echo/id6759010657",
+          "https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho",
+        ],
       })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
@@ -81,7 +86,7 @@ export default function BauhausEchoPage() {
               { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" },
             ]}
             extraLinks={[
-              { href: "https://bauhaus.such.software", label: "Play on Web" },
+              { href: "https://play.bauhausecho.com", label: "Play Online Free" },
               { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io: $2" },
             ]}
           />
@@ -123,10 +128,14 @@ export default function BauhausEchoPage() {
           </Card>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <Link href="/products/bauhaus-echo/privacy" className="hover:text-foreground transition-colors">
             Privacy Policy
           </Link>
+          <span>•</span>
+          <a href="https://bauhausecho.com" className="hover:text-foreground transition-colors">
+            bauhausecho.com
+          </a>
           <span>•</span>
           <Link href="/blog/bauhaus-echo-launch" className="hover:text-foreground transition-colors">
             Blog Post

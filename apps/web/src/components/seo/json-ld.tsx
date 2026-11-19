@@ -70,6 +70,47 @@ export function softwareAppLd(opts: SoftwareAppOpts) {
   return data;
 }
 
+type VideoGameOpts = {
+  name: string;
+  path: string;
+  description: string;
+  genre: string[];
+  /** Platforms the game runs on; include "Web browser" when it has a playable web build. */
+  gamePlatform: string[];
+  /** The playable web build, when there is one. Becomes the free Offer's url. */
+  playUrl?: string;
+  /** The game's own site and store listings: the same game, elsewhere. */
+  sameAs?: string[];
+};
+
+/**
+ * VideoGame node for a game page. Game queries ("puzzle online", "word game online") match
+ * VideoGame better than a generic SoftwareApplication, and the free Offer points at the
+ * playable build so the result leads straight to the game.
+ */
+export function videoGameLd(opts: VideoGameOpts) {
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    name: opts.name,
+    url: `${SITE}${opts.path}`,
+    description: opts.description,
+    applicationCategory: "Game",
+    genre: opts.genre,
+    gamePlatform: opts.gamePlatform,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      url: opts.playUrl ?? `${SITE}${opts.path}`,
+    },
+    author: { "@type": "Organization", name: "Such Software" },
+    publisher: { "@type": "Organization", name: "Such Software" },
+  };
+  if (opts.sameAs?.length) data.sameAs = opts.sameAs;
+  return data;
+}
+
 /** FAQPage node. Pair it with the SAME questions/answers rendered visibly on the page. */
 export function faqLd(items: { q: string; a: string }[]) {
   return {

@@ -2,18 +2,18 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { StoreButtons } from "@/components/store-buttons";
-import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbLd, videoGameLd } from "@/components/seo/json-ld";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
-  description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
+  title: "Vegan IQ: Free Plant-Based Trivia Quiz Game | Such Software",
+  description: "Play Vegan IQ free on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
   alternates: { canonical: "/products/vegan-iq" },
   openGraph: {
-    title: "Vegan IQ: Plant-Based Trivia Game | Such Software",
-    description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
+    title: "Vegan IQ: Free Plant-Based Trivia Quiz Game | Such Software",
+    description: "Play Vegan IQ free on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
     type: "website",
     images: ["/images/og/vegan-iq.png"],
   },
@@ -42,13 +42,17 @@ export default function VeganIqPage() {
         { name: "Products", path: "/products" },
         { name: "Vegan IQ", path: "/products/vegan-iq" },
       ])} />
-      <JsonLd data={softwareAppLd({
+      <JsonLd data={videoGameLd({
         name: "Vegan IQ",
         path: "/products/vegan-iq",
-        description: "Test your plant-based knowledge with 1,000+ trivia questions across 8 categories, plus a daily challenge and weekly quiz. Free vegan trivia for iOS and Android.",
-        category: "GameApplication",
-        operatingSystem: "Android, iOS",
-        price: "0",
+        description: "Play Vegan IQ free on iOS and Android: 1,000+ sourced trivia questions across 8 categories, plus a daily challenge and weekly quiz.",
+        genre: ["Trivia", "Quiz", "Educational"],
+        gamePlatform: ["iOS", "Android"],
+        sameAs: [
+          "https://veganiq.site",
+          "https://apps.apple.com/us/app/vegan-iq-plant-based-trivia/id6761139580",
+          "https://play.google.com/store/apps/details?id=com.veganiq.vegan_iq",
+        ],
       })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
@@ -109,8 +113,13 @@ export default function VeganIqPage() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border">
-          <h2 className="text-2xl font-bold mb-4">Legal</h2>
+          <h2 className="text-2xl font-bold mb-4">Links</h2>
           <ul className="space-y-2">
+            <li>
+              <a href="https://veganiq.site" className="text-blue-600 dark:text-blue-400 hover:underline">
+                veganiq.site
+              </a>
+            </li>
             <li>
               <Link href="/products/vegan-iq/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">
                 Privacy Policy

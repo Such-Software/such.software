@@ -2,17 +2,17 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Card } from "@repo/ui/components/card";
 import { SuchMoonLaunchStoreButtons } from "@/components/store-buttons";
-import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbLd, videoGameLd } from "@/components/seo/json-ld";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
-  description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, and browser.",
+  title: "Such Moon Launch: Free Rocket Arcade Game, Play Online | Such Software",
+  description: "Play Such Moon Launch free in your browser: fly a pixel rocket across the solar system through 11 levels, 4 weapons, and an endless mode. Also on iOS and Android.",
   alternates: { canonical: "/products/such-moon-launch" },
   openGraph: {
-    title: "Such Moon Launch: Pixel Rocket Arcade Game | Such Software",
-    description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, and browser.",
+    title: "Such Moon Launch: Free Rocket Arcade Game, Play Online | Such Software",
+    description: "Play Such Moon Launch free in your browser: fly a pixel rocket across the solar system through 11 levels, 4 weapons, and an endless mode. Also on iOS and Android.",
     type: "website",
     images: ["/images/og/such-moon-launch.png"],
   },
@@ -52,14 +52,18 @@ export default function SuchMoonLaunchPage() {
         { name: "Products", path: "/products" },
         { name: "Such Moon Launch", path: "/products/such-moon-launch" },
       ])} />
-      <JsonLd data={softwareAppLd({
+      <JsonLd data={videoGameLd({
         name: "Such Moon Launch",
         path: "/products/such-moon-launch",
-        description: "Fly a rocket across the solar system in this Wownero-themed pixel arcade. 11 levels, 4 weapons, tilt-to-steer, endless mode. Free on iOS, Android, and browser.",
-        category: "GameApplication",
-        operatingSystem: "Android, iOS, Web",
-        price: "0",
-        offerUrl: "https://moonlaunch.such.software",
+        description: "Play Such Moon Launch free in your browser: fly a pixel rocket across the solar system through 11 levels, 4 weapons, and an endless mode. Also on iOS and Android.",
+        genre: ["Arcade", "Action", "Casual"],
+        gamePlatform: ["Web browser", "iOS", "Android"],
+        playUrl: "https://moonlaunch.space/play/",
+        sameAs: [
+          "https://moonlaunch.space",
+          "https://apps.apple.com/us/app/such-moon-launch/id6767909623",
+          "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch",
+        ],
       })} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
@@ -193,7 +197,11 @@ export default function SuchMoonLaunchPage() {
           </ul>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+          <a href="https://moonlaunch.space" className="hover:text-foreground transition-colors">
+            moonlaunch.space
+          </a>
+          <span>•</span>
           <Link href="/products/such-moon-launch/privacy" className="hover:text-foreground transition-colors">
             Privacy Policy
           </Link>

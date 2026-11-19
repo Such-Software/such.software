@@ -79,7 +79,7 @@ export function SuchMoonLaunchStoreButtons() {
         { platform: "apple", href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
       ]}
       extraLinks={[
-        { href: "https://moonlaunch.such.software", label: "Play on Web" },
+        { href: "https://moonlaunch.space/play/", label: "Play Online Free" },
       ]}
     />
   );
@@ -107,7 +107,7 @@ export function BauhausEchoStoreButtons() {
         { platform: "google", href: "https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" },
       ]}
       extraLinks={[
-        { href: "https://bauhaus.such.software", label: "Play on Web" },
+        { href: "https://play.bauhausecho.com", label: "Play Online Free" },
         { href: "https://suchsoftware.itch.io/bauhaus-echo", label: "itch.io: $2" },
       ]}
     />

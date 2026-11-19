@@ -17,6 +17,7 @@ const RANK: Record<
 > = {
   "/": { changeFrequency: "weekly", priority: 1.0 },
   "/products": { changeFrequency: "weekly", priority: 0.9 },
+  "/games": { changeFrequency: "weekly", priority: 0.9 },
   "/services": { changeFrequency: "monthly", priority: 0.9 },
   "/blog": { changeFrequency: "weekly", priority: 0.8 },
   "/about": { changeFrequency: "monthly", priority: 0.7 },
@@ -47,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // every page as "modified now" on every build, which is noise that dilutes the freshness
   // signal. Bump this when the site's static content meaningfully changes. (Blog posts carry
   // their own per-post dates below.)
-  const updated = new Date("2026-09-05");
+  const updated = new Date("2026-11-18");
 
   const staticPages: MetadataRoute.Sitemap = staticRoutes().map((route) => ({
     url: route === "/" ? base : `${base}${route}`,

@@ -8,11 +8,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Apps: Games & Tools for iOS, Android & Web | Such Software",
-  description: "Download Such Software's apps and games: Bloomword, Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
+  description: "Download Such Software's apps and games, or play online free: Bloomword, Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. On the App Store, Google Play, and the web.",
   alternates: { canonical: "/apps" },
   openGraph: {
     title: "Apps: Games & Tools for iOS, Android & Web | Such Software",
-    description: "Download Such Software's apps and games: Bloomword, Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. Free on the App Store, Google Play, and the web.",
+    description: "Download Such Software's apps and games, or play online free: Bloomword, Bauhaus Echo, Suchoice, Vegan IQ, Such Moon Launch, and more. On the App Store, Google Play, and the web.",
     type: "website",
     images: [{ url: "/images/branding/OG_banner_v2_light.png", width: 1200, height: 630, alt: "Such Software" }],
   },
@@ -64,6 +64,7 @@ const apps = [
     color: "text-blue-600 dark:text-blue-400",
     borderColor: "border-blue-500/20",
     href: "/products/bauhaus-echo",
+    web: "https://play.bauhausecho.com",
     links: [
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/bauhaus-echo/id6759010657" },
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.bauhausecho" },
@@ -88,6 +89,7 @@ const apps = [
     color: "text-amber-600 dark:text-amber-400",
     borderColor: "border-amber-500/20",
     href: "/products/such-moon-launch",
+    web: "https://moonlaunch.space/play/",
     links: [
       { platform: "apple" as const, href: "https://apps.apple.com/us/app/such-moon-launch/id6767909623" },
       { platform: "google" as const, href: "https://play.google.com/store/apps/details?id=com.suchsoftware.suchmoonlaunch" },
@@ -105,7 +107,10 @@ export default function LinksPage() {
       <Header />
       <div id="main-content" className="z-10 w-full max-w-3xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <h1 className="text-3xl font-bold mb-2 text-center">Such Software</h1>
-        <p className="text-muted-foreground text-center mb-10">Our apps</p>
+        <p className="text-muted-foreground text-center mb-10">
+          Our apps. Want to play right now?{" "}
+          <Link href="/games" className="underline hover:text-foreground">Free online games</Link>
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {sortedApps.map((app, i) => (
@@ -127,7 +132,10 @@ export default function LinksPage() {
                     <p className="text-sm text-muted-foreground">{app.tagline}</p>
                   </div>
                 </div>
-                <StoreButtons links={app.links} />
+                <StoreButtons
+                  links={app.links}
+                  extraLinks={"web" in app && app.web ? [{ href: app.web, label: "Play Online Free" }] : undefined}
+                />
               </div>
             </ScrollReveal>
           ))}
