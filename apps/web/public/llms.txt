@@ -1,0 +1,26 @@
+# Such Software
+
+> Such Software is an independent software studio in Kennett Square, Pennsylvania, USA. It makes free games and apps for the web, iOS and Android, and builds custom online stores, web apps and Monero and crypto tools for clients.
+
+Website: https://such.software
+Contact: apps@such.software
+Privacy: https://such.software/privacy
+
+## Free online games
+
+All of these are free to play. The browser versions need no download or account.
+
+- [Bauhaus Echo](https://such.software/products/bauhaus-echo): a visual memory puzzle game. Study a grid of Bauhaus-style tiles, watch them shuffle, then rebuild the pattern. Five modes, including a calm Zen sandbox. Play online: https://play.bauhausecho.com. Also on iOS and Android. Site: https://bauhausecho.com
+- [Vegan IQ](https://such.software/products/vegan-iq): a plant-based trivia quiz with over 1,000 sourced questions in 8 categories, a daily challenge and a weekly quiz. Play online: https://app.veganiq.site. Also on iOS and Android. Site: https://veganiq.site
+- [Such Moon Launch](https://such.software/products/such-moon-launch): a pixel-art rocket arcade game. Fly across the solar system, dodge hazards and land softly, through 11 levels and an endless mode. Play online: https://play.moonlaunch.space. Also on iOS and Android. Site: https://moonlaunch.space
+- [Wownerogue](https://such.software/products/wownerogue): a multiplayer roguelike in the browser where each round ends on a new blockchain block. Play online: https://play.wowne.ro
+- [Bloomword](https://such.software/products/bloomword): a daily word game where everyone gets the same letters and each word found grows a 3D tree. iOS and Android; a browser version is planned. Site: https://bloomword.earth
+- [Suchoice](https://such.software/products/suchoice): a decision maker app with a spin wheel, coin flip, 3D dice and photo menu reading. iOS and Android; a browser version is coming. Site: https://suchoice.com
+
+All games: https://such.software/games
+
+## Studio
+
+- [Services](https://such.software/services): custom e-commerce, web and mobile apps, games, and crypto payment tools.
+- [Portfolio](https://such.software/products)
+- [Blog](https://such.software/blog)

@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { StoreButtons } from "@/components/store-buttons";
-import { JsonLd, breadcrumbLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbLd, faqLd } from "@/components/seo/json-ld";
 import { pageMetadata } from "@/lib/page-metadata";
 import Image from "next/image";
 import Link from "next/link";
@@ -113,6 +113,25 @@ const games: Game[] = [
   },
 ];
 
+const faqs = [
+  {
+    q: "Are these games free?",
+    a: "Yes. All of them are free to play, in the browser or on iOS and Android. Some offer optional extras inside the game.",
+  },
+  {
+    q: "Do I need to download anything to play online?",
+    a: "No. Bauhaus Echo, Vegan IQ, Such Moon Launch and Wownerogue run in a modern web browser on a computer, tablet or phone, with no install and no account needed to start.",
+  },
+  {
+    q: "Which game is a puzzle game?",
+    a: "Bauhaus Echo is a visual memory puzzle: you memorize a grid of tiles, watch it shuffle, and put the picture back together. Bloomword is a daily word puzzle on iOS and Android.",
+  },
+  {
+    q: "Who makes these games?",
+    a: "Such Software, an independent studio in Kennett Square, Pennsylvania.",
+  },
+];
+
 const itemListLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -147,6 +166,7 @@ export default function GamesPage() {
         { name: "Free Online Games", path: "/games" },
       ])} />
       <JsonLd data={itemListLd} />
+      <JsonLd data={faqLd(faqs)} />
       <Header />
       <div id="main-content" className="z-10 w-full max-w-4xl mx-auto py-20 px-4 pb-24 md:pb-20">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Free Online Games</h1>
@@ -201,6 +221,16 @@ export default function GamesPage() {
             </section>
           ))}
         </div>
+
+        <h2 className="text-2xl font-bold mt-16 mb-6">Questions</h2>
+        <dl className="space-y-6">
+          {faqs.map((item) => (
+            <div key={item.q}>
+              <dt className="font-semibold">{item.q}</dt>
+              <dd className="text-muted-foreground mt-1">{item.a}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
       <MobileNav />
     </main>
