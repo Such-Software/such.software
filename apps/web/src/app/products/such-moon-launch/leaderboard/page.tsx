@@ -168,7 +168,7 @@ export default async function LeaderboardPage({
         ) : scores.length === 0 ? (
           <Card className="glass-card border-amber-500/20 p-8 text-center text-muted-foreground">
             No scores yet for {levelName}. Be the first:{" "}
-            <a href="https://moonlaunch.such.software" className="text-amber-600 dark:text-amber-400 hover:underline">
+            <a href="https://play.moonlaunch.space" className="text-amber-600 dark:text-amber-400 hover:underline">
               play on web
             </a>
             !
@@ -241,7 +241,7 @@ export default async function LeaderboardPage({
             About the game
           </Link>
           <span>•</span>
-          <a href="https://moonlaunch.such.software" className="hover:text-foreground transition-colors">
+          <a href="https://play.moonlaunch.space" className="hover:text-foreground transition-colors">
             Play on web
           </a>
           <span>•</span>

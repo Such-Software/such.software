@@ -44,6 +44,12 @@ export function Header({ floating = false, visible = true }: { floating?: boolea
               Apps
             </Link>
             <Link
+              href="/games"
+              className={pathname.startsWith("/games") ? "text-primary" : "hover:text-primary transition-colors"}
+            >
+              Games
+            </Link>
+            <Link
               href="/services"
               className={pathname === "/services" ? "text-primary" : "hover:text-primary transition-colors"}
             >

@@ -27,6 +27,7 @@ export const metadata: Metadata = {
       "Radiation belts, cosmic rays and solar storms in 3D, with spectra, shielding and dose at any point. Sourced, free, in the browser.",
     type: "website",
     url: "/products/radiation-space",
+    images: [{ url: "/images/branding/OG_banner_v2_light.png", width: 1200, height: 630, alt: "Such Software" }],
   },
 };
 

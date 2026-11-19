@@ -33,6 +33,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Links</h3>
             <nav className="flex flex-col gap-2 text-sm text-muted-foreground">
+              <Link href="/games" className="hover:text-primary transition-colors">Free Online Games</Link>
               <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
               <Link href="/about" className="hover:text-primary transition-colors">About</Link>
               <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
